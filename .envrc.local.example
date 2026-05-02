@@ -1,0 +1,7 @@
+# Copy to .envrc.local (gitignored) to set your default Salesforce env.
+# direnv re-evaluates automatically when this file changes (.envrc watches it).
+#
+# Or use the make targets:
+#   make use-staging
+#   make use-production
+export SF_ENV=staging   # or: production
