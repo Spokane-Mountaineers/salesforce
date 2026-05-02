@@ -4,6 +4,13 @@
 
 package.xml
 
+# Auth Providers - tracked locally as templates with ${VAR} placeholders.
+# Excluded from routine sf push/pull/retrieve so the consumerSecret in the
+# org is never clobbered with `Placeholder_Value`. Deploy via:
+#   make deploy-authproviders
+# which renders the templates with values from .env (loaded by direnv).
+force-app/main/default/authproviders/**
+
 # LWC configuration files
 **/jsconfig.json
 **/.eslintrc.json

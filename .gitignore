@@ -38,6 +38,9 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+.env.*
+!.env.example
+.envrc.local
 
 # Python Salesforce Functions
 **/__pycache__/
