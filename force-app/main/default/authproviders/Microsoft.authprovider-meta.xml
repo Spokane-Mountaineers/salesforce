@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
     <authorizeUrl
-  >https://login.microsoftonline.com/common/oauth2/v2.0/authorize</authorizeUrl>
+  >https://login.microsoftonline.com/common/oauth2/v2.0/authorize?prompt=select_account</authorizeUrl>
     <consumerKey>${MICROSOFT_ENTRA_CLIENT_ID}</consumerKey>
     <consumerSecret>${MICROSOFT_ENTRA_CLIENT_SECRET}</consumerSecret>
     <defaultScopes>openid email profile</defaultScopes>
