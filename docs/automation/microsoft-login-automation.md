@@ -36,7 +36,7 @@ The `MicrosoftAuthRegistrationHandler` implements Salesforce's `Auth.Registratio
     - URL Suffix: `Microsoft`
     - Consumer Key: `client_id` from `tofu output -raw client_id`
     - Consumer Secret: `client_secret` from `tofu output -raw client_secret`
-    - Authorize Endpoint URL: `https://login.microsoftonline.com/common/oauth2/v2.0/authorize`
+    - Authorize Endpoint URL: `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?prompt=select_account` - the `prompt=select_account` query param forces Microsoft to show its account picker on every sign-in attempt instead of silently auto-selecting the only/most-recent session. Without it, a user already signed in to a single Microsoft account is taken straight through with no chance to pick a different one. Salesforce preserves static query params on the authorize URL and appends the OAuth params with `&`, so the resulting request carries both the static `prompt` and the standard `client_id`, `redirect_uri`, etc.
     - Token Endpoint URL: `https://login.microsoftonline.com/common/oauth2/v2.0/token`
     - User Info Endpoint URL: `https://graph.microsoft.com/oidc/userinfo`
     - Default Scopes: `openid email profile`
