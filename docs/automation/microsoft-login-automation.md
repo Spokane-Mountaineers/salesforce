@@ -79,6 +79,30 @@ The `MicrosoftAuthRegistrationHandler` implements Salesforce's `Auth.Registratio
 5. **Add to Login Page**:
     - The login page is `force-app/main/default/pages/CommunitiesLogin.page`. The "Continue with Microsoft" button is wired to `{!microsoftLoginUrl}` and ships with the Apex deploy.
 
+### Branding the Builder login button
+
+Experience Builder's standard Login component renders each enabled auth provider as `<img src="{iconUrl}"> {friendlyName}`. We ship the official "Sign in with Microsoft" lockup as a Static Resource and reference it via the AuthProvider's `iconUrl` (`/resource/Microsoft_Logo`). Because the lockup SVG already contains the "Sign in with Microsoft" text, `friendlyName` is left as plain `Microsoft` to avoid rendering the same words twice.
+
+Updating the lockup SVG runs into a Cloudflare caching gotcha:
+
+- Salesforce serves community static resources through Cloudflare with a long TTL (`Cache-Control: public, max-age=3888000` — 45 days).
+- Updating the Static Resource updates the bytes at origin, but Cloudflare keeps serving the previous version at the bare URL until the TTL expires. End users see the old icon for weeks.
+- Cloudflare keys cache by the full URL including query string, so any unique query string forces a fresh origin fetch and gets the new bytes.
+
+The fix is a versioned query string on the iconUrl. Bump `v=N` whenever the SVG bytes change:
+
+```xml
+<iconUrl>/resource/Microsoft_Logo?v=2</iconUrl>
+```
+
+Workflow for any future SVG update:
+
+1. Edit `force-app/main/default/staticresources/Microsoft_Logo.svg`.
+2. Bump `?v=N` in `force-app/main/default/authproviders/Microsoft.authprovider-meta.xml`.
+3. Deploy: `sf project deploy start --metadata "StaticResource:Microsoft_Logo"` then `make deploy-microsoft-auth SF_ENV=<env>`.
+
+The same pattern applies to any other absolute-path static resource referenced from long-lived configuration (e.g. brand logos, fonts).
+
 ---
 
 ## Implementation Details
