@@ -7,6 +7,7 @@
     <defaultScopes>openid email profile</defaultScopes>
     <executionUser>${SF_EXECUTION_USER}</executionUser>
     <friendlyName>Microsoft</friendlyName>
+    <iconUrl>/resource/Microsoft_Logo?v=2</iconUrl>
     <includeOrgIdInIdentifier>false</includeOrgIdInIdentifier>
     <isPkceEnabled>true</isPkceEnabled>
     <providerType>OpenIdConnect</providerType>
