@@ -99,7 +99,7 @@ Workflow for any future SVG update:
 
 1. Edit `force-app/main/default/staticresources/Microsoft_Logo.svg`.
 2. Bump `?v=N` in `force-app/main/default/authproviders/Microsoft.authprovider-meta.xml`.
-3. Deploy: `sf project deploy start --metadata "StaticResource:Microsoft_Logo"` then `make deploy-microsoft-auth SF_ENV=<env>`.
+3. Deploy: `sf project deploy start --metadata "StaticResource:Microsoft_Logo"` then `just deploy-microsoft-auth SF_ENV=<env>`.
 
 The same pattern applies to any other absolute-path static resource referenced from long-lived configuration (e.g. brand logos, fonts).
 
