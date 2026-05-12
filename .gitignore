@@ -36,6 +36,9 @@ ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
 
+# direnv cache
+.direnv/
+
 # Local environment variables
 .env
 .env.*
