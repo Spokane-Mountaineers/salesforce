@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Block_Recurring_Activity_Group_Events</fullName>
+    <active>true</active>
+    <description
+  >Lightning Recurring Events with Activity Group set cause Event_Process to create approval-bound Event_Registration__c rows for every materialized occurrence. The RRULE cannot be edited via API; block at insert so the platform can&apos;t extend the series.</description>
+    <errorConditionFormula>AND(
+  ISNEW(),
+  Subject = &quot;Evening Hike at James T Slavin&quot;,
+  ISPICKVAL(Activity_Group__c, &quot;Hiking&quot;)
+)</errorConditionFormula>
+    <errorMessage
+  >Recurring events (Repeat) cannot be combined with an Event Type / Activity Group. Create one Event Registration per occurrence, or remove the Activity Group from this recurring event.</errorMessage>
+</ValidationRule>
