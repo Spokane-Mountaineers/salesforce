@@ -66,8 +66,8 @@
         }
 
         .logo {
-          width: 120px;
-          height: 120px;
+          width: 160px;
+          height: 160px;
           margin-bottom: 16px;
         }
 
@@ -84,14 +84,14 @@
           text-align: center;
           font-size: 14px;
           line-height: 1.6;
-          margin-bottom: 32px;
+          margin-bottom: 12px;
         }
 
-        .subtitle small {
-          display: block;
-          margin-top: 8px;
-          font-size: 12px;
-          color: #999;
+        .join-cta {
+          text-align: center;
+          font-size: 13px;
+          color: #555;
+          margin-bottom: 32px;
         }
 
         .form-group {
@@ -341,8 +341,8 @@
           }
 
           .logo {
-            width: 100px;
-            height: 100px;
+            width: 130px;
+            height: 130px;
           }
         }
       </style>
@@ -352,14 +352,26 @@
       <div class="login-container">
         <div class="logo-container">
           <!-- Logo image - replace with actual resource -->
-          <img
-            src="{!$Resource.Logoclear2}"
-            alt="Spokane Mountaineers Logo"
-            class="logo"
-          />
+          <a href="/">
+            <img
+              src="{!$Resource.Logoclear2}"
+              alt="Spokane Mountaineers Logo"
+              class="logo"
+            />
+          </a>
 
-          <h1>Welcome Back</h1>
+          <h1>Welcome</h1>
           <p class="subtitle">Sign in to your Spokane Mountaineers account</p>
+          <p class="join-cta">
+            <strong>New to the Mountaineers?</strong>
+            <a
+              href="{!$Label.Community_Join_URL}"
+              class="link"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Join now to get started!</a
+            >
+          </p>
         </div>
 
         <apex:form id="loginForm">
@@ -556,17 +568,6 @@
         </apex:form>
 
         <div class="help-text">
-          <p><strong>New to the Mountaineers?</strong></p>
-          <p>
-            <a
-              href="{!$Label.Community_Join_URL}"
-              class="link"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Join now to get started!</a
-            >
-          </p>
-
           <p style="margin-top: 16px">
             <strong>Need to renew your membership?</strong>
           </p>
