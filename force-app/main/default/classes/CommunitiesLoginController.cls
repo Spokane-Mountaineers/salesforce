@@ -23,9 +23,10 @@ public without sharing class CommunitiesLoginController {
       .getParameters()
       .get('startURL');
 
-    // Default to home if no startURL provided
+    // Default to community home if no startURL provided
     if (String.isBlank(this.startUrl)) {
-      this.startUrl = '/s/';
+      String communityUrl = Site.getBaseUrl();
+      this.startUrl = String.isNotBlank(communityUrl) ? communityUrl : '/s/';
     }
   }
 
