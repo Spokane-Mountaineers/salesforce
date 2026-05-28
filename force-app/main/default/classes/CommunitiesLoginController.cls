@@ -245,6 +245,19 @@ public without sharing class CommunitiesLoginController {
       sessionCreateUrl += '?site=' + shortSiteId;
 
       String destUrl = String.isNotBlank(startUrl) ? startUrl : '/s/';
+
+      // If startUrl is the switch servlet (our default), extract the real destination
+      // The networks/session/create endpoint handles the context switch natively
+      // Passing the switch servlet to it can bounce internal users to LEX /home/home.jsp
+      if (destUrl.contains('/servlet/networks/switch') && destUrl.contains('startURL=')) {
+        Integer startIndex = destUrl.indexOf('startURL=') + 9;
+        String encodedInnerUrl = destUrl.substring(startIndex);
+        if (encodedInnerUrl.contains('&')) {
+          encodedInnerUrl = encodedInnerUrl.substring(0, encodedInnerUrl.indexOf('&'));
+        }
+        destUrl = EncodingUtil.urlDecode(encodedInnerUrl, 'UTF-8');
+      }
+
       sessionCreateUrl += '&url=' + EncodingUtil.urlEncode(destUrl, 'UTF-8');
     }
 
