@@ -597,11 +597,11 @@
               padding-top: 16px;
               border-top: 1px solid #e0e0e0;
               font-size: 12px;
-              color: #999;
+              color: #666;
               text-align: center;
             "
           >
-            <a href="{!adminLoginUrl}" class="link" style="color: #999">
+            <a href="{!adminLoginUrl}" class="link">
               Are you a system admin? Login here
             </a>
           </p>

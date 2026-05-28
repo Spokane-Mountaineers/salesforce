@@ -46,11 +46,14 @@ private class CommunitiesLoginControllerTest {
     CommunitiesLoginController controller = new CommunitiesLoginController();
     Test.stopTest();
 
-    // Verify default startURL
-    System.assertEquals(
-      '/s/',
-      controller.startUrl,
-      'Start URL should default to /s/ when not provided'
+    // Verify default startURL contains the switch path
+    System.assert(
+      controller.startUrl.contains('servlet/networks/switch'),
+      'Start URL should default to the network switch path'
+    );
+    System.assert(
+      controller.startUrl.contains('startURL=%2Fs%2F'),
+      'Start URL should redirect to /s/ after the switch'
     );
   }
 
@@ -311,6 +314,36 @@ private class CommunitiesLoginControllerTest {
     System.assert(
       microsoftLoginUrl.contains('startURL='),
       'Microsoft login URL should include startURL parameter when provided'
+    );
+  }
+
+  /**
+   * Test admin login URL generation
+   * Should point to internal org using standard employee login URL formatting with ?so=
+   */
+  @IsTest
+  static void testGetAdminLoginUrl() {
+    CommunitiesLoginController controller = new CommunitiesLoginController();
+
+    Test.startTest();
+    String adminLoginUrl = controller.getAdminLoginUrl();
+    Test.stopTest();
+
+    // Verify URL contains expected components
+    System.assertNotEquals(
+      null,
+      adminLoginUrl,
+      'Admin login URL should not be null'
+    );
+    // Should include standard Salesforce login route
+    System.assert(
+      adminLoginUrl.contains('/login'),
+      'Admin login URL should include the login path'
+    );
+    // Should include the ?so= parameter for standard employee login
+    System.assert(
+      adminLoginUrl.contains('so=' + UserInfo.getOrganizationId()),
+      'Admin login URL should include org ID in the so parameter'
     );
   }
 }

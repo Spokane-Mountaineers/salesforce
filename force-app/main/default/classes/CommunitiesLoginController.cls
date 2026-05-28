@@ -25,9 +25,51 @@ public without sharing class CommunitiesLoginController {
 
     // Default to community home if no startURL provided
     if (String.isBlank(this.startUrl)) {
-      String communityUrl = Site.getBaseUrl();
-      this.startUrl = String.isNotBlank(communityUrl) ? communityUrl : '/s/';
+      this.startUrl = getDefaultStartUrl();
     }
+  }
+
+  /**
+   * Get the default start URL for the community
+   * Ensures we point to the /s/ path which is the home for Experience Builder sites.
+   * Uses the /servlet/networks/switch endpoint to force the community context
+   * for all users, including administrators who might otherwise be redirected to LEX.
+   *
+   * @return Default community start URL (switch path)
+   */
+  private String getDefaultStartUrl() {
+    String networkId = getNetworkId();
+    if (String.isNotBlank(networkId)) {
+      return '/servlet/networks/switch?networkId=' +
+        networkId +
+        '&startURL=' +
+        EncodingUtil.urlEncode('/s/', 'UTF-8');
+    }
+    return '/s/';
+  }
+
+  /**
+   * Helper to retrieve the Network ID for the Spokane Mountaineers community
+   *
+   * @return Network ID or null if not found
+   */
+  private String getNetworkId() {
+    try {
+      // Query the Network ID for the main community
+      // Using 'without sharing' controller allows access to this record
+      List<Network> networks = [
+        SELECT Id
+        FROM Network
+        WHERE Name = 'Spokane Mountaineers'
+        LIMIT 1
+      ];
+      if (!networks.isEmpty()) {
+        return networks[0].Id;
+      }
+    } catch (Exception e) {
+      // Log error or handle gracefully
+    }
+    return null;
   }
 
   /**
@@ -165,15 +207,25 @@ public without sharing class CommunitiesLoginController {
 
   /**
    * Get the admin/internal Salesforce login URL
-   * This allows system admins to access the internal org from the community login page
+   * This allows system admins to access the internal org from the community login page.
+   * Uses standard Salesforce employee login flow with the ?so= parameter.
    *
-   * @return URL to internal Salesforce login
+   * @return URL to internal Salesforce employee login
    */
   public String getAdminLoginUrl() {
-    // Get the org's base URL (e.g., https://mydomain.my.salesforce.com)
-    String orgUrl = URL.getOrgDomainUrl().toExternalForm();
+    String communityUrl = Site.getBaseUrl();
+    if (String.isBlank(communityUrl)) {
+      communityUrl = '';
+    }
 
-    // Return the standard login page
-    return orgUrl;
+    String orgId = UserInfo.getOrganizationId();
+    String employeeLoginUrl = communityUrl + '/login?so=' + orgId;
+
+    if (String.isNotBlank(startUrl)) {
+      employeeLoginUrl +=
+        '&startURL=' + EncodingUtil.urlEncode(startUrl, 'UTF-8');
+    }
+
+    return employeeLoginUrl;
   }
 }
