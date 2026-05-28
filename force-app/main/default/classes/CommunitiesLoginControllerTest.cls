@@ -319,7 +319,7 @@ private class CommunitiesLoginControllerTest {
 
   /**
    * Test admin login URL generation
-   * Should point to internal org using standard employee login URL formatting with ?so=
+   * Should point to internal org using the networks session create endpoint
    */
   @IsTest
   static void testGetAdminLoginUrl() {
@@ -337,13 +337,13 @@ private class CommunitiesLoginControllerTest {
     );
     // Should include standard Salesforce login route
     System.assert(
-      adminLoginUrl.contains('/login'),
-      'Admin login URL should include the login path'
+      adminLoginUrl.contains('/servlet/networks/session/create'),
+      'Admin login URL should include the session create path'
     );
-    // Should include the ?so= parameter for standard employee login
+    // Should include the site parameter
     System.assert(
-      adminLoginUrl.contains('so=' + UserInfo.getOrganizationId()),
-      'Admin login URL should include org ID in the so parameter'
+      adminLoginUrl.contains('site='),
+      'Admin login URL should include the site parameter'
     );
   }
 }

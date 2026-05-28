@@ -208,24 +208,46 @@ public without sharing class CommunitiesLoginController {
   /**
    * Get the admin/internal Salesforce login URL
    * This allows system admins to access the internal org from the community login page.
-   * Uses standard Salesforce employee login flow with the ?so= parameter.
+   * Uses the networks session create endpoint to ensure the user is logged into
+   * the community context after authenticating with their internal credentials.
    *
    * @return URL to internal Salesforce employee login
    */
   public String getAdminLoginUrl() {
-    String communityUrl = Site.getBaseUrl();
-    if (String.isBlank(communityUrl)) {
-      communityUrl = '';
+    String orgUrl = URL.getOrgDomainUrl().toExternalForm();
+    String siteId = Site.getSiteId();
+
+    // Fallback for test context or if accessed directly internally
+    if (String.isBlank(siteId)) {
+      try {
+        List<Site> sites = [
+          SELECT Id
+          FROM Site
+          WHERE Name = 'Spokane_Mountaineers'
+          LIMIT 1
+        ];
+        if (!sites.isEmpty()) {
+          siteId = sites[0].Id;
+        }
+      } catch (Exception e) {
+        // Handle gracefully
+      }
     }
 
-    String orgId = UserInfo.getOrganizationId();
-    String employeeLoginUrl = communityUrl + '/login?so=' + orgId;
+    // Construct the session create URL
+    String sessionCreateUrl = orgUrl + '/servlet/networks/session/create';
 
-    if (String.isNotBlank(startUrl)) {
-      employeeLoginUrl +=
-        '&startURL=' + EncodingUtil.urlEncode(startUrl, 'UTF-8');
+    if (String.isNotBlank(siteId)) {
+      // The servlet expects the 15-character Site ID
+      String shortSiteId = siteId.length() >= 15
+        ? siteId.substring(0, 15)
+        : siteId;
+      sessionCreateUrl += '?site=' + shortSiteId;
+
+      String destUrl = String.isNotBlank(startUrl) ? startUrl : '/s/';
+      sessionCreateUrl += '&url=' + EncodingUtil.urlEncode(destUrl, 'UTF-8');
     }
 
-    return employeeLoginUrl;
+    return sessionCreateUrl;
   }
 }
