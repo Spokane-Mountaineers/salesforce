@@ -217,7 +217,6 @@ public without sharing class CommunitiesLoginController {
     String orgUrl = URL.getOrgDomainUrl().toExternalForm();
     String siteId = Site.getSiteId();
 
-    // Fallback for test context or if accessed directly internally
     if (String.isBlank(siteId)) {
       try {
         List<Site> sites = [
@@ -234,11 +233,9 @@ public without sharing class CommunitiesLoginController {
       }
     }
 
-    // Construct the session create URL
     String sessionCreateUrl = orgUrl + '/servlet/networks/session/create';
 
     if (String.isNotBlank(siteId)) {
-      // The servlet expects the 15-character Site ID
       String shortSiteId = siteId.length() >= 15
         ? siteId.substring(0, 15)
         : siteId;
@@ -246,9 +243,7 @@ public without sharing class CommunitiesLoginController {
 
       String destUrl = String.isNotBlank(startUrl) ? startUrl : '/s/';
 
-      // If startUrl is the switch servlet (our default), extract the real destination
-      // The networks/session/create endpoint handles the context switch natively
-      // Passing the switch servlet to it can bounce internal users to LEX /home/home.jsp
+      // Extract the real destination if startUrl is the switch servlet
       if (destUrl.contains('/servlet/networks/switch') && destUrl.contains('startURL=')) {
         Integer startIndex = destUrl.indexOf('startURL=') + 9;
         String encodedInnerUrl = destUrl.substring(startIndex);
