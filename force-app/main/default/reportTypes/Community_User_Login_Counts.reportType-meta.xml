@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>User</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description
+  >Active users with their fiscal-year login count (Feb 1 - Jan 31), stamped daily by LicenseShuffleBatch. Used to review Community license usage, including users who have not logged in.</description>
+    <label>Community User Login Counts</label>
+    <sections>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Username</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Fiscal_Year_Login_Count__c</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Fiscal_Year_Login_Count_Updated__c</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>IsActive</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate</field>
+            <table>User</table>
+        </columns>
+        <masterLabel>Users</masterLabel>
+    </sections>
+</ReportType>

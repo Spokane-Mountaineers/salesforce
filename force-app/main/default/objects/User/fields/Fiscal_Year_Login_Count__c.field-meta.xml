@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fiscal_Year_Login_Count__c</fullName>
+    <description
+  >Logins in the current fiscal year (Feb 1 - Jan 31), stamped daily by LicenseShuffleBatch from Fiscal_Year_Login_History__c. Reflects the last nightly run, not real time.</description>
+    <externalId>false</externalId>
+    <label>Fiscal Year Login Count</label>
+    <precision>7</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

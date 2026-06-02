@@ -58,7 +58,12 @@ public class LicenseShuffleBatch implements Database.Batchable<sObject>, Databas
 
     return Database.getQueryLocator(
       [
-        SELECT Id, Profile.UserLicense.Name, Profile.Name, CreatedDate
+        SELECT
+          Id,
+          Profile.UserLicense.Name,
+          Profile.Name,
+          CreatedDate,
+          Fiscal_Year_Login_Count__c
         FROM User
         WHERE
           IsActive = TRUE
@@ -147,8 +152,32 @@ public class LicenseShuffleBatch implements Database.Batchable<sObject>, Databas
 
     Set<Id> premiumUsersToKeep = calculatePremiumUsersToKeep();
 
-    List<User> usersToUpdate = new List<User>();
+    // Single update list keyed by user Id so a login-count stamp and a
+    // profile change for the same user collapse into one row.
+    Map<Id, User> updatesById = new Map<Id, User>();
     List<License_Change_Log__c> changeLogs = new List<License_Change_Log__c>();
+    DateTime stampTime = DateTime.now();
+
+    // Stamp the freshly-computed login count on every collected user — including
+    // protected users — so the native report reflects all of them. Only write
+    // when the value actually changed to avoid needless DML and trigger churn.
+    for (User u : allUsers.values()) {
+      Integer loginCount = userLoginCounts.containsKey(u.Id)
+        ? userLoginCounts.get(u.Id)
+        : 0;
+      // Read the stored value defensively: the batch's own start() query selects
+      // it, but unit tests may hand in User records that omit the field.
+      Object storedCount = u.getPopulatedFieldsAsMap()
+        .get('Fiscal_Year_Login_Count__c');
+      Boolean countChanged =
+        storedCount == null ||
+        ((Decimal) storedCount).intValue() != loginCount;
+      if (countChanged) {
+        User upd = getOrCreateUpdate(updatesById, u.Id);
+        upd.Fiscal_Year_Login_Count__c = loginCount;
+        upd.Fiscal_Year_Login_Count_Updated__c = stampTime;
+      }
+    }
 
     for (User u : allUsers.values()) {
       if (protectedUserIds.contains(u.Id))
@@ -162,8 +191,8 @@ public class LicenseShuffleBatch implements Database.Batchable<sObject>, Databas
       if (
         currentLicense == PREMIUM_LICENSE && !premiumUsersToKeep.contains(u.Id)
       ) {
-        usersToUpdate.add(
-          new User(Id = u.Id, ProfileId = profileIds.get(LOGIN_PROFILE))
+        getOrCreateUpdate(updatesById, u.Id).ProfileId = profileIds.get(
+          LOGIN_PROFILE
         );
         changeLogs.add(
           makeLog(
@@ -179,8 +208,8 @@ public class LicenseShuffleBatch implements Database.Batchable<sObject>, Databas
       } else if (
         currentLicense == LOGIN_LICENSE && premiumUsersToKeep.contains(u.Id)
       ) {
-        usersToUpdate.add(
-          new User(Id = u.Id, ProfileId = profileIds.get(PREMIUM_PROFILE))
+        getOrCreateUpdate(updatesById, u.Id).ProfileId = profileIds.get(
+          PREMIUM_PROFILE
         );
         changeLogs.add(
           makeLog(
@@ -197,20 +226,33 @@ public class LicenseShuffleBatch implements Database.Batchable<sObject>, Databas
     }
 
     System.debug(
-      'LicenseShuffleBatch: License changes planned: ' + usersToUpdate.size()
+      'LicenseShuffleBatch: License changes planned: ' + changeLogs.size()
     );
 
-    if (!usersToUpdate.isEmpty()) {
-      try {
-        update usersToUpdate;
-        System.debug(
-          'LicenseShuffleBatch: Updated ' + usersToUpdate.size() + ' users'
-        );
-      } catch (Exception e) {
-        System.debug(
-          'LicenseShuffleBatch: Error updating users: ' + e.getMessage()
-        );
+    if (!updatesById.isEmpty()) {
+      // Partial success: a single bad license-change row (e.g. no license seat
+      // available) must not roll back everyone else's login-count stamps.
+      Integer succeeded = 0;
+      Integer failed = 0;
+      for (
+        Database.SaveResult sr : Database.update(updatesById.values(), false)
+      ) {
+        if (sr.isSuccess()) {
+          succeeded++;
+        } else {
+          failed++;
+          System.debug(
+            'LicenseShuffleBatch: User update failed: ' + sr.getErrors()
+          );
+        }
       }
+      System.debug(
+        'LicenseShuffleBatch: User updates — succeeded: ' +
+          succeeded +
+          ', failed: ' +
+          failed +
+          ' (license changes + login-count stamps)'
+      );
     }
 
     if (!changeLogs.isEmpty()) {
@@ -235,6 +277,17 @@ public class LicenseShuffleBatch implements Database.Batchable<sObject>, Databas
   // -------------------------------------------------------------------------
   // Helpers
   // -------------------------------------------------------------------------
+
+  /**
+   * Fetch the pending update row for a user, creating it if needed, so multiple
+   * field changes (login-count stamp, profile change) merge into one DML row.
+   */
+  private static User getOrCreateUpdate(Map<Id, User> updates, Id userId) {
+    if (!updates.containsKey(userId)) {
+      updates.put(userId, new User(Id = userId));
+    }
+    return updates.get(userId);
+  }
 
   private Boolean isNewUser(DateTime createdDate) {
     if (createdDate == null)

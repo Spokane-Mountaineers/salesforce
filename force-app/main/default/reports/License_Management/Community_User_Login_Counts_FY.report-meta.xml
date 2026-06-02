@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>Community User Login Counts FY</name>
+    <description
+  >Active Community users ranked by fiscal-year (Feb 1 - Jan 31) login count, including zero-login users. Counts are stamped daily by LicenseShuffleBatch; the Updated column shows freshness.</description>
+    <reportType>Community_User_Login_Counts__c</reportType>
+    <format>Tabular</format>
+    <columns>
+        <field>User$Name</field>
+    </columns>
+    <columns>
+        <field>User$Username</field>
+    </columns>
+    <columns>
+        <field>User*User$Fiscal_Year_Login_Count__c</field>
+    </columns>
+    <columns>
+        <field>User*User$Fiscal_Year_Login_Count_Updated__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>User$IsActive</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>User*User$Fiscal_Year_Login_Count_Updated__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value />
+        </criteriaItems>
+    </filter>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>User*User$Fiscal_Year_Login_Count__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
+</Report>

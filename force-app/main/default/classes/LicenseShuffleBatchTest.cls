@@ -1659,6 +1659,95 @@ private class LicenseShuffleBatchTest {
     );
   }
 
+  @isTest
+  static void testLoginCountStampedForCollectedUser() {
+    // Chair users are always protected, so the batch makes no license change for
+    // them — only the login-count stamp — giving a deterministic, side-effect-
+    // free update to assert against the live Fiscal_Year_Login_History__c data.
+    List<User> chairUsers = [
+      SELECT
+        Id,
+        Profile.UserLicense.Name,
+        Profile.Name,
+        CreatedDate,
+        Fiscal_Year_Login_Count__c
+      FROM User
+      WHERE IsActive = TRUE AND Profile.Name = 'SM Community Plus Chair'
+      LIMIT 5
+    ];
+
+    if (chairUsers.isEmpty()) {
+      return;
+    }
+
+    // Same fiscal-year window the batch uses (see LicenseShuffleBatch.start).
+    Integer currentYear = Date.today().year();
+    Integer currentMonth = Date.today().month();
+    Date fyStartDate;
+    if (currentMonth >= 2 && currentMonth <= 4) {
+      fyStartDate = Date.today().addDays(-365);
+    } else if (currentMonth >= 5) {
+      fyStartDate = Date.newInstance(currentYear, 2, 1);
+    } else {
+      fyStartDate = Date.newInstance(currentYear - 1, 2, 1);
+    }
+    DateTime fyStart = DateTime.newInstance(
+      fyStartDate,
+      Time.newInstance(0, 0, 0, 0)
+    );
+
+    Set<Id> userIds = new Map<Id, User>(chairUsers).keySet();
+
+    // Expected counts straight from the source object — defaults to 0.
+    Map<Id, Integer> expected = new Map<Id, Integer>();
+    for (Id uid : userIds) {
+      expected.put(uid, 0);
+    }
+    for (AggregateResult ar : [
+      SELECT User__c uid, COUNT(Id) cnt
+      FROM Fiscal_Year_Login_History__c
+      WHERE User__c IN :userIds AND Login_Time__c >= :fyStart
+      GROUP BY User__c
+    ]) {
+      expected.put((Id) ar.get('uid'), (Integer) ar.get('cnt'));
+    }
+
+    Test.startTest();
+    LicenseShuffleBatch batch = new LicenseShuffleBatch();
+    Database.BatchableContext bc = new TestBatchableContext();
+    List<sObject> scope = new List<sObject>();
+    for (User u : chairUsers) {
+      scope.add((sObject) u);
+    }
+    System.runAs(new User(Id = UserInfo.getUserId())) {
+      batch.execute(bc, scope);
+      batch.finish(bc);
+    }
+    Test.stopTest();
+
+    for (User u : [
+      SELECT Id, Fiscal_Year_Login_Count__c, Fiscal_Year_Login_Count_Updated__c
+      FROM User
+      WHERE Id IN :userIds
+    ]) {
+      System.assertNotEquals(
+        null,
+        u.Fiscal_Year_Login_Count__c,
+        'Login count should be stamped for collected user ' + u.Id
+      );
+      System.assertEquals(
+        expected.get(u.Id),
+        u.Fiscal_Year_Login_Count__c.intValue(),
+        'Stamped count should match the login-history aggregate for ' + u.Id
+      );
+      System.assertNotEquals(
+        null,
+        u.Fiscal_Year_Login_Count_Updated__c,
+        'Updated timestamp should be set for ' + u.Id
+      );
+    }
+  }
+
   /**
    * Helper method to get a test user
    */

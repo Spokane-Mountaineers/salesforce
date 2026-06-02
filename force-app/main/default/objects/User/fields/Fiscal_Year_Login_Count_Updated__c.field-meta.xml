@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fiscal_Year_Login_Count_Updated__c</fullName>
+    <description
+  >When Fiscal_Year_Login_Count__c was last refreshed by LicenseShuffleBatch. Use this to gauge how current the login count is.</description>
+    <externalId>false</externalId>
+    <label>Fiscal Year Login Count Updated</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>
