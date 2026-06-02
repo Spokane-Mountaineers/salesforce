@@ -21,5 +21,6 @@
     <timeFrameFilter>
         <dateColumn>Monthly_Active_Members__c$Snapshot_Month__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2024-01-01</startDate>
     </timeFrameFilter>
 </Report>
