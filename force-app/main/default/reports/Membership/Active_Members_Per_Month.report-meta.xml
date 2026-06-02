@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>Active Members Per Month</name>
+    <description
+  >Distinct active member Contacts per month, from the Monthly Active Members snapshot (one row/month from Membership Opportunity date ranges). Sum = the month's value. INTERVAL_CUSTOM avoids the default current-period clip. Feeds the Membership dashboard.</description>
+    <reportType>Monthly_Active_Members__c</reportType>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>Monthly_Active_Members__c$Snapshot_Month__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <columns>
+        <field>Monthly_Active_Members__c$Active_Member_Count__c</field>
+        <aggregateTypes>Sum</aggregateTypes>
+    </columns>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Monthly_Active_Members__c$Snapshot_Month__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

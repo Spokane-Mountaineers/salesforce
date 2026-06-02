@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Monthly_Active_Members__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description
+  >Monthly Active Members snapshots (one row per month, distinct active member Contacts derived from Membership Opportunity date ranges by MembershipSnapshotBatch). Backs the Active Members Per Month line graph.</description>
+    <label>Monthly Active Members</label>
+    <sections>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Snapshot_Month__c</field>
+            <table>Monthly_Active_Members__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Active_Member_Count__c</field>
+            <table>Monthly_Active_Members__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Snapshot_Key__c</field>
+            <table>Monthly_Active_Members__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Calculated_On__c</field>
+            <table>Monthly_Active_Members__c</table>
+        </columns>
+        <masterLabel>Monthly Active Members</masterLabel>
+    </sections>
+</ReportType>
