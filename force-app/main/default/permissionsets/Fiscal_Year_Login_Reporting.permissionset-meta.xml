@@ -15,6 +15,12 @@
         <editable>false</editable>
     </fieldPermissions>
     <fieldPermissions>
+        <field
+    >Fiscal_Year_Login_History__c.Exclude_From_Member_Login_Stats__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
         <field>Fiscal_Year_Login_History__c.Login_Type__c</field>
         <readable>true</readable>
         <editable>false</editable>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exclude_From_Member_Login_Stats__c</fullName>
+    <description
+  >True for logins by non-member accounts so the Member Logins Per Month report can exclude them. Staff and the integration user all use @smi.org / @spokanemountaineers.org / @prolocity.com usernames (members use a .smi-suffixed personal email); the FirstName/LastName "test" checks cover test member accounts. Formulas can't span User to Profile, so this keys off the username domain instead.</description>
+    <formula>OR(
+  ISBLANK(User__c),
+  CONTAINS(LOWER(User__r.Username), "@smi.org"),
+  CONTAINS(LOWER(User__r.Username), "@spokanemountaineers.org"),
+  CONTAINS(LOWER(User__r.Username), "@prolocity.com"),
+  BEGINS(LOWER(User__r.FirstName), "test"),
+  BEGINS(LOWER(User__r.LastName), "test")
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Exclude From Member Login Stats</label>
+    <type>Checkbox</type>
+</CustomField>

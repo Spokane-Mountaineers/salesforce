@@ -37,6 +37,11 @@
             <field>Application__c</field>
             <table>Fiscal_Year_Login_History__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Exclude_From_Member_Login_Stats__c</field>
+            <table>Fiscal_Year_Login_History__c</table>
+        </columns>
         <masterLabel>Fiscal Year Login History</masterLabel>
     </sections>
 </ReportType>

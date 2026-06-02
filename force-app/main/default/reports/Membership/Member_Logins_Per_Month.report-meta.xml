@@ -2,7 +2,7 @@
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <name>Member Logins Per Month</name>
     <description
-  >Member login events per calendar month, from the Fiscal Year Login History mirror (one fiscal year, Feb 1 - Jan 31). Counts all login rows, matching the LicenseShuffleBatch login-count convention. Feeds the Membership dashboard line graph.</description>
+  >Member login events per calendar month from the Fiscal Year Login History mirror, excluding non-member logins (System Administrator/staff, integration, and test accounts via Exclude From Member Login Stats). Feeds the Membership dashboard line graph.</description>
     <reportType>Fiscal_Year_Login_History__c</reportType>
     <format>Summary</format>
     <groupingsDown>
@@ -13,6 +13,16 @@
     <columns>
         <field>Fiscal_Year_Login_History__c$User__c</field>
     </columns>
+    <filter>
+        <criteriaItems>
+            <column
+      >Fiscal_Year_Login_History__c$Exclude_From_Member_Login_Stats__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>false</value>
+        </criteriaItems>
+    </filter>
     <scope>organization</scope>
     <showDetails>false</showDetails>
     <showGrandTotal>true</showGrandTotal>
