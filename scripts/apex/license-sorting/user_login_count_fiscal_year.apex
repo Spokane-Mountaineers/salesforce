@@ -1,22 +1,18 @@
-// Anonymous Apex script to log User.Id, User.Name (first and last), and login count for fiscal year
+// Anonymous Apex script to log User.Id, User.Name, and login count for the fiscal year.
+// Login counts are sourced from Fiscal_Year_Login_History__c (the full-year mirror),
+// not the native LoginHistory object, which only retains ~6 months.
 
 // ============================================
 // Determine Fiscal Year Date Range
 // ============================================
-Integer currentMonth = Date.today().month();
-Date startDate;
-String dateRange;
-
-if (currentMonth < 4) {
-    // January, February, March: Use last 365 days
-    startDate = Date.today().addDays(-365);
-    dateRange = 'Last 365 days';
-} else {
-    // April through December: Use current fiscal year (starts April 1)
-    Integer currentYear = Date.today().year();
-    startDate = Date.newInstance(currentYear, 1, 1);
-    dateRange = 'Current Fiscal Year (from January 1, ' + currentYear + ')';
-}
+// The fiscal year runs Feb 1 - Jan 31, matching Fiscal_Year_Login_History__c.
+// Find the start of the fiscal year that contains today: Feb 1 of this calendar
+// year, unless we're still in January, in which case it began Feb 1 last year.
+Date today = Date.today();
+Integer fiscalStartYear = today.month() >= 2 ? today.year() : today.year() - 1;
+Date startDate = Date.newInstance(fiscalStartYear, 2, 1);
+Date endDate = Date.newInstance(fiscalStartYear + 1, 1, 31);
+String dateRange = 'Fiscal Year (Feb 1, ' + fiscalStartYear + ' - Jan 31, ' + (fiscalStartYear + 1) + ')';
 
 DateTime startDateTime = DateTime.newInstance(startDate, Time.newInstance(0, 0, 0, 0));
 
@@ -47,15 +43,19 @@ for (User u : users) {
 // ============================================
 // Count Logins by User (Aggregate Query)
 // ============================================
+// Query the Fiscal_Year_Login_History__c mirror rather than the native
+// LoginHistory object. LoginHistory only retains ~6 months via the API, so it
+// can't cover a full fiscal year; the custom object is synced daily and holds
+// the entire window, making the "Current Fiscal Year" range accurate.
 Map<Id, Integer> loginCounts = new Map<Id, Integer>();
 for (AggregateResult ar : [
-    SELECT UserId, COUNT(Id) loginCount
-    FROM LoginHistory
-    WHERE UserId IN :userIds
-    AND LoginTime >= :startDateTime
-    GROUP BY UserId
+    SELECT User__c, COUNT(Id) loginCount
+    FROM Fiscal_Year_Login_History__c
+    WHERE User__c IN :userIds
+    AND Login_Time__c >= :startDateTime
+    GROUP BY User__c
 ]) {
-    loginCounts.put((Id)ar.get('UserId'), (Integer)ar.get('loginCount'));
+    loginCounts.put((Id)ar.get('User__c'), (Integer)ar.get('loginCount'));
 }
 
 // ============================================
@@ -124,7 +124,7 @@ System.debug('');
 System.debug('========================================');
 System.debug('User Login Count Report - Fiscal Year');
 System.debug('Date Range: ' + dateRange);
-System.debug('Period: ' + startDate + ' to ' + Date.today());
+System.debug('Data Through: ' + startDate + ' to ' + today + ' (fiscal year ends ' + endDate + ')');
 System.debug('Total Users: ' + users.size());
 System.debug('========================================');
 System.debug('');
