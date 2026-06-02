@@ -34,6 +34,11 @@
         <readable>true</readable>
         <editable>false</editable>
     </fieldPermissions>
+    <fieldPermissions>
+        <field>Fiscal_Year_Login_History__c.User__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
     <objectPermissions>
         <object>Fiscal_Year_Login_History__c</object>
         <allowRead>true</allowRead>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Fiscal_Year_Login_History__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description
+  >Fiscal Year Login History records (LoginHistory mirror, one fiscal year Feb 1 - Jan 31). Used for membership login-activity reporting, such as logins per month.</description>
+    <label>Fiscal Year Login History</label>
+    <sections>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Fiscal_Year_Login_History__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>User__c</field>
+            <table>Fiscal_Year_Login_History__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Login_Time__c</field>
+            <table>Fiscal_Year_Login_History__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Login_Type__c</field>
+            <table>Fiscal_Year_Login_History__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Status__c</field>
+            <table>Fiscal_Year_Login_History__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Application__c</field>
+            <table>Fiscal_Year_Login_History__c</table>
+        </columns>
+        <masterLabel>Fiscal Year Login History</masterLabel>
+    </sections>
+</ReportType>
