@@ -2,38 +2,29 @@
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <name>Member Logins Per Month</name>
     <description
-  >Member login events per calendar month from the Fiscal Year Login History mirror, excluding non-member logins (System Administrator/staff, integration, and test accounts via Exclude From Member Login Stats). Feeds the Membership dashboard line graph.</description>
-    <reportType>Fiscal_Year_Login_History__c</reportType>
+  >Total member logins per month, summed from the durable Member Login Month rollup (staff/integration/test already excluded). Drill a month for per-member counts, sorted by logins descending. Feeds the Membership dashboard.</description>
+    <reportType>Member_Login_Month__c</reportType>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Month</dateGranularity>
-        <field>Fiscal_Year_Login_History__c$Login_Time__c</field>
+        <field>Member_Login_Month__c$Month__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <groupingsDown>
-        <field>Fiscal_Year_Login_History__c$User__c</field>
-        <sortByName>false</sortByName>
-        <sortOrder>Desc</sortOrder>
-    </groupingsDown>
     <columns>
-        <field>Fiscal_Year_Login_History__c$Login_Type__c</field>
+        <field>Member_Login_Month__c$Member_Name__c</field>
     </columns>
-    <filter>
-        <criteriaItems>
-            <column
-      >Fiscal_Year_Login_History__c$Exclude_From_Member_Login_Stats__c</column>
-            <columnToColumn>false</columnToColumn>
-            <isUnlocked>false</isUnlocked>
-            <operator>equals</operator>
-            <value>false</value>
-        </criteriaItems>
-    </filter>
+    <columns>
+        <field>Member_Login_Month__c$Login_Count__c</field>
+        <aggregateTypes>Sum</aggregateTypes>
+    </columns>
     <scope>organization</scope>
-    <showDetails>false</showDetails>
+    <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
+    <sortColumn>Member_Login_Month__c$Login_Count__c</sortColumn>
+    <sortOrder>Desc</sortOrder>
     <timeFrameFilter>
-        <dateColumn>Fiscal_Year_Login_History__c$Login_Time__c</dateColumn>
+        <dateColumn>Member_Login_Month__c$Month__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

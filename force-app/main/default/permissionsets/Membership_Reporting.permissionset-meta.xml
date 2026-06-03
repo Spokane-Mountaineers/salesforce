@@ -5,6 +5,21 @@
   >Read access to the Monthly Active Members snapshot object and fields, for admins who view the Membership dashboard's Active Members Per Month line graph.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <fieldPermissions>
+        <field>Member_Login_Month__c.Calculated_On__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Member_Login_Month__c.Login_Count__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Member_Login_Month__c.User__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
         <field>Monthly_Active_Members__c.Active_Member_Count__c</field>
         <readable>true</readable>
         <editable>false</editable>
@@ -14,6 +29,15 @@
         <readable>true</readable>
         <editable>false</editable>
     </fieldPermissions>
+    <objectPermissions>
+        <object>Member_Login_Month__c</object>
+        <allowRead>true</allowRead>
+        <allowCreate>false</allowCreate>
+        <allowEdit>false</allowEdit>
+        <allowDelete>false</allowDelete>
+        <viewAllRecords>true</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
     <objectPermissions>
         <object>Monthly_Active_Members__c</object>
         <allowRead>true</allowRead>

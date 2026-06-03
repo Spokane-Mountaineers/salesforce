@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description
+  >The member (User) these logins belong to. SetNull so the row survives if the User is later deleted; Member_Name__c preserves the identity.</description>
+    <label>User</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Member Login Months</relationshipLabel>
+    <relationshipName>Member_Login_Months</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
