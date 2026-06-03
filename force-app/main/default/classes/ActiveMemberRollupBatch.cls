@@ -3,10 +3,11 @@
  * Active_Member_Month__c rollup — one row per active member per month — so the
  * Active Members Per Month chart can drill into a month and show WHO was active.
  *
- * A member counts for a month if a Membership Opportunity covers that month's
- * "as of" date (last day of the month, capped at today for the in-progress
- * month), so the per-month record count here is the active-member count. Test
- * accounts (primary contact name containing "test") are excluded.
+ * A member counts for a month if a **won** Membership Opportunity (IsWon = true,
+ * i.e. a completed/paid membership — NOT a Closed Lost or Withdrawn renewal)
+ * covers that month's "as of" date (last day of the month, capped at today for
+ * the in-progress month), so the per-month record count here is the active-member
+ * count. Test accounts (primary contact name containing "test") are excluded.
  *
  * Member_Name__c is the member's login User name when they have one (so this
  * matches the User-based "Monthly New Users" report — "Dan", not "Daniel"),
@@ -76,6 +77,7 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
         FROM Opportunity
         WHERE
           RecordType.Name = :MEMBERSHIP_RECORD_TYPE
+          AND IsWon = TRUE
           AND npe01__Membership_Start_Date__c <= :asOf
           AND npe01__Membership_End_Date__c >= :asOf
           AND npsp__Primary_Contact__c != NULL

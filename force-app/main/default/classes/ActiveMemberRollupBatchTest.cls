@@ -32,12 +32,13 @@ private class ActiveMemberRollupBatchTest {
 
     Contact hiker = new Contact(LastName = 'Hiker');
     Contact tester = new Contact(LastName = 'Testerson'); // name contains "test" -> excluded
-    insert new List<Contact>{ hiker, tester };
+    Contact lost = new Contact(LastName = 'Lapsed'); // membership Closed Lost -> excluded
+    insert new List<Contact>{ hiker, tester, lost };
     Map<Id, Contact> withAccts = new Map<Id, Contact>(
       [
         SELECT Id, AccountId
         FROM Contact
-        WHERE Id IN :new List<Id>{ hiker.Id, tester.Id }
+        WHERE Id IN :new List<Id>{ hiker.Id, tester.Id, lost.Id }
       ]
     );
 
@@ -63,7 +64,18 @@ private class ActiveMemberRollupBatchTest {
       npe01__Membership_Start_Date__c = monthStart(4),
       npe01__Membership_End_Date__c = lastDayOfMonth(monthStart(4))
     );
-    insert new List<Opportunity>{ oppHiker, oppTester };
+    // Closed Lost (failed/abandoned) renewal covering month 4 -> must NOT count.
+    Opportunity oppLost = new Opportunity(
+      Name = 'Membership Lapsed',
+      StageName = 'Closed Lost',
+      CloseDate = monthStart(4),
+      RecordTypeId = membershipRt,
+      AccountId = withAccts.get(lost.Id).AccountId,
+      npsp__Primary_Contact__c = lost.Id,
+      npe01__Membership_Start_Date__c = monthStart(4),
+      npe01__Membership_End_Date__c = lastDayOfMonth(monthStart(3))
+    );
+    insert new List<Opportunity>{ oppHiker, oppTester, oppLost };
   }
 
   @isTest
@@ -75,6 +87,7 @@ private class ActiveMemberRollupBatchTest {
       WHERE LastName = 'Testerson'
       LIMIT 1
     ];
+    Contact lost = [SELECT Id FROM Contact WHERE LastName = 'Lapsed' LIMIT 1];
 
     Test.startTest();
     Database.executeBatch(
@@ -91,7 +104,7 @@ private class ActiveMemberRollupBatchTest {
     System.assertEquals(
       1,
       activeCount(monthStart(4)),
-      'Only the real member (tester excluded)'
+      'Only the real member (tester excluded by name, lapsed excluded by stage)'
     );
     System.assertEquals(
       1,
@@ -116,6 +129,11 @@ private class ActiveMemberRollupBatchTest {
         WHERE Contact__c = :tester.Id
       ],
       'Test account produces no rollup rows'
+    );
+    System.assertEquals(
+      0,
+      [SELECT COUNT() FROM Active_Member_Month__c WHERE Contact__c = :lost.Id],
+      'Closed Lost (failed renewal) produces no rollup rows'
     );
   }
 
