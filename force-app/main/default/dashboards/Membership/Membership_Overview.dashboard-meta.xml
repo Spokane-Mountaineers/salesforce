@@ -34,7 +34,7 @@
                 <chartAxisRange>Auto</chartAxisRange>
                 <componentType>Line</componentType>
                 <displayUnits>Integer</displayUnits>
-                <drillEnabled>false</drillEnabled>
+                <drillEnabled>true</drillEnabled>
                 <enableHover>true</enableHover>
                 <expandOthers>false</expandOthers>
                 <header

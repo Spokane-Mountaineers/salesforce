@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Active_Member_Month__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description
+  >Durable membership rollup (one row per active member per month). Record count per month = active members; backs the Active Members Per Month line graph and its per-member drill (who was active that month).</description>
+    <label>Active Member Month</label>
+    <sections>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Month__c</field>
+            <table>Active_Member_Month__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Member_Name__c</field>
+            <table>Active_Member_Month__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Contact__c</field>
+            <table>Active_Member_Month__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Calculated_On__c</field>
+            <table>Active_Member_Month__c</table>
+        </columns>
+        <masterLabel>Active Member Month</masterLabel>
+    </sections>
+</ReportType>
