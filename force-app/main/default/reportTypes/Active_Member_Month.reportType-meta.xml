@@ -14,6 +14,11 @@
         </columns>
         <columns>
             <checkedByDefault>true</checkedByDefault>
+            <field>Member_Link__c</field>
+            <table>Active_Member_Month__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
             <field>Member_Name__c</field>
             <table>Active_Member_Month__c</table>
         </columns>
