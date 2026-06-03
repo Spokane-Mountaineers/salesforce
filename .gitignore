@@ -60,5 +60,3 @@ tmp/
 thoughts/
 settings.local.json
 
-# Member PII exports (never commit)
-docs/plans/member-list-*.txt
