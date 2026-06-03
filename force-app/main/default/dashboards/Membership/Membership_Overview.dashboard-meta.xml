@@ -15,12 +15,13 @@
                 <drillEnabled>true</drillEnabled>
                 <enableHover>true</enableHover>
                 <expandOthers>false</expandOthers>
-                <header>Login events grouped by month</header>
+                <header
+        >Total member logins per month — click a month for per-member counts</header>
                 <legendPosition>Bottom</legendPosition>
                 <report>Membership/Member_Logins_Per_Month</report>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
-                <title>Member Logins Per Month</title>
+                <title>Member Logins Over Time</title>
                 <useReportChart>false</useReportChart>
             </dashboardComponent>
             <rowIndex>0</rowIndex>
@@ -38,12 +39,12 @@
                 <enableHover>true</enableHover>
                 <expandOthers>false</expandOthers>
                 <header
-        >Distinct active member Contacts at each month end</header>
+        >Active members per month — click a month to see who</header>
                 <legendPosition>Bottom</legendPosition>
                 <report>Membership/Active_Members_Per_Month</report>
                 <showValues>true</showValues>
                 <sortBy>RowLabelAscending</sortBy>
-                <title>Active Members Per Month</title>
+                <title>Active Membership Over Time</title>
                 <useReportChart>false</useReportChart>
             </dashboardComponent>
             <rowIndex>8</rowIndex>

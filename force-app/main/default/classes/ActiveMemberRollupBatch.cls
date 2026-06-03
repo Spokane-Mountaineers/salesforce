@@ -5,16 +5,16 @@
  *
  * A member counts for a month if a Membership Opportunity covers that month's
  * "as of" date (last day of the month, capped at today for the in-progress
- * month) — the same definition MembershipSnapshotBatch uses for the count, so
- * the per-month record count here equals that snapshot count. Test accounts
- * (primary contact name containing "test") are excluded.
+ * month), so the per-month record count here is the active-member count. Test
+ * accounts (primary contact name containing "test") are excluded.
  *
  * The batch writes only the months in its range: the backfill writes every month
  * from 2021; the scheduler passes the trailing two months, so closed months are
  * written once and the current month stays live.
  */
 public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Database.Stateful {
-  // Continuous membership tracking in this org begins in 2021 (matches MembershipSnapshotBatch).
+  // Continuous membership tracking in this org begins in 2021; earlier records
+  // are a handful of lifetime members, not a meaningful monthly trend.
   public static final Date BACKFILL_START = Date.newInstance(2021, 1, 1);
   private static final String MEMBERSHIP_RECORD_TYPE = 'Membership';
 

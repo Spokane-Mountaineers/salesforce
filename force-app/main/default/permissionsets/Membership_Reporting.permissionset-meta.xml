@@ -29,16 +29,6 @@
         <readable>true</readable>
         <editable>false</editable>
     </fieldPermissions>
-    <fieldPermissions>
-        <field>Monthly_Active_Members__c.Active_Member_Count__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Monthly_Active_Members__c.Calculated_On__c</field>
-        <readable>true</readable>
-        <editable>false</editable>
-    </fieldPermissions>
     <objectPermissions>
         <object>Active_Member_Month__c</object>
         <allowRead>true</allowRead>
@@ -50,15 +40,6 @@
     </objectPermissions>
     <objectPermissions>
         <object>Member_Login_Month__c</object>
-        <allowRead>true</allowRead>
-        <allowCreate>false</allowCreate>
-        <allowEdit>false</allowEdit>
-        <allowDelete>false</allowDelete>
-        <viewAllRecords>true</viewAllRecords>
-        <modifyAllRecords>false</modifyAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <object>Monthly_Active_Members__c</object>
         <allowRead>true</allowRead>
         <allowCreate>false</allowCreate>
         <allowEdit>false</allowEdit>
