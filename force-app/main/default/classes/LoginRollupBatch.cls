@@ -10,8 +10,14 @@
  * recomputed each run so it stays live.
  *
  * Excludes staff/integration/test logins via Exclude_From_Member_Login_Stats__c,
- * matching the Member Logins Per Month report. Months are bucketed by the running
- * user's time zone (Date-range binds), matching the report's month grouping.
+ * AND counts a login only if that person was an **active member that month**
+ * (their Contact is in Active_Member_Month__c for the month) — so lapsed members
+ * and non-member community accounts don't inflate the chart. Months are bucketed
+ * by the running user's time zone (Date-range binds), matching the report.
+ *
+ * Each processed month is fully replaced (delete + insert) so lapsed users drop
+ * out; a plain upsert can't remove a row. Runs after the active-member rollup so
+ * the current month's gate uses fresh data.
  */
 public class LoginRollupBatch implements Database.Batchable<Date>, Database.Stateful {
   private final Date startMonth;
@@ -60,16 +66,34 @@ public class LoginRollupBatch implements Database.Batchable<Date>, Database.Stat
 
   public void execute(Database.BatchableContext bc, List<Date> scope) {
     DateTime calculatedOn = DateTime.now();
+    Set<Date> monthsInScope = new Set<Date>(scope);
     List<Member_Login_Month__c> rows = new List<Member_Login_Month__c>();
 
     for (Date monthStart : scope) {
       Date nextMonth = monthStart.addMonths(1);
+
+      // Gate: only count a login if that person was an active member THAT month.
+      // Active_Member_Month__c holds the active member Contacts per month; map
+      // login users to their Contact via User.ContactId.
+      Set<Id> activeContactIds = new Set<Id>();
+      for (Active_Member_Month__c amm : [
+        SELECT Contact__c
+        FROM Active_Member_Month__c
+        WHERE Month__c = :monthStart AND Contact__c != NULL
+      ]) {
+        activeContactIds.add(amm.Contact__c);
+      }
+      if (activeContactIds.isEmpty()) {
+        continue; // no active members that month -> no member logins
+      }
+
       for (AggregateResult ar : [
         SELECT User__c uid, User__r.Name nm, COUNT(Id) cnt
         FROM Fiscal_Year_Login_History__c
         WHERE
           Exclude_From_Member_Login_Stats__c = FALSE
           AND User__c != NULL
+          AND User__r.ContactId IN :activeContactIds
           AND Login_Time__c >= :monthStart
           AND Login_Time__c < :nextMonth
         GROUP BY User__c, User__r.Name
@@ -88,20 +112,20 @@ public class LoginRollupBatch implements Database.Batchable<Date>, Database.Stat
       }
     }
 
+    // Replace every processed month so lapsed/non-member users drop out (an
+    // upsert can't delete). Closed months are written once; the scheduler only
+    // passes the trailing months, so this stays cheap.
+    List<Member_Login_Month__c> existing = [
+      SELECT Id
+      FROM Member_Login_Month__c
+      WHERE Month__c IN :monthsInScope
+    ];
+    if (!existing.isEmpty()) {
+      Database.delete(existing, false);
+    }
     if (!rows.isEmpty()) {
-      // Partial success so one bad row can't roll back the rest.
-      Database.UpsertResult[] results = Database.upsert(
-        rows,
-        Member_Login_Month__c.Key__c,
-        false
-      );
-      for (Database.UpsertResult r : results) {
-        if (r.isSuccess()) {
-          rowsUpserted++;
-        } else {
-          System.debug('LoginRollupBatch: upsert error: ' + r.getErrors());
-        }
-      }
+      Database.insert(rows, false);
+      rowsUpserted += rows.size();
     }
   }
 

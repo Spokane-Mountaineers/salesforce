@@ -55,6 +55,7 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
   public void execute(Database.BatchableContext bc, List<Date> scope) {
     DateTime calculatedOn = DateTime.now();
     Date today = Date.today();
+    Set<Date> monthsInScope = new Set<Date>(scope);
     List<Active_Member_Month__c> rows = new List<Active_Member_Month__c>();
 
     for (Date monthStart : scope) {
@@ -88,22 +89,20 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
       }
     }
 
+    // Replace every processed month so members who lapsed drop out (an upsert
+    // can't delete). Closed months are written once; the scheduler passes only
+    // the trailing months, so this stays cheap.
+    List<Active_Member_Month__c> existing = [
+      SELECT Id
+      FROM Active_Member_Month__c
+      WHERE Month__c IN :monthsInScope
+    ];
+    if (!existing.isEmpty()) {
+      Database.delete(existing, false);
+    }
     if (!rows.isEmpty()) {
-      // Partial success so one bad row can't roll back the rest.
-      Database.UpsertResult[] results = Database.upsert(
-        rows,
-        Active_Member_Month__c.Key__c,
-        false
-      );
-      for (Database.UpsertResult r : results) {
-        if (r.isSuccess()) {
-          rowsUpserted++;
-        } else {
-          System.debug(
-            'ActiveMemberRollupBatch: upsert error: ' + r.getErrors()
-          );
-        }
-      }
+      Database.insert(rows, false);
+      rowsUpserted += rows.size();
     }
   }
 

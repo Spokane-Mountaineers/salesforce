@@ -4,7 +4,8 @@
  *
  * Recomputes only the current and previous month (trailing window); older months
  * stay frozen in Active_Member_Month__c. The one-time historical backfill is
- * `Database.executeBatch(new ActiveMemberRollupBatch(), 6)` run by an admin.
+ * `Database.executeBatch(new ActiveMemberRollupBatch(), 4)` run by an admin (small
+ * scope because each month is delete+inserted, doubling DML rows).
  */
 public class ActiveMemberRollupScheduler implements Schedulable {
   public void execute(SchedulableContext ctx) {

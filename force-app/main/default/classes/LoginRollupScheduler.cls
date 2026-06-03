@@ -5,7 +5,8 @@
  * Recomputes only the current and previous month: the current month stays live and
  * the just-closed month gets a final value after late syncs, while older months
  * remain frozen in Member_Login_Month__c. The one-time historical backfill is
- * `Database.executeBatch(new LoginRollupBatch(), 12)` run by an admin.
+ * `Database.executeBatch(new LoginRollupBatch(), 6)` run by an admin (small scope
+ * because each month is delete+inserted, doubling DML rows).
  */
 public class LoginRollupScheduler implements Schedulable {
   public void execute(SchedulableContext ctx) {
