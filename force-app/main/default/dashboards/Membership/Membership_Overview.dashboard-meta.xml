@@ -8,13 +8,19 @@
             <colSpan>12</colSpan>
             <columnIndex>0</columnIndex>
             <dashboardComponent>
-                <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
+                <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
                 <chartAxisRange>Auto</chartAxisRange>
+                <chartSummary>
+                    <axisBinding>y</axisBinding>
+                    <column>RowCount</column>
+                </chartSummary>
                 <componentType>Line</componentType>
                 <displayUnits>Integer</displayUnits>
-                <drillEnabled>false</drillEnabled>
+                <drillEnabled>true</drillEnabled>
                 <enableHover>true</enableHover>
                 <expandOthers>false</expandOthers>
+                <groupingColumn
+        >Fiscal_Year_Login_History__c$Login_Time__c</groupingColumn>
                 <header>Login events grouped by month</header>
                 <legendPosition>Bottom</legendPosition>
                 <report>Membership/Member_Logins_Per_Month</report>

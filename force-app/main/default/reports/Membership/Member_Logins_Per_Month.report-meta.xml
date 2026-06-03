@@ -10,8 +10,13 @@
         <field>Fiscal_Year_Login_History__c$Login_Time__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <columns>
+    <groupingsDown>
         <field>Fiscal_Year_Login_History__c$User__c</field>
+        <sortByName>false</sortByName>
+        <sortOrder>Desc</sortOrder>
+    </groupingsDown>
+    <columns>
+        <field>Fiscal_Year_Login_History__c$Login_Type__c</field>
     </columns>
     <filter>
         <criteriaItems>
