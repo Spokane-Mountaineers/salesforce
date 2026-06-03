@@ -68,9 +68,9 @@ public class MembershipSnapshotBatch implements Database.Batchable<Date>, Databa
       // are active now but expire later this month.
       Date asOf = monthEnd > today ? today : monthEnd;
 
-      // Exclude test accounts (word-boundary "test" so real surnames like
-      // "Freetest" are not dropped). Staff/integration users aren't member
-      // primary contacts, so a name filter on "test" is the only one needed.
+      // Exclude test accounts: any contact whose name contains "test"
+      // (e.g. "test hoots", "Matt Freetest"). Verified no real member names
+      // contain "test". Staff/integration users aren't member primary contacts.
       AggregateResult ar = [
         SELECT COUNT_DISTINCT(npsp__Primary_Contact__c) cnt
         FROM Opportunity
@@ -78,8 +78,7 @@ public class MembershipSnapshotBatch implements Database.Batchable<Date>, Databa
           RecordType.Name = :MEMBERSHIP_RECORD_TYPE
           AND npe01__Membership_Start_Date__c <= :asOf
           AND npe01__Membership_End_Date__c >= :asOf
-          AND (NOT npsp__Primary_Contact__r.Name LIKE 'test%')
-          AND (NOT npsp__Primary_Contact__r.Name LIKE '% test%')
+          AND (NOT npsp__Primary_Contact__r.Name LIKE '%test%')
       ];
       Integer activeCount = (Integer) ar.get('cnt');
 
