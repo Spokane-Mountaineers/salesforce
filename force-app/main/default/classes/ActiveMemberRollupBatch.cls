@@ -8,6 +8,10 @@
  * month), so the per-month record count here is the active-member count. Test
  * accounts (primary contact name containing "test") are excluded.
  *
+ * Member_Name__c is the member's login User name when they have one (so this
+ * matches the User-based "Monthly New Users" report — "Dan", not "Daniel"),
+ * falling back to the Contact name for members without a login.
+ *
  * The batch writes only the months in its range: the backfill writes every month
  * from 2021; the scheduler passes the trailing two months, so closed months are
  * written once and the current month stays live.
@@ -56,14 +60,17 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
     DateTime calculatedOn = DateTime.now();
     Date today = Date.today();
     Set<Date> monthsInScope = new Set<Date>(scope);
-    List<Active_Member_Month__c> rows = new List<Active_Member_Month__c>();
 
+    // Collect the active member Contacts per month, plus each Contact's own name
+    // as a fallback.
+    Map<Date, Set<Id>> activeByMonth = new Map<Date, Set<Id>>();
+    Map<Id, String> contactName = new Map<Id, String>();
     for (Date monthStart : scope) {
       Date monthEnd = monthStart.addMonths(1).addDays(-1);
       // In-progress month: count as of today (don't drop memberships expiring later this month).
       Date asOf = monthEnd > today ? today : monthEnd;
 
-      Set<Id> seen = new Set<Id>();
+      Set<Id> ids = new Set<Id>();
       for (Opportunity o : [
         SELECT npsp__Primary_Contact__c, npsp__Primary_Contact__r.Name
         FROM Opportunity
@@ -75,17 +82,44 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
           AND (NOT npsp__Primary_Contact__r.Name LIKE '%test%')
       ]) {
         Id cid = o.npsp__Primary_Contact__c;
-        if (seen.add(cid)) {
-          rows.add(
-            new Active_Member_Month__c(
-              Key__c = cid + '-' + monthKey(monthStart),
-              Contact__c = cid,
-              Member_Name__c = o.npsp__Primary_Contact__r.Name,
-              Month__c = monthStart,
-              Calculated_On__c = calculatedOn
-            )
-          );
+        ids.add(cid);
+        contactName.put(cid, o.npsp__Primary_Contact__r.Name);
+      }
+      activeByMonth.put(monthStart, ids);
+    }
+
+    // Prefer the member's login User name so this matches the User-based
+    // "Monthly New Users" report (e.g. "Dan McDermott", not "Daniel McDermott").
+    // Members without a login User keep their Contact name.
+    Map<Id, String> userNameByContact = new Map<Id, String>();
+    if (!contactName.isEmpty()) {
+      for (User u : [
+        SELECT ContactId, Name
+        FROM User
+        WHERE ContactId IN :contactName.keySet()
+        ORDER BY IsActive DESC, CreatedDate DESC
+      ]) {
+        if (!userNameByContact.containsKey(u.ContactId)) {
+          userNameByContact.put(u.ContactId, u.Name);
         }
+      }
+    }
+
+    List<Active_Member_Month__c> rows = new List<Active_Member_Month__c>();
+    for (Date monthStart : scope) {
+      for (Id cid : activeByMonth.get(monthStart)) {
+        String nm = userNameByContact.containsKey(cid)
+          ? userNameByContact.get(cid)
+          : contactName.get(cid);
+        rows.add(
+          new Active_Member_Month__c(
+            Key__c = cid + '-' + monthKey(monthStart),
+            Contact__c = cid,
+            Member_Name__c = nm,
+            Month__c = monthStart,
+            Calculated_On__c = calculatedOn
+          )
+        );
       }
     }
 
