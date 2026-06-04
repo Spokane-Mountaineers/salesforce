@@ -66,6 +66,8 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
     // as a fallback.
     Map<Date, Set<Id>> activeByMonth = new Map<Date, Set<Id>>();
     Map<Id, String> contactName = new Map<Id, String>();
+    Map<Id, String> contactFirst = new Map<Id, String>();
+    Map<Id, String> contactLast = new Map<Id, String>();
     for (Date monthStart : scope) {
       Date monthEnd = monthStart.addMonths(1).addDays(-1);
       // In-progress month: count as of today (don't drop memberships expiring later this month).
@@ -73,7 +75,11 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
 
       Set<Id> ids = new Set<Id>();
       for (Opportunity o : [
-        SELECT npsp__Primary_Contact__c, npsp__Primary_Contact__r.Name
+        SELECT
+          npsp__Primary_Contact__c,
+          npsp__Primary_Contact__r.Name,
+          npsp__Primary_Contact__r.FirstName,
+          npsp__Primary_Contact__r.LastName
         FROM Opportunity
         WHERE
           RecordType.Name = :MEMBERSHIP_RECORD_TYPE
@@ -86,6 +92,8 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
         Id cid = o.npsp__Primary_Contact__c;
         ids.add(cid);
         contactName.put(cid, o.npsp__Primary_Contact__r.Name);
+        contactFirst.put(cid, o.npsp__Primary_Contact__r.FirstName);
+        contactLast.put(cid, o.npsp__Primary_Contact__r.LastName);
       }
       activeByMonth.put(monthStart, ids);
     }
@@ -94,15 +102,19 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
     // "Monthly New Users" report (e.g. "Dan McDermott", not "Daniel McDermott").
     // Members without a login User keep their Contact name.
     Map<Id, String> userNameByContact = new Map<Id, String>();
+    Map<Id, String> userFirstByContact = new Map<Id, String>();
+    Map<Id, String> userLastByContact = new Map<Id, String>();
     if (!contactName.isEmpty()) {
       for (User u : [
-        SELECT ContactId, Name
+        SELECT ContactId, Name, FirstName, LastName
         FROM User
         WHERE ContactId IN :contactName.keySet()
         ORDER BY IsActive DESC, CreatedDate DESC
       ]) {
         if (!userNameByContact.containsKey(u.ContactId)) {
           userNameByContact.put(u.ContactId, u.Name);
+          userFirstByContact.put(u.ContactId, u.FirstName);
+          userLastByContact.put(u.ContactId, u.LastName);
         }
       }
     }
@@ -110,14 +122,20 @@ public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Databa
     List<Active_Member_Month__c> rows = new List<Active_Member_Month__c>();
     for (Date monthStart : scope) {
       for (Id cid : activeByMonth.get(monthStart)) {
-        String nm = userNameByContact.containsKey(cid)
-          ? userNameByContact.get(cid)
-          : contactName.get(cid);
+        Boolean hasUser = userNameByContact.containsKey(cid);
         rows.add(
           new Active_Member_Month__c(
             Key__c = cid + '-' + monthKey(monthStart),
             Contact__c = cid,
-            Member_Name__c = nm,
+            Member_Name__c = hasUser
+              ? userNameByContact.get(cid)
+              : contactName.get(cid),
+            First_Name__c = hasUser
+              ? userFirstByContact.get(cid)
+              : contactFirst.get(cid),
+            Last_Name__c = hasUser
+              ? userLastByContact.get(cid)
+              : contactLast.get(cid),
             Month__c = monthStart,
             Calculated_On__c = calculatedOn
           )

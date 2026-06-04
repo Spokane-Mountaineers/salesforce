@@ -19,6 +19,16 @@
         </columns>
         <columns>
             <checkedByDefault>true</checkedByDefault>
+            <field>Last_Name__c</field>
+            <table>Active_Member_Month__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>First_Name__c</field>
+            <table>Active_Member_Month__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Member_Name__c</field>
             <table>Active_Member_Month__c</table>
         </columns>

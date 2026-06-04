@@ -2,10 +2,10 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Member_Link__c</fullName>
     <description
-  >The member's name (the login-User name, consistent with Monthly New Users) rendered as a click-through link to their Contact record. Used as the member column in the Active Members Per Month drill.</description>
+  >Member's first name as a click-through link to their Contact record. Paired with the plain Last Name column (which the drill sorts on, since a HYPERLINK column sorts by its URL, not its text).</description>
     <externalId>false</externalId>
-    <formula>HYPERLINK("/" &amp; Contact__c, Member_Name__c, "_blank")</formula>
+    <formula>HYPERLINK("/" &amp; Contact__c, First_Name__c, "_blank")</formula>
     <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
-    <label>Member</label>
+    <label>First Name</label>
     <type>Text</type>
 </CustomField>

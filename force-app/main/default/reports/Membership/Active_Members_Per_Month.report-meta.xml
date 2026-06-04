@@ -14,13 +14,13 @@
         <field>Active_Member_Month__c$Member_Link__c</field>
     </columns>
     <columns>
-        <field>Active_Member_Month__c$Member_Name__c</field>
+        <field>Active_Member_Month__c$Last_Name__c</field>
     </columns>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
-    <sortColumn>Active_Member_Month__c$Member_Name__c</sortColumn>
+    <sortColumn>Active_Member_Month__c$Last_Name__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Active_Member_Month__c$Month__c</dateColumn>

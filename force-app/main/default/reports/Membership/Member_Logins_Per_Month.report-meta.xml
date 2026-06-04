@@ -11,7 +11,7 @@
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <columns>
-        <field>Member_Login_Month__c$Member_Name__c</field>
+        <field>Member_Login_Month__c$Member_Link__c</field>
     </columns>
     <columns>
         <field>Member_Login_Month__c$Login_Count__c</field>

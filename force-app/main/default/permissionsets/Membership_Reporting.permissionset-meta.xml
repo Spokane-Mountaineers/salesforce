@@ -15,6 +15,16 @@
         <editable>false</editable>
     </fieldPermissions>
     <fieldPermissions>
+        <field>Active_Member_Month__c.First_Name__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Active_Member_Month__c.Last_Name__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
         <field>Active_Member_Month__c.Member_Link__c</field>
         <readable>true</readable>
         <editable>false</editable>
@@ -26,6 +36,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <field>Member_Login_Month__c.Login_Count__c</field>
+        <readable>true</readable>
+        <editable>false</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Member_Login_Month__c.Member_Link__c</field>
         <readable>true</readable>
         <editable>false</editable>
     </fieldPermissions>

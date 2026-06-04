@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Member_Link__c</fullName>
+    <description
+  >The member's name as a click-through link to their Contact record (via the login User's ContactId). Used as the member column in the Member Logins Per Month drill.</description>
+    <externalId>false</externalId>
+    <formula
+  >HYPERLINK("/" &amp; User__r.ContactId, Member_Name__c, "_blank")</formula>
+    <formulaTreatBlanksAs>BlankAsBlank</formulaTreatBlanksAs>
+    <label>Member</label>
+    <type>Text</type>
+</CustomField>
