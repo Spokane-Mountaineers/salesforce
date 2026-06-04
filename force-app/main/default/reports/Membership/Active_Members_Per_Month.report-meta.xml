@@ -2,7 +2,7 @@
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <name>Active Members Per Month</name>
     <description
-  >Active members per month (record count) from the durable Active Member Month rollup (test accounts excluded). Drill a month to see who was active. Starts 2024 where Salesforce membership data is complete.</description>
+  >Active members per month (record count) from the durable Active Member Month rollup (won memberships; test accounts excluded). Drill a month to see who was active. Starts June 2021, the earliest the Donorbox/Salesforce data is reliable.</description>
     <reportType>Active_Member_Month__c</reportType>
     <format>Summary</format>
     <groupingsDown>
@@ -25,6 +25,6 @@
     <timeFrameFilter>
         <dateColumn>Active_Member_Month__c$Month__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2024-01-01</startDate>
+        <startDate>2021-06-01</startDate>
     </timeFrameFilter>
 </Report>
