@@ -1,6 +1,6 @@
 # Spokane Mountaineers
 
-Help and documentation for [spokanemountaineers.org](https://spokanemountaineers.org)
+Help and documentation for [www.spokanemountaineers.org](https://www.spokanemountaineers.org)
 — for members getting the most out of the site, and for the volunteers who keep it
 running.
 

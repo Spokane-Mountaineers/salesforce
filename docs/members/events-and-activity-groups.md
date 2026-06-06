@@ -57,6 +57,7 @@ activity group. Following a group and keeping its notifications on is the easies
 way to hear about new events as they're added.
 
 !!! note "Why are some names in a participant list not clickable?"
+
     When you look at who's attending an event, members with a public profile show as
     links you can click; everyone else shows as plain text. That's on purpose — it
     protects the privacy of members who haven't chosen to share a public profile.

@@ -1,7 +1,7 @@
 # For Members
 
 Welcome to the Spokane Mountaineers member help center. These guides cover the
-everyday things you'll do on [spokanemountaineers.org](https://spokanemountaineers.org):
+everyday things you'll do on [www.spokanemountaineers.org](https://www.spokanemountaineers.org):
 signing in, setting up your profile, finding trips, and making the most of your
 membership.
 
