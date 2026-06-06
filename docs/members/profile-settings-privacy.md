@@ -23,10 +23,10 @@ This is where you manage your contact information and, importantly, **what other
 members can see when they look you up**.
 
 !!! warning "New accounts hide your email and phone by default"
-For every new member, email and phone start out private. If you want other
-members to be able to reach you, change those fields to **Member**. Messaging
-through the site can't be turned off, so members can always message you even
-when your email and phone are hidden.
+    For every new member, email and phone start out private. If you want other
+    members to be able to reach you, change those fields to **Member**. Messaging
+    through the site can't be turned off, so members can always message you even
+    when your email and phone are hidden.
 
 My Settings is also where you manage **email notifications**. Notifications must be
 turned on here for you to receive emails from your activity groups, and there are

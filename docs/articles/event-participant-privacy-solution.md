@@ -3,9 +3,9 @@
 _Published: November 5, 2025 | Category: Community Solutions_
 
 !!! tip "Looking for member help?"
-This is the technical write-up. For the short member explanation of why some
-participant names aren't clickable, see
-[Events & Activity Groups](../members/events-and-activity-groups.md).
+    This is the technical write-up. For the short member explanation of why some
+    participant names aren't clickable, see
+    [Events & Activity Groups](../members/events-and-activity-groups.md).
 
 ## The Problem We Solved
 

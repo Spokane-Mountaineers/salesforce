@@ -5,10 +5,10 @@ important thing to get right: **renew with your email address, not your website
 username.**
 
 !!! danger "Use your email, never your `.smi` username"
-Donorbox matches you by email. If you renew using your website username (your
-email with `.smi` on the end), Donorbox can't match you to your existing record —
-it creates a brand-new contact and breaks your membership history. Always renew
-with your plain email address.
+    Donorbox matches you by email. If you renew using your website username (your
+    email with `.smi` on the end), Donorbox can't match you to your existing record —
+    it creates a brand-new contact and breaks your membership history. Always renew
+    with your plain email address.
 
 ## Keep your details consistent
 
@@ -21,9 +21,9 @@ website, where you can see the name, email, and phone on file. **My Account** sh
 the address.
 
 !!! note "Watch the email on your payment method"
-Some payment tools attach a different email than the one you use for membership.
-Before you finish, make sure the email tied to your membership doesn't get
-replaced by a payment-account email.
+    Some payment tools attach a different email than the one you use for membership.
+    Before you finish, make sure the email tied to your membership doesn't get
+    replaced by a payment-account email.
 
 ## Where to renew
 

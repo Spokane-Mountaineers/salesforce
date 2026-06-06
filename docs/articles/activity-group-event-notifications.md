@@ -3,8 +3,8 @@
 _Published: November 26, 2025 | Category: Community Solutions_
 
 !!! tip "Looking for member help?"
-This is the technical write-up. For how to follow activity groups and set your
-event notifications, see [Events & Activity Groups](../members/events-and-activity-groups.md).
+    This is the technical write-up. For how to follow activity groups and set your
+    event notifications, see [Events & Activity Groups](../members/events-and-activity-groups.md).
 
 ## The Problem We Solved
 

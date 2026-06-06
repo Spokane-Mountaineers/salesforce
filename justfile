@@ -9,7 +9,7 @@ serve:
 
 # Build the docs and fail on broken links or nav (parity with CI --strict)
 build-docs:
-    @echo ➤ building docs (strict)
+    @echo "➤ building docs (strict)"
     @docker run --rm -v $PWD:/docs squidfunk/mkdocs-material:9.7.6 build --strict
 
 # Run linters

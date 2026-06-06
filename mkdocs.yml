@@ -123,10 +123,6 @@ plugins:
   - search
   - git-revision-date-localized:
       enable_creation_date: true
-      # Use the build date for any not-yet-committed file, and skip git --follow
-      # on renames (avoids the follow-quirk "first revision older than last" warning).
-      fallback_to_build_date: true
-      enable_git_follow: false
   - blog:
       blog_dir: blog
       post_dir: "{blog}/posts"
