@@ -1,31 +1,47 @@
-# Spokane Mountaineers Documentation
+# Spokane Mountaineers
 
-Welcome to the Spokane Mountaineers documentation portal.
-This site is a growing collection of how-to guides, internal processes,
-and technical documentation to support club operations, technology tools, and volunteer contributors.
+Help and documentation for [spokanemountaineers.org](https://spokanemountaineers.org)
+— for members getting the most out of the site, and for the volunteers who keep it
+running.
 
-## What You'll Find Here
+## For members
 
-- In-depth technical articles and solution case studies
-- Detailed implementation documentation for major features
-- Step-by-step guides for common workflows
-- Reference documentation for club systems
-- Walkthroughs for maintaining Salesforce and our public-facing site
-- Technical solutions we've implemented (like session keep-alive)
+New to the site, or just need a hand? Start here.
 
-## Getting Started
+<div class="grid cards" markdown>
 
-Use the sidebar to explore topics by category. If you're not sure where to begin, here are a few helpful starting points:
+- :material-account-group: **[For Members](members/index.md)**
 
-- [Technical Articles](articles/index.md)
-- [Latest Update: Migrating to Email-Based Login](articles/simplifying-custom-login-experience.md)
-- [Implementation Details](implementation/index.md)
-- [How To Guides](how-to-guides/index.md)
-- [Automations](automation/index.md)
-- [Proposals](proposals/index.md)
-- [About](about.md)
+    Sign in, set up your profile, find events, and manage your membership.
+
+- :material-newspaper: **[News](blog/index.md)**
+
+    The latest from the club and our online store.
+
+</div>
+
+## For the tech team
+
+Documentation for board members, event leaders, website contributors, and developers.
+
+<div class="grid cards" markdown>
+
+- :material-clipboard-text: **[Staff & Admin Guides](staff-guides/index.md)**
+
+    Day-to-day tasks: running elections, editing the website, email setup, and more.
+
+- :material-wrench: **[Technical Reference](developer-guides/index.md)**
+
+    Developer guides, automations, implementation write-ups, integrations, and plans.
+
+- :material-information: **[About](about.md)**
+
+    About the club and this documentation site.
+
+</div>
 
 ## Contributing
 
-This site is maintained by volunteers.
-If you'd like to help document a process or fix something out of date, please reach out to the tech team [webdev@spokanemountaineers.org](mailto:webdev@spokanemountaineers.org).
+This site is maintained by volunteers. To document a process or fix something out of
+date, reach out to the tech team at
+[webdev@spokanemountaineers.org](mailto:webdev@spokanemountaineers.org).

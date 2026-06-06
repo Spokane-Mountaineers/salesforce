@@ -84,7 +84,7 @@ If you're not familiar with these tools, contact a dev/tech lead before making c
 ## 📝 Related Docs
 
 - [Customize Favicon](update-experience-cloud-favicon.md)
-- [KeepAlive Sessions](keepalive-sessions.md)
+- [KeepAlive Sessions](../developer-guides/keepalive-sessions.md)
 
 ---
 

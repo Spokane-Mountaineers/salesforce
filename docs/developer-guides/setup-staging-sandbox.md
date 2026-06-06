@@ -218,7 +218,7 @@ If groups fail to create due to the "Add Chatter Service To New Groups" flow:
 
 - [Activity Group Event Notifications](../articles/activity-group-event-notifications.md)
 - [Event Chatter Batch Setup](../automation/event-chatter-batch-setup.md)
-- [Website Editing Guide](website-editing.md)
+- [Website Editing Guide](../staff-guides/website-editing.md)
 
 ---
 
