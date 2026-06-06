@@ -43,7 +43,7 @@ Because your organization email is a Google Workspace account, you'll use an **A
 9. Google will display a 16-character password. **Copy this password now** — you will not be able to view it again after closing the dialog.
 
 !!! note
-Keep this App Password private. It grants access to send and read mail as your organization address without your main password.
+    Keep this App Password private. It grants access to send and read mail as your organization address without your main password.
 
 ---
 
@@ -80,7 +80,7 @@ Outlook.com connects to your Gmail account using both IMAP (to sync folders and 
 Outlook.com will verify the credentials and begin syncing. If the connection is rejected, double-check that you copied the App Password correctly (no spaces).
 
 !!! note
-Outlook.com may auto-detect the correct server settings after you enter the email address and password. If it does, you can skip the manual server fields and proceed directly to saving.
+    Outlook.com may auto-detect the correct server settings after you enter the email address and password. If it does, you can skip the manual server fields and proceed directly to saving.
 
 ---
 
