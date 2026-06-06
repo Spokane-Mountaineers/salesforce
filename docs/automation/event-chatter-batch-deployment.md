@@ -147,6 +147,7 @@
     - Review the debug logs to confirm the service account was added to all groups
 
 3. Deploy Flow for automatic addition to new groups:
+
     ```bash
     sf project deploy start --target-org smi --source-dir force-app/main/default/flows/Add_Chatter_Service_To_New_Groups.flow-meta.xml
     ```

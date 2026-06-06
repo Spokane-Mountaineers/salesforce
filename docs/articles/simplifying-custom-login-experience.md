@@ -1,6 +1,7 @@
 # Migrating to Email-Based Login: Supporting `.smi` Username Suffix Transparently
 
 !!! tip "Looking for member help?"
+
     This is the technical write-up. If you just want to know how to log in with your
     email, see [Logging In](../members/logging-in.md).
 

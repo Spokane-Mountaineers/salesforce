@@ -63,7 +63,7 @@ After making edits:
 
 1. Click **Publish** in the top-right corner of Experience Builder.
 2. Choose **Publish to All** to make the changes live.
-3. Verify by visiting [spokanemountaineers.org](https://www.spokanemountaineers.org).
+3. Verify by visiting [www.spokanemountaineers.org](https://www.spokanemountaineers.org).
 
 You can also use the **Preview** button to test changes before publishing.
 
