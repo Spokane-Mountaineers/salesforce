@@ -5,7 +5,12 @@ default:
 # Run Docs Server
 serve:
     @echo ➤ starting dev server
-    @docker run --rm -it -p 8000:8000 -v $PWD:/docs squidfunk/mkdocs-material
+    @docker run --rm -it -p 8000:8000 -v $PWD:/docs squidfunk/mkdocs-material:9.7.6
+
+# Build the docs and fail on broken links or nav (parity with CI --strict)
+build-docs:
+    @echo ➤ building docs (strict)
+    @docker run --rm -v $PWD:/docs squidfunk/mkdocs-material:9.7.6 build --strict
 
 # Run linters
 lint: lint-lwc lint-aura lint-docs

@@ -25,6 +25,6 @@ Implementation guides serve several important purposes:
 
 ## Related Documentation
 
-- [How-To Guides](../how-to-guides/index.md) – Step-by-step configuration instructions
+- [Developer Guides](../developer-guides/index.md) – Step-by-step configuration instructions
 - [Technical Articles](../articles/index.md) – Problem-solution narratives and case studies
 - [Automation Guides](../automation/index.md) – Documentation for automated processes and workflows

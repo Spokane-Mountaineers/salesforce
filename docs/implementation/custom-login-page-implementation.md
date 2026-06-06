@@ -94,6 +94,7 @@ This implementation was completed in six atomic commits, each building on the pr
 **Primary Goal**: Enable automatic `.smi` appending to support email-based login
 
 **Features**:
+
 - Username normalization (automatically appends `.smi` suffix if not present)
 - Modern, responsive design
 - Alpine.js for interactivity
@@ -104,6 +105,7 @@ This implementation was completed in six atomic commits, each building on the pr
 **Why This Matters**: The standard Experience Cloud login page cannot transform input values. This custom page gives us the ability to append `.smi` before authentication, allowing members to enter just their email address.
 
 **Components**:
+
 - `CommunitiesLogin.page` - Visualforce page with custom styling
 - `CommunitiesLoginController.cls` - Controller with username normalization logic
 - `CommunitiesLoginControllerTest.cls` - Test class with comprehensive coverage
@@ -113,6 +115,7 @@ This implementation was completed in six atomic commits, each building on the pr
 **Created**: Custom labels for frequently-changed values
 
 **Labels Added**:
+
 - `Community_Join_URL` - New member signup form URL
 - `Community_Renew_URL` - Membership renewal form URL
 - `Community_Support_Email` - Support contact email
@@ -124,11 +127,13 @@ This implementation was completed in six atomic commits, each building on the pr
 **Removed**: Unused features to focus on core username normalization functionality
 
 **Features Removed**:
+
 - Remember me checkbox (redundant with Salesforce session settings)
 - Self-registration URL method (not used in current flow)
 - Unnecessary debug logging
 
 **Benefits**:
+
 - Simpler codebase focused on username normalization
 - Reduced maintenance burden
 - Clearer code intention
@@ -143,6 +148,7 @@ This implementation was completed in six atomic commits, each building on the pr
 **Primary Goal**: Complete the authentication flow by supporting automatic `.smi` appending in password resets
 
 **Features**:
+
 - Matching visual design with login page
 - Username normalization (appends `.smi` suffix if not present)
 - Same background image and styling
@@ -152,6 +158,7 @@ This implementation was completed in six atomic commits, each building on the pr
 **Why This Matters**: Members who forget their password need the same username normalization support. Without this custom page, a member entering just their email address on the forgot password form would fail to receive a reset email.
 
 **Components**:
+
 - `CommunitiesForgotPassword.page` - Visualforce page
 - `CommunitiesForgotPasswordController.cls` - Controller with password reset and normalization logic
 - `CommunitiesForgotPasswordControllerTest.cls` - Test class (100% coverage)
@@ -161,6 +168,7 @@ This implementation was completed in six atomic commits, each building on the pr
 **Created**: Guest user profile with page access permissions
 
 **Configuration**: Added Visualforce page access to guest user profile for:
+
 - `CommunitiesLogin`
 - `CommunitiesForgotPassword`
 
@@ -171,6 +179,7 @@ This implementation was completed in six atomic commits, each building on the pr
 **Updated**: Configuration guide to reflect current implementation
 
 **Changes**:
+
 - Removed documentation for removed features (remember me, self-registration)
 - Added custom labels documentation
 - Updated test scenarios to match actual functionality
@@ -190,7 +199,9 @@ This implementation was completed in six atomic commits, each building on the pr
 ```apex
 public PageReference login()
 ```
+
 Main login method that:
+
 1. Normalizes username by appending `.smi` suffix if not present
 2. Calls `Site.login()` with credentials and startURL
 3. Handles errors with user-friendly messages
@@ -199,14 +210,17 @@ Main login method that:
 ```apex
 public String getForgotPasswordUrl()
 ```
+
 Returns the URL to the custom forgot password page based on the current site's base URL.
 
 ```apex
 public String getGoogleLoginUrl()
 ```
+
 Generates the Google OAuth login URL with proper redirect handling and startURL preservation.
 
 **Properties**:
+
 - `username` - User-entered username
 - `password` - User-entered password
 - `startUrl` - URL to redirect to after successful login
@@ -221,7 +235,9 @@ Generates the Google OAuth login URL with proper redirect handling and startURL 
 ```apex
 public PageReference forgotPassword()
 ```
+
 Main password reset method that:
+
 1. Validates username is provided
 2. Normalizes username by appending `.smi` suffix if not present
 3. Calls `Site.forgotPassword()` to send reset email
@@ -231,9 +247,11 @@ Main password reset method that:
 ```apex
 public String getLoginUrl()
 ```
+
 Returns the URL to the custom login page for easy navigation back.
 
 **Properties**:
+
 - `username` - User-entered username
 - `hasError` - Boolean flag for error state
 
@@ -242,33 +260,36 @@ Returns the URL to the custom login page for easy navigation back.
 Both pages share a common structure:
 
 **Head Section**:
+
 - Alpine.js CDN for interactivity
 - Tailwind CSS CDN for styling
 - Custom inline styles for branding
 - Favicon reference
 
 **Body Structure**:
+
 ```html
 <body class="min-h-screen bg-cover bg-center">
-  <div class="background-overlay">
-    <div class="container mx-auto">
-      <div class="form-container">
-        <apex:form>
-          <!-- Logo, heading, form fields -->
-          <!-- Error messages -->
-          <!-- Submit button with loading state -->
-          <!-- Helper links -->
-        </apex:form>
-      </div>
-      <div class="info-container">
-        <!-- Helpful information panel -->
-      </div>
+    <div class="background-overlay">
+        <div class="container mx-auto">
+            <div class="form-container">
+                <apex:form>
+                    <!-- Logo, heading, form fields -->
+                    <!-- Error messages -->
+                    <!-- Submit button with loading state -->
+                    <!-- Helper links -->
+                </apex:form>
+            </div>
+            <div class="info-container">
+                <!-- Helpful information panel -->
+            </div>
+        </div>
     </div>
-  </div>
 </body>
 ```
 
 **Alpine.js Data**:
+
 - `loading` - Boolean for button/spinner state
 - `showPassword` - Boolean for password visibility toggle (login only)
 
@@ -279,6 +300,7 @@ Both pages share a common structure:
 All controllers achieve 100% code coverage with comprehensive test scenarios:
 
 **CommunitiesLoginControllerTest**:
+
 - Constructor initialization
 - Successful login
 - Login with empty username
@@ -289,6 +311,7 @@ All controllers achieve 100% code coverage with comprehensive test scenarios:
 - Google login URL with startURL parameter
 
 **CommunitiesForgotPasswordControllerTest**:
+
 - Constructor initialization
 - Successful password reset
 - Password reset with empty username
@@ -299,6 +322,7 @@ All controllers achieve 100% code coverage with comprehensive test scenarios:
 ### Test Data Strategy
 
 Tests use:
+
 - Standard test users where possible
 - Mock page parameters for startURL testing
 - `Test.startTest()` and `Test.stopTest()` for governor limit isolation
@@ -324,28 +348,26 @@ Custom labels enable easy configuration updates without code deployment.
 
 1. Setup → Custom Labels → New Custom Label
 2. Fill in required fields:
-   - **Name**: `Community_Join_URL`
-   - **Value**: `https://donorbox.org/spokane-mountaineers-membership-2`
-   - **Description**: URL for new member signup
-   - **Category**: Community
-   - **Protected**: No (unchecked)
+    - **Name**: `Community_Join_URL`
+    - **Value**: `https://donorbox.org/spokane-mountaineers-membership-2`
+    - **Description**: URL for new member signup
+    - **Category**: Community
+    - **Protected**: No (unchecked)
 3. Save
 
 **Using in Visualforce**:
 
 ```html
-<a href="{!$Label.Community_Join_URL}" class="link">
-  Sign up for membership
-</a>
+<a href="{!$Label.Community_Join_URL}" class="link"> Sign up for membership </a>
 ```
 
 **Current Custom Labels**:
 
-| Label Name | Value | Purpose |
-|------------|-------|---------|
-| `Community_Join_URL` | `https://donorbox.org/spokane-mountaineers-membership-2` | New member signup form |
-| `Community_Renew_URL` | `https://donorbox.org/spokane-mountaineers-membership` | Membership renewal form |
-| `Community_Support_Email` | `membership@spokanemountaineers.org` | Support contact email |
+| Label Name                | Value                                                    | Purpose                 |
+| ------------------------- | -------------------------------------------------------- | ----------------------- |
+| `Community_Join_URL`      | `https://donorbox.org/spokane-mountaineers-membership-2` | New member signup form  |
+| `Community_Renew_URL`     | `https://donorbox.org/spokane-mountaineers-membership`   | Membership renewal form |
+| `Community_Support_Email` | `membership@spokanemountaineers.org`                     | Support contact email   |
 
 ### Guest User Profile
 
@@ -356,8 +378,8 @@ The guest user profile must have access to both Visualforce pages for unauthenti
 1. Setup → Profiles → [Guest User Profile]
 2. Scroll to "Enabled Apex Page Access"
 3. Verify both pages are listed:
-   - `CommunitiesLogin`
-   - `CommunitiesForgotPassword`
+    - `CommunitiesLogin`
+    - `CommunitiesForgotPassword`
 4. If missing, click "Edit" and add them
 
 ### Experience Cloud Configuration
@@ -400,6 +422,7 @@ The guest user profile must have access to both Visualforce pages for unauthenti
 **Member Communication**: Consider whether to proactively communicate to members that they can now use just their email address to log in. Some members may still be typing `.smi` unnecessarily, even though it works fine. A help article or tooltip could improve awareness.
 
 **Analytics Integration**: Adding analytics tracking to understand:
+
 - How many members use just email vs. full username with `.smi`
 - Common login errors
 - Whether members are discovering the simplified login naturally
@@ -412,13 +435,14 @@ The guest user profile must have access to both Visualforce pages for unauthenti
 
 ## Related Documentation
 
-- [Configure Custom Login Page](../how-to-guides/configure-custom-login-page.md) - User guide for setup
+- [Configure Custom Login Page](../developer-guides/configure-custom-login-page.md) - User guide for setup
 - [Simplifying Custom Login Experience](../articles/simplifying-custom-login-experience.md) - Blog-style overview
-- [Enable Google Login](../articles/enable-google-login.md) - Google OAuth setup
+- [Google Login Automation](../automation/google-login-automation.md) - Google OAuth setup
 
 ## Code References
 
 **Main Components**:
+
 - `force-app/main/default/pages/CommunitiesLogin.page`
 - `force-app/main/default/classes/CommunitiesLoginController.cls`
 - `force-app/main/default/classes/CommunitiesLoginControllerTest.cls`
@@ -427,5 +451,6 @@ The guest user profile must have access to both Visualforce pages for unauthenti
 - `force-app/main/default/classes/CommunitiesForgotPasswordControllerTest.cls`
 
 **Configuration**:
+
 - `force-app/main/default/labels/CustomLabels.labels-meta.xml`
 - `force-app/main/default/profiles/Spokane Mountaineers Profile.profile-meta.xml`

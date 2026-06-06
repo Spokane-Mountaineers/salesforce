@@ -410,5 +410,5 @@ For questions or issues:
 
 ## Related Documentation
 
-- [Google OAuth Setup](../articles/enable-google-login.md)
+- [Google OAuth Setup](../automation/google-login-automation.md)
 - [Experience Cloud Configuration](./setup-staging-sandbox.md)

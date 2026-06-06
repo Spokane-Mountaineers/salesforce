@@ -4,53 +4,69 @@ repo_url: https://github.com/jasonkradams/smi
 edit_uri: edit/main/docs/
 nav:
   - Home: index.md
-  - Articles:
-      - articles/index.md
-      - Migrating to Email-Based Login: articles/simplifying-custom-login-experience.md
-      - Activity Group Event Notifications: articles/activity-group-event-notifications.md
-      - Fixing Approval Email Notifications: articles/fixing-approval-email-notifications.md
-      - Restricting Account Access: articles/experience-cloud-account-access-restriction.md
-      - Enabling Google Login: articles/enable-google-login.md
-      - Enabling Microsoft Login: articles/enable-microsoft-login.md
-      - Event Participant Follow Handler Update: articles/event-participant-follow-handler-update.md
-      - Event Participant Privacy (Overview): articles/event-participant-privacy-solution.md
-      - Event Participant Privacy (Technical): articles/event-participant-redirect.md
-  - Implementation:
-      - implementation/index.md
-      - Custom Login Page: implementation/custom-login-page-implementation.md
-      - Chatter Publisher with Autosave: implementation/chatter-publisher-autosave.md
-  - How-To Guides:
-      - how-to-guides/index.md
-      - Create an Election: how-to-guides/create-an-election.md
-      - Configure Custom Login Page: how-to-guides/configure-custom-login-page.md
-      - Setup Staging Sandbox: how-to-guides/setup-staging-sandbox.md
-      - Customize Favicon: how-to-guides/update-experience-cloud-favicon.md
-      - Preventing Logout With KeepAlives: how-to-guides/keepalive-sessions.md
-      - Website Editing: how-to-guides/website-editing.md
-      - Bulk Delete Events in Salesforce: how-to-guides/bulk-delete-events-in-salesforce.md
-      - Salesforce Development Console Cheatsheet: how-to-guides/salesforce-development-console-cheatsheet.md
-      - Send as Org Email from Hotmail: how-to-guides/send-as-gmail-from-hotmail.md
-  - Automation:
-      - automation/index.md
-      - Event Approval Email Alerts: automation/event-approval-email-alerts.md
-      - Event Chatter Batch Setup: automation/event-chatter-batch-setup.md
-      - Event Chatter Batch Deployment: automation/event-chatter-batch-deployment.md
-      - Event Chatter Batch Production Deployment: automation/event-chatter-batch-production-deployment.md
-      - Google Login Automation: automation/google-login-automation.md
-      - Microsoft Login Automation: automation/microsoft-login-automation.md
-      - Notify Leader on RSVP: automation/notify-leader-on-rsvp.md
-      - Notify Subscribers of New Event: automation/notify-subscribers-new-event.md
-      - Scheduled Add Aembers to Conservation Group: automation/scheduled-add-members-to-conservation-group.md
-  - Proposals:
-      - proposals/index.md
-      - Automate Member License Sorting: proposals/automate-member-license-sorting.md
-  - Google Workspace:
-      - google-workspace/index.md
-      - Querying Custom User Schema: google-workspace/querying-custom-user-schema.md
-  - Plans:
-      - Fix Event Participant Contact/User Mapping: plans/2026-03-18-fix-event-participant-contact-user-mapping.md
-      - Hide Event Participant List for Public Events: plans/2026-03-18-hide-event-participant-list-for-public-events.md
-  - About: about.md # We'll add this page later.
+  - For Members:
+      - members/index.md
+      - Getting Started: members/getting-started.md
+      - Logging In: members/logging-in.md
+      - Sign in with Google: members/sign-in-with-google.md
+      - Sign in with Microsoft: members/sign-in-with-microsoft.md
+      - Profile, Settings & Privacy: members/profile-settings-privacy.md
+      - Events & Activity Groups: members/events-and-activity-groups.md
+      - Member Resources: members/member-resources.md
+      - Renewing Your Membership: members/renewing-membership.md
+  - News:
+      - blog/index.md
+  - Staff & Admin Guides:
+      - staff-guides/index.md
+      - Create an Election: staff-guides/create-an-election.md
+      - Website Editing: staff-guides/website-editing.md
+      - Customize Favicon: staff-guides/update-experience-cloud-favicon.md
+      - Bulk Delete Events in Salesforce: staff-guides/bulk-delete-events-in-salesforce.md
+      - Send as Org Email from Hotmail: staff-guides/send-as-gmail-from-hotmail.md
+  - Technical Reference:
+      - Developer Guides:
+          - developer-guides/index.md
+          - Configure Custom Login Page: developer-guides/configure-custom-login-page.md
+          - Setup Staging Sandbox: developer-guides/setup-staging-sandbox.md
+          - Preventing Logout With KeepAlives: developer-guides/keepalive-sessions.md
+          - Salesforce Development Console Cheatsheet: developer-guides/salesforce-development-console-cheatsheet.md
+      - Articles:
+          - articles/index.md
+          - Migrating to Email-Based Login: articles/simplifying-custom-login-experience.md
+          - Activity Group Event Notifications: articles/activity-group-event-notifications.md
+          - Fixing Approval Email Notifications: articles/fixing-approval-email-notifications.md
+          - Restricting Account Access: articles/experience-cloud-account-access-restriction.md
+          - Event Participant Follow Handler Update: articles/event-participant-follow-handler-update.md
+          - Event Participant Privacy (Overview): articles/event-participant-privacy-solution.md
+          - Event Participant Privacy (Technical): articles/event-participant-redirect.md
+      - Implementation:
+          - implementation/index.md
+          - Custom Login Page: implementation/custom-login-page-implementation.md
+          - Chatter Publisher with Autosave: implementation/chatter-publisher-autosave.md
+      - Automation:
+          - automation/index.md
+          - Event Approval Email Alerts: automation/event-approval-email-alerts.md
+          - Event Chatter Batch Setup: automation/event-chatter-batch-setup.md
+          - Event Chatter Batch Deployment: automation/event-chatter-batch-deployment.md
+          - Event Chatter Batch Production Deployment: automation/event-chatter-batch-production-deployment.md
+          - Google Login Automation: automation/google-login-automation.md
+          - Microsoft Login Automation: automation/microsoft-login-automation.md
+          - Notify Leader on RSVP: automation/notify-leader-on-rsvp.md
+          - Notify Subscribers of New Event: automation/notify-subscribers-new-event.md
+          - Scheduled Add Members to Conservation Group: automation/scheduled-add-members-to-conservation-group.md
+      - Integrations:
+          - google-workspace/index.md
+          - Querying Custom User Schema: google-workspace/querying-custom-user-schema.md
+      - Proposals:
+          - proposals/index.md
+          - Automate Member License Sorting: proposals/automate-member-license-sorting.md
+      - Plans:
+          - plans/index.md
+          - Fix Event Participant Contact/User Mapping: plans/2026-03-18-fix-event-participant-contact-user-mapping.md
+          - Hide Event Participant List for Public Events: plans/2026-03-18-hide-event-participant-list-for-public-events.md
+          - Fix License Shuffle Batch: plans/2026-04-12-fix-license-shuffle-batch.md
+          - Login History Monthly Rollup: plans/2026-06-02-login-history-monthly-rollup.md
+  - About: about.md
 
 # Custom branding
 theme:
@@ -59,16 +75,19 @@ theme:
   favicon: assets/images/favicon.ico
   icon:
     repo: fontawesome/brands/github
+  font:
+    text: Public Sans
+    code: JetBrains Mono
   palette:
     - scheme: default
-      primary: green
-      accent: blue
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - scheme: slate
-      primary: green
-      accent: blue
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
@@ -86,9 +105,8 @@ theme:
     # - navigation.expand
     - navigation.footer
     - navigation.indexes
-    # - navigation.instant
-    # - navigation.instant.prefetch
-    # - navigation.instant.progress
+    - navigation.instant
+    - navigation.instant.progress
     # - navigation.prune
     - navigation.sections
     - navigation.tabs
@@ -101,17 +119,35 @@ theme:
     - toc.follow
     # - toc.integrate
 
-  plugins:
-    - git-revision-date-localized:
+plugins:
+  - search
+  - git-revision-date-localized:
       enable_creation_date: true
+      # Use the build date for any not-yet-committed file, and skip git --follow
+      # on renames (avoids the follow-quirk "first revision older than last" warning).
+      fallback_to_build_date: true
+      enable_git_follow: false
+  - blog:
+      blog_dir: blog
+      post_dir: "{blog}/posts"
+      post_url_format: "{date}/{slug}"
+      categories_allowed:
+        - Club News
+        - E-Commerce
+      authors: true
 
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - toc:
       permalink: true
   - footnotes
   - def_list
   - admonition
   - codehilite
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -120,6 +156,9 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.tasklist:
       custom_checkbox: true
+
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   social:

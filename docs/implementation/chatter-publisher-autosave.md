@@ -624,8 +624,8 @@ This could be implemented as an enhancement without changing the current localSt
 ## Related Documentation
 
 - [Activity Group Event Notifications](../articles/activity-group-event-notifications.md) - Related Chatter automation
-- [Setup Staging Sandbox](../how-to-guides/setup-staging-sandbox.md) - Staging environment setup
-- [Salesforce Development Console Cheatsheet](../how-to-guides/salesforce-development-console-cheatsheet.md) - Debugging tools
+- [Setup Staging Sandbox](../developer-guides/setup-staging-sandbox.md) - Staging environment setup
+- [Salesforce Development Console Cheatsheet](../developer-guides/salesforce-development-console-cheatsheet.md) - Debugging tools
 
 ## Code References
 

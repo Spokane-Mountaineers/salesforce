@@ -298,7 +298,7 @@ Monitor for:
 
 ## 📝 Related Documentation
 
-- [Google Login Article](../articles/enable-google-login.md) - User-friendly overview
+- [Sign in with Google (member guide)](../members/sign-in-with-google.md) - User-friendly overview
 - [Experience Cloud Setup](https://help.salesforce.com/s/articleView?id=sf.networks_communities_setup.htm) - Salesforce documentation
 - [Auth.RegistrationHandler Interface](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_auth_registration_handler.htm) - Salesforce Apex documentation
 

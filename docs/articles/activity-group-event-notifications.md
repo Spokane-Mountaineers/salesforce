@@ -2,6 +2,10 @@
 
 _Published: November 26, 2025 | Category: Community Solutions_
 
+!!! tip "Looking for member help?"
+This is the technical write-up. For how to follow activity groups and set your
+event notifications, see [Events & Activity Groups](../members/events-and-activity-groups.md).
+
 ## The Problem We Solved
 
 Members of the Spokane Mountaineers were missing out on events they would have loved to attend. When event leaders posted new hikes, climbs, or other activities, members had no way to know unless they happened to check the website. This led to:

@@ -253,7 +253,7 @@ If the `.smi` suffix is removed in the future, update the username pattern in `M
 
 ## Related Documentation
 
-- [Microsoft Login Article](../articles/enable-microsoft-login.md) - user-friendly overview
+- [Sign in with Microsoft (member guide)](../members/sign-in-with-microsoft.md) - user-friendly overview
 - [Google Login Automation](google-login-automation.md) - sibling provider with the same matching strategy
 - [Infrastructure repo plan](https://github.com/Spokane-Mountaineers/infrastructure/blob/main/plans/sign-in-with-microsoft.md) - Azure side
 - [Auth.RegistrationHandler Interface](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_auth_registration_handler.htm)

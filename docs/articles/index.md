@@ -7,11 +7,13 @@ This section contains in-depth technical articles and solutions we've implemente
 - **[Migrating to Email-Based Login](simplifying-custom-login-experience.md)** – How we built custom login and password reset pages that automatically append `.smi` to member email addresses, allowing members to login using just their email while maintaining Salesforce's global username uniqueness requirement.
 - **[Fixing Missing Approval Email Notifications](fixing-approval-email-notifications.md)** – How we diagnosed and fixed a Salesforce platform behavior change that stopped approval emails from being sent to activity group chairs.
 - **[Restricting Member Access to Account Records in Experience Cloud](experience-cloud-account-access-restriction.md)** – How we resolved a privacy concern by removing Account object read access for member-facing profiles, protecting sensitive financial and household data.
-- **[Enabling Google Login for Spokane Mountaineers Members](enable-google-login.md)** – How we implemented Google OAuth authentication to simplify member login while preserving our Donorbox registration process.
-- **[Enabling Microsoft Login for Spokane Mountaineers Members](enable-microsoft-login.md)** – How we added Sign in with Microsoft alongside the existing Google flow, with the Microsoft Entra App Registrations managed in our new Terraform/OpenTofu infrastructure repo.
 - **[Event Participant Follow Handler: Tests, Deployment, and Lessons Learned](event-participant-follow-handler-update.md)** – End-to-end recap of the latest handler improvements, unit testing strategy, and deployment verification steps.
 - **[Protecting Member Privacy in Event Participant Lists](event-participant-privacy-solution.md)** – An overview of our privacy solution for Event Participants, written for a general technical audience.
 - **[Event Participant Privacy Redirect Solution (Technical)](event-participant-redirect.md)** – Complete technical implementation guide with deployment instructions, code examples, and troubleshooting.
+
+> Member sign-in help (Google and Microsoft) now lives under
+> [For Members](../members/index.md). The technical OAuth write-ups are in
+> [Automation](../automation/index.md).
 
 ## Article Categories
 

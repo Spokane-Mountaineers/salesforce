@@ -1,5 +1,9 @@
 # Migrating to Email-Based Login: Supporting `.smi` Username Suffix Transparently
 
+!!! tip "Looking for member help?"
+This is the technical write-up. If you just want to know how to log in with your
+email, see [Logging In](../members/logging-in.md).
+
 ## The Challenge
 
 When our Salesforce Experience Cloud site was created, we faced a significant constraint: Salesforce requires usernames to be globally unique across all Salesforce organizations worldwide. According to [Salesforce documentation](https://help.salesforce.com/s/articleView?id=sf.basics_intro_usernames_passwords.htm), this remains a current platform requirement.
@@ -130,5 +134,5 @@ Sometimes the best solution isn't to change the data model—it's to make the ex
 
 **Related Documentation:**
 
-- [Configure Custom Login Page Guide](../how-to-guides/configure-custom-login-page.md)
+- [Configure Custom Login Page Guide](../developer-guides/configure-custom-login-page.md)
 - [Custom Login Implementation Details](../implementation/custom-login-page-implementation.md)
