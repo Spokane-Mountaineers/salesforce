@@ -4,27 +4,27 @@ This guide walks through how to update content on the Spokane Mountaineers publi
 
 ---
 
-## 🔐 Admin Access
+## Admin Access
 
 To access administrative tools, log in at:
 
-👉 [https://spokanemountaineers.my.salesforce.com](https://spokanemountaineers.my.salesforce.com)
+- [https://spokanemountaineers.my.salesforce.com](https://spokanemountaineers.my.salesforce.com)
 
 If you need credentials or access permissions, contact the tech team.
 
 ---
 
-## 🌐 Public Website
+## Public Website
 
 The public-facing site is hosted at:
 
-👉 [https://www.spokanemountaineers.org](https://www.spokanemountaineers.org)
+- [https://www.spokanemountaineers.org](https://www.spokanemountaineers.org)
 
 It is powered by Salesforce **Experience Cloud** (Aura framework) and managed using Experience Builder and Salesforce Setup.
 
 ---
 
-## 🧭 Helpful Salesforce Links
+## Helpful Salesforce Links
 
 Here are commonly used Salesforce admin tools:
 
@@ -38,7 +38,7 @@ Bookmark these for easy access when managing site content or user permissions.
 
 ---
 
-## ✏️ Editing Pages in Experience Builder
+## Editing Pages in Experience Builder
 
 1. Navigate to [Digital Experiences](https://spokanemountaineers.lightning.force.com/lightning/cms/home).
 2. Click **Builder** next to the `Spokane Mountaineers` site.
@@ -49,7 +49,7 @@ Bookmark these for easy access when managing site content or user permissions.
 
 ---
 
-## 🖼 Adding or Replacing Images
+## Adding or Replacing Images
 
 1. In Builder, select the image component you want to change.
 2. Click **Upload Image** or choose from existing **Site Assets**.
@@ -57,7 +57,7 @@ Bookmark these for easy access when managing site content or user permissions.
 
 ---
 
-## ✅ Publishing Changes
+## Publishing Changes
 
 After making edits:
 
@@ -69,7 +69,7 @@ You can also use the **Preview** button to test changes before publishing.
 
 ---
 
-## 🛠 Advanced Editing (Admins Only)
+## Advanced Editing (Admins Only)
 
 For more complex changes, like updating custom Aura components:
 
@@ -81,7 +81,7 @@ If you're not familiar with these tools, contact a dev/tech lead before making c
 
 ---
 
-## 📝 Related Docs
+## Related Docs
 
 - [Customize Favicon](update-experience-cloud-favicon.md)
 - [KeepAlive Sessions](../developer-guides/keepalive-sessions.md)

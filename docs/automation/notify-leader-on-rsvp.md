@@ -1,4 +1,4 @@
-# 🔔 Flow: Notify Leader on RSVP
+# Flow: Notify Leader on RSVP
 
 This automated Salesforce Flow sends an email notification to the event leader whenever someone RSVPs "Attending" to an event registration.
 
@@ -11,7 +11,7 @@ This automated Salesforce Flow sends an email notification to the event leader w
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 This Flow automatically notifies event leaders via email when a member RSVPs to their event. It:
 
@@ -23,7 +23,7 @@ This Flow automatically notifies event leaders via email when a member RSVPs to 
 
 ---
 
-## ⚡ Trigger
+## Trigger
 
 - **Object**: `Event_Participant__c`
 - **Trigger Type**: Record-Triggered Flow
@@ -34,7 +34,7 @@ This Flow automatically notifies event leaders via email when a member RSVPs to 
 
 ---
 
-## 🧱 Flow Structure
+## Flow Structure
 
 ### 1. Get Event Registration
 
@@ -55,8 +55,8 @@ Checks if the participant's response is "Attending".
 
 **Element**: `Is_Attending`
 
-- ✅ **Response is Attending**: Proceeds to get leader information
-- ❌ **Not Attending**: Flow exits (no email sent)
+- **Response is Attending**: Proceeds to get leader information
+- **Not Attending**: Flow exits (no email sent)
 
 ---
 
@@ -80,8 +80,8 @@ Validates that a leader is assigned to the event.
 
 **Element**: `Has_Leader`
 
-- ✅ **Leader Exists**: Proceeds to get leader's Contact record
-- ❌ **No Leader**: Flow exits (no email to send)
+- **Leader Exists**: Proceeds to get leader's Contact record
+- **No Leader**: Flow exits (no email to send)
 
 ---
 
@@ -114,8 +114,8 @@ Validates that the leader's Contact record has an email address.
 
 **Element**: `Has_Leader_Email`
 
-- ✅ **Email Exists**: Proceeds to send email
-- ❌ **No Email**: Flow exits (cannot send email)
+- **Email Exists**: Proceeds to send email
+- **No Email**: Flow exits (cannot send email)
 
 ---
 
@@ -159,7 +159,7 @@ Spokane Mountaineers
 
 ---
 
-## 🔍 Data Model
+## Data Model
 
 ### Objects Used
 
@@ -180,7 +180,7 @@ Spokane Mountaineers
 
 ---
 
-## ⚠️ Edge Cases Handled
+## Edge Cases Handled
 
 1. **Response is not "Attending"**: Flow exits early, no email sent
 2. **No Leader assigned**: Flow exits if `Event_Registration__c.Leader__c` is null
@@ -190,7 +190,7 @@ Spokane Mountaineers
 
 ---
 
-## 🔧 Why Use Contact Email Instead of User Email?
+## Why Use Contact Email Instead of User Email?
 
 This flow intentionally retrieves the email address from the leader's **Contact** record rather than directly from the **User** record. This is because:
 
@@ -202,7 +202,7 @@ The flow retrieves the Contact via `User.ContactId`, then uses `Contact.Email` f
 
 ---
 
-## 📊 Monitoring & Troubleshooting
+## Monitoring & Troubleshooting
 
 ### Check Flow Execution
 
@@ -230,7 +230,7 @@ The flow retrieves the Contact via `User.ContactId`, then uses `Contact.Email` f
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 |      **Feature**       |                                                           **Notes**                                                            |
 | :--------------------: | :----------------------------------------------------------------------------------------------------------------------------: |
@@ -243,13 +243,13 @@ The flow retrieves the Contact via `User.ContactId`, then uses `Contact.Email` f
 
 ---
 
-## 📝 Related Documentation
+## Related Documentation
 
 - [Event Participant Redirect](../articles/event-participant-redirect.md): Related solution for event participant functionality
 
 ---
 
-## 🛠 Technical Details
+## Technical Details
 
 - **API Version**: 65.0
 - **Flow Type**: Auto-Launched Flow (Record-Triggered)
@@ -260,6 +260,6 @@ The flow retrieves the Contact via `User.ContactId`, then uses `Contact.Email` f
 
 ---
 
-## 📞 Support
+## Support
 
 For issues or questions about this flow, contact the tech team at [webdev@spokanemountaineers.org](mailto:webdev@spokanemountaineers.org).

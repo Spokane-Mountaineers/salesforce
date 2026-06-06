@@ -4,7 +4,7 @@ This document explains how to access and query the custom schema field `Mountain
 
 ---
 
-## 🧩 Schema Definition
+## Schema Definition
 
 | Schema Name    | Field Name    | Type   | Description                           |
 | -------------- | ------------- | ------ | ------------------------------------- |
@@ -22,7 +22,7 @@ This field is stored under the `customSchemas` object in each user's Google Work
 
 ---
 
-## 🔍 Query via Admin SDK
+## Query via Admin SDK
 
 Use the Directory API `users.list` endpoint with `projection=full`:
 
@@ -40,7 +40,7 @@ Reference: [Admin SDK Directory API - Users: list](https://developers.google.com
 
 ---
 
-## 🧰 Query via GAM CLI
+## Query via GAM CLI
 
 ### Show for a single user:
 

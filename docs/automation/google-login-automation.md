@@ -12,7 +12,7 @@ This document describes the technical implementation of Google OAuth authenticat
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 The `GoogleAuthRegistrationHandler` implements Salesforce's `Auth.RegistrationHandler` interface to manage user authentication for Google OAuth login on Experience Cloud sites. It:
 
@@ -23,7 +23,7 @@ The `GoogleAuthRegistrationHandler` implements Salesforce's `Auth.RegistrationHa
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Prerequisites
 
@@ -57,7 +57,7 @@ The `GoogleAuthRegistrationHandler` implements Salesforce's `Auth.RegistrationHa
 
 ---
 
-## 🧱 Implementation Details
+## Implementation Details
 
 ### User Matching Strategy
 
@@ -109,7 +109,7 @@ This ensures that:
 
 ---
 
-## 📊 Flow Diagram
+## Flow Diagram
 
 ![Google Login Flow Diagram](google-login-flow.svg)
 
@@ -117,7 +117,7 @@ _Source: [google-login-flow.d2](google-login-flow.d2)_
 
 ---
 
-## 🔍 Code Structure
+## Code Structure
 
 ### Main Methods
 
@@ -163,7 +163,7 @@ Called when user data needs updating (not used in this implementation).
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Coverage
 
@@ -189,7 +189,7 @@ sf apex run test --class-names GoogleAuthRegistrationHandlerTest --target-org sm
 
 ---
 
-## 🚨 Error Handling
+## Error Handling
 
 ### Common Error Scenarios
 
@@ -227,7 +227,7 @@ Email is required for authentication
 
 ---
 
-## 🔧 Maintenance
+## Maintenance
 
 ### Updating Username Pattern
 
@@ -264,7 +264,7 @@ Monitor for:
 
 ---
 
-## 📈 Performance
+## Performance
 
 ### Query Optimization
 
@@ -275,7 +275,7 @@ Monitor for:
 
 ---
 
-## 🔐 Security Considerations
+## Security Considerations
 
 ### Account Creation Prevention
 
@@ -296,7 +296,7 @@ Monitor for:
 
 ---
 
-## 📝 Related Documentation
+## Related Documentation
 
 - [Sign in with Google (member guide)](../members/sign-in-with-google.md) - User-friendly overview
 - [Experience Cloud Setup](https://help.salesforce.com/s/articleView?id=sf.networks_communities_setup.htm) - Salesforce documentation
@@ -304,7 +304,7 @@ Monitor for:
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Google Button Not Appearing
 
@@ -328,7 +328,7 @@ Monitor for:
 
 ---
 
-## 📞 Support
+## Support
 
 For issues or questions about Google login automation:
 

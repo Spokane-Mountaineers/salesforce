@@ -1,4 +1,4 @@
-# 🔔 Batch Service: Event Chatter Batch Posting
+# Batch Service: Event Chatter Batch Posting
 
 This automated Salesforce batch job posts rich text notifications to activity group Chatter groups daily, collecting all approved events that haven't been posted yet and posting one comprehensive message per activity group.
 
@@ -12,7 +12,7 @@ This automated Salesforce batch job posts rich text notifications to activity gr
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 This batch service automatically posts rich text notifications to activity group Chatter groups on a daily schedule. It:
 
@@ -26,7 +26,7 @@ This batch service automatically posts rich text notifications to activity group
 
 ---
 
-## ⚡ Schedule
+## Schedule
 
 - **Frequency**: Daily
 - **Time**: 5:00 AM Pacific Time
@@ -37,7 +37,7 @@ This batch service automatically posts rich text notifications to activity group
 
 ---
 
-## 🧱 Batch Job Structure
+## Batch Job Structure
 
 The batch job implements the standard Salesforce batchable pattern:
 
@@ -91,7 +91,7 @@ ORDER BY Activity_Group__c, Start__c
 
 ---
 
-## 🔍 Data Model
+## Data Model
 
 ### Objects Used
 
@@ -107,7 +107,7 @@ ORDER BY Activity_Group__c, Start__c
 
 ---
 
-## 📝 Rich Text Message Format
+## Rich Text Message Format
 
 ### Single Event Format
 
@@ -181,7 +181,7 @@ View Event: https://www.spokanemountaineers.org/s/event-registration/a03...
 
 ---
 
-## ⚠️ Edge Cases Handled
+## Edge Cases Handled
 
 1. **No Events Approved**: If no approved events need posting, batch completes with no posts
 2. **No Activity Group**: Query filters out events without `Activity_Group__c`
@@ -197,7 +197,7 @@ View Event: https://www.spokanemountaineers.org/s/event-registration/a03...
 8. **Duplicate Prevention**: Uses `Chatter_Posted__c` checkbox to prevent reprocessing events that were already posted, even if they're modified later
 9. **No Time Window**: Processes any approved event that hasn't been posted, ensuring no events are missed even if batch job was skipped or events were approved before field was added
 
-## 🔧 Required Setup
+## Required Setup
 
 **IMPORTANT**: This batch job requires custom fields and a Flow to prevent duplicate processing. See [Event Chatter Batch Setup Guide](event-chatter-batch-setup.md) for details.
 
@@ -209,7 +209,7 @@ View Event: https://www.spokanemountaineers.org/s/event-registration/a03...
 
 ---
 
-## 🔧 Technical Implementation
+## Technical Implementation
 
 ### EventChatterBatchPoster Class
 
@@ -280,7 +280,7 @@ See: [EventChatterPostHelper.cls](https://github.com/jasonkradams/smi/blob/main/
 
 ---
 
-## 📊 Monitoring & Troubleshooting
+## Monitoring & Troubleshooting
 
 ### Check Batch Job Execution
 
@@ -391,7 +391,7 @@ AND Name IN ('Hiking', 'Climbing', 'Alpine', 'Conservation')
 
 ---
 
-## 🔗 Related Components
+## Related Components
 
 ### Apex Batch Class
 
@@ -441,7 +441,7 @@ See: [EventChatterPostHelper.cls](https://github.com/jasonkradams/smi/blob/main/
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 |         **Feature**         |                                         **Notes**                                         |
 | :-------------------------: | :---------------------------------------------------------------------------------------: |
@@ -457,13 +457,13 @@ See: [EventChatterPostHelper.cls](https://github.com/jasonkradams/smi/blob/main/
 
 ---
 
-## 📝 Related Documentation
+## Related Documentation
 
 - [Activity Group Event Notifications](../articles/activity-group-event-notifications.md): Article explaining the feature and implementation
 - [Notify Leader on RSVP](notify-leader-on-rsvp.md): Similar notification flow for event leaders
 - [Event Participant Redirect](../articles/event-participant-redirect.md): Related solution for event participant functionality
 
-## 📅 Scheduling the Batch Job
+## Scheduling the Batch Job
 
 To set up the scheduled batch job, run the following Apex script:
 
@@ -491,7 +491,7 @@ This script:
 
 ---
 
-## 🛠 Technical Details
+## Technical Details
 
 - **API Version**: 65.0
 - **Batch Class**: EventChatterBatchPoster (implements Database.Batchable<SObject> and Schedulable)
@@ -505,6 +505,6 @@ This script:
 
 ---
 
-## 📞 Support
+## Support
 
 For issues or questions about this flow, contact the tech team at [webdev@spokanemountaineers.org](mailto:webdev@spokanemountaineers.org).

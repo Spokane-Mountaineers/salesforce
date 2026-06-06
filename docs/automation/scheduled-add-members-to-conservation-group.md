@@ -1,4 +1,4 @@
-# 🔄 Scheduled Flow: Add Members To Conservation Group
+# Scheduled Flow: Add Members To Conservation Group
 
 This scheduled Salesforce Flow ensures that all eligible site users (Community Users) are members of the **Conservation Chatter Group**, and logs each action for auditing.
 
@@ -12,17 +12,17 @@ This scheduled Salesforce Flow ensures that all eligible site users (Community U
 
 ---
 
-## 📆 Schedule
+## Schedule
 
 - **Runs Once** at **04:30 AM Pacific**
 - Type: **Scheduled Flow**
 - Trigger: **Platform-Scheduled**, not user-initiated
 
-> _Note: This flow has been **deactivated** to ensure members who Opt Out of the Conservation group are not put back into teh group the next day._
+> _Note: This flow has been **deactivated** to ensure members who Opt Out of the Conservation group are not put back into the group the next day._
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 This Flow:
 
@@ -33,7 +33,7 @@ This Flow:
 
 ---
 
-## 📋 Criteria for Eligible Users
+## Criteria for Eligible Users
 
 The flow targets **active Community users**, defined as:
 
@@ -50,18 +50,18 @@ These users are queried via a Get Records element labeled **Get_User_Records**.
 
 ---
 
-## 🧱 Flow Structure
+## Flow Structure
 
 ### 1. Get Existing Group Memberships
 
 - Retrieves all CollaborationGroupMember records for the **Conservation Group**.
 - Group ID is hardcoded as: 0F91N000000m2jESAQ.
 
-⠀2. Get Active Community Users
+### 2. Get Active Community Users
 
 - Loads active site users matching the criteria above.
 
-⠀3. Loop Through Each User
+### 3. Loop Through Each User
 
 - For each user:
     - Filters existing memberships to check if the user is already in the group.
@@ -69,9 +69,9 @@ These users are queried via a Get Records element labeled **Get_User_Records**.
 
 ---
 
-## 🤖 Decision Logic
+## Decision Logic
 
-### ❌ If the user is not already a group member
+### If the user is not already a group member
 
 - Assigns:
     - CollaborationGroupId = 0F91N000000m2jESAQ
@@ -81,7 +81,7 @@ These users are queried via a Get Records element labeled **Get_User_Records**.
 - Logs the action with:
     - Message\_\_c = "Added To Conservation Group"
 
-⠀✅ If the user is already a member:
+### If the user is already a group member
 
 - Loops through their existing CollaborationGroupMember record(s)
 - Logs the status:
@@ -89,14 +89,14 @@ These users are queried via a Get Records element labeled **Get_User_Records**.
 
 ---
 
-## 📦 Record Creation
+## Record Creation
 
 At the end of all processing:
 
 - The flow **bulk-creates** all new CollaborationGroupMember records.
 - It also **bulk-creates** all Conservation_Group_Membership_Log\_\_c log entries.
 
-## 🛠 Key Variables and Resources
+## Key Variables and Resources
 
 |           **Variable Name**            |                       **Type**                       |               **Description**               |
 | :------------------------------------: | :--------------------------------------------------: | :-----------------------------------------: |
@@ -107,7 +107,7 @@ At the end of all processing:
 
 ---
 
-## 🧾 Logging Details
+## Logging Details
 
 Each log record stores:
 
@@ -121,7 +121,7 @@ Each log record stores:
 
 ---
 
-## ⚠️ Edge Cases Handled
+## Edge Cases Handled
 
 - Users not in the group are added and logged.
 - Users already in the group are skipped.
@@ -130,7 +130,7 @@ Each log record stores:
 
 ---
 
-## 📈 Monitoring & Auditing
+## Monitoring & Auditing
 
 Admins can monitor execution by:
 
@@ -140,7 +140,7 @@ Admins can monitor execution by:
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 |       **Feature**       |                                 **Notes**                                  |
 | :---------------------: | :------------------------------------------------------------------------: |

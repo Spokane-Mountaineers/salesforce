@@ -469,11 +469,11 @@ This prioritized approach ensures:
 
 ## Security & Privacy Considerations
 
-- ✅ Respects User privacy settings by redirecting to User profile pages
-- ✅ Shows plain text (no link) when no related User exists
-- ✅ Community users only see User profiles that respect Experience Cloud visibility rules
-- ✅ Internal users retain standard Contact access for business operations
-- ✅ No sensitive Contact data exposed to community users
+- Respects User privacy settings by redirecting to User profile pages
+- Shows plain text (no link) when no related User exists
+- Community users only see User profiles that respect Experience Cloud visibility rules
+- Internal users retain standard Contact access for business operations
+- No sensitive Contact data exposed to community users
 
 ## Troubleshooting Common Issues
 

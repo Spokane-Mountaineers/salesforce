@@ -12,14 +12,14 @@ This guide shows how to update the favicon (`favicon.ico`) for a Salesforce Expe
     - **Cache Control**: `Public`
 4. Save the static resource.
 
-> 💡 Best format is a `.ico` file at 16x16 or 32x32 pixels.
+> Best format is a `.ico` file at 16x16 or 32x32 pixels.
 
 ## Step 2: Add a Reference to the Favicon in the Site Head
 
 1. Go to **Setup** → **Digital Experiences** → **All Sites**.
 2. Click **Builder** next to your site.
 3. In **Experience Builder**:
-    - Click the **gear icon (⚙️)** in the top right.
+    - Click the **gear icon** in the top right.
     - Go to **Advanced** → **Edit Head Markup**.
 4. Add the following HTML:
 
@@ -40,7 +40,7 @@ This guide shows how to update the favicon (`favicon.ico`) for a Salesforce Expe
 
 ---
 
-## ✅ Example
+## Example
 
 If your favicon file is named favicon.ico and uploaded as a static resource named FaviconICO, the browser will now use:
 
@@ -50,6 +50,6 @@ If your favicon file is named favicon.ico and uploaded as a static resource name
 
 ---
 
-## 🔁 Why This is Needed
+## Why This is Needed
 
 Some Experience Cloud templates (e.g., Help Center, Customer Service) do not offer a "Branding" section in the settings UI. In those cases, the favicon must be manually added via the \<head> section.

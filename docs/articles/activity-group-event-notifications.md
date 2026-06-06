@@ -150,19 +150,19 @@ This makes it easy to integrate with any Flow that needs to post event notificat
 
 ### Member Engagement
 
-✅ Members automatically see new events in their subscribed Chatter groups  
-✅ Event leaders get visibility for their approved events  
-✅ Website becomes more integrated with Chatter for notifications  
-✅ Reduced manual promotion work for admins  
-✅ Leverages existing Chatter subscription system
+- Members automatically see new events in their subscribed Chatter groups
+- Event leaders get visibility for their approved events
+- Website becomes more integrated with Chatter for notifications
+- Reduced manual promotion work for admins
+- Leverages existing Chatter subscription system
 
 ### Technical Benefits
 
-✅ Scalable architecture that handles growth  
-✅ Comprehensive test coverage (100% passing)  
-✅ Well-documented for future maintenance  
-✅ Extensible design for future features  
-✅ Uses standard Salesforce APIs (Connect API)
+- Scalable architecture that handles growth
+- Comprehensive test coverage (100% passing)
+- Well-documented for future maintenance
+- Extensible design for future features
+- Uses standard Salesforce APIs (Connect API)
 
 ## For Administrators
 

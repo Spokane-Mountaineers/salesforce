@@ -52,7 +52,7 @@ If new user profiles are added, or users report seeing this error in the Develop
 
 …then you need to **grant access to the Apex class**. Here's how:
 
-### 🔧 Steps to Update Profile > Apex Class Access
+### Steps to Update Profile > Apex Class Access
 
 1. Go to **Setup > Profiles**
 2. Find and click on the profile name (e.g. `SM Community Plus Member`)

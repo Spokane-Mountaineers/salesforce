@@ -25,4 +25,4 @@ Salesforce-internals guides, see [Developer Guides](../developer-guides/index.md
 
 More guides coming soon!
 
-> 🛠 Have a task you'd like documented? [Open a GitHub issue](https://github.com/jasonkradams/smi/issues/new) or contribute a page.
+> Have a task you'd like documented? [Open a GitHub issue](https://github.com/jasonkradams/smi/issues/new) or contribute a page.

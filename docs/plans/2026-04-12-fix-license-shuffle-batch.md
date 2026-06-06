@@ -130,13 +130,13 @@ Update `docs/proposals/automate-member-license-sorting.md`:
 
 ## Implementation Order
 
-1. **Run emergency script** — immediate, no deploy needed ✅ (script written, ready to run)
-2. **Rewrite `LicenseShuffleBatch`** — fix execute/finish split, batch login queries, remove dead code ✅
-3. **Fix `LoginHistoryCleanupBatch`** — add `Database.Stateful` ✅
-4. **Update tests** — removed four dead-code tests, 240/240 passing ✅
-5. **Deploy to org** — deployed 2026-04-12, 240/240 org tests passing ✅
-6. **Reschedule daily sync** — rescheduled after deploy, next fire 2026-04-13 09:00 ✅
-7. **Update proposal doc** ✅
+1. **Run emergency script** — immediate, no deploy needed (script written, ready to run)
+2. **Rewrite `LicenseShuffleBatch`** — fix execute/finish split, batch login queries, remove dead code
+3. **Fix `LoginHistoryCleanupBatch`** — add `Database.Stateful`
+4. **Update tests** — removed four dead-code tests, 240/240 passing
+5. **Deploy to org** — deployed 2026-04-12, 240/240 org tests passing
+6. **Reschedule daily sync** — rescheduled after deploy, next fire 2026-04-13 09:00
+7. **Update proposal doc**
 
 ---
 
@@ -146,4 +146,4 @@ Update `docs/proposals/automate-member-license-sorting.md`:
 - Next daily batch run (2026-04-13 09:00) makes correct decisions (downgrades all users with ≤5 logins)
 - Batch `finish()` debug log shows correct total counts
 - `LoginHistoryCleanupBatch` finish log shows accurate deleted count
-- All existing tests pass ✅
+- All existing tests pass

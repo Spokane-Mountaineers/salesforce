@@ -97,7 +97,7 @@ sf apex get test \
     - Or click **Administration**
 
 2. **Access Login & Registration Settings**
-    - In Builder: Click ⚙️ (Settings) → **Login & Registration**
+    - In Builder: Click the **Settings** gear → **Login & Registration**
     - Or in Administration: Click **Login & Registration**
 
 3. **Configure Login Page**

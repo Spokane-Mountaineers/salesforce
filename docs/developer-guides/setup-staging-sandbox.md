@@ -4,7 +4,7 @@ This guide walks through setting up a staging sandbox to match your production E
 
 ---
 
-## 🎯 Overview
+## Overview
 
 When setting up a new sandbox, you may encounter errors in Experience Builder such as:
 
@@ -15,7 +15,7 @@ This guide helps you resolve these issues by setting up the necessary components
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Access to your staging sandbox
 - System Administrator permissions
@@ -23,7 +23,7 @@ This guide helps you resolve these issues by setting up the necessary components
 
 ---
 
-## 🔧 Step 1: Create Activity Group Chatter Groups
+## Step 1: Create Activity Group Chatter Groups
 
 The EventChatterPostHelper requires Chatter groups with names matching your activity groups. Create these manually in Salesforce.
 
@@ -55,7 +55,7 @@ Plus any additional activity groups used in your `Event_Registration__c` records
 2. Click **Groups** in the left sidebar
 3. Verify each activity group appears as a public Chatter group
 
-### ⚠ Troubleshooting: Flow Error When Creating Groups
+### Troubleshooting: Flow Error When Creating Groups
 
 If you see errors like:
 
@@ -87,7 +87,7 @@ This means the **"Add Chatter Service To New Groups"** flow is trying to automat
 
 ---
 
-## 📁 Step 2: Create Managed Content Folder
+## Step 2: Create Managed Content Folder
 
 Managed Content folders are created through the Experience Builder UI and cannot be deployed via metadata.
 
@@ -113,7 +113,7 @@ If you have access to production, you can:
 
 ---
 
-## 📊 Step 3: Create Test Data
+## Step 3: Create Test Data
 
 Experience Builder components need data to display. Create test events for each activity group.
 
@@ -139,7 +139,7 @@ Experience Builder components need data to display. Create test events for each 
 
 ---
 
-## 🧩 Step 4: Verify Experience Builder Pages
+## Step 4: Verify Experience Builder Pages
 
 After setting up the above, verify your Experience Builder pages load correctly.
 
@@ -160,7 +160,7 @@ After setting up the above, verify your Experience Builder pages load correctly.
 
 ---
 
-## 🔄 Step 5: Deploy Metadata (Optional)
+## Step 5: Deploy Metadata (Optional)
 
 If you need to deploy custom components, classes, or other metadata:
 
@@ -173,7 +173,7 @@ Or use the Salesforce CLI to deploy specific components.
 
 ---
 
-## ✅ Verification Checklist
+## Verification Checklist
 
 - [ ] Chatter groups created for all activity groups
 - [ ] Managed Content folder "Activity_Groups" exists
@@ -184,7 +184,7 @@ Or use the Salesforce CLI to deploy specific components.
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Components Still Show "No Data" Error
 
@@ -214,7 +214,7 @@ If groups fail to create due to the "Add Chatter Service To New Groups" flow:
 
 ---
 
-## 📚 Related Documentation
+## Related Documentation
 
 - [Activity Group Event Notifications](../articles/activity-group-event-notifications.md)
 - [Event Chatter Batch Setup](../automation/event-chatter-batch-setup.md)
@@ -222,7 +222,7 @@ If groups fail to create due to the "Add Chatter Service To New Groups" flow:
 
 ---
 
-## 💡 Tips
+## Tips
 
 - **Keep staging in sync**: Regularly refresh test data to match production patterns
 - **Document customizations**: Note any manual UI configurations that can't be deployed
@@ -230,4 +230,4 @@ If groups fail to create due to the "Add Chatter Service To New Groups" flow:
 
 ---
 
-> ✨ _Need help? Check the debug logs from the scripts for detailed information about what was created or any errors encountered._
+> _Need help? Check the debug logs from the scripts for detailed information about what was created or any errors encountered._

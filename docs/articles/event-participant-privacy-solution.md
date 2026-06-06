@@ -86,21 +86,21 @@ This ensures we find the right match even when email addresses aren't exactly th
 
 ### Privacy Protection
 
-✅ Members' private information is no longer exposed through Event participant lists  
-✅ Only public profile information is accessible  
-✅ Privacy settings are respected automatically
+- Members' private information is no longer exposed through Event participant lists
+- Only public profile information is accessible
+- Privacy settings are respected automatically
 
 ### User Experience
 
-✅ Seamless navigation - members don't notice the change  
-✅ Consistent appearance - looks like standard Salesforce lists  
-✅ Works for both linked and unlinked participants
+- Seamless navigation - members don't notice the change
+- Consistent appearance - looks like standard Salesforce lists
+- Works for both linked and unlinked participants
 
 ### Data Quality
 
-✅ 99.14% of Contacts successfully linked to Users  
-✅ Automatic maintenance keeps connections current  
-✅ Handles edge cases gracefully
+- 99.14% of Contacts successfully linked to Users
+- Automatic maintenance keeps connections current
+- Handles edge cases gracefully
 
 ## For Administrators
 

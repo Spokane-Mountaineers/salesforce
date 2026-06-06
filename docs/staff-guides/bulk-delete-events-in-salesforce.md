@@ -7,7 +7,7 @@ When a user accidentally creates a large number of recurring Events (e.g., hundr
 ## Delete Events Using Developer Console (SOQL Query)
 
 1. **Open the Developer Console**
-    - In Salesforce, click the **⚙️ (Setup gear)** in the top right.
+    - In Salesforce, click the **Setup gear** in the top right.
     - Select **Developer Console**.
 
     ![Developer Console](../assets/images/salesforce%20open%20developer%20console.png)
@@ -38,10 +38,10 @@ When a user accidentally creates a large number of recurring Events (e.g., hundr
 
 ## Optional: Delete In The Event Registration Table
 
-If the event has not yet been approved then it will be in the Event Registration table. You can and sholud delete it from there as well.
+If the event has not yet been approved then it will be in the Event Registration table. You can and should delete it from there as well.
 
 1. **Open the Developer Console**
-    - In Salesforce, click the **⚙️ (Setup gear)** in the top right.
+    - In Salesforce, click the **Setup gear** in the top right.
     - Select **Developer Console**.
 
     ![Developer Console](../assets/images/salesforce%20open%20developer%20console.png)
@@ -63,5 +63,5 @@ If the event has not yet been approved then it will be in the Event Registration
     - Confirm you’re only pulling the unwanted Event Registrations.
     - Export results if you want a record for audit.
 5. **Delete the Records**
-    - Select the records you want to delete, then cick the **Delete Row** button.
+    - Select the records you want to delete, then click the **Delete Row** button.
       ![Delete the Records](../assets/images/salesforce%20query%20editor%20delete%20row%20button.png)

@@ -4,13 +4,13 @@ This section covers configuration and automation related to Google Workspace for
 
 It includes tools and practices that ensure secure, consistent management of user accounts, directory information, and integrations with external systems like Salesforce.
 
-## 📂 Subsections
+## Subsections
 
-### 📊 Directory Customization
+### Directory Customization
 
 - [Querying Custom Schema: Mountaineers.PublicEmail](./querying-custom-user-schema.md): How to access and export public-facing email addresses for communication lists.
 
-### 🔧 Tools
+### Tools
 
 - [GAM](https://github.com/jay0lee/GAM): Command-line tool to interact with Google Workspace Admin SDK.
 - [Admin SDK Directory API](https://developers.google.com/admin-sdk/directory): REST API for programmatically managing user accounts and attributes.
