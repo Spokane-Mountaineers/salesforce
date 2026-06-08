@@ -1,0 +1,499 @@
+<template>
+  <article class="faq-root">
+    <header class="hero">
+      <div class="hero__inner">
+        <p class="eyebrow">Spokane Mountaineers · Member Help</p>
+        <h1 class="hero__title">Frequently<br />Asked <em>Questions</em></h1>
+        <p class="hero__sub">
+          Signing in, setting up your account, finding trips, and making the
+          most of your membership — the questions members ask most.
+        </p>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="On this page">
+      <p class="toc__h">On this page</p>
+      <ol class="toc__list">
+        <li>
+          <a data-target="login" onclick={handleTocClick}
+            ><span class="n">01</span><span>Logging in</span></a
+          >
+        </li>
+        <li>
+          <a data-target="start" onclick={handleTocClick}
+            ><span class="n">02</span
+            ><span>Getting started after you join</span></a
+          >
+        </li>
+        <li>
+          <a data-target="renew" onclick={handleTocClick}
+            ><span class="n">03</span><span>Renewing your membership</span></a
+          >
+        </li>
+        <li>
+          <a data-target="calendar" onclick={handleTocClick}
+            ><span class="n">04</span
+            ><span>Finding events on the Calendar</span></a
+          >
+        </li>
+        <li>
+          <a data-target="groups" onclick={handleTocClick}
+            ><span class="n">05</span
+            ><span>Activity groups &amp; notifications</span></a
+          >
+        </li>
+        <li>
+          <a data-target="resources" onclick={handleTocClick}
+            ><span class="n">06</span><span>Member resources</span></a
+          >
+        </li>
+      </ol>
+    </nav>
+
+    <main class="wrap">
+      <section class="sec" data-section="login">
+        <div class="sec-head">
+          <span class="idx">01</span>
+          <h2 class="q">Logging in</h2>
+        </div>
+        <div class="sec-rule"></div>
+
+        <h3>What is my username?</h3>
+        <p>
+          Salesforce, the platform behind our website, requires every username
+          to be unique across every Salesforce site in the world. To guarantee
+          that, the system adds <span class="smi">.smi</span> to the end of your
+          email address when it creates your account.
+        </p>
+        <p>
+          So your username is your email address followed by
+          <span class="smi">.smi</span> — for example,
+          <span class="smi">you@example.com</span> becomes
+          <span class="smi">you@example.com.smi</span>.
+        </p>
+        <p>
+          You can type your email <strong>with or without</strong> the
+          <span class="smi">.smi</span> ending on our login page. If you leave
+          it off, the page adds it for you before signing you in.
+        </p>
+
+        <h3>How do I reset my password?</h3>
+        <p>
+          If you forget your password, use the
+          <strong>Forgot your password?</strong> link on the login page. Enter
+          your username — your email, with or without
+          <span class="smi">.smi</span> — and you'll get an email with a link to
+          set a new one.
+        </p>
+        <figure class="shot">
+          <img
+            src={imgPasswordReset}
+            alt="The password reset screen, showing the username field and the Send Password Reset Link button"
+            loading="lazy"
+          />
+          <figcaption>The password reset screen.</figcaption>
+        </figure>
+
+        <h3>Can I sign in with Google or Microsoft?</h3>
+        <p>
+          Yes. If the email on your membership is a Google or Microsoft address,
+          you can skip the password entirely and use
+          <strong>Sign in with Google</strong> or
+          <strong>Continue with Microsoft</strong> on the login page. Both sign
+          you straight into your existing account — they don't create a new
+          membership, so you still need an active membership to use them.
+        </p>
+
+        <h3>What if I can't get in?</h3>
+        <ol>
+          <li>
+            Make sure you're using the email address on your membership. If you
+            have more than one email, try the one you used when you joined or
+            renewed.
+          </li>
+          <li>Use <strong>Forgot your password?</strong> to reset it.</li>
+          <li>
+            Still stuck? Email
+            <a href="mailto:membership@spokanemountaineers.org"
+              >membership@spokanemountaineers.org</a
+            >
+            and we'll help you back in.
+          </li>
+        </ol>
+      </section>
+
+      <section class="sec" data-section="start">
+        <div class="sec-head">
+          <span class="idx">02</span>
+          <h2 class="q">Getting started after you join</h2>
+        </div>
+        <div class="sec-rule"></div>
+
+        <h3>How do I activate my account?</h3>
+        <p>
+          Your account is created when you join or renew through Donorbox. After
+          that, you'll get an activation email with a link to set your password
+          and finish your login. Follow the link, choose a password, and you're
+          in.
+        </p>
+        <p>
+          If you joined but never got an activation email, check your spam
+          folder first, then email
+          <a href="mailto:membership@spokanemountaineers.org"
+            >membership@spokanemountaineers.org</a
+          >
+          and we'll resend it.
+        </p>
+
+        <h3>Where do I find my account menu?</h3>
+        <p>
+          Everything about your account lives under the
+          <strong>down arrow to the right of your name</strong> in the
+          upper-right corner of the site. Click it to open your account menu:
+          Home, My Profile, My Settings, My Messages, My Account, Contact
+          Support, and Logout.
+        </p>
+
+        <h3>My Profile</h3>
+        <p>
+          A summary of your profile, along with every post you've made in the
+          club's nine primary groups. From here you can edit your preferred
+          contact method, your activity interests, additional information about
+          you, and when you joined the club.
+        </p>
+        <figure class="shot">
+          <img
+            src={imgMyProfile}
+            alt="The My Profile editor, with fields for name, contact method, interests, and join date"
+            loading="lazy"
+          />
+          <figcaption>The My Profile editor.</figcaption>
+        </figure>
+
+        <h3>My Settings (and your privacy)</h3>
+        <p>
+          This is where you manage your contact information and, importantly,
+          <strong>what other members can see when they look you up</strong>.
+        </p>
+        <div class="callout callout--warn">
+          <p>
+            <strong>New accounts hide your email and phone by default.</strong>
+            For every new member, email and phone start out private. If you want
+            other members to be able to reach you, change those fields to
+            <strong>Member</strong>. Messaging through the site can't be turned
+            off, so members can always message you even when your email and
+            phone are hidden.
+          </p>
+        </div>
+        <p>
+          My Settings is also where you manage
+          <strong>email notifications</strong>. Notifications must be turned on
+          here for you to receive emails from your activity groups, and there
+          are extra options to fine-tune what reaches your inbox.
+        </p>
+        <figure class="shot">
+          <img
+            src={imgProfileVisibility}
+            alt="The Profile Visibility and Email Notifications settings, with visibility set to Member"
+            loading="lazy"
+          />
+          <figcaption>Profile Visibility &amp; Email Notifications.</figcaption>
+        </figure>
+
+        <h3>My Messages</h3>
+        <p>
+          Messages other members have sent you, and where you send your own.
+          When you have unread messages, a red circle with a number shows how
+          many are waiting.
+        </p>
+        <figure class="shot">
+          <img
+            src={imgNewMessage}
+            alt="The unread-message badge: a red circle with a number near your avatar"
+            loading="lazy"
+          />
+          <figcaption>The unread-message badge.</figcaption>
+        </figure>
+
+        <h3>My Account</h3>
+        <p>
+          The status of your membership and your household: who the primary
+          contact is, the billing address and membership information, payments
+          made by members of your household, and a link to renew. You can renew
+          your own membership here, but you can't renew another member of your
+          household from your account — that has to be done from theirs.
+        </p>
+
+        <h3>Contact Support</h3>
+        <p>
+          A member lookup tool for messaging any current member, plus a direct
+          line to club support at
+          <a href="mailto:membership@spokanemountaineers.org"
+            >membership@spokanemountaineers.org</a
+          >.
+        </p>
+      </section>
+
+      <section class="sec" data-section="renew">
+        <div class="sec-head">
+          <span class="idx">03</span>
+          <h2 class="q">Renewing your membership</h2>
+        </div>
+        <div class="sec-rule"></div>
+        <p>
+          Renewals go through <strong>Donorbox</strong>, the same service you
+          used to join. The single most important thing to get right:
+          <strong
+            >renew with your email address, not your website username.</strong
+          >
+        </p>
+        <div class="callout callout--warn">
+          <p>
+            <strong
+              >Use your email, never your
+              <span class="smi">.smi</span> username.</strong
+            >
+            Donorbox matches you by email. If you renew using your website
+            username (your email with <span class="smi">.smi</span> on the end),
+            Donorbox can't match you to your existing record — it creates a
+            brand-new contact and breaks your membership history. Always renew
+            with your plain email address.
+          </p>
+        </div>
+        <p>
+          If you're renewing manually, use the
+          <strong>same name, address, and phone number</strong> you used before.
+          Small differences create duplicate records — renewing as "David" when
+          you originally joined as "Dave," for example, can create a second
+          contact. Not sure what you used? Check your Donorbox receipt, or open
+          <strong>My Profile</strong> on the website to see the name, email, and
+          phone on file (<strong>My Account</strong> shows the address).
+        </p>
+        <div class="callout callout--note">
+          <p>
+            <strong>Watch the email on your payment method.</strong> Some
+            payment tools attach a different email than the one you use for
+            membership. Before you finish, make sure the email tied to your
+            membership doesn't get replaced by a payment-account email.
+          </p>
+        </div>
+        <p>
+          Open <strong>My Account</strong> from the menu under your name for a
+          link to renew. If anything looks off after you renew, email
+          <a href="mailto:membership@spokanemountaineers.org"
+            >membership@spokanemountaineers.org</a
+          >
+          and we'll sort it out.
+        </p>
+      </section>
+
+      <section class="sec" data-section="calendar">
+        <div class="sec-head">
+          <span class="idx">04</span>
+          <h2 class="q">Finding events on the Calendar</h2>
+        </div>
+        <div class="sec-rule"></div>
+        <p>
+          Event details are visible only to members, so
+          <strong>sign in first</strong>. Then find
+          <strong>Calendar of Events</strong> in the middle of the main menu. On
+          a phone, look in the menu list at the upper left.
+        </p>
+        <figure class="shot">
+          <img
+            src={imgCalendarMenu}
+            alt="The main menu with Calendar of Events highlighted"
+            loading="lazy"
+          />
+          <figcaption>Calendar of Events in the main menu.</figcaption>
+        </figure>
+        <p>
+          When you open it, you land on the current week. All nine event
+          categories are color-coded, and you can switch any of them off to
+          focus on the activities you care about. Events you've created show up
+          under <strong>My Events</strong>.
+        </p>
+        <p>A few things worth knowing:</p>
+        <ul>
+          <li>
+            <strong>List view.</strong> Scroll down within the calendar for a
+            list of upcoming events. On a phone the calendar grid doesn't render
+            well, so you'll see the list view only.
+          </li>
+          <li>
+            <strong>Week or month.</strong> Use the view control to switch from
+            Week to Month, or scroll within the week for a more compact view.
+          </li>
+          <li>
+            <strong>Sorting the list.</strong> The default
+            <strong>All Upcoming Events List</strong> runs from now into the
+            future. Click the Start or End column to change the sort order.
+          </li>
+          <li>
+            <strong>Pinned views.</strong> You can pin a different list view,
+            but we don't recommend it for the Calendar of Events — your profile
+            remembers the pinned view instead of the default that shows
+            everything.
+          </li>
+        </ul>
+        <p>
+          Each activity group also has its own calendar list, filtered to that
+          activity, which is often the easiest way to see just hikes, just
+          climbs, and so on.
+        </p>
+        <figure class="shot">
+          <img
+            src={imgCalendarMonth}
+            alt="The Calendar of Events in month view, with color-coded categories"
+            loading="lazy"
+          />
+          <figcaption>The calendar in month view.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img
+            src={imgEventsList}
+            alt="The list view of upcoming events, sortable by Start and End"
+            loading="lazy"
+          />
+          <figcaption>The list view of upcoming events.</figcaption>
+        </figure>
+      </section>
+
+      <section class="sec" data-section="groups">
+        <div class="sec-head">
+          <span class="idx">05</span>
+          <h2 class="q">Activity groups &amp; notifications</h2>
+        </div>
+        <div class="sec-rule"></div>
+        <p>
+          When you first join, take a few minutes to find
+          <strong>Activity Groups</strong> and <strong>join</strong> the ones
+          you want to follow. Each group page has its upcoming events, posts,
+          polls, members, and files. Group admins and managers keep an eye on
+          the content, and you can <strong>like</strong> a post to keep
+          following the conversation.
+        </p>
+        <p>
+          You're automatically joined to the <strong>Clubwide</strong> and
+          <strong>Conservation</strong> groups. Posts to those reach the whole
+          club, so they're reserved for general announcements and conservation
+          news.
+        </p>
+        <h3>Choose how often you hear from each group</h3>
+        <p>For each group you follow, set its email notifications:</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>What you get</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Every Post</td>
+                <td>An email every time someone posts to the group</td>
+              </tr>
+              <tr>
+                <td>Daily Digest</td>
+                <td>Everything from the past 24 hours in one daily email</td>
+              </tr>
+              <tr>
+                <td>Weekly Digest</td>
+                <td>
+                  The past 7 days in a Sunday-morning email — the default for
+                  every group
+                </td>
+              </tr>
+              <tr>
+                <td>Limited</td>
+                <td>Minimal email</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          When event leaders post new trips, the club posts a daily summary to
+          the matching activity group. Following a group and keeping its
+          notifications on is the easiest way to hear about new events as
+          they're added.
+        </p>
+        <div class="callout callout--tip">
+          <p>
+            <strong
+              >Why are some names in a participant list not clickable?</strong
+            >
+            When you look at who's attending an event, members with a public
+            profile show as links you can click; everyone else shows as plain
+            text. That's on purpose — it protects the privacy of members who
+            haven't chosen to share a public profile.
+          </p>
+        </div>
+      </section>
+
+      <section class="sec" data-section="resources">
+        <div class="sec-head">
+          <span class="idx">06</span>
+          <h2 class="q">Member resources</h2>
+        </div>
+        <div class="sec-rule"></div>
+        <p>
+          Beyond events, your membership comes with documents, discounts, and a
+          full slate of schools and clinics. Most of it lives under two menus on
+          the main site: <strong>Resources</strong> and
+          <strong>Schools &amp; Clinics</strong>.
+        </p>
+
+        <h3>Trip waiver and liability release</h3>
+        <p>
+          From the main menu, choose
+          <strong>Resources → Member Resources</strong>. That page holds the
+          club's important member documents, and the
+          <strong>trip waiver / liability release</strong> is the first one on
+          the list. You'll find other documents and links there too. Some
+          activity groups also post the waiver in their own group files, or link
+          back to this same document.
+        </p>
+        <figure class="shot">
+          <img
+            src={imgMemberDocuments}
+            alt="The Member Resources page, with the Liability Release Trip Waiver as the first document"
+            loading="lazy"
+          />
+          <figcaption>The Member Resources documents page.</figcaption>
+        </figure>
+
+        <h3>Member discounts</h3>
+        <p>
+          From the main menu, choose
+          <strong>Resources → Member Discounts</strong> for the current list of
+          discounts available to members. To use a discount in person, be ready
+          to show proof of current membership by logging into your account on
+          your phone. Online discounts may use a discount code instead.
+        </p>
+
+        <h3>Schools and clinics</h3>
+        <p>
+          From the main menu, choose <strong>Schools &amp; Clinics</strong> to
+          see the club's educational offerings — everything from Backpack School
+          and Rock School to Wilderness First Aid and Leadership Development. A
+          program may still show details from its last session until we begin
+          advertising the next one, so check back as the season approaches.
+          Schools and clinics are often listed in the Calendar of Events as
+          well.
+        </p>
+      </section>
+
+      <div class="help">
+        <h2>Still need help?</h2>
+        <p>
+          Email
+          <a href="mailto:membership@spokanemountaineers.org"
+            >membership@spokanemountaineers.org</a
+          >
+          and a club volunteer will help you out.
+        </p>
+      </div>
+    </main>
+  </article>
+</template>
