@@ -24,6 +24,7 @@ nav:
       - Bulk Delete Events in Salesforce: staff-guides/bulk-delete-events-in-salesforce.md
       - Send as Org Email from Hotmail: staff-guides/send-as-gmail-from-hotmail.md
   - Technical Reference:
+      - Style Guide: brand/style-guide.md
       - Developer Guides:
           - developer-guides/index.md
           - Configure Custom Login Page: developer-guides/configure-custom-login-page.md
@@ -157,6 +158,7 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/smi-theme.css
 
 extra:
   social:
