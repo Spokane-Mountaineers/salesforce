@@ -90,6 +90,7 @@
             src={imgPasswordReset}
             alt="The password reset screen, showing the username field and the Send Password Reset Link button"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>The password reset screen.</figcaption>
         </figure>
@@ -166,6 +167,7 @@
             src={imgMyProfile}
             alt="The My Profile editor, with fields for name, contact method, interests, and join date"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>The My Profile editor.</figcaption>
         </figure>
@@ -196,6 +198,7 @@
             src={imgProfileVisibility}
             alt="The Profile Visibility and Email Notifications settings, with visibility set to Member"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>Profile Visibility &amp; Email Notifications.</figcaption>
         </figure>
@@ -211,6 +214,7 @@
             src={imgNewMessage}
             alt="The unread-message badge: a red circle with a number near your avatar"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>The unread-message badge.</figcaption>
         </figure>
@@ -304,6 +308,7 @@
             src={imgCalendarMenu}
             alt="The main menu with Calendar of Events highlighted"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>Calendar of Events in the main menu.</figcaption>
         </figure>
@@ -346,6 +351,7 @@
             src={imgCalendarMonth}
             alt="The Calendar of Events in month view, with color-coded categories"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>The calendar in month view.</figcaption>
         </figure>
@@ -354,6 +360,7 @@
             src={imgEventsList}
             alt="The list view of upcoming events, sortable by Start and End"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>The list view of upcoming events.</figcaption>
         </figure>
@@ -459,6 +466,7 @@
             src={imgMemberDocuments}
             alt="The Member Resources page, with the Liability Release Trip Waiver as the first document"
             loading="lazy"
+            onclick={openLightbox}
           />
           <figcaption>The Member Resources documents page.</figcaption>
         </figure>
@@ -495,5 +503,25 @@
         </p>
       </div>
     </main>
+
+    <template if:true={isLightboxOpen}>
+      <div
+        class="lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Enlarged screenshot"
+        onclick={closeLightbox}
+      >
+        <img class="lightbox__img" src={lightboxSrc} alt={lightboxAlt} />
+        <button
+          type="button"
+          class="lightbox__close"
+          aria-label="Close enlarged image"
+          onclick={closeLightbox}
+        >
+          &times;
+        </button>
+      </div>
+    </template>
   </article>
 </template>
