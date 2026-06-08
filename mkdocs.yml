@@ -158,7 +158,6 @@ markdown_extensions:
       custom_checkbox: true
 
 extra_css:
-  - stylesheets/extra.css
   - stylesheets/smi-theme.css
 
 extra:
