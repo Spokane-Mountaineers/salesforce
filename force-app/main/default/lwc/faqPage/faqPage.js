@@ -11,6 +11,38 @@ import FAQ_IMAGES from "@salesforce/resourceUrl/member_faq_images";
 export default class FaqPage extends LightningElement {
   _fontsLoaded = false;
 
+  // Lightbox (click a screenshot to enlarge).
+  lightboxSrc = null;
+  lightboxAlt = "";
+
+  connectedCallback() {
+    this._onKeydown = (event) => {
+      if (event.key === "Escape") {
+        this.closeLightbox();
+      }
+    };
+    window.addEventListener("keydown", this._onKeydown);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("keydown", this._onKeydown);
+  }
+
+  get isLightboxOpen() {
+    return this.lightboxSrc !== null;
+  }
+
+  openLightbox(event) {
+    const img = event.currentTarget;
+    this.lightboxSrc = img.src;
+    this.lightboxAlt = img.alt;
+  }
+
+  closeLightbox() {
+    this.lightboxSrc = null;
+    this.lightboxAlt = "";
+  }
+
   renderedCallback() {
     if (this._fontsLoaded) {
       return;
