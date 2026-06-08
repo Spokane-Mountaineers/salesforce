@@ -34,7 +34,7 @@ Documentation for board members, event leaders, website contributors, and develo
 
     Developer guides, automations, implementation write-ups, integrations, and plans.
 
-- :material-information: **[About](about.md)**
+- :material-information: **[About](about/index.md)**
 
     About the club and this documentation site.
 
