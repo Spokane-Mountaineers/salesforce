@@ -1,0 +1,132 @@
+:host {
+  --paper-2: #ede6d5;
+  --card: #fbf8f0;
+  --ink: #1c2520;
+  --ink-soft: #54605a;
+  --ink-faint: #8a938c;
+  --pine: #1e4b38;
+  --rust: #b14a1e;
+  --line: rgba(28, 37, 32, 0.14);
+  --line-strong: rgba(28, 37, 32, 0.26);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  display: block;
+}
+
+.event {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 44px 24px 80px;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin: 0 0 10px;
+}
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--pine);
+  margin: 0 0 24px;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin: 0 0 28px;
+  padding: 18px 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.fact dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 3px;
+}
+.fact dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.body {
+  font-size: 18px;
+  line-height: 1.72;
+}
+.prereq {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--rust);
+  border-radius: 0 8px 8px 0;
+}
+.prereq__title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--pine);
+  margin: 0 0 6px;
+}
+.rsvp {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.smi-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.15s var(--ease),
+    background 0.2s;
+}
+.smi-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.smi-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.smi-btn--primary {
+  background: var(--rust);
+  color: #fff;
+}
+.smi-btn--ghost {
+  background: transparent;
+  color: var(--pine);
+  border-color: var(--line-strong);
+}
+.full {
+  font-weight: 600;
+  color: var(--rust);
+  margin: 0;
+}
+.message {
+  font-size: 15px;
+  color: var(--pine);
+  margin: 0;
+}
+.error {
+  color: var(--rust);
+  padding: 32px 0;
+}

@@ -1,0 +1,64 @@
+<template>
+  <section class="cal">
+    <header class="cal__head">
+      <h2 class="cal__title">{monthLabel}</h2>
+      <div class="cal__nav">
+        <button
+          type="button"
+          class="navbtn"
+          onclick={previousMonth}
+          aria-label="Previous month"
+        >
+          ‹
+        </button>
+        <button type="button" class="navbtn navbtn--today" onclick={today}>
+          Today
+        </button>
+        <button
+          type="button"
+          class="navbtn"
+          onclick={nextMonth}
+          aria-label="Next month"
+        >
+          ›
+        </button>
+      </div>
+    </header>
+
+    <template lwc:if={hasError}>
+      <p class="cal__error">{error}</p>
+    </template>
+
+    <div class="grid" role="grid">
+      <div class="weekrow weekrow--head" role="row">
+        <template for:each={weekdays} for:item="wd">
+          <div key={wd} class="weekday" role="columnheader">{wd}</div>
+        </template>
+      </div>
+      <template for:each={weeks} for:item="week">
+        <div key={week.key} class="weekrow" role="row">
+          <template for:each={week.days} for:item="day">
+            <div key={day.key} class={day.cls} role="gridcell">
+              <span class="cell__num">{day.day}</span>
+              <ul class="cell__events">
+                <template for:each={day.events} for:item="ev">
+                  <li key={ev.id}>
+                    <button
+                      type="button"
+                      class={ev.cls}
+                      data-id={ev.id}
+                      onclick={handleSelect}
+                      title={ev.name}
+                    >
+                      {ev.name}
+                    </button>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </template>
+        </div>
+      </template>
+    </div>
+  </section>
+</template>

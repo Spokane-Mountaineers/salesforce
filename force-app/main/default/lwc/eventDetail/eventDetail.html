@@ -1,0 +1,83 @@
+<template>
+  <article class="event">
+    <template lwc:if={error}>
+      <p class="error">{error}</p>
+    </template>
+
+    <template lwc:if={hasEvent}>
+      <p class="eyebrow">{event.activityGroup}</p>
+      <h1 class="title">{event.name}</h1>
+
+      <dl class="facts">
+        <div class="fact">
+          <dt>When</dt>
+          <dd>
+            <lightning-formatted-date-time
+              value={event.startTime}
+              year="numeric"
+              month="short"
+              day="2-digit"
+              hour="2-digit"
+              minute="2-digit"
+            ></lightning-formatted-date-time>
+          </dd>
+        </div>
+        <template lwc:if={event.location}>
+          <div class="fact">
+            <dt>Where</dt>
+            <dd>{event.location}</dd>
+          </div>
+        </template>
+        <template lwc:if={event.leaderName}>
+          <div class="fact">
+            <dt>Leader</dt>
+            <dd>{event.leaderName}</dd>
+          </div>
+        </template>
+        <template lwc:if={takesRsvp}>
+          <div class="fact">
+            <dt>Spots</dt>
+            <dd>{spots}</dd>
+          </div>
+        </template>
+      </dl>
+
+      <template lwc:if={event.description}>
+        <lightning-formatted-rich-text
+          value={event.description}
+          class="body"
+        ></lightning-formatted-rich-text>
+      </template>
+
+      <template lwc:if={event.prerequisites}>
+        <div class="prereq">
+          <h2 class="prereq__title">Prerequisites</h2>
+          <lightning-formatted-rich-text
+            value={event.prerequisites}
+          ></lightning-formatted-rich-text>
+        </div>
+      </template>
+
+      <template lwc:if={takesRsvp}>
+        <div class="rsvp">
+          <template lwc:if={isFull}>
+            <p class="full">This event is full.</p>
+          </template>
+          <template lwc:else>
+            <button
+              type="button"
+              class={rsvpVariant}
+              onclick={handleRsvp}
+              disabled={busy}
+            >
+              {rsvpLabel}
+            </button>
+          </template>
+          <template lwc:if={message}>
+            <p class="message" role="status">{message}</p>
+          </template>
+        </div>
+      </template>
+    </template>
+  </article>
+</template>
