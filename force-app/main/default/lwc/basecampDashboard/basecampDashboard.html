@@ -1,0 +1,73 @@
+<template>
+  <section class="basecamp">
+    <div class="status-strip">
+      <span class="status-strip__hi">{greeting}</span>
+      <a class="status-strip__card" href={memberCardHref}>Membership card ▸</a>
+    </div>
+
+    <div class="cols">
+      <section class="panel panel--events">
+        <h2 class="panel__title">Your upcoming events</h2>
+        <template lwc:if={hasRegistrations}>
+          <ul class="evlist">
+            <template for:each={upcoming} for:item="e">
+              <li key={e.id} class="evcard">
+                <a class="evcard__link" href={e.id}>
+                  <p class="evcard__group">{e.activityGroup}</p>
+                  <p class="evcard__name">{e.name}</p>
+                  <p class="evcard__when">
+                    <lightning-formatted-date-time
+                      value={e.startTime}
+                      month="short"
+                      day="2-digit"
+                      hour="2-digit"
+                      minute="2-digit"
+                    ></lightning-formatted-date-time>
+                  </p>
+                </a>
+              </li>
+            </template>
+          </ul>
+        </template>
+        <template lwc:else>
+          <p class="empty">
+            No upcoming registrations.
+            <a href={eventsHref}>Browse events ▸</a>
+          </p>
+        </template>
+      </section>
+
+      <aside class="panel panel--actions">
+        <h2 class="panel__title">Quick actions</h2>
+        <ul class="actions">
+          <li>
+            <a class="action" href={tripReportHref}>+ Post a trip report</a>
+          </li>
+          <li><a class="action" href={eventsHref}>⌕ Browse events</a></li>
+          <template lwc:if={showSlack}>
+            <li><a class="action" href={slackHref}>→ Open Slack</a></li>
+          </template>
+        </ul>
+      </aside>
+    </div>
+
+    <section class="panel panel--latest">
+      <h2 class="panel__title">Latest from your activities</h2>
+      <template lwc:if={hasPosts}>
+        <ul class="postlist">
+          <template for:each={latestPosts} for:item="p">
+            <li key={p.id} class="postrow">
+              <a class="postrow__link" href={p.id}>
+                <span class="postrow__title">{p.title}</span>
+                <span class="postrow__meta">{p.meta}</span>
+              </a>
+            </li>
+          </template>
+        </ul>
+      </template>
+      <template lwc:else>
+        <p class="empty">No posts yet — be the first to write a trip report.</p>
+      </template>
+    </section>
+  </section>
+</template>

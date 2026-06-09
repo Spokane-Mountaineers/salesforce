@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Basecamp Dashboard</masterLabel>
+    <description
+  >"Basecamp" member home (plan §9.4): upcoming events, quick actions, and latest from your activities.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+        name="tripReportHref"
+        type="String"
+        label="Post-trip-report link"
+        default="/trip-report/new"
+      />
+            <property
+        name="eventsHref"
+        type="String"
+        label="Events link"
+        default="/events"
+      />
+            <property
+        name="slackHref"
+        type="String"
+        label="Slack link (optional)"
+      />
+            <property
+        name="memberCardHref"
+        type="String"
+        label="Membership card link"
+        default="/my-membership"
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
