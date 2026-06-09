@@ -7,3 +7,4 @@ problem, the approach, and the steps to carry it out.
 - [Hide Event Participant List for Public Events](2026-03-18-hide-event-participant-list-for-public-events.md)
 - [Fix License Shuffle Batch](2026-04-12-fix-license-shuffle-batch.md)
 - [Login History Monthly Rollup](2026-06-02-login-history-monthly-rollup.md)
+- [LWR Site Overhaul (Aura → LWR member site)](2026-06-08-lwr-site-overhaul.md)
