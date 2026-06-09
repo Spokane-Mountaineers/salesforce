@@ -20,5 +20,6 @@
     </nameField>
     <pluralLabel>Content Post Tags</pluralLabel>
     <searchLayouts />
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

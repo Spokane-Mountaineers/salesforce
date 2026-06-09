@@ -125,19 +125,60 @@ private class ContentPostControllerTest {
     System.assertEquals('Cascades', tags[0].name);
   }
 
+  // Sys-admin profile (so the new record type is accessible) + the perm set
+  // (so the new fields are FLS-writeable). Created in the test method, then the
+  // non-setup insert runs inside runAs — which both refreshes the permission
+  // context and isolates it from the setup-object DML (no MIXED_DML).
+  private static User authorUser() {
+    Profile admin = [
+      SELECT Id
+      FROM Profile
+      WHERE Name = 'System Administrator'
+      LIMIT 1
+    ];
+    String uniq = 'triprpt' + DateTime.now().getTime();
+    User u = new User(
+      ProfileId = admin.Id,
+      LastName = 'Author',
+      Email = uniq + '@example.com',
+      Username = uniq + '@smi-test.example.com',
+      Alias = 'trauth',
+      TimeZoneSidKey = 'America/Los_Angeles',
+      LocaleSidKey = 'en_US',
+      EmailEncodingKey = 'UTF-8',
+      LanguageLocaleKey = 'en_US'
+    );
+    insert u;
+    PermissionSet ps = [
+      SELECT Id
+      FROM PermissionSet
+      WHERE Name = 'Trip_Report_Author'
+      LIMIT 1
+    ];
+    insert new PermissionSetAssignment(
+      AssigneeId = u.Id,
+      PermissionSetId = ps.Id
+    );
+    return u;
+  }
+
   @isTest
   static void createTripReport_setsRecordTypeOwnerAndPublishes() {
-    Test.startTest();
-    Id newId = ContentPostController.createTripReport(
-      'Enchantments thru-hike',
-      '<p>Twenty miles, one long day.</p>',
-      'Hiking',
-      Date.today().addDays(-7),
-      'Enchantments',
-      'Strenuous',
-      'larches, golden'
-    );
-    Test.stopTest();
+    User author = authorUser();
+    Id newId;
+    System.runAs(author) {
+      Test.startTest();
+      newId = ContentPostController.createTripReport(
+        'Enchantments thru-hike',
+        '<p>Twenty miles, one long day.</p>',
+        'Hiking',
+        Date.today().addDays(-7),
+        'Enchantments',
+        'Strenuous',
+        'larches, golden'
+      );
+      Test.stopTest();
+    }
 
     Content_Post__c rec = [
       SELECT
@@ -151,7 +192,7 @@ private class ContentPostControllerTest {
       WHERE Id = :newId
     ];
     System.assertEquals('Trip_Report', rec.RecordType.DeveloperName);
-    System.assertEquals(UserInfo.getUserId(), rec.OwnerId, 'Author owns it');
+    System.assertEquals(author.Id, rec.OwnerId, 'Author owns it');
     System.assertEquals(
       'Published',
       rec.Status__c,

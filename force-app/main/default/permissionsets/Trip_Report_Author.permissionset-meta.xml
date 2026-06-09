@@ -2,7 +2,7 @@
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <label>Trip Report Author</label>
     <description
-  >Lets active members author trip reports (plan §3.3): Create/Read/Edit on Content_Post__c + its fields (so the authoring LWC's `insert as user` succeeds), and Read on the tag objects. Scope to the Trip Report record type is enforced server-side in ContentPostController and by record-type assignment on the member profile. Does NOT grant delete/modifyAll. Assign to active members.</description>
+  >Lets active members author trip reports (plan §3.3): Create/Read/Edit on Content_Post__c + fields so the authoring LWC's insert-as-user succeeds. Trip Report record-type scope is enforced in ContentPostController. No delete/modifyAll.</description>
     <hasActivationRequired>false</hasActivationRequired>
     <objectPermissions>
         <object>Content_Post__c</object>
@@ -62,28 +62,11 @@
         <editable>true</editable>
     </fieldPermissions>
     <fieldPermissions>
-        <field>Content_Post__c.Status__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Content_Post__c.Title__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
         <field>Content_Post__c.Trip_Date__c</field>
         <readable>true</readable>
         <editable>true</editable>
     </fieldPermissions>
-    <fieldPermissions>
-        <field>Content_Post__c.Visibility__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <field>Content_Post_Tag__c.Content_Tag__c</field>
-        <readable>true</readable>
-        <editable>true</editable>
-    </fieldPermissions>
+    <!-- Title__c, Status__c, Visibility__c are required fields; FLS can't be
+         set on them (they're implicitly editable on create) and the Trip Report
+         Author needs object Create which covers them. -->
 </PermissionSet>

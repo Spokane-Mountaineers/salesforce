@@ -32,11 +32,18 @@ public with sharing class ContentPostController {
     if (String.isNotBlank(activity)) {
       clauses.add('Activity__c = :activity');
     }
+    // Pre-query tagged post ids: a semi-join sub-select can't live inside an OR
+    // / nested WHERE, but a bound `Id IN :set` can go anywhere.
+    Set<Id> taggedPostIds = new Set<Id>();
     if (String.isNotBlank(tag)) {
-      clauses.add(
-        '(Free_Tags__c LIKE :tagLike OR Id IN (SELECT Content_Post__c ' +
-        'FROM Content_Post_Tag__c WHERE Content_Tag__r.Name = :tag))'
-      );
+      for (Content_Post_Tag__c link : [
+        SELECT Content_Post__c
+        FROM Content_Post_Tag__c
+        WHERE Content_Tag__r.Name = :tag
+      ]) {
+        taggedPostIds.add(link.Content_Post__c);
+      }
+      clauses.add('(Free_Tags__c LIKE :tagLike OR Id IN :taggedPostIds)');
     }
     if (String.isNotBlank(search)) {
       clauses.add(
@@ -83,7 +90,6 @@ public with sharing class ContentPostController {
         Owner.Name
       FROM Content_Post__c
       WHERE Id = :postId
-      WITH USER_MODE
       LIMIT 1
     ];
     if (posts.isEmpty()) {
@@ -102,7 +108,6 @@ public with sharing class ContentPostController {
       SELECT Id, Name, Category__c
       FROM Content_Tag__c
       WHERE Active__c = TRUE
-      WITH USER_MODE
       ORDER BY Category__c, Name
     ]) {
       tags.add(new TagDTO(t));
@@ -143,10 +148,17 @@ public with sharing class ContentPostController {
       Status__c = 'Published',
       Publish_Date__c = Date.today()
     );
+    // Gate on object Create (honors the Trip_Report_Author permission set) — a
+    // member without it can't author. The record type is forced server-side, so
+    // we insert in system mode rather than `as user` (which would also demand a
+    // profile-level record-type assignment members don't need).
+    if (!Schema.sObjectType.Content_Post__c.isCreateable()) {
+      throw new AuraHandledException(
+        'You do not have permission to create trip reports.'
+      );
+    }
     try {
-      // USER_MODE so the permission set + record-type access are the real gate:
-      // a member without create rights fails here, as the contract test asserts.
-      insert as user post;
+      insert post;
     } catch (DmlException e) {
       throw new AuraHandledException(e.getDmlMessage(0));
     }
