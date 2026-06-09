@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description
+  >Junction between Content_Post__c and the controlled Content_Tag__c vocabulary (plan §3.2). Master-detail to the post so tags cascade-delete with it and inherit its sharing.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableStreamingApi>true</enableStreamingApi>
+    <label>Content Post Tag</label>
+    <nameField>
+        <displayFormat>CPT-{00000000}</displayFormat>
+        <label>Content Post Tag Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Content Post Tags</pluralLabel>
+    <searchLayouts />
+    <visibility>Public</visibility>
+</CustomObject>

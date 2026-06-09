@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Free_Tags__c</fullName>
+    <description
+  >Comma-separated user-defined free tags (plan §3.2) — members add their own without an admin minting picklist values. The tag filter queries these alongside the controlled Content_Tag__c vocabulary.</description>
+    <externalId>false</externalId>
+    <label>Free Tags</label>
+    <length>500</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description
+  >Durable content/blog backbone for the LWR site (plan §3): trip reports (member-authored), news/announcements (staff), and reference posts. One object keeps the index, tag filter, and search uniform across types; record types drive create UX and permissions. OWD Private — authors own their records and edit their own; a sharing rule exposes Status=Published to members.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <label>Content Post</label>
+    <nameField>
+        <displayFormat>POST-{00000}</displayFormat>
+        <label>Post Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Content Posts</pluralLabel>
+    <searchLayouts />
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

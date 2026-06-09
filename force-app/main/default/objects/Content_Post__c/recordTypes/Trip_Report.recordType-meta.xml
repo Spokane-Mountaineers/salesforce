@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trip_Report</fullName>
+    <active>true</active>
+    <description
+  >Member-authored trip report. The only record type members can create (plan §3.3).</description>
+    <label>Trip Report</label>
+</RecordType>

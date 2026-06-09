@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Visibility__c</fullName>
+    <description
+  >Internal (member-only) publishes on submit; flipping to Public routes through the activity-group approval queues before guests can see it (plan §3.3, §5.5).</description>
+    <label>Visibility</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Internal</fullName>
+                <default>true</default>
+                <label>Internal (members only)</label>
+            </value>
+            <value>
+                <fullName>Public</fullName>
+                <default>false</default>
+                <label>Public</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
