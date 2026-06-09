@@ -50,11 +50,15 @@ $RECYCLE.BIN/
 **/.venv/
 **/venv/
 
-# Material for MkDocs
-site/
+# Material for MkDocs build output (repo-root only — must NOT match
+# force-app/main/default/digitalExperiences/site/, the LWR site bundle)
+/site/
 
 # Temporary
 tmp/
+
+# Local production-site reference dumps (regenerate with `just use production && just refresh`)
+docs/plans/_reference/
 
 # AI Workflows
 thoughts/
