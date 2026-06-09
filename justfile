@@ -42,15 +42,11 @@ env:
     @echo "SF_TARGET_ORG=${SF_TARGET_ORG:-(unset)}"
     @echo "SF_EXECUTION_USER=${SF_EXECUTION_USER:-(unset)}"
 
-# Set local default env to staging (writes .envrc.local)
-use-staging:
-    @echo 'export SF_ENV=staging' > .envrc.local
-    @echo "✓ wrote .envrc.local — direnv will reload on next prompt"
-
-# Set local default env to production (writes .envrc.local)
-use-production:
-    @echo 'export SF_ENV=production' > .envrc.local
-    @echo "✓ wrote .envrc.local — direnv will reload on next prompt"
+# Select the active Salesforce env, e.g. `just use staging` → loads .env.staging (fails if that file is missing)
+use env:
+    @test -f .env.{{env}} || { echo "✗ .env.{{env}} does not exist — available: $(ls .env.* 2>/dev/null | sed 's|\.env\.||' | tr '\n' ' ')"; exit 1; }
+    @echo 'export SF_ENV={{env}}' > .envrc.local
+    @echo "✓ SF_ENV={{env}} (wrote .envrc.local) — direnv will reload on next prompt"
 
 # Render and deploy all AuthProviders for current SF_ENV
 deploy-authproviders:
