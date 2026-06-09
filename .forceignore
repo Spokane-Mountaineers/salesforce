@@ -11,6 +11,13 @@ package.xml
 # which renders the templates with values from .env (loaded by direnv).
 force-app/main/default/authproviders/**
 
+# Experience site config — tracked as ${VAR} templates (staff emails, url
+# prefix) and excluded from routine sf push/pull/retrieve so the placeholders
+# never overwrite real org values, and a `just refresh` of the bundle never
+# clobbers them. Render + deploy with `just deploy-site-config`.
+force-app/main/default/networks/**
+force-app/main/default/sites/**
+
 # LWC configuration files
 **/jsconfig.json
 **/.eslintrc.json
