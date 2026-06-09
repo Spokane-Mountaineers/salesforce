@@ -1,0 +1,28 @@
+<template>
+  <article class="post">
+    <template lwc:if={errorMessage}>
+      <p class="error">{errorMessage}</p>
+    </template>
+
+    <template lwc:if={hasPost}>
+      <header class="head">
+        <p class="meta">{meta}</p>
+        <h1 class="title">{post.title}</h1>
+        <p class="byline">By {post.authorName}</p>
+      </header>
+
+      <lightning-formatted-rich-text
+        value={post.body}
+        class="body"
+      ></lightning-formatted-rich-text>
+
+      <template lwc:if={hasTags}>
+        <ul class="tags" aria-label="Tags">
+          <template for:each={tags} for:item="t">
+            <li key={t} class="tag">#{t}</li>
+          </template>
+        </ul>
+      </template>
+    </template>
+  </article>
+</template>

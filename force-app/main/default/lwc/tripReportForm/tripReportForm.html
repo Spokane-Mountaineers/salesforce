@@ -1,0 +1,95 @@
+<template>
+  <form class="form" onsubmit={handleSubmit}>
+    <header class="head">
+      <p class="eyebrow">New Trip Report</p>
+      <h1 class="title">Share where you went</h1>
+    </header>
+
+    <template lwc:if={errorMessage}>
+      <p class="error" role="alert">{errorMessage}</p>
+    </template>
+
+    <label class="field">
+      <span class="label">Title</span>
+      <input
+        type="text"
+        data-field="title"
+        value={form.title}
+        onchange={handleChange}
+        maxlength="120"
+        required
+      />
+    </label>
+
+    <div class="row">
+      <label class="field">
+        <span class="label">Activity</span>
+        <select data-field="activity" onchange={handleChange}>
+          <option value="">—</option>
+          <template for:each={activityOptions} for:item="opt">
+            <option key={opt} value={opt}>{opt}</option>
+          </template>
+        </select>
+      </label>
+      <label class="field">
+        <span class="label">Difficulty</span>
+        <select data-field="difficulty" onchange={handleChange}>
+          <option value="">—</option>
+          <template for:each={difficultyOptions} for:item="opt">
+            <option key={opt} value={opt}>{opt}</option>
+          </template>
+        </select>
+      </label>
+    </div>
+
+    <div class="row">
+      <label class="field">
+        <span class="label">Trip date</span>
+        <input type="date" data-field="tripDate" onchange={handleChange} />
+      </label>
+      <label class="field">
+        <span class="label">Location / region</span>
+        <input
+          type="text"
+          data-field="location"
+          value={form.location}
+          onchange={handleChange}
+          maxlength="255"
+        />
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="label">Trip report</span>
+      <textarea
+        data-field="body"
+        rows="10"
+        onchange={handleChange}
+        placeholder="How was the route? Conditions, beta, the good and the type-2 fun…"
+      ></textarea>
+    </label>
+
+    <label class="field">
+      <span class="label">Tags (comma-separated)</span>
+      <input
+        type="text"
+        data-field="freeTags"
+        value={form.freeTags}
+        onchange={handleChange}
+        placeholder="larches, scramble, north cascades"
+        maxlength="500"
+      />
+    </label>
+
+    <div class="actions">
+      <button
+        class="smi-btn smi-btn--primary"
+        type="submit"
+        disabled={submitting}
+      >
+        <template lwc:if={submitting}>Saving…</template>
+        <template lwc:else>Publish trip report</template>
+      </button>
+    </div>
+  </form>
+</template>

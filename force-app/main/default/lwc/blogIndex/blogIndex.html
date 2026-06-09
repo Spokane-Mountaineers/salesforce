@@ -1,0 +1,73 @@
+<template>
+  <section class="blog">
+    <header class="head">
+      <p class="eyebrow">Field Notes</p>
+      <h1 class="title">Trip Reports &amp; Club News</h1>
+    </header>
+
+    <div class="controls">
+      <input
+        type="search"
+        class="search-box"
+        placeholder="Search posts…"
+        onchange={handleSearch}
+        aria-label="Search posts"
+      />
+      <div class="chips" role="group" aria-label="Filter by activity">
+        <template for:each={activityChips} for:item="c">
+          <button
+            key={c.value}
+            class={c.cls}
+            data-value={c.value}
+            onclick={handleActivity}
+            type="button"
+          >
+            {c.label}
+          </button>
+        </template>
+      </div>
+      <template lwc:if={tagChips.length}>
+        <div class="chips" role="group" aria-label="Filter by tag">
+          <template for:each={tagChips} for:item="c">
+            <button
+              key={c.value}
+              class={c.cls}
+              data-value={c.value}
+              onclick={handleTag}
+              type="button"
+            >
+              #{c.label}
+            </button>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <template lwc:if={postsError}>
+      <p class="state state--error">{postsError}</p>
+    </template>
+
+    <template lwc:if={isEmpty}>
+      <p class="state">
+        No posts match those filters yet.
+        <button class="link" type="button" onclick={clearFilters}>
+          Clear filters
+        </button>
+      </p>
+    </template>
+
+    <template lwc:if={hasPosts}>
+      <ul class="grid">
+        <template for:each={cards} for:item="p">
+          <li key={p.id} class="card">
+            <a class="card__link" href={p.id}>
+              <p class="card__meta">{p.meta}</p>
+              <h2 class="card__title">{p.title}</h2>
+              <p class="card__byline">{p.authorName}</p>
+            </a>
+          </li>
+        </template>
+      </ul>
+    </template>
+  </section>
+</template>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Blog Post</masterLabel>
+    <description
+  >Content post detail: rich body, metadata, tags, author (plan §3.4).</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+        name="postId"
+        type="String"
+        label="Post Id (optional; defaults to the page record)"
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
