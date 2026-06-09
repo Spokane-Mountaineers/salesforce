@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "Check Password",
   "contentBody": {
     "component": {
       "children": [
@@ -89,5 +87,7 @@
     "themeLayoutType": "Inner",
     "viewType": "check-password"
   },
+  "title": "Check Password",
+  "type": "sfdc_cms__view",
   "urlName": "check-password"
 }

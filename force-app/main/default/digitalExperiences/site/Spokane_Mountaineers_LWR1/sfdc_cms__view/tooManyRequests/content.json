@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "Too Many Requests",
   "contentBody": {
     "component": {
       "children": [
@@ -64,5 +62,7 @@
     "themeLayoutType": "ServiceNotAvailable",
     "viewType": "too-many-requests"
   },
+  "title": "Too Many Requests",
+  "type": "sfdc_cms__view",
   "urlName": "too-many-requests"
 }

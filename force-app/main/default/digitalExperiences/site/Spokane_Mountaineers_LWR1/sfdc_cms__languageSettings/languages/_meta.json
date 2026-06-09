@@ -1,5 +1,5 @@
 {
   "apiName": "languages",
-  "type": "sfdc_cms__languageSettings",
-  "path": "_settings"
+  "path": "_settings",
+  "type": "sfdc_cms__languageSettings"
 }

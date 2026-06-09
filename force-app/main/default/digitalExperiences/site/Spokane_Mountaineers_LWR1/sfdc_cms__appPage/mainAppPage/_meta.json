@@ -1,5 +1,1 @@
-{
-  "apiName": "mainAppPage",
-  "type": "sfdc_cms__appPage",
-  "path": ""
-}
+{ "apiName": "mainAppPage", "path": "", "type": "sfdc_cms__appPage" }

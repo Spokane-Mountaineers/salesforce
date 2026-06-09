@@ -1,5 +1,1 @@
-{
-  "apiName": "tooManyRequests",
-  "type": "sfdc_cms__view",
-  "path": "views"
-}
+{ "apiName": "tooManyRequests", "path": "views", "type": "sfdc_cms__view" }

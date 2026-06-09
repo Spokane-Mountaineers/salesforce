@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__route",
-  "title": "Service Not Available",
   "contentBody": {
     "activeViewId": "serviceNotAvailable",
     "configurationTags": ["allow-in-static-site"],
@@ -8,5 +6,7 @@
     "routeType": "service-not-available",
     "urlPrefix": "service-not-available"
   },
+  "title": "Service Not Available",
+  "type": "sfdc_cms__route",
   "urlName": "service-not-available"
 }

@@ -1,5 +1,1 @@
-{
-  "apiName": "Error",
-  "type": "sfdc_cms__route",
-  "path": "routes"
-}
+{ "apiName": "Error", "path": "routes", "type": "sfdc_cms__route" }

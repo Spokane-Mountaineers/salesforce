@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "Register",
   "contentBody": {
     "component": {
       "children": [
@@ -95,5 +93,7 @@
     "themeLayoutType": "Inner",
     "viewType": "self-register"
   },
+  "title": "Register",
+  "type": "sfdc_cms__view",
   "urlName": "register"
 }

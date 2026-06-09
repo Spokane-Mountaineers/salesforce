@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__themeLayout",
-  "title": "Service Not Available Theme Layout",
   "contentBody": {
     "component": {
       "attributes": {},
@@ -23,5 +21,7 @@
       "type": "component"
     }
   },
+  "title": "Service Not Available Theme Layout",
+  "type": "sfdc_cms__themeLayout",
   "urlName": "service-not-available-theme-layout"
 }

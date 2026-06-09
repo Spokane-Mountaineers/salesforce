@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__route",
-  "title": "Home",
   "contentBody": {
     "activeViewId": "home",
     "configurationTags": [],
@@ -8,5 +6,7 @@
     "routeType": "home",
     "urlPrefix": ""
   },
+  "title": "Home",
+  "type": "sfdc_cms__route",
   "urlName": "home"
 }

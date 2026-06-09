@@ -1,5 +1,5 @@
 {
   "apiName": "snaThemeLayout",
-  "type": "sfdc_cms__themeLayout",
-  "path": "themeLayouts"
+  "path": "themeLayouts",
+  "type": "sfdc_cms__themeLayout"
 }

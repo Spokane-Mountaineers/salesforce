@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "Forgot Password",
   "contentBody": {
     "component": {
       "children": [
@@ -92,5 +90,7 @@
     "themeLayoutType": "Inner",
     "viewType": "forgot-password"
   },
+  "title": "Forgot Password",
+  "type": "sfdc_cms__view",
   "urlName": "forgot-password"
 }

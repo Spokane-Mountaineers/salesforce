@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__brandingSet",
-  "title": "Build Your Own (LWR)",
   "contentBody": {
     "brandingSetType": "APP",
     "definitionName": "talon-template-byo:branding",
@@ -276,5 +274,7 @@
       "_WarningForegroundColor3": "#ffffff"
     }
   },
+  "title": "Build Your Own (LWR)",
+  "type": "sfdc_cms__brandingSet",
   "urlName": "build-your-own-lwr"
 }

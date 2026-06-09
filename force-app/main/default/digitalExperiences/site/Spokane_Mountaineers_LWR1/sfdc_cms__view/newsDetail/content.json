@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "News Detail",
   "contentBody": {
     "component": {
       "children": [
@@ -66,5 +64,7 @@
     "themeLayoutType": "Inner",
     "viewType": "managed-content-sfdc_cms__news"
   },
+  "title": "News Detail",
+  "type": "sfdc_cms__view",
   "urlName": "news-detail"
 }

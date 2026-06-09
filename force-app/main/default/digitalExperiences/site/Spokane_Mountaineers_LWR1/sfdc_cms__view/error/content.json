@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "Error",
   "contentBody": {
     "component": {
       "children": [
@@ -77,5 +75,7 @@
     "themeLayoutType": "Inner",
     "viewType": "error"
   },
+  "title": "Error",
+  "type": "sfdc_cms__view",
   "urlName": "error"
 }

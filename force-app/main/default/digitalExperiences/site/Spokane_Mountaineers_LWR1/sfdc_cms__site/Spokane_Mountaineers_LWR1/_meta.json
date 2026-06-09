@@ -1,5 +1,1 @@
-{
-  "apiName": "Spokane_Mountaineers_LWR1",
-  "type": "sfdc_cms__site",
-  "path": ""
-}
+{ "apiName": "Spokane_Mountaineers_LWR1", "path": "", "type": "sfdc_cms__site" }

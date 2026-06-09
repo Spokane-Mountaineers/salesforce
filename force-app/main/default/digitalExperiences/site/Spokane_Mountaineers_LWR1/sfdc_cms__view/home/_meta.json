@@ -1,5 +1,1 @@
-{
-  "apiName": "home",
-  "type": "sfdc_cms__view",
-  "path": "views"
-}
+{ "apiName": "home", "path": "views", "type": "sfdc_cms__view" }

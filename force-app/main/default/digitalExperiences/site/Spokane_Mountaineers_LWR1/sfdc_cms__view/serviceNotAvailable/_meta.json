@@ -1,5 +1,1 @@
-{
-  "apiName": "serviceNotAvailable",
-  "type": "sfdc_cms__view",
-  "path": "views"
-}
+{ "apiName": "serviceNotAvailable", "path": "views", "type": "sfdc_cms__view" }

@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__themeLayout",
-  "title": "Scoped Header and Footer",
   "contentBody": {
     "component": {
       "attributes": {
@@ -83,5 +81,7 @@
       "type": "component"
     }
   },
+  "title": "Scoped Header and Footer",
+  "type": "sfdc_cms__themeLayout",
   "urlName": "scoped-header-and-footer"
 }

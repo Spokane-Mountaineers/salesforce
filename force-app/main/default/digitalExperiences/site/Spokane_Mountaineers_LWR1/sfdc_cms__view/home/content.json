@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "Home",
   "contentBody": {
     "component": {
       "children": [
@@ -77,5 +75,7 @@
     "themeLayoutType": "Inner",
     "viewType": "home"
   },
+  "title": "Home",
+  "type": "sfdc_cms__view",
   "urlName": "home"
 }

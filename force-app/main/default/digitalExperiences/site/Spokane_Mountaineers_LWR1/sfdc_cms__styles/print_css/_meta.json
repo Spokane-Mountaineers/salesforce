@@ -1,5 +1,1 @@
-{
-  "apiName": "print_css",
-  "type": "sfdc_cms__styles",
-  "path": ""
-}
+{ "apiName": "print_css", "path": "", "type": "sfdc_cms__styles" }

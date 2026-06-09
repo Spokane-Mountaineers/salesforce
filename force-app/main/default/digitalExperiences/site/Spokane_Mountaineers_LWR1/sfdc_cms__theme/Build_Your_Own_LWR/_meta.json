@@ -1,5 +1,1 @@
-{
-  "apiName": "Build_Your_Own_LWR",
-  "type": "sfdc_cms__theme",
-  "path": "themes"
-}
+{ "apiName": "Build_Your_Own_LWR", "path": "themes", "type": "sfdc_cms__theme" }

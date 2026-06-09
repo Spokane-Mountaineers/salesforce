@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__view",
-  "title": "Service Not Available",
   "contentBody": {
     "component": {
       "children": [
@@ -58,5 +56,7 @@
     "themeLayoutType": "ServiceNotAvailable",
     "viewType": "service-not-available"
   },
+  "title": "Service Not Available",
+  "type": "sfdc_cms__view",
   "urlName": "service-not-available"
 }

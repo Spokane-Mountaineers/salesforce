@@ -1,5 +1,1 @@
-{
-  "apiName": "styles_css",
-  "type": "sfdc_cms__styles",
-  "path": ""
-}
+{ "apiName": "styles_css", "path": "", "type": "sfdc_cms__styles" }

@@ -1,49 +1,44 @@
 {
-  "type": "sfdc_cms__mobilePublisherConfig",
-  "title": "Mobile Publisher Content",
   "contentBody": {
-    "nativeTabMenu": {
-      "branding": {
-        "iconTintColor": "#0B5CAB",
-        "iconTintColorUnselected": "#C9C9C9",
-        "barTintColor": "#FFFFFF"
-      },
-      "menuItems": [
-        {
-          "name": "Home",
-          "targetUrl": "/",
-          "iconDetails": {
-            "source": {
-              "type": "salesforceAsset",
-              "salesforceAssetName": "slds-icon:home"
-            }
-          }
-        }
-      ]
+    "mobilePublisherAppUpdateConfig": {
+      "enableAppUpdate": false,
+      "forceAppUpdate": false,
+      "minVersion": {
+        "android": {
+          "url": "https://play.google.com/store",
+          "version": "10.1"
+        },
+        "ios": { "url": "https://apps.apple.com/us", "version": "10.0" }
+      }
     },
     "nativeMobileNavConfig": {
-      "global": {
-        "showHamburgerMenu": true
-      },
+      "global": { "showHamburgerMenu": true },
       "ios": {
         "showBackButton": true,
         "showHamburgerMenuWithBackButton": false
       }
     },
-    "mobilePublisherAppUpdateConfig": {
-      "enableAppUpdate": false,
-      "forceAppUpdate": false,
-      "minVersion": {
-        "ios": {
-          "url": "https://apps.apple.com/us",
-          "version": "10.0"
-        },
-        "android": {
-          "url": "https://play.google.com/store",
-          "version": "10.1"
+    "nativeTabMenu": {
+      "branding": {
+        "barTintColor": "#FFFFFF",
+        "iconTintColor": "#0B5CAB",
+        "iconTintColorUnselected": "#C9C9C9"
+      },
+      "menuItems": [
+        {
+          "iconDetails": {
+            "source": {
+              "salesforceAssetName": "slds-icon:home",
+              "type": "salesforceAsset"
+            }
+          },
+          "name": "Home",
+          "targetUrl": "/"
         }
-      }
+      ]
     }
   },
+  "title": "Mobile Publisher Content",
+  "type": "sfdc_cms__mobilePublisherConfig",
   "urlName": "mobile-publisher-content"
 }

@@ -1,6 +1,4 @@
 {
-  "type": "sfdc_cms__route",
-  "title": "Check Password",
   "contentBody": {
     "activeViewId": "checkPasswordResetEmail",
     "configurationTags": [],
@@ -8,5 +6,7 @@
     "routeType": "check-password",
     "urlPrefix": "CheckPasswordResetEmail"
   },
+  "title": "Check Password",
+  "type": "sfdc_cms__route",
   "urlName": "check-password"
 }
