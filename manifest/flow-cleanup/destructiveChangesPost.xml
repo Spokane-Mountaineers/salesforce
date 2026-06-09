@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  DEAD flows to delete from the org (plan §6.5). These are removed from source;
+  this manifest deletes them from the org. As of 2026-06-09 a check-only delete
+  against staging fails for all six with:
+      "insufficient access rights on cross-reference id"
+  i.e. the deploying user (webdev5) lacks rights to delete them, or an
+  out-of-source component still references them. Resolve that (run as an admin
+  with Manage Flow + Modify All Data, deactivate any lingering versions, or
+  clear the cross-reference), then deploy:
+
+      sf project deploy start \
+        --manifest manifest/flow-cleanup/package.xml \
+        --post-destructive-changes manifest/flow-cleanup/destructiveChangesPost.xml \
+        --target-org "$SF_TARGET_ORG"
+
+  Apply to production at the Phase 6 cutover as well.
+-->
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Contact_Process</members>
+        <members>Notify_Subscribers_New_Event</members>
+        <members>Opportunity_Process_1</members>
+        <members>Redirect_to_User_Profile</members>
+        <members>Scheduled_Add_Members_To_Conservation_Group</members>
+        <members>Sync_User_to_Contact</members>
+        <name>Flow</name>
+    </types>
+    <version>59.0</version>
+</Package>
