@@ -541,5 +541,5 @@ Pulled from production for offline reference (git-ignored; regenerate with `just
 - Inventory existing `managedContent` / CMS news collections and reconcile with the blog data-model decision.
 - Map the `checkout` Visualforce ecomm/payments site dependency so it isn't broken at cutover.
 - Verify Slack Free member-count behavior and any current nonprofit-grant seat terms before rollout.
-- Enumerate every flow launched through the `flow.json` runner (`forceCommunity:flowCommunity` + `{!flowName}`) so none is missed in the LWR rebuild ([§6.1](#61-how-flows-are-wired-into-the-aura-site)).
+- ~~Enumerate every flow launched through the `flow.json` runner~~ **(resolved 2026-06-09).** The reference dump shows `routes/flow.json` binds exactly one flow — `Community_Event_Registration_Screen_Flow` (the RSVP flow, already the known high-coupling case in [§6.1](#61-how-flows-are-wired-into-the-aura-site)) — and `views/flow.json` carries the generic dynamic `{!flowName}`. No additional flows are wired through the runner, so nothing beyond the RSVP rebuild is missed.
 - Confirm `cccalendar` managed-package consumers before retiring it ([§5.3](#53-calendar-ui-is-a-forced-rebuild-regardless)).
