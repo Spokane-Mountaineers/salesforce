@@ -58,27 +58,31 @@ describe("c-blog-index", () => {
     }
   });
 
-  it("renders a card per published post", async () => {
+  it("leads with the newest post and lists the rest as ledger rows", async () => {
     const el = mount();
     getActiveTags.emit([{ id: "t1", name: "Cascades", category: "Region" }]);
     getPublishedPosts.emit(POSTS);
     await flush();
-    const cards = el.shadowRoot.querySelectorAll(".card");
-    expect(cards.length).toBe(2);
-    expect(el.shadowRoot.querySelector(".card__title").textContent).toBe(
+    expect(el.shadowRoot.querySelector(".lead__title").textContent).toBe(
       "Beacon Rock"
+    );
+    const rows = el.shadowRoot.querySelectorAll(".row");
+    expect(rows.length).toBe(1);
+    expect(el.shadowRoot.querySelector(".row__title").textContent).toBe(
+      "Mount Spokane"
     );
   });
 
-  it("composes the card meta from activity and location", async () => {
+  it("composes meta from activity and location for lead and rows", async () => {
     const el = mount();
     getPublishedPosts.emit(POSTS);
     await flush();
-    const metas = [...el.shadowRoot.querySelectorAll(".card__meta")].map((m) =>
-      m.textContent.trim()
+    expect(el.shadowRoot.querySelector(".lead__meta").textContent).toBe(
+      "Climbing · Beacon"
     );
-    expect(metas[0]).toBe("Climbing · Beacon");
-    expect(metas[1]).toBe("Hiking");
+    expect(el.shadowRoot.querySelector(".row__meta").textContent).toBe(
+      "Hiking"
+    );
   });
 
   it("renders a tag chip per active tag", async () => {
@@ -98,7 +102,8 @@ describe("c-blog-index", () => {
     getPublishedPosts.emit([]);
     await flush();
     expect(el.shadowRoot.querySelector(".state")).not.toBeNull();
-    expect(el.shadowRoot.querySelectorAll(".card").length).toBe(0);
+    expect(el.shadowRoot.querySelector(".lead")).toBeNull();
+    expect(el.shadowRoot.querySelectorAll(".row").length).toBe(0);
   });
 
   it("surfaces an error from the wire", async () => {

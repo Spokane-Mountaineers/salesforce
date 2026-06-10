@@ -69,11 +69,24 @@ export default class BlogIndex extends LightningElement {
     return this.posts && this.posts.length === 0 && !this.postsError;
   }
 
-  get cards() {
-    return (this.posts || []).map((p) => ({
+  withMeta(p) {
+    return {
       ...p,
       meta: [p.activity, p.location].filter((x) => x).join(" · ")
-    }));
+    };
+  }
+
+  // Editorial layout: the newest post leads, the rest form a hairline ledger.
+  get leadPost() {
+    return this.hasPosts ? this.withMeta(this.posts[0]) : null;
+  }
+
+  get restPosts() {
+    return (this.posts || []).slice(1).map((p) => this.withMeta(p));
+  }
+
+  get hasRest() {
+    return this.restPosts.length > 0;
   }
 
   handleSearch(event) {

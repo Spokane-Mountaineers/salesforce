@@ -57,17 +57,31 @@
     </template>
 
     <template lwc:if={hasPosts}>
-      <ul class="grid">
-        <template for:each={cards} for:item="p">
-          <li key={p.id} class="card">
-            <a class="card__link" href={p.id}>
-              <p class="card__meta">{p.meta}</p>
-              <h2 class="card__title">{p.title}</h2>
-              <p class="card__byline">{p.authorName}</p>
-            </a>
-          </li>
-        </template>
-      </ul>
+      <a class="lead" href={leadPost.id}>
+        <div class="lead__plate">
+          <span class="lead__contour" aria-hidden="true"></span>
+          <span class="lead__tag">Latest</span>
+        </div>
+        <div class="lead__body">
+          <p class="lead__meta">{leadPost.meta}</p>
+          <h2 class="lead__title">{leadPost.title}</h2>
+          <p class="lead__byline">by {leadPost.authorName}</p>
+        </div>
+      </a>
+
+      <template lwc:if={hasRest}>
+        <ul class="ledger">
+          <template for:each={restPosts} for:item="p">
+            <li key={p.id} class="row">
+              <a class="row__link" href={p.id}>
+                <span class="row__meta">{p.meta}</span>
+                <span class="row__title">{p.title}</span>
+                <span class="row__byline">{p.authorName}</span>
+              </a>
+            </li>
+          </template>
+        </ul>
+      </template>
     </template>
   </section>
 </template>
