@@ -39,6 +39,12 @@ test("sorts keys nested inside arrays", () => {
   assert.deepEqual(Object.keys(out.items[0]), ["a", "b"]);
 });
 
+test("strips deploy-incompatible keys (e.g. geoBotsAllowed)", () => {
+  const out = sortKeysDeep({ geoBotsAllowed: false, urlPathPrefix: "lwrsite" });
+  assert.equal("geoBotsAllowed" in out, false, "geoBotsAllowed must be stripped");
+  assert.equal(out.urlPathPrefix, "lwrsite", "other keys are preserved");
+});
+
 test("passes through primitives and null", () => {
   assert.equal(sortKeysDeep("s"), "s");
   assert.equal(sortKeysDeep(7), 7);

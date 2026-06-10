@@ -25,6 +25,13 @@ import prettier from "prettier";
 
 const DEFAULT_GLOB = "force-app/main/default/digitalExperiences/**/*.json";
 
+// Keys Experience Builder writes on retrieve that the deploy schema rejects
+// (newer retrieve API vs. the bundle's sourceApiVersion). Stripping them keeps
+// the bundle deployable round-trip (plan §7.1, "strip volatile-meaningless
+// fields"). geoBotsAllowed: rejected with additionalProperties=false on the
+// sfdc_cms__site config.
+export const STRIP_KEYS = new Set(["geoBotsAllowed"]);
+
 // Pure, exported for the determinism contract test (plan §7.4).
 export function sortKeysDeep(value) {
   if (Array.isArray(value)) {
@@ -34,6 +41,7 @@ export function sortKeysDeep(value) {
   if (value && typeof value === "object") {
     const out = {};
     for (const key of Object.keys(value).sort()) {
+      if (STRIP_KEYS.has(key)) continue;
       out[key] = sortKeysDeep(value[key]);
     }
     return out;
