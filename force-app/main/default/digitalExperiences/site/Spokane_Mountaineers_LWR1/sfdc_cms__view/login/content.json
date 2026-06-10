@@ -35,18 +35,8 @@
                       "type": "component"
                     },
                     {
-                      "attributes": {
-                        "dxpStyle": {},
-                        "forgotPasswordLabel": "Forgot your password?",
-                        "forgotPasswordUrl": "/ForgotPassword",
-                        "loginButtonLabel": "Log In",
-                        "passwordLabel": "Password",
-                        "selfRegisterLabel": "Not a member?",
-                        "selfRegisterUrl": "/SelfRegister",
-                        "startUrl": "",
-                        "usernameLabel": "Username"
-                      },
-                      "definition": "community_login:loginForm",
+                      "attributes": { "dxpStyle": {} },
+                      "definition": "c:communityLogin",
                       "id": "f3c7bda3-ac7c-4bbd-93ff-2e00c5398fc7",
                       "type": "component"
                     },
