@@ -1,0 +1,64 @@
+<template>
+  <div class="login" style={rootStyle}>
+    <form class="card" onsubmit={handleSubmit}>
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true">▲</span>
+        <span class="brand__name">Spokane Mountaineers</span>
+      </div>
+      <h1 class="heading">{heading}</h1>
+
+      <template lwc:if={hasError}>
+        <p class="error" role="alert">{errorMessage}</p>
+      </template>
+
+      <label class="field">
+        <span class="label">Email or username</span>
+        <input
+          type="text"
+          data-field="username"
+          value={username}
+          onchange={handleChange}
+          autocomplete="username"
+          required
+        />
+      </label>
+
+      <label class="field">
+        <span class="label">Password</span>
+        <input
+          type="password"
+          data-field="password"
+          value={password}
+          onchange={handleChange}
+          autocomplete="current-password"
+          required
+        />
+      </label>
+
+      <button class="btn btn--primary" type="submit" disabled={busy}>
+        <template lwc:if={busy}>Signing in…</template>
+        <template lwc:else>Sign in</template>
+      </button>
+
+      <template lwc:if={forgotUrl}>
+        <a class="forgot" href={forgotUrl}>Forgot your password?</a>
+      </template>
+
+      <div class="divider"><span>or continue with</span></div>
+
+      <div class="sso">
+        <template lwc:if={googleUrl}>
+          <a class="btn btn--sso" href={googleUrl}>Google</a>
+        </template>
+        <template lwc:if={microsoftUrl}>
+          <a class="btn btn--sso" href={microsoftUrl}>Microsoft</a>
+        </template>
+      </div>
+
+      <p class="note">
+        Membership is managed through DonorBox. New here? Join the club to get
+        an account.
+      </p>
+    </form>
+  </div>
+</template>
