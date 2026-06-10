@@ -11,6 +11,7 @@ Salesforce-internals guides, see [Developer Guides](../developer-guides/index.md
 
 - [Create an Election](create-an-election.md): Run a secret-ballot election with the
   Election Manager.
+- [Create a Nomination Request](create-a-nomination.md): Use the Election Manager to solicit candidate names and feedback.
 - [Website Editing](website-editing.md): Edit pages and content in Experience Cloud.
 - [Update Experience Cloud Favicon](update-experience-cloud-favicon.md): Customize the
   browser tab icon for our public Salesforce site.
