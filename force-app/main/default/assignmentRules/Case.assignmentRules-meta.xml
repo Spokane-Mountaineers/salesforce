@@ -11,8 +11,6 @@
                 <operation>equals</operation>
                 <value>Web</value>
             </criteriaItems>
-            <orderNumber>1</orderNumber>
-            <useForCriteria>false</useForCriteria>
         </ruleEntry>
     </assignmentRule>
 </AssignmentRules>
