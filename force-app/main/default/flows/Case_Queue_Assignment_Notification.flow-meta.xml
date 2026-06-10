@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <description
+  >Notifies the assigned queue's email address when a new web-originated Case is created and assigned to a queue. Works for any queue that has an Email field populated — no flow changes needed when adding new queues.</description>
+    <environments>Default</environments>
+    <interviewLabel
+  >Case Queue Assignment Notification {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case Queue Assignment Notification</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+
+    <!-- Look up the queue record to get its email address -->
+    <recordLookups>
+        <name>Get_Queue</name>
+        <label>Get Queue</label>
+        <description
+    >Retrieves the Group record for the Case owner to get the queue's designated email address.</description>
+        <locationX>264</locationX>
+        <locationY>182</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Queue_Email_Populated</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.OwnerId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Queue</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>Email</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+
+    <!-- Only send if the queue has an email configured -->
+    <decisions>
+        <name>Queue_Email_Populated</name>
+        <label>Queue Email Populated</label>
+        <description
+    >Checks whether the queue has an email address configured before attempting to send a notification.</description>
+        <locationX>264</locationX>
+        <locationY>398</locationY>
+        <defaultConnectorLabel>No Queue Email</defaultConnectorLabel>
+        <rules>
+            <name>Has_Queue_Email</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Queue.Email</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Send_Queue_Notification</targetReference>
+            </connector>
+            <label>Has Queue Email</label>
+        </rules>
+    </decisions>
+
+    <!-- Send the notification email to the queue address -->
+    <actionCalls>
+        <name>Send_Queue_Notification</name>
+        <label>Send Queue Notification</label>
+        <description
+    >Sends an email to the queue's configured address notifying staff of the new ticket.</description>
+        <locationX>480</locationX>
+        <locationY>506</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Get_Queue.Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <stringValue
+        >A new support ticket has been submitted and assigned to the {!Get_Queue.Name} queue.
+
+Ticket Details:
+- Case Number: {!$Record.CaseNumber}
+- Subject: {!$Record.Subject}
+- Priority: {!$Record.Priority}
+- Submitted: {!$Record.CreatedDate}
+
+Description:
+{!$Record.Description}
+
+View the ticket in Salesforce:
+https://spokanemountaineers--staging.sandbox.my.salesforce.com/{!$Record.Id}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue
+        >New ticket: {!$Record.Subject} [#{!$Record.CaseNumber}]</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderAddress</name>
+            <value>
+                <stringValue>admin@spokanemountaineers.org</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>senderType</name>
+            <value>
+                <stringValue>OrgWideEmailAddress</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Queue</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Origin</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Web</stringValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

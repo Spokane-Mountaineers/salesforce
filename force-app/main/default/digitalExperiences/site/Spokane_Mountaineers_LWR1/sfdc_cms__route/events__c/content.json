@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Events",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-events",
+    "urlPrefix": "events"
+  },
+  "title": "Calendar of Events",
+  "type": "sfdc_cms__route",
+  "urlName": "events"
+}

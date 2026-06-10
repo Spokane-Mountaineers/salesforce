@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Blog",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-blog",
+    "urlPrefix": "blog"
+  },
+  "title": "Blog",
+  "type": "sfdc_cms__route",
+  "urlName": "blog"
+}

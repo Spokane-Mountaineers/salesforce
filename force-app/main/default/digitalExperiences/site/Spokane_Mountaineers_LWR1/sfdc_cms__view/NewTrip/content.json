@@ -15,7 +15,7 @@
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "",
-                "sectionConfig": "{\"UUID\":\"80d23b8f-38fd-4d0a-a01a-ddf6f8976d9c\",\"columns\":[{\"UUID\":\"7773d5a7-e0db-4f97-a98c-71ee522471f0\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionConfig": "{\"UUID\": \"bc70c04a-0ec9-422f-9a4b-c87d28031c5d\", \"columns\": [{\"UUID\": \"cdbd93b6-2694-493a-8da7-b5cbb4a47eaa\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
@@ -23,41 +23,24 @@
                 {
                   "children": [
                     {
-                      "attributes": {
-                        "alignment": "left",
-                        "dxpStyle": {},
-                        "imageInfo": "",
-                        "imageInfoMobile": "",
-                        "logoWidth": 250
-                      },
-                      "definition": "dxp_content_layout:siteLogo",
-                      "id": "e98fa634-63dd-403e-92cc-a229e696babd",
-                      "type": "component"
-                    },
-                    {
-                      "attributes": {
-                        "checkEmailMessage": "Check the email account associated with your username for the link to reset your password. If you didn't get an email, check your Spam folder. Or contact your administrator.",
-                        "dxpStyle": {},
-                        "returnButtonLabel": "Back to login",
-                        "titleLabel": "Now check your email"
-                      },
-                      "definition": "community_login:checkEmail",
-                      "id": "c799493f-152a-4c9b-97cc-09921ac71051",
+                      "attributes": { "dxpStyle": {} },
+                      "definition": "c:tripReportForm",
+                      "id": "02489ad0-6409-494f-8a51-f16841eee7d5",
                       "type": "component"
                     }
                   ],
-                  "id": "7773d5a7-e0db-4f97-a98c-71ee522471f0",
+                  "id": "cdbd93b6-2694-493a-8da7-b5cbb4a47eaa",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
                 }
               ],
               "definition": "community_layout:section",
-              "id": "80d23b8f-38fd-4d0a-a01a-ddf6f8976d9c",
+              "id": "bc70c04a-0ec9-422f-9a4b-c87d28031c5d",
               "type": "component"
             }
           ],
-          "id": "86fc8e3a-20d7-4ec8-9c79-7477cbf415f8",
+          "id": "1eeff600-829f-490b-ad52-56fcf6552dbb",
           "name": "content",
           "title": "Content",
           "type": "region"
@@ -69,29 +52,29 @@
                 "customHeadTags": "",
                 "description": "",
                 "dxpStyle": {},
-                "pageTitle": "Check Password",
+                "pageTitle": "Share a Trip Report",
                 "recordId": "{!recordId}"
               },
               "definition": "community_builder:seoAssistant",
-              "id": "ff6ef7fd-0eba-4abf-98fd-1c4d234d4855",
+              "id": "ba380823-f571-4a83-aa5e-f3564536a459",
               "type": "component"
             }
           ],
-          "id": "f8bdaf0b-af75-4b23-904d-6719acba97b0",
+          "id": "2ca2bfd0-6248-4f4c-ae7a-d96e4d31b620",
           "name": "sfdcHiddenRegion",
           "title": "sfdcHiddenRegion",
           "type": "region"
         }
       ],
       "definition": "community_layout:sldsFlexibleLayout",
-      "id": "b438903f-155d-4cb5-ae93-bc5b418b69a1",
+      "id": "a2bdf1b3-7e98-4ded-b984-044d47545157",
       "type": "component"
     },
     "dataProviders": [],
     "themeLayoutType": "Inner",
-    "viewType": "check-password"
+    "viewType": "custom-newtrip"
   },
-  "title": "Check Password",
+  "title": "Share a Trip Report",
   "type": "sfdc_cms__view",
-  "urlName": "check-password"
+  "urlName": "newtrip"
 }

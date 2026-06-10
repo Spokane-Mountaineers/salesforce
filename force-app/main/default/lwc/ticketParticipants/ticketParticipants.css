@@ -1,0 +1,9 @@
+.participant-item {
+  padding: 0.5rem 0;
+}
+
+.participants-section {
+  border: 1px solid #dddbda;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}

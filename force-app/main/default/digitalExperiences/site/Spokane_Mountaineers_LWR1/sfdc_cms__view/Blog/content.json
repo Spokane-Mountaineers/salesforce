@@ -15,7 +15,7 @@
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "",
-                "sectionConfig": "{\"UUID\":\"80d23b8f-38fd-4d0a-a01a-ddf6f8976d9c\",\"columns\":[{\"UUID\":\"7773d5a7-e0db-4f97-a98c-71ee522471f0\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionConfig": "{\"UUID\":\"2f9ca9b2-5b5c-41bc-8f87-89e69b9ac1ce\",\"columns\":[{\"UUID\":\"022cb826-f09d-4b22-8065-86e02cafe7e4\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
@@ -23,41 +23,24 @@
                 {
                   "children": [
                     {
-                      "attributes": {
-                        "alignment": "left",
-                        "dxpStyle": {},
-                        "imageInfo": "",
-                        "imageInfoMobile": "",
-                        "logoWidth": 250
-                      },
-                      "definition": "dxp_content_layout:siteLogo",
-                      "id": "e98fa634-63dd-403e-92cc-a229e696babd",
-                      "type": "component"
-                    },
-                    {
-                      "attributes": {
-                        "checkEmailMessage": "Check the email account associated with your username for the link to reset your password. If you didn't get an email, check your Spam folder. Or contact your administrator.",
-                        "dxpStyle": {},
-                        "returnButtonLabel": "Back to login",
-                        "titleLabel": "Now check your email"
-                      },
-                      "definition": "community_login:checkEmail",
-                      "id": "c799493f-152a-4c9b-97cc-09921ac71051",
+                      "attributes": { "dxpStyle": {} },
+                      "definition": "c:blogIndex",
+                      "id": "1ec3dca5-a089-42f0-9a27-d791c70523a6",
                       "type": "component"
                     }
                   ],
-                  "id": "7773d5a7-e0db-4f97-a98c-71ee522471f0",
+                  "id": "022cb826-f09d-4b22-8065-86e02cafe7e4",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
                 }
               ],
               "definition": "community_layout:section",
-              "id": "80d23b8f-38fd-4d0a-a01a-ddf6f8976d9c",
+              "id": "2f9ca9b2-5b5c-41bc-8f87-89e69b9ac1ce",
               "type": "component"
             }
           ],
-          "id": "86fc8e3a-20d7-4ec8-9c79-7477cbf415f8",
+          "id": "8eda17bf-d80b-496e-8792-7297b6e47d7a",
           "name": "content",
           "title": "Content",
           "type": "region"
@@ -69,29 +52,29 @@
                 "customHeadTags": "",
                 "description": "",
                 "dxpStyle": {},
-                "pageTitle": "Check Password",
+                "pageTitle": "Blog",
                 "recordId": "{!recordId}"
               },
               "definition": "community_builder:seoAssistant",
-              "id": "ff6ef7fd-0eba-4abf-98fd-1c4d234d4855",
+              "id": "05cedafc-0566-47cd-bc07-b9b802685ca1",
               "type": "component"
             }
           ],
-          "id": "f8bdaf0b-af75-4b23-904d-6719acba97b0",
+          "id": "f5ee724f-606c-4f45-bd62-4f644b89dece",
           "name": "sfdcHiddenRegion",
           "title": "sfdcHiddenRegion",
           "type": "region"
         }
       ],
       "definition": "community_layout:sldsFlexibleLayout",
-      "id": "b438903f-155d-4cb5-ae93-bc5b418b69a1",
+      "id": "27645894-6bcc-432f-aacf-7a2ddcd243bc",
       "type": "component"
     },
     "dataProviders": [],
     "themeLayoutType": "Inner",
-    "viewType": "check-password"
+    "viewType": "custom-blog"
   },
-  "title": "Check Password",
+  "title": "Blog",
   "type": "sfdc_cms__view",
-  "urlName": "check-password"
+  "urlName": "blog"
 }

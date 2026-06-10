@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.slds-card {
+  margin-bottom: 1rem;
+}
+
+.ticket-row {
+  cursor: pointer;
+}
+
+.ticket-row:hover {
+  background-color: #f3f3f3;
+}

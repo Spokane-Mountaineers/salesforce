@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Basecamp",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-basecamp",
+    "urlPrefix": "basecamp"
+  },
+  "title": "My Mountaineers",
+  "type": "sfdc_cms__route",
+  "urlName": "basecamp"
+}

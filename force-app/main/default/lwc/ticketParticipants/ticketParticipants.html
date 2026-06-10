@@ -1,0 +1,202 @@
+<template>
+  <div class="participants-section">
+    <div class="slds-section slds-is-open">
+      <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small">
+          Participants
+          <template if:true={hasParticipants}> ({participantCount}) </template>
+        </span>
+        <template if:true={canAddParticipant}>
+          <lightning-button-icon
+            icon-name="utility:add"
+            variant="bare"
+            size="small"
+            alternative-text="Add participant"
+            title="Add participant"
+            onclick={handleOpenAddModal}
+          ></lightning-button-icon>
+        </template>
+      </h3>
+
+      <!-- Participant list -->
+      <div class="slds-section__content slds-p-around_small">
+        <template if:true={isLoading}>
+          <lightning-spinner
+            alternative-text="Loading participants"
+            size="small"
+          ></lightning-spinner>
+        </template>
+
+        <template if:false={isLoading}>
+          <template if:true={hasParticipants}>
+            <ul class="slds-has-dividers_bottom-space">
+              <template for:each={participants} for:item="participant">
+                <li key={participant.Id} class="slds-item participant-item">
+                  <div
+                    class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center"
+                  >
+                    <div class="slds-col">
+                      <lightning-icon
+                        icon-name="standard:contact"
+                        size="x-small"
+                        class="slds-m-right_x-small"
+                      ></lightning-icon>
+                      <span class="slds-text-body_regular">
+                        {participant.contactName}
+                      </span>
+                      <span
+                        class="slds-text-body_small slds-text-color_weak slds-m-left_x-small"
+                      >
+                        Added {participant.formattedAddedDate}
+                      </span>
+                    </div>
+                    <template if:true={canAddParticipant}>
+                      <div class="slds-col slds-no-flex">
+                        <template if:false={participant.isPendingRemove}>
+                          <lightning-button-icon
+                            icon-name="utility:delete"
+                            variant="bare"
+                            size="x-small"
+                            alternative-text="Remove participant"
+                            title="Remove participant"
+                            data-participant-id={participant.Id}
+                            data-contact-name={participant.contactName}
+                            onclick={handleRemoveParticipant}
+                          ></lightning-button-icon>
+                        </template>
+                        <template if:true={participant.isPendingRemove}>
+                          <span
+                            class="slds-text-body_small slds-m-right_x-small"
+                            >Remove?</span
+                          >
+                          <lightning-button
+                            label="Yes"
+                            variant="destructive-text"
+                            size="small"
+                            data-participant-id={participant.Id}
+                            data-contact-name={participant.contactName}
+                            onclick={handleConfirmRemove}
+                          ></lightning-button>
+                          <lightning-button
+                            label="No"
+                            variant="neutral"
+                            size="small"
+                            class="slds-m-left_x-small"
+                            onclick={handleCancelRemove}
+                          ></lightning-button>
+                        </template>
+                      </div>
+                    </template>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </template>
+          <template if:false={hasParticipants}>
+            <p class="slds-text-body_small slds-text-color_weak">
+              No additional participants yet.
+            </p>
+          </template>
+        </template>
+
+        <template if:true={error}>
+          <p class="slds-text-color_error slds-text-body_small">{error}</p>
+        </template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add participant modal -->
+  <template if:true={showAddModal}>
+    <section
+      role="dialog"
+      tabindex="-1"
+      aria-modal="true"
+      aria-label="Add Participant"
+      class="slds-modal slds-fade-in-open"
+    >
+      <div class="slds-modal__container">
+        <header class="slds-modal__header">
+          <button
+            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+            title="Close"
+            onclick={handleCloseAddModal}
+          >
+            <lightning-icon
+              icon-name="utility:close"
+              alternative-text="Close"
+              size="small"
+            ></lightning-icon>
+          </button>
+          <h2 class="slds-modal__title slds-hyphenate">Add Participant</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium">
+          <p class="slds-text-body_small slds-m-bottom_small">
+            Search for a member to add as a participant. Participants can view
+            the ticket and add comments.
+          </p>
+          <lightning-input
+            label="Search by name or email"
+            value={searchTerm}
+            onchange={handleSearchChange}
+            placeholder="Type at least 2 characters..."
+          ></lightning-input>
+
+          <template if:true={isSearching}>
+            <lightning-spinner
+              alternative-text="Searching"
+              size="small"
+              class="slds-m-top_small"
+            ></lightning-spinner>
+          </template>
+
+          <template if:true={hasSearchResults}>
+            <ul class="slds-has-dividers_bottom-space slds-m-top_small">
+              <template for:each={searchResults} for:item="contact">
+                <li key={contact.Id} class="slds-item">
+                  <div
+                    class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-p-vertical_x-small"
+                  >
+                    <div class="slds-col">
+                      <span class="slds-text-body_regular">{contact.Name}</span>
+                      <span
+                        class="slds-text-body_small slds-text-color_weak slds-m-left_x-small"
+                        >{contact.Email}</span
+                      >
+                    </div>
+                    <div class="slds-col slds-no-flex">
+                      <lightning-button
+                        label="Add"
+                        variant="brand"
+                        size="small"
+                        data-contact-id={contact.Id}
+                        data-contact-name={contact.Name}
+                        onclick={handleAddContact}
+                        disabled={isAdding}
+                      ></lightning-button>
+                    </div>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </template>
+
+          <template if:true={showNoResults}>
+            <p
+              class="slds-text-body_small slds-text-color_weak slds-m-top_small"
+            >
+              No members found matching "{searchTerm}".
+            </p>
+          </template>
+        </div>
+        <footer class="slds-modal__footer">
+          <lightning-button
+            label="Cancel"
+            onclick={handleCloseAddModal}
+          ></lightning-button>
+        </footer>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+</template>

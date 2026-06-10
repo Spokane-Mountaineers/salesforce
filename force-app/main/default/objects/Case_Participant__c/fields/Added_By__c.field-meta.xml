@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Added_By__c</fullName>
+    <description
+  >The user who added this participant to the case. Auto-populated on creation.</description>
+    <externalId>false</externalId>
+    <label>Added By</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Case Participants Added</relationshipLabel>
+    <relationshipName>Case_Participants_Added</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

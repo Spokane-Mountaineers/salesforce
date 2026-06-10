@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "NewTrip",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-newtrip",
+    "urlPrefix": "newtrip"
+  },
+  "title": "Share a Trip Report",
+  "type": "sfdc_cms__route",
+  "urlName": "newtrip"
+}
