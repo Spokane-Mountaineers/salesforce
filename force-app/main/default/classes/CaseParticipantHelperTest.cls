@@ -412,4 +412,78 @@ private class CaseParticipantHelperTest {
       Test.stopTest();
     }
   }
+
+  @isTest
+  static void testAddParticipantBlankInput() {
+    User openerUser = [
+      SELECT Id
+      FROM User
+      WHERE Username = 'opener@example.com.cptest'
+      LIMIT 1
+    ];
+    System.runAs(openerUser) {
+      try {
+        CaseParticipantHelper.addParticipant(null, null);
+        System.assert(false, 'Expected an exception for blank input');
+      } catch (AuraHandledException e) {
+        System.assert(true);
+      }
+    }
+  }
+
+  @isTest
+  static void testRemoveParticipantBlank() {
+    User openerUser = [
+      SELECT Id
+      FROM User
+      WHERE Username = 'opener@example.com.cptest'
+      LIMIT 1
+    ];
+    System.runAs(openerUser) {
+      try {
+        CaseParticipantHelper.removeParticipant('');
+        System.assert(false, 'Expected an exception for blank participant id');
+      } catch (AuraHandledException e) {
+        System.assert(true);
+      }
+    }
+  }
+
+  @isTest
+  static void testGetParticipantsBlank() {
+    User openerUser = [
+      SELECT Id
+      FROM User
+      WHERE Username = 'opener@example.com.cptest'
+      LIMIT 1
+    ];
+    System.runAs(openerUser) {
+      try {
+        CaseParticipantHelper.getParticipants('');
+        System.assert(false, 'Expected an exception for blank case id');
+      } catch (AuraHandledException e) {
+        System.assert(true);
+      }
+    }
+  }
+
+  @isTest
+  static void testSearchContactsShortTerm() {
+    User openerUser = [
+      SELECT Id
+      FROM User
+      WHERE Username = 'opener@example.com.cptest'
+      LIMIT 1
+    ];
+    System.runAs(openerUser) {
+      Test.startTest();
+      List<Contact> results = CaseParticipantHelper.searchContacts('a', null);
+      Test.stopTest();
+      System.assertEquals(
+        0,
+        results.size(),
+        'Short term should return nothing'
+      );
+    }
+  }
 }

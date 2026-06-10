@@ -359,4 +359,52 @@ private class TicketQueryHelperTest {
       System.assertEquals(4, allTickets.size(), 'Should return all 4 tickets');
     }
   }
+
+  @isTest
+  static void testGetMyTicketsByStatusBranches() {
+    User testUser = [
+      SELECT Id
+      FROM User
+      WHERE Username = 'testmember@example.com.test'
+      LIMIT 1
+    ];
+    System.runAs(testUser) {
+      Test.startTest();
+      List<Case> open = TicketQueryHelper.getMyTicketsByStatus('Open');
+      List<Case> closed = TicketQueryHelper.getMyTicketsByStatus('Closed');
+      List<Case> all = TicketQueryHelper.getMyTicketsByStatus('All');
+      Test.stopTest();
+      System.assert(all.size() >= open.size(), 'All should include open');
+      System.assertNotEquals(
+        null,
+        closed,
+        'Closed filter should return a list'
+      );
+    }
+  }
+
+  @isTest
+  static void testQueriesEmptyWithoutContact() {
+    // The running admin has no linked Contact -> getContactForUser null ->
+    // the methods short-circuit to empty (covers the no-contact branches).
+    Test.startTest();
+    System.assertEquals(0, TicketQueryHelper.getMyTickets().size());
+    System.assertEquals(
+      0,
+      TicketQueryHelper.getMyTicketsByStatus('All').size()
+    );
+    Test.stopTest();
+  }
+
+  @isTest
+  static void testGetTicketCommentsNotAccessible() {
+    // As admin (null contact) a seeded case isn't accessible -> not-found path.
+    Case c = [SELECT Id FROM Case LIMIT 1];
+    try {
+      TicketQueryHelper.getTicketComments(c.Id);
+      System.assert(false, 'Expected a not-found / access exception');
+    } catch (AuraHandledException e) {
+      System.assert(true);
+    }
+  }
 }

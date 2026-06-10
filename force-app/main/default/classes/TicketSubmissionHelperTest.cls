@@ -502,4 +502,113 @@ private class TicketSubmissionHelperTest {
       Test.stopTest();
     }
   }
+
+  @isTest
+  static void testGetRecordTypes() {
+    User testUser = [
+      SELECT Id
+      FROM User
+      WHERE Username = 'testmember@example.com.test'
+      LIMIT 1
+    ];
+    System.runAs(testUser) {
+      Test.startTest();
+      List<TicketSubmissionHelper.RecordTypeOption> opts = TicketSubmissionHelper.getRecordTypes();
+      Test.stopTest();
+      System.assert(!opts.isEmpty(), 'Should return at least one ticket type');
+      System.assertNotEquals(null, opts[0].value, 'Option should have a value');
+      System.assertNotEquals(null, opts[0].label, 'Option should have a label');
+    }
+  }
+
+  @isTest
+  static void testCreateCaseMissingType() {
+    User testUser = [
+      SELECT Id
+      FROM User
+      WHERE Username = 'testmember@example.com.test'
+      LIMIT 1
+    ];
+    System.runAs(testUser) {
+      try {
+        TicketSubmissionHelper.createCase(
+          'A subject',
+          'A description that is long enough',
+          null,
+          null
+        );
+        System.assert(false, 'Expected an exception for missing ticket type');
+      } catch (AuraHandledException e) {
+        System.assert(true);
+      }
+    }
+  }
+
+  @isTest
+  static void testSubmissionWithoutContact() {
+    RecordType rt = [
+      SELECT Id
+      FROM RecordType
+      WHERE DeveloperName = 'Technical_Bug'
+      LIMIT 1
+    ];
+    Test.startTest();
+    // Admin has no linked Contact -> getContactForUser null -> createCase rejects.
+    System.assertEquals(null, TicketSubmissionHelper.getContactForUser());
+    try {
+      TicketSubmissionHelper.createCase(
+        'Subject',
+        'A description that is definitely long enough',
+        rt.Id,
+        null
+      );
+      System.assert(false, 'Expected an exception without a member contact');
+    } catch (AuraHandledException e) {
+      System.assert(true);
+    }
+    Test.stopTest();
+  }
+
+  @isTest
+  static void testCommentAndReopenGuards() {
+    RecordType rt = [
+      SELECT Id
+      FROM RecordType
+      WHERE DeveloperName = 'Technical_Bug'
+      LIMIT 1
+    ];
+    Case c = new Case(
+      Subject = 'Guard',
+      Description = 'Guard test description long enough',
+      RecordTypeId = rt.Id,
+      Status = 'New'
+    );
+    insert c;
+
+    Test.startTest();
+    // Running as admin (no linked Contact) exercises the guard branches.
+    for (
+      String[] args : new List<String[]>{
+        new List<String>{ '', 'x' },
+        new List<String>{ c.Id, '' },
+        new List<String>{ c.Id, 'a real comment body' }
+      }
+    ) {
+      try {
+        TicketSubmissionHelper.addComment(args[0], args[1]);
+        System.assert(false, 'addComment should have thrown');
+      } catch (AuraHandledException e) {
+        System.assert(true);
+      }
+    }
+    for (String cid : new List<String>{ '', c.Id }) {
+      try {
+        TicketSubmissionHelper.reopenTicket(cid);
+        System.assert(false, 'reopenTicket should have thrown');
+      } catch (AuraHandledException e) {
+        System.assert(true);
+      }
+    }
+    Test.stopTest();
+  }
 }
