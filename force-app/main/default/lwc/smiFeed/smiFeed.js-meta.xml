@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SMI Feed</masterLabel>
+    <description
+  >Alpine Field Guide in-site feed (plan §4.4): compose + recent posts for a Chatter group, with draft autosave. Pure-LWR replacement for chatterPublisherWithAutosave.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="groupId" type="String" label="Chatter Group Id" />
+            <property
+        name="heading"
+        type="String"
+        label="Heading"
+        default="Club Feed"
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

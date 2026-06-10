@@ -169,6 +169,51 @@ public with sharing class ChatterPublisherController {
   }
 
   /**
+   * Recent feed posts for a group, newest first, for the in-site feed display
+   * (plan §4.4). Reads FeedItem directly (simpler + sharing-checked than
+   * ConnectApi); the durable content/blog system owns long-lived posts.
+   * @param groupId CollaborationGroup id
+   * @return list of FeedPostDTO, newest first
+   */
+  @AuraEnabled(cacheable=true)
+  public static List<FeedPostDTO> getFeed(String groupId) {
+    if (String.isBlank(groupId)) {
+      throw new AuraHandledException('A group id is required');
+    }
+    List<FeedPostDTO> posts = new List<FeedPostDTO>();
+    for (FeedItem fi : [
+      SELECT Id, Body, CreatedDate, CreatedBy.Name
+      FROM FeedItem
+      WHERE ParentId = :groupId AND Type = 'TextPost'
+      WITH USER_MODE
+      ORDER BY CreatedDate DESC
+      LIMIT 25
+    ]) {
+      posts.add(new FeedPostDTO(fi));
+    }
+    return posts;
+  }
+
+  /** Stable shape the feed LWC binds to. */
+  public class FeedPostDTO {
+    @AuraEnabled
+    public Id id;
+    @AuraEnabled
+    public String body;
+    @AuraEnabled
+    public String authorName;
+    @AuraEnabled
+    public Datetime createdDate;
+
+    public FeedPostDTO(FeedItem fi) {
+      this.id = fi.Id;
+      this.body = fi.Body;
+      this.authorName = fi.CreatedBy != null ? fi.CreatedBy.Name : null;
+      this.createdDate = fi.CreatedDate;
+    }
+  }
+
+  /**
    * Gets the network ID for the current community context
    * Falls back to querying for the Spokane Mountaineers network if not in community context
    * @return The network ID, or null if not found

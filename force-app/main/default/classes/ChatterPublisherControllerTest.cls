@@ -358,4 +358,38 @@ private class ChatterPublisherControllerTest {
     Test.stopTest();
     System.assertNotEquals(null, feedItemId, 'Feed item ID should not be null');
   }
+
+  @isTest
+  static void testGetFeed() {
+    CollaborationGroup g = new CollaborationGroup(
+      Name = 'SMI Test Feed Group',
+      CollaborationType = 'Public'
+    );
+    insert g;
+    insert new FeedItem(
+      ParentId = g.Id,
+      Body = 'Hello feed',
+      Type = 'TextPost'
+    );
+
+    Test.startTest();
+    List<ChatterPublisherController.FeedPostDTO> posts = ChatterPublisherController.getFeed(
+      g.Id
+    );
+    Test.stopTest();
+
+    System.assert(!posts.isEmpty(), 'Should return the posted item');
+    System.assertEquals('Hello feed', posts[0].body, 'Body should match');
+    System.assertNotEquals(null, posts[0].id, 'Post id should be set');
+  }
+
+  @isTest
+  static void testGetFeedBlankThrows() {
+    try {
+      ChatterPublisherController.getFeed('');
+      System.assert(false, 'Expected an exception for a blank group id');
+    } catch (AuraHandledException e) {
+      System.assert(true);
+    }
+  }
 }

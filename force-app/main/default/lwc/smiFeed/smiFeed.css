@@ -1,0 +1,131 @@
+:host {
+  --paper-2: #ede6d5;
+  --card: #fbf8f0;
+  --ink: #1c2520;
+  --ink-soft: #54605a;
+  --ink-faint: #8a938c;
+  --pine: #1e4b38;
+  --rust: #b14a1e;
+  --line: rgba(28, 37, 32, 0.14);
+  --line-strong: rgba(28, 37, 32, 0.26);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  display: block;
+}
+
+.feed {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+.feed__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--pine);
+  margin: 0 0 16px;
+}
+
+.composer {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 24px;
+}
+.composer__input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  resize: vertical;
+}
+.composer__input:focus {
+  outline: 2px solid var(--pine);
+  outline-offset: 1px;
+}
+.composer__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+.composer__error {
+  color: var(--rust);
+  font-size: 13px;
+  margin-right: auto;
+}
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.15s var(--ease),
+    background 0.2s;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.btn--primary {
+  background: var(--rust);
+  color: #fff;
+}
+
+.posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.post {
+  padding: 14px 2px;
+  border-top: 1px solid var(--line);
+}
+.post:first-child {
+  border-top: 0;
+}
+.post__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.post__author {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--pine);
+}
+.post__when {
+  font-size: 12px;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.post__body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.empty {
+  color: var(--ink-soft);
+  padding: 12px 0;
+}

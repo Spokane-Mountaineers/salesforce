@@ -1,0 +1,54 @@
+<template>
+  <section class="feed">
+    <h2 class="feed__title">{heading}</h2>
+
+    <div class="composer">
+      <textarea
+        class="composer__input"
+        rows="3"
+        placeholder="Share an update with the club…"
+        value={draft}
+        oninput={handleInput}
+        aria-label="Write a post"
+      ></textarea>
+      <div class="composer__actions">
+        <template lwc:if={errorMessage}>
+          <span class="composer__error" role="alert">{errorMessage}</span>
+        </template>
+        <button
+          class="btn btn--primary"
+          type="button"
+          onclick={handlePost}
+          disabled={postDisabled}
+        >
+          <template lwc:if={posting}>Posting…</template>
+          <template lwc:else>Post</template>
+        </button>
+      </div>
+    </div>
+
+    <template lwc:if={hasPosts}>
+      <ul class="posts">
+        <template for:each={posts} for:item="p">
+          <li key={p.id} class="post">
+            <div class="post__head">
+              <span class="post__author">{p.authorName}</span>
+              <lightning-formatted-date-time
+                class="post__when"
+                value={p.createdDate}
+                month="short"
+                day="2-digit"
+                hour="2-digit"
+                minute="2-digit"
+              ></lightning-formatted-date-time>
+            </div>
+            <p class="post__body">{p.excerpt}</p>
+          </li>
+        </template>
+      </ul>
+    </template>
+    <template lwc:else>
+      <p class="empty">No posts yet — start the conversation.</p>
+    </template>
+  </section>
+</template>
