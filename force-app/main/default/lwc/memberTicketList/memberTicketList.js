@@ -55,12 +55,12 @@ export default class MemberTicketList extends NavigationMixin(
   }
 
   handleStatusFilterChange(event) {
-    this.selectedStatusFilter = event.detail.value;
+    this.selectedStatusFilter = event.target.value;
     this.applyFilters();
   }
 
   handleRecordTypeFilterChange(event) {
-    this.selectedRecordTypeFilter = event.detail.value;
+    this.selectedRecordTypeFilter = event.target.value;
     this.applyFilters();
   }
 
@@ -129,6 +129,18 @@ export default class MemberTicketList extends NavigationMixin(
 
   get hasTickets() {
     return this.filteredTickets && this.filteredTickets.length > 0;
+  }
+
+  get isNotLoading() {
+    return !this.isLoading;
+  }
+
+  get isEmpty() {
+    return !this.isLoading && !this.hasTickets;
+  }
+
+  get hasAnyTickets() {
+    return this.tickets && this.tickets.length > 0;
   }
 
   get ticketCount() {

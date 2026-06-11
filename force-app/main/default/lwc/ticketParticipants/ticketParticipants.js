@@ -95,6 +95,10 @@ export default class TicketParticipants extends LightningElement {
     return this._rawParticipants.length > 0;
   }
 
+  get isNotLoading() {
+    return !this.isLoading;
+  }
+
   get participantCount() {
     return this._rawParticipants.length;
   }

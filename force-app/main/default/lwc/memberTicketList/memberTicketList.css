@@ -1,17 +1,191 @@
 :host {
+  --paper-2: #ede6d5;
+  --card: #fbf8f0;
+  --ink: #1c2520;
+  --ink-soft: #54605a;
+  --ink-faint: #8a938c;
+  --pine: #1e4b38;
+  --rust: #b14a1e;
+  --line: rgba(28, 37, 32, 0.14);
+  --line-strong: rgba(28, 37, 32, 0.26);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  --shadow:
+    0 1px 2px rgba(28, 37, 32, 0.05), 0 12px 30px -16px rgba(28, 37, 32, 0.3);
   display: block;
-  max-width: 800px;
+}
+
+.tk {
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 32px 24px 64px;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+.eyebrow {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin: 0 0 8px;
+}
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 4.5vw, 38px);
+  color: var(--pine);
+  margin: 0 0 20px;
+}
+.error {
+  background: #f3e2d6;
+  color: #7a3214;
+  border: 1px solid var(--rust);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 0 0 18px;
+  font-size: 15px;
+}
+.muted {
+  color: var(--ink-faint);
 }
 
-.slds-card {
-  margin-bottom: 1rem;
+.controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
 }
-
-.ticket-row {
+.field {
+  display: block;
+}
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 5px;
+}
+.field select {
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 9px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+}
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--card);
+  color: var(--pine);
   cursor: pointer;
 }
+.btn--ghost:hover {
+  border-color: var(--pine);
+}
+.count {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+}
 
-.ticket-row:hover {
-  background-color: #f3f3f3;
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.grid thead th {
+  background: var(--pine);
+  color: #eaf2ec;
+  text-align: left;
+  padding: 11px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.grid tbody td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--line);
+}
+.row {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.row:hover {
+  background: var(--paper-2);
+}
+.link {
+  color: var(--pine);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.pill {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 3px 11px;
+  border-radius: 999px;
+}
+.pill--status {
+  background: var(--pine);
+  color: #eaf2ec;
+}
+.pill--priority {
+  background: var(--rust);
+  color: #fff;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px 0;
+}
+.empty__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--pine);
+  margin: 0 0 6px;
+}
+
+@media (max-width: 640px) {
+  .grid thead {
+    display: none;
+  }
+  .grid,
+  .grid tbody,
+  .grid tr,
+  .grid td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .grid tbody td {
+    border-top: 0;
+    padding: 4px 16px;
+  }
+  .row {
+    border-top: 1px solid var(--line);
+    padding: 10px 0;
+  }
+  .grid tbody td::before {
+    content: attr(data-label) ": ";
+    font-weight: 700;
+    color: var(--ink-faint);
+  }
 }

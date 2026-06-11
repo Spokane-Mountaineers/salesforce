@@ -71,11 +71,11 @@ export default class TicketSubmissionForm extends NavigationMixin(
   }
 
   handleRecordTypeChange(event) {
-    this.selectedRecordType = event.detail.value;
+    this.selectedRecordType = event.target.value;
   }
 
   handlePriorityChange(event) {
-    this.selectedPriority = event.detail.value;
+    this.selectedPriority = event.target.value;
   }
 
   handleShowForm() {

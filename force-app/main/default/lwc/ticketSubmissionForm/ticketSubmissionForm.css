@@ -1,9 +1,145 @@
 :host {
+  --paper-2: #ede6d5;
+  --card: #fbf8f0;
+  --ink: #1c2520;
+  --ink-soft: #54605a;
+  --ink-faint: #8a938c;
+  --pine: #1e4b38;
+  --rust: #b14a1e;
+  --line-strong: rgba(28, 37, 32, 0.26);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   display: block;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
-.slds-card {
-  margin-bottom: 1rem;
+.tk {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 36px 24px 72px;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+.eyebrow {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin: 0 0 8px;
+}
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 4.5vw, 38px);
+  color: var(--pine);
+  margin: 0 0 22px;
+}
+.error {
+  background: #f3e2d6;
+  color: #7a3214;
+  border: 1px solid var(--rust);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 0 0 20px;
+  font-size: 15px;
+}
+
+.intro {
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  padding: 32px;
+  text-align: center;
+}
+.intro__lead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0 0 6px;
+}
+.intro__sub {
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+
+.field {
+  display: block;
+  margin-bottom: 18px;
+}
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 16px;
+  padding: 11px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+}
+.field textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid var(--pine);
+  outline-offset: 1px;
+}
+.hint {
+  display: block;
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.15s var(--ease),
+    background 0.2s,
+    border-color 0.2s;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.btn--primary {
+  background: var(--rust);
+  color: #fff;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--pine);
+  border-color: var(--line-strong);
+}
+.btn--ghost:hover:not(:disabled) {
+  border-color: var(--pine);
 }

@@ -393,6 +393,10 @@ export default class TicketDetail extends NavigationMixin(LightningElement) {
     );
   }
 
+  get isTicketOpen() {
+    return !this.isTicketClosed;
+  }
+
   get hasFiles() {
     return this.files && this.files.length > 0;
   }
