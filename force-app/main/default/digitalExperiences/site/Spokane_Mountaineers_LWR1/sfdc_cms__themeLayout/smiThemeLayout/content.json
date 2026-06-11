@@ -1,0 +1,14 @@
+{
+  "contentBody": {
+    "component": {
+      "attributes": {},
+      "children": [],
+      "definition": "c:smiThemeLayout",
+      "id": "5138c502-ee3d-4195-beba-7406dc7e888a",
+      "type": "component"
+    }
+  },
+  "title": "SMI Theme Layout",
+  "type": "sfdc_cms__themeLayout",
+  "urlName": "smi-theme-layout"
+}

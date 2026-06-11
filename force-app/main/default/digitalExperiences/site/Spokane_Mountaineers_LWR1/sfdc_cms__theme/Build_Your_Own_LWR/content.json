@@ -4,7 +4,7 @@
     "definitionName": "byo",
     "layouts": [
       { "layoutId": "snaThemeLayout", "layoutType": "ServiceNotAvailable" },
-      { "layoutId": "scopedHeaderAndFooter", "layoutType": "Inner" }
+      { "layoutId": "smiThemeLayout", "layoutType": "Inner" }
     ]
   },
   "title": "Build Your Own (LWR)",

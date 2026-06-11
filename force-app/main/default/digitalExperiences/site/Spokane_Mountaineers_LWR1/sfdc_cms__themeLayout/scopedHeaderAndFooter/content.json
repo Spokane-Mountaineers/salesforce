@@ -11,7 +11,7 @@
           "children": [
             {
               "attributes": {
-                "backgroundImageConfig": "",
+                "backgroundImageConfig": "{\"url\":\"/cms/delivery/media/MCSGUUQUD46ZGO7BYNDY2FOZJOM4\",\"contentKey\":\"MCSGUUQUD46ZGO7BYNDY2FOZJOM4\",\"altText\":\"\",\"contentType\":\"\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
                 "backgroundImageOverlay": "rgba(0,0,0,0)",
                 "componentSpacerSize": "",
                 "dxpStyle": {},
@@ -21,7 +21,7 @@
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "",
                 "sectionConfig": "{\"UUID\":\"30ce5193-0484-4c17-82b5-3b33df762b0c\",\"columns\":[{\"UUID\":\"2b9d21ae-86cc-491a-97a8-44cc178f819d\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
-                "sectionMinHeight": "",
+                "sectionMinHeight": "200px",
                 "sectionVerticalAlign": "flex-start"
               },
               "children": [
@@ -34,6 +34,104 @@
               ],
               "definition": "community_layout:section",
               "id": "30ce5193-0484-4c17-82b5-3b33df762b0c",
+              "type": "component"
+            },
+            {
+              "attributes": {
+                "dxpStyle": {
+                  "padding": {
+                    "bottom": "5px",
+                    "left": "5px",
+                    "right": "5px",
+                    "top": "5px"
+                  }
+                }
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "activeLineWeight": "3px",
+                        "backgroundColor": "rgba(255, 255, 255, 0)",
+                        "dropdownAccordionIconSize": "xx-small",
+                        "dropdownActiveLineWeight": "5px",
+                        "dropdownBackgroundActiveColor": "rgba(0, 0, 0, 0)",
+                        "dropdownBackgroundColor": "",
+                        "dropdownBackgroundHoverColor": "",
+                        "dropdownBottomBorderRadius": "5px",
+                        "dropdownFontSizeOverride": "",
+                        "dropdownFontWeightOverride": "300",
+                        "dropdownItemPadding": "{\"top\":\"10px\",\"right\":\"10px\",\"bottom\":\"10px\",\"left\":\"10px\"}",
+                        "dropdownLineHeightOverride": "",
+                        "dropdownMenuPadding": "{\"top\":\"0px\",\"right\":\"0px\",\"bottom\":\"0px\",\"left\":\"0px\"}",
+                        "dropdownOverrideTextStyle": true,
+                        "dropdownShowDividerLines": false,
+                        "dropdownTextDecorationOverride": "",
+                        "dropdownTextStyle": "body-regular",
+                        "dropdownTopBorderRadius": "5px",
+                        "fontSizeOverride": "",
+                        "fontWeightOverride": "",
+                        "iconSize": "xx-small",
+                        "itemBackgroundActiveColor": "rgba(255, 255, 255, 0)",
+                        "itemBackgroundHoverColor": "rgba(255, 255, 255, 0)",
+                        "lineHeightOverride": "",
+                        "menuHorizontalAlignment": "left",
+                        "overrideTextStyle": false,
+                        "showHomeLink": true,
+                        "showParentMenuIcon": true,
+                        "spaceBetweenMenuItems": "30px",
+                        "textDecorationOverride": "",
+                        "textStyle": "body-regular"
+                      },
+                      "definition": "community_navigation:customizableNavigationBarContainer",
+                      "id": "fff6eca3-ff52-4e23-b7d3-5d1d33311e2f",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "88f38463-2162-453b-b3ba-bd5b6747ce94",
+                  "name": "desktop",
+                  "title": "Desktop View",
+                  "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "burgerIconHorizontalAlignment": "left",
+                        "modalAccordionIconSize": "xx-small",
+                        "modalActiveBackgroundColor": "rgba(255, 255, 255, 0)",
+                        "modalActiveLineWeight": "5px",
+                        "modalFontSizeOverride": "",
+                        "modalFontWeightOverride": "",
+                        "modalItemPadding": "{\"top\":\"10px\",\"right\":\"10px\",\"bottom\":\"10px\",\"left\":\"15px\"}",
+                        "modalLineHeightOverride": "",
+                        "modalMenuPadding": "{\"top\":\"0px\",\"right\":\"0px\",\"bottom\":\"0px\",\"left\":\"0px\"}",
+                        "modalOverrideTextStyle": false,
+                        "modalShowDividerLines": true,
+                        "modalSubmenuFontSizeOverride": "",
+                        "modalSubmenuFontWeightOverride": "300",
+                        "modalSubmenuLineHeightOverride": "",
+                        "modalSubmenuOverrideTextStyle": true,
+                        "modalSubmenuTextDecorationOverride": "",
+                        "modalSubmenuTextStyle": "body-regular",
+                        "modalTextDecorationOverride": "",
+                        "modalTextStyle": "body-regular",
+                        "showHomeLink": true
+                      },
+                      "definition": "community_navigation:customizableNavigationHamburgerMenuContainer",
+                      "id": "9d181548-5d60-432c-85d0-91e724a02c63",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "a3fbf27d-97f3-4840-889e-7e926edc7e8a",
+                  "name": "mobile",
+                  "title": "Mobile View",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_navigation:customizableNavigationMenu",
+              "id": "b828bde9-a6b7-4f9e-b23b-733bb67dbed5",
               "type": "component"
             }
           ],
