@@ -52,7 +52,7 @@
                 "customHeadTags": "",
                 "description": "",
                 "dxpStyle": {},
-                "pageTitle": "Share a Trip Report",
+                "pageTitle": "Trip Reports",
                 "recordId": "{!recordId}"
               },
               "definition": "community_builder:seoAssistant",
@@ -74,7 +74,7 @@
     "themeLayoutType": "Inner",
     "viewType": "custom-newtrip"
   },
-  "title": "Share a Trip Report",
+  "title": "Trip Reports",
   "type": "sfdc_cms__view",
   "urlName": "newtrip"
 }

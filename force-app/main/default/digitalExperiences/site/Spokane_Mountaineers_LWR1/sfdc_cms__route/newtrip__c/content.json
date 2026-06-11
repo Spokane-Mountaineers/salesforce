@@ -6,7 +6,7 @@
     "routeType": "custom-newtrip",
     "urlPrefix": "newtrip"
   },
-  "title": "Share a Trip Report",
+  "title": "Trip Reports",
   "type": "sfdc_cms__route",
   "urlName": "newtrip"
 }
