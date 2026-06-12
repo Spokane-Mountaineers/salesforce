@@ -134,6 +134,20 @@ deploy:
     fi
     @echo "✓ deployed. If the site changed, run 'just publish' to make it live (publish is not part of deploy)."
 
+# Deploy ONLY the Experience site bundle ($SITE_BUNDLE) to the active org (guard + real tests on prod)
+[group('lwr site')]
+deploy-site:
+    @if [ "$SF_ENV" = "production" ]; then \
+      printf '⚠  Deploying site bundle %s to PRODUCTION (org %s). Type "yes" to continue: ' "$SITE_BUNDLE" "$SF_TARGET_ORG"; \
+      read ans; [ "$ans" = "yes" ] || { echo "aborted."; exit 1; }; \
+      echo "➤ prod site deploy with RunLocalTests (prod rejects NoTestRun)"; \
+      sf project deploy start --metadata "DigitalExperienceBundle:$SITE_BUNDLE" --target-org "$SF_TARGET_ORG" --test-level RunLocalTests; \
+    else \
+      echo "➤ deploying $SITE_BUNDLE to '$SF_TARGET_ORG' (SF_ENV=$SF_ENV)"; \
+      sf project deploy start --metadata "DigitalExperienceBundle:$SITE_BUNDLE" --target-org "$SF_TARGET_ORG"; \
+    fi
+    @echo "✓ site bundle deployed. Run 'just publish' to make it live (publish is not part of deploy)."
+
 # Render org-specific Network/CustomSite templates and deploy them
 [group('lwr site')]
 deploy-site-config:
