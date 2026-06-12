@@ -1,0 +1,15 @@
+<template>
+  <figure class={rootClass}>
+    <span class="frame">
+      <img src={imageUrl} alt={alt} loading="lazy" />
+    </span>
+    <figcaption class="cap">
+      <template lwc:if={hasMeta}>
+        <span class="meta">{meta}</span>
+      </template>
+      <template lwc:if={title}>
+        <span class="title">{title}</span>
+      </template>
+    </figcaption>
+  </figure>
+</template>

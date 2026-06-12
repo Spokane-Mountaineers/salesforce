@@ -1,0 +1,100 @@
+<template>
+  <div class="shell">
+    <svg class="topo" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern
+          id="topo-shell"
+          width="420"
+          height="420"
+          patternUnits="userSpaceOnUse"
+        >
+          <g
+            fill="none"
+            stroke="#1e4b38"
+            stroke-opacity="0.05"
+            stroke-width="1.5"
+          >
+            <path d="M-20 120 C 90 60 170 180 280 120 S 460 60 540 140" />
+            <path d="M-20 170 C 90 110 170 230 280 170 S 460 110 540 190" />
+            <path d="M-20 220 C 90 160 170 280 280 220 S 460 160 540 240" />
+            <path d="M-20 270 C 90 210 170 330 280 270 S 460 210 540 290" />
+            <path d="M-20 320 C 90 260 170 380 280 320 S 460 260 540 340" />
+          </g>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#topo-shell)" />
+    </svg>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href={homeLink} title={siteName}>
+          <template lwc:if={logoUrl}>
+            <img class="brand__logo" src={logoUrl} alt={siteName} />
+          </template>
+          <template lwc:else>
+            <span class="brand__mark" aria-hidden="true">▲</span>
+            <span class="brand__name">{siteName}</span>
+          </template>
+        </a>
+
+        <button
+          class="hamburger"
+          type="button"
+          aria-label={hamburgerLabel}
+          aria-expanded={mobileOpen}
+          onclick={toggleMobile}
+        >
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </button>
+
+        <nav class={navClass} aria-label="Primary">
+          <ul class="nav__list">
+            <template for:each={navItems} for:item="item">
+              <li class="nav__item" key={item.key}>
+                <a class="nav__link" href={item.href} onclick={closeMobile}
+                  >{item.label}</a
+                >
+              </li>
+            </template>
+          </ul>
+          <div class="nav__auth">
+            <template lwc:if={isGuest}>
+              <a class="smi-btn smi-btn--primary" href={loginLink}>Log in</a>
+            </template>
+            <template lwc:else>
+              <a class="smi-btn smi-btn--ghost" href={logoutLink}>Log out</a>
+            </template>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="site-main">
+      <slot></slot>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="brand__mark" aria-hidden="true">▲</span>
+          <span class="footer-brand__name">{siteName}</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+          <ul class="footer-nav__list">
+            <template for:each={navItems} for:item="item">
+              <li key={item.key}>
+                <a class="footer-nav__link" href={item.href}>{item.label}</a>
+              </li>
+            </template>
+          </ul>
+        </nav>
+        <p class="footer-legal">
+          © {year} {siteName}. A volunteer-run outdoor club since 1915.
+        </p>
+      </div>
+    </footer>
+  </div>
+</template>

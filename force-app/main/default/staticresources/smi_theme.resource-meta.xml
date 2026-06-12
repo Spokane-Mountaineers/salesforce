@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>text/css</contentType>
+    <description>Canonical SMI Alpine Field Guide theme (mirror of docs/stylesheets/smi-theme.css). Load in light-DOM LWCs via loadStyle.</description>
+</StaticResource>

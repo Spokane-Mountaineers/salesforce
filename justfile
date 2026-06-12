@@ -12,6 +12,12 @@ build-docs:
     @echo "➤ building docs (strict)"
     @docker run --rm -v $PWD:/docs squidfunk/mkdocs-material:9.7.6 build --strict
 
+# Mirror the canonical SMI theme into the Salesforce static resource
+sync-theme:
+    @echo "➤ syncing smi-theme.css → smi_theme static resource"
+    @cp docs/stylesheets/smi-theme.css force-app/main/default/staticresources/smi_theme.css
+    @echo "✓ synced (commit both copies)"
+
 # Run linters
 lint: lint-lwc lint-aura lint-docs
 
