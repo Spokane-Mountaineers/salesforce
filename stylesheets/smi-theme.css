@@ -1,0 +1,739 @@
+/* ============================================================================
+   Spokane Mountaineers — Alpine Field Guide design system
+   ----------------------------------------------------------------------------
+   Canonical, reusable theme: design tokens + `smi-` component classes.
+   Source of truth for the brand look extracted from the Member FAQ page.
+
+   This is the SINGLE brand source. It themes the MkDocs Material chrome too
+   (palette, heading font, header) — see the integration section at the bottom.
+
+   Reuse:
+   - Docs site (MkDocs): loaded via `extra_css` in mkdocs.yml.
+   - Any standalone HTML / email: link this file.
+   - Experience Cloud LWCs: mirrored to the `smi_theme` static resource
+     (force-app/.../staticresources/smi_theme/) — keep the two copies in sync
+     (`just sync-theme`). Light-DOM components load it via loadStyle; shadow-DOM
+     components import an equivalent token block (the faqPage LWC is the
+     reference implementation).
+
+   Tokens are declared on `:root, :host` so the same file works in a normal
+   document AND inside an LWC shadow root.
+   ============================================================================ */
+
+/* Fonts for web/docs contexts. LWCs bundle their own (the faq_fonts static
+   resource) and do not rely on this CDN import. */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,500&display=swap");
+
+:root,
+:host {
+  /* — Brand — */
+  --smi-pine: #1e4b38; /* primary evergreen */
+  --smi-pine-2: #2c6a4e; /* lighter pine (hover, gradients) */
+  --smi-pine-deep: #122e22; /* darkest pine (gradient base) */
+  --smi-moss: #6e9173; /* soft secondary green */
+  --smi-rust: #b14a1e; /* trail-marker accent */
+  --smi-rust-soft: #f3e2d6; /* rust callout wash */
+  --smi-sky: #2c6a8c; /* info / links */
+
+  /* — Surfaces & ink — */
+  --smi-bg: #faf8f4; /* light app / reading background (docs) */
+  --smi-paper: #f4efe3; /* warm feature surface (hero, FAQ) */
+  --smi-paper-2: #ede6d5; /* zebra / inset surface */
+  --smi-card: #fbf8f0; /* raised card surface */
+  --smi-ink: #1c2520; /* primary text */
+  --smi-ink-soft: #54605a; /* secondary text */
+  --smi-ink-faint: #8a938c; /* captions / eyebrows */
+  --smi-line: rgba(28, 37, 32, 0.14);
+  --smi-line-strong: rgba(28, 37, 32, 0.26);
+
+  /* — Type — */
+  --smi-font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --smi-font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  --smi-font-mono: ui-monospace, "JetBrains Mono", Menlo, monospace;
+
+  /* — Form — */
+  --smi-radius: 12px;
+  --smi-radius-sm: 6px;
+  --smi-shadow:
+    0 1px 2px rgba(28, 37, 32, 0.05), 0 12px 30px -16px rgba(28, 37, 32, 0.3);
+  --smi-measure: 760px; /* readable content width */
+  --smi-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* — Topographic contour wash (reused in heros / surfaces) — */
+  --smi-contour: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%231E4B38' stroke-opacity='0.05' stroke-width='1.5'%3E%3Cpath d='M-20 120 C 90 60 170 180 280 120 S 460 60 540 140'/%3E%3Cpath d='M-20 170 C 90 110 170 230 280 170 S 460 110 540 190'/%3E%3Cpath d='M-20 220 C 90 160 170 280 280 220 S 460 160 540 240'/%3E%3Cpath d='M-20 270 C 90 210 170 330 280 270 S 460 210 540 290'/%3E%3Cpath d='M-20 320 C 90 260 170 380 280 320 S 460 260 540 340'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* — Photography & imagery (§9.5) — */
+  /* Scrim: anchors overlaid display type so it stays legible on a photo.
+     Reuse everywhere text sits on an image (hero, event card, plate). */
+  --smi-scrim: linear-gradient(
+    to top,
+    rgba(18, 46, 34, 0.82) 0%,
+    rgba(18, 46, 34, 0.45) 38%,
+    rgba(18, 46, 34, 0) 72%
+  );
+  --smi-overlay-ink: #f4efe3; /* paper-white text over photography */
+  /* Duotone wash for UI chrome (thumbnails, tag-page headers) — keeps quiet
+     surfaces on-brand so they don't compete with full-colour photos nearby. */
+  --smi-duotone: linear-gradient(
+    rgba(30, 75, 56, 0.55),
+    rgba(18, 46, 34, 0.72)
+  );
+  /* Standard image aspect ratios so collection grids stay tidy. */
+  --smi-ratio-landscape: 3 / 2; /* plates, heros */
+  --smi-ratio-portrait: 4 / 5; /* trip shots */
+  --smi-ratio-square: 1 / 1; /* thumbnails */
+
+  /* — Site shell — */
+  --smi-header-h: 64px;
+}
+
+/* ---------------------------------------------------------------------------
+   Prose — apply `.smi-prose` to any content container for field-guide
+   typography. Scoped so it never leaks into surrounding chrome.
+   --------------------------------------------------------------------------- */
+.smi-prose {
+  font-family: var(--smi-font-body);
+  font-size: 18px;
+  line-height: 1.72;
+  color: var(--smi-ink);
+  -webkit-font-smoothing: antialiased;
+}
+.smi-prose h2 {
+  font-family: var(--smi-font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 4.5vw, 35px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--smi-pine);
+  margin: 0 0 0.5em;
+}
+.smi-prose h3 {
+  font-family: var(--smi-font-display);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+  color: var(--smi-ink);
+  margin: 1.6em 0 0.4em;
+}
+.smi-prose p {
+  margin: 0 0 16px;
+}
+.smi-prose a {
+  color: var(--smi-sky);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: rgba(44, 106, 140, 0.4);
+  transition: text-decoration-color 0.18s;
+}
+.smi-prose a:hover {
+  text-decoration-color: var(--smi-sky);
+}
+.smi-prose strong {
+  font-weight: 700;
+  color: var(--smi-ink);
+}
+.smi-prose ul,
+.smi-prose ol {
+  margin: 0 0 18px;
+  padding-left: 1.3em;
+}
+.smi-prose li {
+  margin: 0 0 8px;
+}
+.smi-prose ul li::marker {
+  color: var(--smi-moss);
+}
+.smi-prose ol li::marker {
+  color: var(--smi-rust);
+  font-family: var(--smi-font-display);
+  font-weight: 600;
+}
+
+/* Inline code / tokens (e.g. the `.smi` username) */
+.smi-code {
+  font-family: var(--smi-font-mono);
+  font-size: 0.84em;
+  background: var(--smi-paper-2);
+  border: 1px solid var(--smi-line);
+  border-radius: var(--smi-radius-sm);
+  padding: 1px 6px;
+  color: var(--smi-pine);
+}
+
+/* ---------------------------------------------------------------------------
+   Layout helpers
+   --------------------------------------------------------------------------- */
+.smi-surface {
+  background-color: var(--smi-paper);
+  background-image:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      rgba(46, 106, 78, 0.1),
+      transparent 60%
+    ),
+    var(--smi-contour);
+}
+.smi-measure {
+  max-width: var(--smi-measure);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------------------- */
+.smi-hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--smi-paper);
+  background: linear-gradient(
+    160deg,
+    #20503c 0%,
+    var(--smi-pine) 55%,
+    var(--smi-pine-deep) 100%
+  );
+  border-bottom: 3px solid var(--smi-rust);
+  padding: 68px 24px 56px;
+}
+.smi-hero__title {
+  font-family: var(--smi-font-display);
+  font-weight: 900;
+  font-optical-sizing: auto;
+  font-size: clamp(40px, 7vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+}
+.smi-hero__title em {
+  font-style: italic;
+  font-weight: 500;
+  color: #c9e2d1;
+}
+.smi-hero__sub {
+  font-family: var(--smi-font-body);
+  font-size: 19px;
+  line-height: 1.55;
+  max-width: 46ch;
+  margin: 0;
+  color: #d8e6dc;
+}
+
+/* Eyebrow / kicker */
+.smi-eyebrow {
+  font-family: var(--smi-font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--smi-ink-faint);
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.smi-eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--smi-rust);
+}
+.smi-hero .smi-eyebrow {
+  color: #9fc6ae;
+}
+
+/* ---------------------------------------------------------------------------
+   Section header with index badge + hairline rule
+   --------------------------------------------------------------------------- */
+.smi-section__head {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin: 0 0 6px;
+}
+.smi-badge-idx {
+  font-family: var(--smi-font-display);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--smi-rust);
+  border: 1px solid var(--smi-rust);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+.smi-rule {
+  height: 1px;
+  margin: 18px 0 24px;
+  background-image: linear-gradient(
+    90deg,
+    var(--smi-line-strong),
+    transparent 42%
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   Cards
+   --------------------------------------------------------------------------- */
+.smi-card {
+  background: var(--smi-card);
+  border: 1px solid var(--smi-line);
+  border-radius: 14px;
+  box-shadow: var(--smi-shadow);
+  padding: 22px 26px;
+}
+
+/* ---------------------------------------------------------------------------
+   Callouts — base + warn / note / tip
+   --------------------------------------------------------------------------- */
+.smi-callout {
+  position: relative;
+  margin: 22px 0;
+  padding: 18px 20px 18px 54px;
+  border-radius: var(--smi-radius);
+  background: var(--smi-card);
+  border: 1px solid var(--smi-line);
+  box-shadow: var(--smi-shadow);
+}
+.smi-callout > :first-child {
+  margin-top: 0;
+}
+.smi-callout > :last-child {
+  margin-bottom: 0;
+}
+.smi-callout::before {
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  font-size: 20px;
+  line-height: 1;
+}
+.smi-callout--warn {
+  background: var(--smi-rust-soft);
+  border-color: rgba(177, 74, 30, 0.35);
+  border-left: 4px solid var(--smi-rust);
+}
+.smi-callout--warn::before {
+  content: "\26A0\FE0F";
+}
+.smi-callout--note {
+  border-left: 4px solid var(--smi-sky);
+}
+.smi-callout--note::before {
+  content: "\1F4A1";
+  left: 19px;
+}
+.smi-callout--tip {
+  border-left: 4px solid var(--smi-moss);
+}
+.smi-callout--tip::before {
+  content: "\1F9ED";
+  left: 19px;
+}
+
+/* ---------------------------------------------------------------------------
+   Figures — framed screenshots (pair with a JS lightbox for click-to-enlarge)
+   --------------------------------------------------------------------------- */
+.smi-figure {
+  margin: 22px 0;
+  text-align: center;
+}
+.smi-figure img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--smi-line);
+  border-radius: var(--smi-radius);
+  box-shadow: var(--smi-shadow);
+  background: #fff;
+}
+.smi-figure--zoom img {
+  cursor: zoom-in;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+.smi-figure--zoom img:hover {
+  box-shadow: 0 4px 14px rgba(28, 37, 32, 0.18);
+  transform: translateY(-2px);
+}
+.smi-figure figcaption {
+  font-size: 13px;
+  color: var(--smi-ink-soft);
+  margin-top: 9px;
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------------
+   Table
+   --------------------------------------------------------------------------- */
+.smi-table {
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+  font-size: 16px;
+  border: 1px solid var(--smi-line);
+  border-radius: var(--smi-radius);
+  overflow: hidden;
+  box-shadow: var(--smi-shadow);
+}
+.smi-table thead th {
+  background: var(--smi-pine);
+  color: #eaf2ec;
+  text-align: left;
+  padding: 13px 18px;
+  font-family: var(--smi-font-body);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.smi-table tbody td {
+  padding: 13px 18px;
+  border-top: 1px solid var(--smi-line);
+  background: var(--smi-card);
+}
+.smi-table tbody tr:nth-child(even) td {
+  background: var(--smi-paper-2);
+}
+.smi-table tbody td:first-child {
+  font-weight: 600;
+  color: var(--smi-pine);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons
+   --------------------------------------------------------------------------- */
+.smi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--smi-font-body);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 0.15s var(--smi-ease),
+    background 0.2s,
+    box-shadow 0.2s;
+}
+.smi-btn:hover {
+  transform: translateY(-1px);
+}
+.smi-btn--primary {
+  background: var(--smi-rust);
+  color: #fff;
+  box-shadow: 0 6px 16px -8px rgba(177, 74, 30, 0.8);
+}
+.smi-btn--secondary {
+  background: var(--smi-pine);
+  color: #eaf2ec;
+  box-shadow: 0 6px 16px -8px rgba(18, 46, 34, 0.8);
+}
+.smi-btn--secondary:hover {
+  background: var(--smi-pine-2);
+}
+.smi-btn--ghost {
+  background: transparent;
+  color: var(--smi-pine);
+  border-color: var(--smi-line-strong);
+}
+.smi-btn--ghost:hover {
+  border-color: var(--smi-pine);
+}
+/* On a dark/photographic surface, ghost buttons invert to paper ink. */
+.smi-btn--ghost.smi-btn--on-dark {
+  color: var(--smi-overlay-ink);
+  border-color: rgba(244, 239, 227, 0.5);
+}
+.smi-btn--ghost.smi-btn--on-dark:hover {
+  border-color: var(--smi-overlay-ink);
+}
+.smi-btn:focus-visible {
+  outline: 2px solid var(--smi-sky);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Tags / pills
+   --------------------------------------------------------------------------- */
+.smi-tag {
+  display: inline-block;
+  font-family: var(--smi-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--smi-paper-2);
+  color: var(--smi-pine);
+  border: 1px solid var(--smi-line);
+}
+
+/* ---------------------------------------------------------------------------
+   Call-to-action band
+   --------------------------------------------------------------------------- */
+.smi-cta {
+  background: linear-gradient(160deg, #20503c, #163a2b);
+  color: #eaf2ec;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: var(--smi-shadow);
+}
+.smi-cta h2 {
+  font-family: var(--smi-font-display);
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0 0 8px;
+  color: #fff;
+}
+.smi-cta a {
+  color: #fff;
+  text-decoration-color: var(--smi-rust);
+  text-decoration-thickness: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Lightbox — pair `.smi-figure--zoom` thumbnails with this overlay
+   --------------------------------------------------------------------------- */
+.smi-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 4vmin;
+  background: rgba(18, 24, 20, 0.86);
+  cursor: zoom-out;
+  animation: smi-fade 0.18s ease;
+}
+.smi-lightbox img {
+  max-width: 94vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  background: #fff;
+  animation: smi-pop 0.2s var(--smi-ease);
+}
+
+/* ---------------------------------------------------------------------------
+   Motion
+   --------------------------------------------------------------------------- */
+.smi-rise {
+  animation: smi-rise 0.7s var(--smi-ease) both;
+}
+@keyframes smi-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes smi-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes smi-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .smi-rise,
+  .smi-lightbox,
+  .smi-lightbox img,
+  .smi-figure--zoom img {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Collection grid — activity groups, schools, events, blog tiles (§9.3)
+   Auto-fills responsive columns; pair tiles with .smi-card or .smi-field-plate.
+   --------------------------------------------------------------------------- */
+.smi-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 22px;
+}
+.smi-card-grid--tight {
+  gap: 14px;
+}
+
+/* ---------------------------------------------------------------------------
+   Photography — the "field plate" (§9.5)
+   A catalogued specimen: photo + thin keyline + caption in the field-guide
+   voice (small-caps eyebrow + Fraunces-italic location · place · date).
+   --------------------------------------------------------------------------- */
+.smi-field-plate {
+  margin: 0;
+  background: var(--smi-card);
+  border: 1px solid var(--smi-line-strong);
+  border-radius: var(--smi-radius-sm);
+  padding: 8px;
+  box-shadow: var(--smi-shadow);
+}
+.smi-field-plate__frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 3px;
+  aspect-ratio: var(--smi-ratio-landscape);
+  background: var(--smi-paper-2);
+}
+.smi-field-plate--portrait .smi-field-plate__frame {
+  aspect-ratio: var(--smi-ratio-portrait);
+}
+.smi-field-plate__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.smi-field-plate__cap {
+  padding: 10px 6px 4px;
+}
+.smi-field-plate__meta {
+  font-family: var(--smi-font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--smi-rust);
+}
+.smi-field-plate__title {
+  font-family: var(--smi-font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--smi-ink);
+  margin: 3px 0 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Photography — hero image (full-bleed photo + scrim + overlaid type) (§9.5)
+   Never put raw text on a photo; the scrim keeps overlaid display type legible.
+   --------------------------------------------------------------------------- */
+.smi-hero-image {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 3px solid var(--smi-rust);
+  min-height: clamp(280px, 46vw, 520px);
+  display: grid;
+}
+.smi-hero-image__img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.smi-hero-image__scrim {
+  grid-area: 1 / 1;
+  background: var(--smi-scrim);
+}
+.smi-hero-image__overlay {
+  grid-area: 1 / 1;
+  align-self: end;
+  color: var(--smi-overlay-ink);
+  padding: 32px 24px;
+  width: 100%;
+  max-width: calc(var(--smi-measure) + 240px);
+  margin: 0 auto;
+}
+.smi-hero-image__overlay .smi-hero__title {
+  text-shadow: 0 1px 18px rgba(18, 46, 34, 0.45);
+}
+
+/* Thumbnail — quiet, duotone'd so it doesn't fight nearby full-colour photos. */
+.smi-thumb {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--smi-radius-sm);
+  aspect-ratio: var(--smi-ratio-square);
+  background: var(--smi-paper-2);
+}
+.smi-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.smi-thumb--duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--smi-duotone);
+  mix-blend-mode: multiply;
+}
+
+/* ============================================================================
+   MkDocs Material integration
+   ----------------------------------------------------------------------------
+   Maps the Material theme to the SMI tokens above so the docs site shares this
+   single brand source. These selectors only match inside MkDocs — they are
+   inert in LWC / standalone contexts.
+   ============================================================================ */
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--smi-pine);
+  --md-primary-fg-color--light: var(--smi-pine-2);
+  --md-primary-fg-color--dark: var(--smi-pine-deep);
+  --md-accent-fg-color: var(--smi-rust);
+  --md-default-bg-color: var(--smi-bg);
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--smi-pine-2);
+  --md-primary-fg-color--light: var(--smi-moss);
+  --md-primary-fg-color--dark: var(--smi-pine);
+  --md-accent-fg-color: #e08a4c;
+}
+
+/* Editorial serif for headings (body + code come from theme.font) */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  font-family: var(--smi-font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+/* A faint topographic contour wash over the header bar */
+.md-header {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='200'><g fill='none' stroke='%23ffffff' stroke-width='1.5' opacity='0.12'><path d='M0,40 C200,10 400,70 600,40 C800,10 1000,70 1200,40'/><path d='M0,80 C200,50 400,110 600,80 C800,50 1000,110 1200,80'/><path d='M0,120 C200,90 400,150 600,120 C800,90 1000,150 1200,120'/><path d='M0,160 C200,130 400,190 600,160 C800,130 1000,190 1200,160'/></g></svg>");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+}
+
+/* Grid cards: warm accent on hover */
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid.cards > .card:hover {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
