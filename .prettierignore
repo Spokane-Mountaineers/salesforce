@@ -3,6 +3,14 @@
 #
 
 **/staticresources/**
+
+# @prettier/plugin-xml corrupts Profile <loginFlows><flow> values (injects a
+# stray ';' + newlines) → "no FlowDefinition named" on deploy. Ignore the
+# profiles that carry a login flow so the <flow> reference stays deployable.
+force-app/main/default/profiles/SM Community Plus Login.profile-meta.xml
+force-app/main/default/profiles/SM Community Plus Member.profile-meta.xml
+force-app/main/default/profiles/SM Community Plus Chair.profile-meta.xml
+
 .localdevserver
 .sfdx
 .sf

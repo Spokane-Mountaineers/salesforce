@@ -30,9 +30,7 @@
     </classAccesses>
     <custom>true</custom>
     <loginFlows>
-        <flow>
-Terms_Conditions_Login_Flow;
-    </flow>
+        <flow>Terms_Conditions_Login_Flow</flow>
         <flowType>UI</flowType>
         <friendlyName>T&amp;C Chair Users</friendlyName>
         <uiLoginFlowType>VisualWorkflow</uiLoginFlowType>
