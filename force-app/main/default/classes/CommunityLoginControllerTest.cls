@@ -58,4 +58,24 @@ private class CommunityLoginControllerTest {
     System.assert(cfg.microsoftUrl.endsWith('/services/auth/sso/Microsoft'));
     System.assert(cfg.forgotPasswordUrl.endsWith('/ForgotPassword'));
   }
+
+  @isTest
+  static void requestPasswordReset_blankUsername_returnsMessage() {
+    CommunityLoginController.ResetResult res = CommunityLoginController.requestPasswordReset(
+      '   '
+    );
+    System.assertEquals(false, res.success);
+    System.assertNotEquals(null, res.message);
+  }
+
+  @isTest
+  static void requestPasswordReset_alwaysReportsSuccess() {
+    // Site.forgotPassword can't send a real email in a test context; the
+    // contract is that the method never reveals whether the account exists, so
+    // it reports success regardless. The internal call is swallowed.
+    CommunityLoginController.ResetResult res = CommunityLoginController.requestPasswordReset(
+      'someone@example.com'
+    );
+    System.assertEquals(true, res.success);
+  }
 }

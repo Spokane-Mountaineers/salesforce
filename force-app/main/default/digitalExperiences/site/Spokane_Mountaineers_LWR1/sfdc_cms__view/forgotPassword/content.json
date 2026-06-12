@@ -35,16 +35,8 @@
                       "type": "component"
                     },
                     {
-                      "attributes": {
-                        "cancelButtonLabel": "Cancel",
-                        "checkEmailUrl": "./CheckPasswordResetEmail",
-                        "dxpStyle": {},
-                        "instructionsLabel": "To reset your password, enter your username. We'll send a reset-password link to the email address associated with your account.",
-                        "submitButtonLabel": "Reset",
-                        "titleLabel": "Forgot your password?",
-                        "usernameLabel": "Username"
-                      },
-                      "definition": "community_login:forgotPassword",
+                      "attributes": { "dxpStyle": {} },
+                      "definition": "c:communityForgotPassword",
                       "id": "eff33a54-9188-48b1-86ab-303df3750331",
                       "type": "component"
                     }

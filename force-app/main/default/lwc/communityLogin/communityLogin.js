@@ -1,4 +1,5 @@
 import { LightningElement, api, wire } from "lwc";
+import basePath from "@salesforce/community/basePath";
 import login from "@salesforce/apex/CommunityLoginController.login";
 import getLoginConfig from "@salesforce/apex/CommunityLoginController.getLoginConfig";
 
@@ -47,8 +48,11 @@ export default class CommunityLogin extends LightningElement {
     return this.config && this.config.microsoftUrl;
   }
 
+  // Stay inside the LWR experience site (basePath = /lwrsite) → the branded
+  // /ForgotPassword route, not the control site's force.com VF page that
+  // Site.getBaseUrl() resolves to.
   get forgotUrl() {
-    return this.config && this.config.forgotPasswordUrl;
+    return `${basePath}/ForgotPassword`;
   }
 
   handleChange(event) {

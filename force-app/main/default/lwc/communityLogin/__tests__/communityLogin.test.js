@@ -61,8 +61,10 @@ describe("c-community-login", () => {
     );
     expect(ssoLinks).toContain(CONFIG.googleUrl);
     expect(ssoLinks).toContain(CONFIG.microsoftUrl);
+    // Forgot link now stays in the LWR experience via basePath (auto-mocked to
+    // "" in jest), independent of the wired config.
     expect(el.shadowRoot.querySelector(".forgot").getAttribute("href")).toBe(
-      CONFIG.forgotPasswordUrl
+      "/ForgotPassword"
     );
   });
 

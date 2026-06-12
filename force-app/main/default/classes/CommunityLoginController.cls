@@ -44,6 +44,26 @@ public without sharing class CommunityLoginController {
     return res;
   }
 
+  /**
+   * Start a password reset for the member (Site.forgotPassword sends the email).
+   * Always reports success so the page never reveals whether an account exists.
+   */
+  @AuraEnabled
+  public static ResetResult requestPasswordReset(String username) {
+    ResetResult res = new ResetResult();
+    if (String.isBlank(username)) {
+      res.message = 'Please enter your email or username.';
+      return res;
+    }
+    try {
+      Site.forgotPassword(normalizeUsername(username.trim()));
+    } catch (Exception e) {
+      // Swallow — don't leak whether the user exists or any internal error.
+    }
+    res.success = true;
+    return res;
+  }
+
   /** SSO + helper URLs for the login UI. */
   @AuraEnabled(cacheable=true)
   public static LoginConfig getLoginConfig() {
@@ -76,6 +96,13 @@ public without sharing class CommunityLoginController {
     public Boolean success = false;
     @AuraEnabled
     public String redirectUrl;
+    @AuraEnabled
+    public String message;
+  }
+
+  public class ResetResult {
+    @AuraEnabled
+    public Boolean success = false;
     @AuraEnabled
     public String message;
   }
