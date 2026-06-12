@@ -56,6 +56,6 @@ private class CommunityLoginControllerTest {
     CommunityLoginController.LoginConfig cfg = CommunityLoginController.getLoginConfig();
     System.assert(cfg.googleUrl.endsWith('/services/auth/sso/Google'));
     System.assert(cfg.microsoftUrl.endsWith('/services/auth/sso/Microsoft'));
-    System.assert(cfg.forgotPasswordUrl.endsWith('/CommunitiesForgotPassword'));
+    System.assert(cfg.forgotPasswordUrl.endsWith('/ForgotPassword'));
   }
 }

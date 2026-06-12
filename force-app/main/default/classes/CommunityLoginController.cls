@@ -54,7 +54,9 @@ public without sharing class CommunityLoginController {
     }
     cfg.googleUrl = base + '/services/auth/sso/Google';
     cfg.microsoftUrl = base + '/services/auth/sso/Microsoft';
-    cfg.forgotPasswordUrl = base + '/CommunitiesForgotPassword';
+    // The LWR site's own forgot-password route (urlPrefix "ForgotPassword"),
+    // not the Aura '/CommunitiesForgotPassword' VF page (which 404s on LWR).
+    cfg.forgotPasswordUrl = base + '/ForgotPassword';
     return cfg;
   }
 
