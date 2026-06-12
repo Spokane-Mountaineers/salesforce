@@ -72,7 +72,7 @@
     },
     "dataProviders": [],
     "themeLayoutType": "Inner",
-    "viewType": "custom-eventdetail"
+    "viewType": "custom-event"
   },
   "title": "Event Detail",
   "type": "sfdc_cms__view",
