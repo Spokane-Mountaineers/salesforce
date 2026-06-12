@@ -22,7 +22,10 @@ public without sharing class CommunityLoginController {
     }
     try {
       String normalized = normalizeUsername(username.trim());
-      String dest = String.isBlank(startUrl) ? defaultStartUrl() : startUrl;
+      // No '/s/' default — that's the Aura path and isn't a valid route on the
+      // LWR site (Site.login rejects it). Blank lets Site.login use the site's
+      // own configured landing.
+      String dest = String.isBlank(startUrl) ? null : startUrl;
       PageReference pr = Site.login(normalized, password, dest);
       if (pr != null) {
         res.success = true;
@@ -30,6 +33,11 @@ public without sharing class CommunityLoginController {
       } else {
         res.message = 'Invalid username or password. Please try again.';
       }
+    } catch (System.SecurityException e) {
+      // Site.login throws this (rather than returning null) on a failed
+      // authentication — surface it as the same friendly invalid-credentials
+      // message rather than a scary stack.
+      res.message = 'Invalid username or password. Please try again.';
     } catch (Exception e) {
       res.message = 'Something went wrong signing you in. Please try again.';
     }
@@ -59,10 +67,6 @@ public without sharing class CommunityLoginController {
     return rawUsername.endsWithIgnoreCase('.smi')
       ? rawUsername
       : rawUsername + '.smi';
-  }
-
-  private static String defaultStartUrl() {
-    return '/s/';
   }
 
   public class LoginResult {
