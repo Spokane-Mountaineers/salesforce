@@ -33,7 +33,7 @@ describe("c-events-calendar", () => {
     expect(el.shadowRoot.querySelectorAll(".cell").length).toBe(42);
   });
 
-  it("places an event chip on its start day and selecting it emits eventselect", async () => {
+  it("places an event chip on its start day that links to the detail page", async () => {
     const el = mount();
     const today = new Date();
     getEvents.emit([
@@ -50,12 +50,8 @@ describe("c-events-calendar", () => {
     expect(chips.length).toBe(1);
     expect(chips[0].textContent.trim()).toBe("Wed Night Hike");
     expect(chips[0].className).toContain("ev--public");
-
-    const handler = jest.fn();
-    el.addEventListener("eventselect", handler);
-    chips[0].click();
-    expect(handler).toHaveBeenCalledTimes(1);
-    expect(handler.mock.calls[0][0].detail.id).toBe("a12X");
+    // basePath is auto-mocked to "" by sfdx-lwc-jest.
+    expect(chips[0].getAttribute("href")).toBe("/event?recordId=a12X");
   });
 
   it("changes the month label when navigating", async () => {

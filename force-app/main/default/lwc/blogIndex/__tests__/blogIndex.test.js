@@ -85,6 +85,19 @@ describe("c-blog-index", () => {
     );
   });
 
+  it("links the lead and rows to the post detail page", async () => {
+    const el = mount();
+    getPublishedPosts.emit(POSTS);
+    await flush();
+    // basePath is auto-mocked to "" by sfdx-lwc-jest.
+    expect(el.shadowRoot.querySelector(".lead").getAttribute("href")).toBe(
+      "/post?recordId=a001"
+    );
+    expect(el.shadowRoot.querySelector(".row__link").getAttribute("href")).toBe(
+      "/post?recordId=a002"
+    );
+  });
+
   it("renders a tag chip per active tag", async () => {
     const el = mount();
     getActiveTags.emit([

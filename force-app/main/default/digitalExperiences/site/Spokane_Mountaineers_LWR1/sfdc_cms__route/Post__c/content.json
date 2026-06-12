@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Post",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-post",
+    "urlPrefix": "post"
+  },
+  "title": "Post",
+  "type": "sfdc_cms__route",
+  "urlName": "post"
+}

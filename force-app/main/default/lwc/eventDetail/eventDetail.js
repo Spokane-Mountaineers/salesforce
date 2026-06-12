@@ -1,23 +1,32 @@
 import { LightningElement, api, wire } from "lwc";
 import { refreshApex } from "@salesforce/apex";
+import { CurrentPageReference } from "lightning/navigation";
 import getEvent from "@salesforce/apex/EventController.getEvent";
 import rsvp from "@salesforce/apex/EventController.rsvp";
 
 // Event detail + RSVP (plan §5.4). Wires getEvent (includes the member's current
 // response + live attending count) and writes via EventController.rsvp, the LWC
-// that replaces the Aura RSVP screen flow.
+// that replaces the Aura RSVP screen flow. Placed on the custom /event page, the
+// id arrives as the ?recordId= URL param (also settable via the eventId prop, or
+// page-context recordId on a record page).
 export default class EventDetail extends LightningElement {
   @api recordId;
   @api eventId;
 
+  urlRecordId;
   event;
   error;
   busy = false;
   message;
   _wired;
 
+  @wire(CurrentPageReference)
+  setPageRef(pageRef) {
+    this.urlRecordId = pageRef?.state?.recordId;
+  }
+
   get effectiveId() {
-    return this.eventId || this.recordId;
+    return this.eventId || this.urlRecordId || this.recordId;
   }
 
   @wire(getEvent, { eventId: "$effectiveId" })

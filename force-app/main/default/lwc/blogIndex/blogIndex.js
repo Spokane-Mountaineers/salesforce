@@ -1,4 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
+import basePath from "@salesforce/community/basePath";
 import getPublishedPosts from "@salesforce/apex/ContentPostController.getPublishedPosts";
 import getActiveTags from "@salesforce/apex/ContentPostController.getActiveTags";
 
@@ -72,7 +73,8 @@ export default class BlogIndex extends LightningElement {
   withMeta(p) {
     return {
       ...p,
-      meta: [p.activity, p.location].filter((x) => x).join(" · ")
+      meta: [p.activity, p.location].filter((x) => x).join(" · "),
+      detailUrl: `${basePath}/post?recordId=${p.id}`
     };
   }
 

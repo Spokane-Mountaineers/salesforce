@@ -57,7 +57,7 @@
     </template>
 
     <template lwc:if={hasPosts}>
-      <a class="lead" href={leadPost.id}>
+      <a class="lead" href={leadPost.detailUrl}>
         <div class="lead__plate">
           <svg
             class="lead__contour"
@@ -108,7 +108,7 @@
         <ul class="ledger">
           <template for:each={restPosts} for:item="p">
             <li key={p.id} class="row">
-              <a class="row__link" href={p.id}>
+              <a class="row__link" href={p.detailUrl}>
                 <span class="row__meta">{p.meta}</span>
                 <span class="row__title">{p.title}</span>
                 <span class="row__byline">{p.authorName}</span>

@@ -1,0 +1,80 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\":\"4d446820-a9ec-4d45-ab70-5939caef218d\",\"columns\":[{\"UUID\":\"322344e8-7f3a-4f3f-b02c-dddd4b9dffac\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": { "dxpStyle": {} },
+                      "definition": "c:blogPost",
+                      "id": "1fa78642-8f82-44a0-b5fc-1dd16f4f4aa7",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "322344e8-7f3a-4f3f-b02c-dddd4b9dffac",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "4d446820-a9ec-4d45-ab70-5939caef218d",
+              "type": "component"
+            }
+          ],
+          "id": "0f4a2736-c458-45f9-b00b-99576ac877b7",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "dxpStyle": {},
+                "pageTitle": "Trip Report",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "58dd99df-d9f3-46b3-a504-132fb44f1e10",
+              "type": "component"
+            }
+          ],
+          "id": "1b738f42-c63f-4c08-a44f-cdeeb957d1a8",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "4ae7d01a-8515-4ea5-a119-3f4b7281d9a9",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-post"
+  },
+  "title": "Post",
+  "type": "sfdc_cms__view",
+  "urlName": "post"
+}

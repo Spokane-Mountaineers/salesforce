@@ -1,11 +1,12 @@
 import { LightningElement, track, wire } from "lwc";
+import basePath from "@salesforce/community/basePath";
 import getEvents from "@salesforce/apex/EventController.getEvents";
 
 // Custom LWR month calendar bound directly to Event_Registration__c (plan §5.3):
 // LWR has no stock calendar, so this is a forced rebuild — and binding straight
 // to the event object is what lets the legacy standard-Event mirror be retired
-// (§5.2). Renders a 6-week grid; events sit on their start day. Selecting one
-// emits `eventselect` with the event id.
+// (§5.2). Renders a 6-week grid; events sit on their start day. Each event links
+// to the custom /event detail page (?recordId=).
 const DAY_MS = 24 * 60 * 60 * 1000;
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = [
@@ -109,6 +110,7 @@ export default class EventsCalendar extends LightningElement {
           events: (byDay[key] || []).map((e) => ({
             id: e.id,
             name: e.name,
+            url: `${basePath}/event?recordId=${e.id}`,
             cls: e.isPublic ? "ev ev--public" : "ev"
           }))
         });
@@ -144,10 +146,5 @@ export default class EventsCalendar extends LightningElement {
     const now = new Date();
     this.viewYear = now.getFullYear();
     this.viewMonth = now.getMonth();
-  }
-
-  handleSelect(event) {
-    const id = event.currentTarget.dataset.id;
-    this.dispatchEvent(new CustomEvent("eventselect", { detail: { id } }));
   }
 }

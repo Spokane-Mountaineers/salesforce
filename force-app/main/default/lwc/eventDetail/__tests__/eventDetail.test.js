@@ -1,4 +1,5 @@
 import { createElement } from "lwc";
+import { CurrentPageReference } from "lightning/navigation";
 import EventDetail from "c/eventDetail";
 import getEvent from "@salesforce/apex/EventController.getEvent";
 import rsvp from "@salesforce/apex/EventController.rsvp";
@@ -78,6 +79,18 @@ describe("c-event-detail", () => {
     expect(btn.textContent.trim()).toBe("Cancel RSVP");
     expect(el.shadowRoot.querySelector(".message").textContent).toContain(
       "list"
+    );
+  });
+
+  it("loads the event from the ?recordId= URL param when no eventId prop is set", async () => {
+    const el = mount();
+    CurrentPageReference.emit({ state: { recordId: "a12X" } });
+    await flush();
+    getEvent.emit(EVENT);
+    await flush();
+    expect(getEvent.getLastConfig()).toEqual({ eventId: "a12X" });
+    expect(el.shadowRoot.querySelector(".title").textContent).toBe(
+      "Beacon Practice"
     );
   });
 

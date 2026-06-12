@@ -1,4 +1,5 @@
 import { createElement } from "lwc";
+import { CurrentPageReference } from "lightning/navigation";
 import BlogPost from "c/blogPost";
 import getPost from "@salesforce/apex/ContentPostController.getPost";
 
@@ -58,6 +59,19 @@ describe("c-blog-post", () => {
     await Promise.resolve();
     const body = el.shadowRoot.querySelector("lightning-formatted-rich-text");
     expect(body.value).toBe("<p>Great day on the rock.</p>");
+  });
+
+  it("loads the post from the ?recordId= URL param when no postId prop is set", async () => {
+    const el = mount();
+    CurrentPageReference.emit({ state: { recordId: "a001" } });
+    await Promise.resolve();
+    getPost.emit(POST);
+    await Promise.resolve();
+    // The wire was called with the URL-derived id.
+    expect(getPost.getLastConfig()).toEqual({ postId: "a001" });
+    expect(el.shadowRoot.querySelector(".title").textContent).toBe(
+      "Beacon Rock south face"
+    );
   });
 
   it("shows an error message when the wire errors", async () => {

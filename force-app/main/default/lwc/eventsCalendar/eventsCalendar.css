@@ -120,6 +120,7 @@
 }
 .ev {
   display: block;
+  box-sizing: border-box;
   width: 100%;
   text-align: left;
   font-family: var(--font-body);
@@ -131,6 +132,7 @@
   border-radius: 5px;
   background: var(--pine);
   color: #eaf2ec;
+  text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;

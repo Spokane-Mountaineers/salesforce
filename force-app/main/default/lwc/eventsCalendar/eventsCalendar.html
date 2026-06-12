@@ -43,15 +43,9 @@
               <ul class="cell__events">
                 <template for:each={day.events} for:item="ev">
                   <li key={ev.id}>
-                    <button
-                      type="button"
-                      class={ev.cls}
-                      data-id={ev.id}
-                      onclick={handleSelect}
-                      title={ev.name}
-                    >
+                    <a class={ev.cls} href={ev.url} title={ev.name}>
                       {ev.name}
-                    </button>
+                    </a>
                   </li>
                 </template>
               </ul>

@@ -1,0 +1,80 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\":\"e4fdbf90-cdaa-4a80-94e4-1e06724dc097\",\"columns\":[{\"UUID\":\"14f6736a-a298-4a32-ad37-01bdba0cb9c9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": { "dxpStyle": {} },
+                      "definition": "c:eventDetail",
+                      "id": "8ea5eece-ebbb-4b44-904a-c122786416f9",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "14f6736a-a298-4a32-ad37-01bdba0cb9c9",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "e4fdbf90-cdaa-4a80-94e4-1e06724dc097",
+              "type": "component"
+            }
+          ],
+          "id": "3e9156b9-294f-45af-98e0-56f19dd895bc",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "dxpStyle": {},
+                "pageTitle": "Event",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "0d7300e5-89ef-405b-95bf-ee3db4f5d048",
+              "type": "component"
+            }
+          ],
+          "id": "05372e73-e818-470f-aed0-790e1b0f3ab2",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "fd396d65-2e7d-466c-acaf-8e71dffc6235",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-eventdetail"
+  },
+  "title": "Event Detail",
+  "type": "sfdc_cms__view",
+  "urlName": "event"
+}
