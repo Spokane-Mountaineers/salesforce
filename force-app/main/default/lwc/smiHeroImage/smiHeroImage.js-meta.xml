@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SMI Hero Image</masterLabel>
+    <description
+  >Full-bleed photographic hero with a legibility scrim and overlaid field-guide type (Alpine Field Guide §9.5).</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="imageUrl" type="String" label="Image URL" />
+            <property name="alt" type="String" label="Alt text (required)" />
+            <property name="eyebrow" type="String" label="Eyebrow" />
+            <property name="heading" type="String" label="Heading" />
+            <property name="subtitle" type="String" label="Subtitle" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

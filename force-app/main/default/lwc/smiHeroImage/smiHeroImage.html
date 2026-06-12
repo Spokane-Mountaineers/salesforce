@@ -1,0 +1,18 @@
+<template>
+  <section class="hero-image">
+    <img class="img" src={imageUrl} alt={alt} />
+    <div class="scrim"></div>
+    <div class="overlay">
+      <template lwc:if={hasEyebrow}>
+        <p class="eyebrow">{eyebrow}</p>
+      </template>
+      <template lwc:if={hasHeading}>
+        <h1 class="title">{heading}</h1>
+      </template>
+      <template lwc:if={hasSubtitle}>
+        <p class="sub">{subtitle}</p>
+      </template>
+      <slot></slot>
+    </div>
+  </section>
+</template>

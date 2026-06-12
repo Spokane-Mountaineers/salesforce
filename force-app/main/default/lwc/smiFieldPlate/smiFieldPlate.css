@@ -1,0 +1,62 @@
+/* Mirrors .smi-field-plate in docs/stylesheets/smi-theme.css (shadow DOM can't
+   read the global static resource — faqPage reference pattern). */
+:host {
+  --paper-2: #ede6d5;
+  --card: #fbf8f0;
+  --ink: #1c2520;
+  --rust: #b14a1e;
+  --line-strong: rgba(28, 37, 32, 0.26);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  --shadow:
+    0 1px 2px rgba(28, 37, 32, 0.05), 0 12px 30px -16px rgba(28, 37, 32, 0.3);
+  display: block;
+}
+
+.smi-field-plate {
+  margin: 0;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: var(--shadow);
+}
+.frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 3px;
+  aspect-ratio: 3 / 2;
+  background: var(--paper-2);
+}
+.smi-field-plate--portrait .frame {
+  aspect-ratio: 4 / 5;
+}
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cap {
+  padding: 10px 6px 4px;
+}
+.meta {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rust);
+}
+.title {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-top: 3px;
+}

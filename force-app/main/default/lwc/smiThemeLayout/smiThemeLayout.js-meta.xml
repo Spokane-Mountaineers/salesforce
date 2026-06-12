@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>SMI Theme Layout</masterLabel>
+    <description
+  >Alpine Field Guide theme layout for the LWR site: header (logo, nav, member/login state), footer, and topographic background wash.</description>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Theme_Layout</target>
+    </targets>
+    <targetConfigs>
+        <!-- Theme_Layout targets don't support <property>; expose the props on
+             the Default target (editable when placed as a component). As the
+             site theme layout the component uses the @api defaults below. -->
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+        name="siteName"
+        type="String"
+        label="Site name"
+        default="Spokane Mountaineers"
+      />
+            <property
+        name="logoUrl"
+        type="String"
+        label="Logo image URL (optional; falls back to wordmark)"
+      />
+            <property
+        name="homeHref"
+        type="String"
+        label="Home link"
+        default="/"
+      />
+            <property
+        name="loginHref"
+        type="String"
+        label="Login link"
+        default="/login"
+      />
+            <property
+        name="logoutHref"
+        type="String"
+        label="Logout link"
+        default="/secur/logout.jsp"
+      />
+            <property
+        name="navItemsJson"
+        type="String"
+        label="Nav items override (JSON array of {label, href, member?})"
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

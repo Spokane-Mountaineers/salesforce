@@ -1,0 +1,71 @@
+/* Mirrors .smi-hero-image + --smi-scrim in docs/stylesheets/smi-theme.css
+   (shadow DOM can't read the global static resource). */
+:host {
+  --rust: #b14a1e;
+  --overlay-ink: #f4efe3;
+  --scrim: linear-gradient(
+    to top,
+    rgba(18, 46, 34, 0.82) 0%,
+    rgba(18, 46, 34, 0.45) 38%,
+    rgba(18, 46, 34, 0) 72%
+  );
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  display: block;
+}
+
+.hero-image {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 3px solid var(--rust);
+  min-height: clamp(280px, 46vw, 520px);
+  display: grid;
+}
+.img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.scrim {
+  grid-area: 1 / 1;
+  background: var(--scrim);
+}
+.overlay {
+  grid-area: 1 / 1;
+  align-self: end;
+  color: var(--overlay-ink);
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  color: #c9e2d1;
+}
+.title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-optical-sizing: auto;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-shadow: 0 1px 18px rgba(18, 46, 34, 0.45);
+}
+.sub {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 46ch;
+  margin: 14px 0 0;
+  color: #e7efe9;
+}
