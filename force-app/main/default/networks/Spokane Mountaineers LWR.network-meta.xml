@@ -42,6 +42,9 @@
   >unfiled$public/CommunityHeadlessRegistrationTemplate</headlessRegistrationTemplate>
     <networkMemberGroups>
         <profile>admin</profile>
+        <profile>SM Community Plus Login</profile>
+        <profile>SM Community Plus Member</profile>
+        <profile>SM Community Plus Chair</profile>
     </networkMemberGroups>
     <networkPageOverrides>
         <changePasswordPageOverrideSetting
