@@ -36,7 +36,7 @@ Terms_Conditions_Login_Flow;
         <flowType>UI</flowType>
         <friendlyName>T&amp;C Login Users</friendlyName>
         <uiLoginFlowType>VisualWorkflow</uiLoginFlowType>
-        <useLightningRuntime>true</useLightningRuntime>
+        <useLightningRuntime>false</useLightningRuntime>
     </loginFlows>
     <userLicense>Customer Community Plus Login</userLicense>
     <userPermissions>

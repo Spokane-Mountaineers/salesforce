@@ -36,7 +36,7 @@ Terms_Conditions_Login_Flow;
         <flowType>UI</flowType>
         <friendlyName>T&amp;C Chair Users</friendlyName>
         <uiLoginFlowType>VisualWorkflow</uiLoginFlowType>
-        <useLightningRuntime>true</useLightningRuntime>
+        <useLightningRuntime>false</useLightningRuntime>
     </loginFlows>
     <userLicense>Customer Community Plus</userLicense>
     <userPermissions>
