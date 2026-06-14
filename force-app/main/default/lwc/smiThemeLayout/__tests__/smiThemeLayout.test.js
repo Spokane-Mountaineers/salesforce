@@ -154,14 +154,19 @@ describe("c-smi-theme-layout", () => {
     expect(aboutUs.getAttribute("href")).toBe("/lwrsite/about-us");
   });
 
-  it("flattens group children into the footer nav", async () => {
+  it("renders a grouped sitemap footer mirroring the header IA", async () => {
     const el = await render();
     await Promise.resolve();
     const footer = [...el.shadowRoot.querySelectorAll(".footer-nav__link")].map(
       (a) => a.textContent.trim()
     );
-    expect(footer).toContain("Calendar"); // childless top item
+    expect(footer).toContain("Calendar"); // primary (childless top item)
     expect(footer).toContain("Our Mission"); // group child
-    expect(footer).not.toContain("About"); // the group label itself isn't a link
+    expect(footer).not.toContain("About"); // group label is a heading, not a link
+
+    const headings = [
+      ...el.shadowRoot.querySelectorAll(".footer-col__head")
+    ].map((h) => h.textContent.trim());
+    expect(headings).toEqual(["About", "Membership", "Activities", "News"]);
   });
 });

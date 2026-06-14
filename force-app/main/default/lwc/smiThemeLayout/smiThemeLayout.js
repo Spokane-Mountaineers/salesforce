@@ -16,18 +16,46 @@ import basePath from "@salesforce/community/basePath";
 // are added here as each batch of the legacy content port lands.
 const DEFAULT_NAV = [
   { label: "Home", href: "/" },
-  { label: "Calendar", href: "/events" },
-  { label: "Trip Reports", href: "/blog" },
   {
     label: "About",
     children: [
       { label: "About Us", href: "/about-us" },
       { label: "Our Mission", href: "/our-mission" },
-      { label: "Membership Benefits", href: "/member-benefits" },
-      { label: "Club Leadership", href: "/club-leadership" },
       { label: "Our History", href: "/100-years" },
-      { label: "The Kinni Online", href: "/kinni-online" },
-      { label: "Member Resources", href: "/member-resources" }
+      { label: "Our Chalet", href: "/our-chalet" },
+      { label: "Club Leadership", href: "/club-leadership" }
+    ]
+  },
+  {
+    label: "Membership",
+    children: [
+      { label: "Membership Benefits", href: "/member-benefits" },
+      { label: "Member Discounts", href: "/member-discounts" },
+      { label: "Member Resources", href: "/member-resources" },
+      { label: "Logo & Gear", href: "/club-logo-gear" }
+    ]
+  },
+  {
+    label: "Activities",
+    children: [
+      { label: "Climbing", href: "/group-climbing" },
+      { label: "Hiking", href: "/group-hiking" },
+      { label: "Skiing", href: "/group-skiing" },
+      { label: "Paddling", href: "/group-paddling" },
+      { label: "Mountain Biking", href: "/group-mountain-biking" },
+      { label: "Road Biking", href: "/group-road-biking" },
+      { label: "Conservation", href: "/group-conservation" },
+      { label: "The Chalet", href: "/group-chalet" },
+      { label: "Club-wide", href: "/group-clubwide" }
+    ]
+  },
+  { label: "Schools & Clinics", href: "/schools-and-clinics" },
+  { label: "Calendar", href: "/events" },
+  {
+    label: "News",
+    children: [
+      { label: "Trip Reports", href: "/blog" },
+      { label: "The Kinni Online", href: "/kinni-online" }
     ]
   },
   { label: "My Mountaineers", href: "/basecamp", member: true }
@@ -113,24 +141,30 @@ export default class SmiThemeLayout extends LightningElement {
       });
   }
 
-  // Footer shows a flat list of every leaf destination (group children +
-  // childless top items).
-  get footerLinks() {
-    const out = [];
-    this.navItems.forEach((item) => {
-      if (item.hasChildren) {
-        item.children.forEach((child) =>
-          out.push({
-            key: `f-${child.key}`,
-            label: child.label,
-            href: child.href
-          })
-        );
-      } else if (item.href) {
-        out.push({ key: `f-${item.key}`, label: item.label, href: item.href });
-      }
-    });
-    return out;
+  // Footer is a grouped sitemap: a row of the top-level standalone links, then
+  // a column per dropdown group mirroring the header IA.
+  get footerPrimary() {
+    return this.navItems
+      .filter((item) => !item.hasChildren && item.href)
+      .map((item) => ({
+        key: `fp-${item.key}`,
+        label: item.label,
+        href: item.href
+      }));
+  }
+
+  get footerGroups() {
+    return this.navItems
+      .filter((item) => item.hasChildren)
+      .map((item) => ({
+        key: `fg-${item.key}`,
+        label: item.label,
+        links: item.children.map((child) => ({
+          key: `fg-${child.key}`,
+          label: child.label,
+          href: child.href
+        }))
+      }));
   }
 
   // Mobile / keyboard: toggle a group's submenu open. Desktop reveals it on

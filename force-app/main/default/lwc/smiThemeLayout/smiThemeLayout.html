@@ -110,13 +110,29 @@
           <span class="footer-brand__name">{siteName}</span>
         </div>
         <nav class="footer-nav" aria-label="Footer">
-          <ul class="footer-nav__list">
-            <template for:each={footerLinks} for:item="link">
+          <ul class="footer-nav__primary">
+            <template for:each={footerPrimary} for:item="link">
               <li key={link.key}>
                 <a class="footer-nav__link" href={link.href}>{link.label}</a>
               </li>
             </template>
           </ul>
+          <div class="footer-nav__groups">
+            <template for:each={footerGroups} for:item="group">
+              <div class="footer-col" key={group.key}>
+                <h3 class="footer-col__head">{group.label}</h3>
+                <ul class="footer-col__list">
+                  <template for:each={group.links} for:item="link">
+                    <li key={link.key}>
+                      <a class="footer-nav__link" href={link.href}
+                        >{link.label}</a
+                      >
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </template>
+          </div>
         </nav>
         <p class="footer-legal">
           © {year} {siteName}. A volunteer-run outdoor club since 1915.
