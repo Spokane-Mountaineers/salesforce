@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"e6ba7404-2c96-4c4a-9fa3-0b225f816af6\", \"columns\": [{\"UUID\": \"d0c67ba7-9c71-4bad-aa56-f13ddc183892\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Spokane Mountaineers",
+                        "heading": "Our Mission",
+                        "subtitle": "Fellowship, mountaincraft, safety, and conservation.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<p>As set out in our By-Laws, the purpose of the Spokane Mountaineers is:</p><ul><li>To encourage a spirit of good fellowship among lovers of outdoor life.</li><li>To maintain a program of mountaineering trips \u2014 including mountain climbing, scrambling, backpacking, hiking, skiing, ski touring, snowshoeing, and bicycling \u2014 and to provide capable and experienced leadership for all trips.</li><li>To educate aspiring mountaineers in the skills of mountaincraft.</li><li>To endorse the principles of mountain safety as prescribed by the climbing code and, when called upon, to provide all possible aid to mountain accident victims.</li><li>To create greater public awareness of the intrinsic value of our wilderness, forests, waters, primitive parks, and monument lands, and to seek the preservation of the natural beauty and scenic value of this national heritage.</li><li>To preserve, by the encouragement of protective legislation or otherwise, the natural beauty of our great out-of-doors.</li></ul><p>(from the By-Laws of The Spokane Mountaineers)</p>",
+                        "relatedHeading": "More About Us",
+                        "relatedLinks": "[{\"label\":\"About Us\",\"path\":\"/about-us\"},{\"label\":\"Our Mission\",\"path\":\"/our-mission\"},{\"label\":\"Our History\",\"path\":\"/100-years\"},{\"label\":\"Our Chalet\",\"path\":\"/our-chalet\"},{\"label\":\"Club Leadership\",\"path\":\"/club-leadership\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "6d9f374b-edf9-4ac9-9385-de3ac36ec5e9",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "d0c67ba7-9c71-4bad-aa56-f13ddc183892",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "e6ba7404-2c96-4c4a-9fa3-0b225f816af6",
+              "type": "component"
+            }
+          ],
+          "id": "2becd863-c8d1-4807-a790-8a6d10995173",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "The mission of the Spokane Mountaineers, as set out in our By-Laws.",
+                "dxpStyle": {},
+                "pageTitle": "Our Mission | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "f893325e-e87f-457a-a9fa-f273afdf1bc9",
+              "type": "component"
+            }
+          ],
+          "id": "21e56034-722b-4ea9-8267-425a27eae0f4",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "16239e3b-cc7a-44f3-a4a0-8c5c45c28978",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-our-mission"
+  },
+  "title": "Our Mission",
+  "type": "sfdc_cms__view",
+  "urlName": "our-mission"
+}

@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"26459b24-0f4f-4f19-8583-945cc6e3c8ba\", \"columns\": [{\"UUID\": \"ecdd9eee-851e-45d2-8bb4-6fb2247ec0fe\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Since 1915",
+                        "heading": "A Century of Adventure",
+                        "subtitle": "From the Spokane Walking Club to today.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3>The beginning \u2014 September 19, 1915</h3><p>Miss Ora L. Maxwell and four other Spokane Public Library staffers founded the <strong>Spokane Walking Club</strong>. The club grew to 15 members, all female librarians.</p><p><strong>1916:</strong> A controversial vote allows men to join the club.</p><p><strong>1921:</strong> The club name is changed to the Spokane Mountaineers Club. Club membership numbers 58.</p><p><strong>1925:</strong> The Spokane Mountaineers hike to Cheney and back \u2014 32 miles \u2014 and pay the expenses of five Campfire Girls to attend Camp Sweyolakan on Lake Coeur d\u2019Alene.</p><p><strong>1935:</strong> The club is incorporated and the name changed to Spokane Mountaineers, Inc., with \u201cthe tradition of developing an outdoor fellowship and responsibility for preserving wilderness values of the Inland Northwest.\u201d A monthly bulletin called the Kinnikinnick (the club flower) is published for members.</p><p><strong>1936:</strong> The Spokane Mountaineers name several peaks including Antoine, Shasta, Garry Palisades, Bonser Crater, Rocky Gorge and Barnicle Bill\u2019s Rock.</p><p><strong>1937:</strong> Climbing Class, the forerunner of today\u2019s Mountain School, begins with a six-session course. Bicycle events also join the club schedule.</p><p><strong>1939:</strong> The Mountaineers purchase their own 40 acres on Mt. Spokane and build a 12-bed ski shack. Trails were cleared and a slalom slope added; in 1938 a cable tow was added.</p><p><strong>1944:</strong> War rationing of gas affects the summer outing at Priest Lake as well as other club outings.</p><p><strong>1950:</strong> The Chalet replaces the little cabin on the Mountaineers\u2019 property on Mt. Spokane.</p><p><strong>1956:</strong> A club team bags 7,300-foot Glory Mountain, then the last unclimbed named peak in the Cascades.</p><p><strong>1967:</strong> First ascent of the east face of Chimney Rock by Ed Cooper and Dave Hiser in two days.</p><p><strong>1976:</strong> Priest Lake to Spokane bicycle ride, later followed by a Bicycle Maintenance class.</p><p><strong>1977:</strong> John Roskelley, Galen Rowell, Kim Schmitz and Dennis Henzel climb Middle Trango Tower in Pakistan.</p><p><strong>1980:</strong> A Spokane Mountaineers team including John Roskelley, Chris Kopczynski, Kim Momb and Dr. Jim States become the first club team from one city to conquer a major Himalayan peak \u2014 fifth-highest Makalu at 27,800 feet.</p><p><strong>1987:</strong> SMI joins other regional clubs in Idaho Panhandle National Forest management plans to demand more protection for trails, roadless areas, water quality and wildlife habitat.</p><p><strong>1996:</strong> Sponsorship of Centennial Trail Mile 17 begins with donations and the first of many clean-up parties.</p><p><strong>2001:</strong> SMI travels to Ecuador to climb.</p><p><strong>2002:</strong> Intro to Backcountry and Basic Avalanche course offered.</p><p><strong>2007:</strong> Youth Rock School begins.</p><p><strong>2009:</strong> \u201cSpeak up for our remaining Wild Country\u201d is one of many conservation efforts of the club.</p><p><strong>2013:</strong> A full roster of events and classes keeps members, old and new, fit and busy throughout the year. SMI membership: 530.</p><p><strong>2015:</strong> Club celebrates its 100th anniversary with year-long programs and publishes a book about the club: <a href=\"https://drive.google.com/file/d/18kIBspGLze65Z-af5Ux4DTHxYtIBmzW1/view?usp=drive_link\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Peaks and Valleys</strong></a>.</p>",
+                        "relatedHeading": "More About Us",
+                        "relatedLinks": "[{\"label\":\"About Us\",\"path\":\"/about-us\"},{\"label\":\"Our Mission\",\"path\":\"/our-mission\"},{\"label\":\"Our History\",\"path\":\"/100-years\"},{\"label\":\"Our Chalet\",\"path\":\"/our-chalet\"},{\"label\":\"Club Leadership\",\"path\":\"/club-leadership\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "ec01b446-5432-4356-9aeb-2cfa35cbebec",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "ecdd9eee-851e-45d2-8bb4-6fb2247ec0fe",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "26459b24-0f4f-4f19-8583-945cc6e3c8ba",
+              "type": "component"
+            }
+          ],
+          "id": "eda829b3-c011-4b50-aed2-d3871baa04a9",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "A century of adventure \u2014 the Spokane Mountaineers from the 1915 Spokane Walking Club to today.",
+                "dxpStyle": {},
+                "pageTitle": "Our History | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "45ce2035-1afe-4da1-b12c-2cb49b3b1e2c",
+              "type": "component"
+            }
+          ],
+          "id": "59a7ae2c-e289-40b6-9dec-45daf192f02c",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "7ab31d45-48a6-47d5-a9b9-9480abb1fd9a",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-100-years"
+  },
+  "title": "Our History",
+  "type": "sfdc_cms__view",
+  "urlName": "100-years"
+}

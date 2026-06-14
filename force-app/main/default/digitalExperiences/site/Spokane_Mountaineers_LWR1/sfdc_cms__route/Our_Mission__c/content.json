@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Our_Mission",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-our-mission",
+    "urlPrefix": "our-mission"
+  },
+  "title": "Our Mission",
+  "type": "sfdc_cms__route",
+  "urlName": "our-mission"
+}
