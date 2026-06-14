@@ -144,6 +144,90 @@
   align-items: center;
 }
 
+/* ── Dropdown groups ── */
+.nav__item {
+  position: relative;
+}
+.nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+.nav__caret {
+  font-size: 11px;
+  transition: transform 0.2s var(--ease);
+}
+.nav__submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 214px;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--rust);
+  border-radius: 4px 4px 12px 12px;
+  box-shadow: 0 14px 34px -14px rgba(18, 46, 34, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition:
+    opacity 0.18s var(--ease),
+    transform 0.18s var(--ease),
+    visibility 0.18s;
+  z-index: 50;
+}
+/* Invisible bridge across the trigger→flyout gap so :hover doesn't drop when
+   the cursor crosses it and snap the menu shut. */
+.nav__submenu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  height: 10px;
+}
+.nav__item:hover .nav__submenu,
+.nav__item:focus-within .nav__submenu,
+.nav__submenu--open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.nav__item:hover .nav__caret,
+.nav__item--open .nav__caret {
+  transform: rotate(180deg);
+}
+.nav__subitem {
+  margin: 0;
+}
+.nav__sublink {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition:
+    background 0.16s,
+    color 0.16s;
+}
+.nav__sublink:hover,
+.nav__sublink:focus-visible {
+  background: var(--paper-2);
+  color: var(--rust);
+  outline: none;
+}
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -277,6 +361,7 @@
   }
   .nav--open {
     max-height: 80vh;
+    overflow-y: auto;
     opacity: 1;
     pointer-events: auto;
   }
@@ -286,11 +371,51 @@
     gap: 0;
   }
   .nav__item {
+    position: static;
     border-bottom: 1px solid rgba(244, 239, 227, 0.12);
   }
   .nav__link {
     display: block;
     padding: 14px 0;
+  }
+  .nav__trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #d8e6dc;
+    border-bottom: 0;
+  }
+  /* Accordion: static, clipped, revealed by the --open class (tap), not hover. */
+  .nav__submenu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 0 6px 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.26s var(--ease);
+  }
+  .nav__submenu::before {
+    display: none;
+  }
+  .nav__submenu--open {
+    max-height: 640px;
+  }
+  .nav__sublink {
+    color: #cdddd2;
+    padding: 11px 0;
+  }
+  .nav__sublink:hover,
+  .nav__sublink:focus-visible {
+    background: transparent;
+    color: #fff;
   }
   .nav__auth {
     margin-top: 16px;

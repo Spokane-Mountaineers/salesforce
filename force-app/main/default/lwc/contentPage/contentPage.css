@@ -1,0 +1,305 @@
+:host {
+  --paper: #f4efe3;
+  --paper-2: #ede6d5;
+  --card: #fbf8f0;
+  --ink: #1c2520;
+  --ink-soft: #54605a;
+  --ink-faint: #8a938c;
+  --pine: #1e4b38;
+  --pine-2: #2c6a4e;
+  --moss: #6e9173;
+  --rust: #b14a1e;
+  --sky: #2c6a8c;
+  --line: rgba(28, 37, 32, 0.14);
+  --line-strong: rgba(28, 37, 32, 0.26);
+  --shadow:
+    0 1px 2px rgba(28, 37, 32, 0.05), 0 12px 30px -16px rgba(28, 37, 32, 0.3);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  --measure: 760px;
+  --scrim: linear-gradient(
+    to top,
+    rgba(18, 46, 34, 0.82) 0%,
+    rgba(18, 46, 34, 0.45) 38%,
+    rgba(18, 46, 34, 0) 72%
+  );
+  display: block;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      rgba(46, 106, 78, 0.1),
+      transparent 60%
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420' viewBox='0 0 420 420'%3E%3Cg fill='none' stroke='%231E4B38' stroke-opacity='0.05' stroke-width='1.5'%3E%3Cpath d='M-20 120 C 90 60 170 180 280 120 S 460 60 540 140'/%3E%3Cpath d='M-20 170 C 90 110 170 230 280 170 S 460 110 540 190'/%3E%3Cpath d='M-20 220 C 90 160 170 280 280 220 S 460 160 540 240'/%3E%3Cpath d='M-20 270 C 90 210 170 330 280 270 S 460 210 540 290'/%3E%3Cpath d='M-20 320 C 90 260 170 380 280 320 S 460 260 540 340'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------------
+   Hero — gradient (default) or full-bleed photo with a legibility scrim
+   --------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--paper);
+  border-bottom: 3px solid var(--rust);
+}
+.hero--gradient {
+  background: linear-gradient(160deg, #20503c 0%, #173b2c 60%, #122e22 100%);
+}
+.hero--gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='760' height='320' viewBox='0 0 760 320' preserveAspectRatio='xMidYMid slice'%3E%3Cg fill='none' stroke='%235C8A6E' stroke-opacity='0.35' stroke-width='1.5'%3E%3Cpath d='M-40 70 C 140 10 260 150 420 80 S 700 10 820 110'/%3E%3Cpath d='M-40 120 C 140 60 260 200 420 130 S 700 60 820 160'/%3E%3Cpath d='M-40 170 C 140 110 260 250 420 180 S 700 110 820 210'/%3E%3Cpath d='M-40 220 C 140 160 260 300 420 230 S 700 160 820 260'/%3E%3Cpath d='M-40 270 C 140 210 260 350 420 280 S 700 210 820 310'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+}
+.hero--photo {
+  min-height: clamp(260px, 40vw, 460px);
+  display: grid;
+  align-items: end;
+}
+.hero--photo .hero__img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero--photo::after {
+  content: "";
+  grid-area: 1 / 1;
+  background: var(--scrim);
+}
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: calc(var(--measure) + 280px);
+  margin: 0 auto;
+  padding: 64px 24px 52px;
+  width: 100%;
+}
+.hero--photo .hero__inner {
+  grid-area: 1 / 1;
+  align-self: end;
+  padding-bottom: 36px;
+}
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9fc6ae;
+  margin: 0 0 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--rust);
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-optical-sizing: auto;
+  font-size: clamp(38px, 6.4vw, 66px);
+  line-height: 0.99;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-shadow: 0 1px 18px rgba(18, 46, 34, 0.35);
+}
+.hero__sub {
+  font-family: var(--font-body);
+  font-size: 19px;
+  max-width: 46ch;
+  margin: 16px 0 0;
+  color: #d8e6dc;
+  line-height: 1.55;
+}
+
+/* ---------------------------------------------------------------------------
+   Body layout — prose column + optional related rail
+   --------------------------------------------------------------------------- */
+.wrap {
+  max-width: calc(var(--measure) + 280px);
+  margin: 0 auto;
+  padding: 44px 24px 88px;
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) 240px;
+  gap: 48px;
+  align-items: start;
+}
+.main {
+  min-width: 0;
+}
+@media (max-width: 880px) {
+  .wrap {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Prose — field-guide typography for the injected body markup
+   --------------------------------------------------------------------------- */
+.body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.72;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+.body :first-child {
+  margin-top: 0;
+}
+.body h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 4.5vw, 35px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--pine);
+  margin: 0 0 0.5em;
+}
+.body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 1.6em 0 0.4em;
+}
+.body p {
+  margin: 0 0 16px;
+}
+.body a {
+  color: var(--sky);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: rgba(44, 106, 140, 0.4);
+  transition: text-decoration-color 0.18s;
+}
+.body a:hover {
+  text-decoration-color: var(--sky);
+}
+.body strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+.body ul,
+.body ol {
+  margin: 0 0 18px;
+  padding-left: 1.3em;
+}
+.body li {
+  margin: 0 0 8px;
+}
+.body ul li::marker {
+  color: var(--moss);
+}
+.body ol li::marker {
+  color: var(--rust);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------------------
+   Related rail — sticky "more about us" nav
+   --------------------------------------------------------------------------- */
+.related {
+  position: sticky;
+  top: 24px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 20px 22px;
+}
+@media (max-width: 880px) {
+  .related {
+    position: static;
+    margin-top: 28px;
+  }
+}
+.related__head {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--pine);
+  margin: 0 0 12px;
+}
+.related__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.related__item {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.related__item:first-child {
+  border-top: none;
+}
+.related__item a {
+  display: block;
+  padding: 9px 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition:
+    color 0.16s,
+    padding-left 0.16s;
+}
+.related__item a:hover,
+.related__item a:focus-visible {
+  color: var(--rust);
+  padding-left: 6px;
+  outline: none;
+}
+.related__item a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------------
+   Entrance motion — a quiet staggered rise, matching the site's .smi-rise
+   --------------------------------------------------------------------------- */
+.hero__inner,
+.main,
+.related {
+  animation: cp-rise 0.6s var(--ease, cubic-bezier(0.2, 0.7, 0.2, 1)) both;
+}
+.main {
+  animation-delay: 0.06s;
+}
+.related {
+  animation-delay: 0.12s;
+}
+@keyframes cp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__inner,
+  .main,
+  .related {
+    animation: none;
+  }
+}

@@ -53,10 +53,37 @@
         <nav class={navClass} aria-label="Primary">
           <ul class="nav__list">
             <template for:each={navItems} for:item="item">
-              <li class="nav__item" key={item.key}>
-                <a class="nav__link" href={item.href} onclick={closeMobile}
-                  >{item.label}</a
-                >
+              <li class={item.itemClass} key={item.key}>
+                <template lwc:if={item.hasChildren}>
+                  <button
+                    class="nav__link nav__trigger"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded={item.ariaExpanded}
+                    data-key={item.key}
+                    onclick={toggleSubmenu}
+                  >
+                    {item.label}
+                    <span class="nav__caret" aria-hidden="true">▾</span>
+                  </button>
+                  <ul class={item.submenuClass}>
+                    <template for:each={item.children} for:item="child">
+                      <li class="nav__subitem" key={child.key}>
+                        <a
+                          class="nav__sublink"
+                          href={child.href}
+                          onclick={closeMobile}
+                          >{child.label}</a
+                        >
+                      </li>
+                    </template>
+                  </ul>
+                </template>
+                <template lwc:else>
+                  <a class="nav__link" href={item.href} onclick={closeMobile}
+                    >{item.label}</a
+                  >
+                </template>
               </li>
             </template>
           </ul>
@@ -84,9 +111,9 @@
         </div>
         <nav class="footer-nav" aria-label="Footer">
           <ul class="footer-nav__list">
-            <template for:each={navItems} for:item="item">
-              <li key={item.key}>
-                <a class="footer-nav__link" href={item.href}>{item.label}</a>
+            <template for:each={footerLinks} for:item="link">
+              <li key={link.key}>
+                <a class="footer-nav__link" href={link.href}>{link.label}</a>
               </li>
             </template>
           </ul>

@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"1cee1c5f-616b-4fd8-9a6b-1036e95372eb\", \"columns\": [{\"UUID\": \"b0115419-31aa-4dde-b015-1339310473db\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Spokane Mountaineers",
+                        "heading": "About the Mountaineers",
+                        "subtitle": "Conservation and enjoyment of the out-of-doors since 1915.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<p>The Spokane Mountaineers is an organization devoted to the conservation and enjoyment of the out-of-doors. By joining the Spokane Mountaineers, you have chosen to adopt these principles for your own and become a participant in some of the most exciting and enjoyable activities available in the Pacific Northwest. Founded in 1915 by a group of librarians who loved to hike, the club has grown to incorporate an amazing range of activities for members of all ages (15 and up) and abilities. Backpacking, day hiking, bicycling, skiing of all varieties \u2014 the Spokane Mountaineers have it! The annual schools and clinics are a wonderful testimony to the enthusiasm our club has for teaching others and to their firm belief that, although the dangers of mountaineering and the out-of-doors can never be ignored, good instruction can help minimize those dangers.</p><p>Few other cities in North America have been home to so many climbers of world-class caliber, including several individuals who have summited Mt. Everest and others who have climbed Aconcagua, Cotopaxi, K2, Huayna Potos\u00ed, Makalu, Ama Dablam, Trango Tower, Kilimanjaro, Denali, Dhaulagiri, Nanda Devi, Kanchenjunga, Gaurishankar and peaks in Europe, Russia and Canada. The Spokane Mountaineers can proudly take credit for sponsoring many of these climbers. Join us. You may not make the summit of Everest, but you can take part in the spirit of mountaineering and all the other activities of the Spokane Mountaineers. We offer activities for all levels of ability and interest.</p><p>The Spokane Mountaineers, Inc. is incorporated in the state of Washington as a 501(c)(3) nonprofit corporation. Dues and contributions go toward our support of the community, our mission and membership. The club has a charitable arm which supports our mission for the community at large and accepts and manages tax-free charitable donations.</p>",
+                        "relatedHeading": "More About Us",
+                        "relatedLinks": "[{\"label\":\"Our Mission\",\"path\":\"/our-mission\"},{\"label\":\"Membership Benefits\",\"path\":\"/member-benefits\"},{\"label\":\"News: The Kinni Online\",\"path\":\"/kinni-online\"},{\"label\":\"Our History\",\"path\":\"/100-years\"},{\"label\":\"Club Leadership\",\"path\":\"/club-leadership\"},{\"label\":\"Member Resources\",\"path\":\"/member-resources\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "2ace7bc5-ea86-4f39-8c50-0fb47fc7406d",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "b0115419-31aa-4dde-b015-1339310473db",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "1cee1c5f-616b-4fd8-9a6b-1036e95372eb",
+              "type": "component"
+            }
+          ],
+          "id": "35c79e7a-50b1-421f-9538-380c27e60217",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "The Spokane Mountaineers \u2014 founded in 1915 \u2014 is a 501(c)(3) nonprofit devoted to the conservation and enjoyment of the out-of-doors.",
+                "dxpStyle": {},
+                "pageTitle": "About the Mountaineers | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "94f67274-75c2-45f6-bcf0-f6b80921b12d",
+              "type": "component"
+            }
+          ],
+          "id": "4caeee46-4ca7-4d4c-9bb2-77ae6fcb22ff",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "41c200be-243e-4732-93fb-424a041e0f96",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-about-us"
+  },
+  "title": "About Us",
+  "type": "sfdc_cms__view",
+  "urlName": "about-us"
+}

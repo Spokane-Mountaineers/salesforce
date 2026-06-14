@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Content Page</masterLabel>
+    <description
+  >Reusable Alpine Field Guide content page (hero + prose + related rail) for ported legacy info pages.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="eyebrow" type="String" label="Eyebrow" />
+            <property name="heading" type="String" label="Heading" />
+            <property name="subtitle" type="String" label="Subtitle" />
+            <property
+        name="heroImageUrl"
+        type="String"
+        label="Hero image URL (optional; gradient hero if blank)"
+      />
+            <property
+        name="heroAlt"
+        type="String"
+        label="Hero image alt text"
+      />
+            <property
+        name="bodyHtml"
+        type="String"
+        label="Body HTML (pre-cleaned)"
+      />
+            <property
+        name="relatedHeading"
+        type="String"
+        label="Related links heading"
+      />
+            <property
+        name="relatedLinks"
+        type="String"
+        label='Related links JSON: [{"label":"","path":"/path"}]'
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

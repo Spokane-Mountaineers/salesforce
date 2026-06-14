@@ -8,13 +8,28 @@ import basePath from "@salesforce/community/basePath";
 // live route map (plan §2.2) but is overridable in Builder via the
 // navItemsJson property so staff can re-order without a code change.
 //
-// hrefs are root-relative ("/events"); the component prefixes the community
-// basePath so they resolve under the site prefix (/lwrsite in staging, whatever
-// prod serves) rather than the bare domain root.
+// Two levels: a top item is either a plain link (href) or a dropdown group
+// (children) — desktop reveals the submenu on hover/focus, mobile toggles it as
+// an accordion. hrefs are root-relative ("/events"); the component prefixes the
+// community basePath so they resolve under the site prefix (/lwrsite in staging,
+// whatever prod serves) rather than the bare domain root. Grouped content pages
+// are added here as each batch of the legacy content port lands.
 const DEFAULT_NAV = [
   { label: "Home", href: "/" },
   { label: "Calendar", href: "/events" },
   { label: "Trip Reports", href: "/blog" },
+  {
+    label: "About",
+    children: [
+      { label: "About Us", href: "/about-us" },
+      { label: "Our Mission", href: "/our-mission" },
+      { label: "Membership Benefits", href: "/member-benefits" },
+      { label: "Club Leadership", href: "/club-leadership" },
+      { label: "Our History", href: "/100-years" },
+      { label: "The Kinni Online", href: "/kinni-online" },
+      { label: "Member Resources", href: "/member-resources" }
+    ]
+  },
   { label: "My Mountaineers", href: "/basecamp", member: true }
 ];
 
@@ -27,6 +42,7 @@ export default class SmiThemeLayout extends LightningElement {
   @api navItemsJson;
 
   _mobileOpen = false;
+  _openKey = null;
 
   get isGuest() {
     return isGuest;
@@ -54,6 +70,8 @@ export default class SmiThemeLayout extends LightningElement {
   }
 
   // A signed-in member sees member-only links + Log out; a guest sees Log in.
+  // Top items are either plain links or dropdown groups (children); member-only
+  // items are filtered at both levels for guests.
   get navItems() {
     let items = DEFAULT_NAV;
     if (this.navItemsJson) {
@@ -69,11 +87,57 @@ export default class SmiThemeLayout extends LightningElement {
     }
     return items
       .filter((item) => !(item.member && isGuest))
-      .map((item, i) => ({
-        ...item,
-        href: this.withBase(item.href),
-        key: `${i}-${item.href}`
-      }));
+      .map((item, i) => {
+        const key = `${i}-${item.label}`;
+        const children = (item.children || [])
+          .filter((child) => !(child.member && isGuest))
+          .map((child, j) => ({
+            key: `${key}-${j}`,
+            label: child.label,
+            href: this.withBase(child.href)
+          }));
+        const hasChildren = children.length > 0;
+        const open = hasChildren && key === this._openKey;
+        return {
+          key,
+          label: item.label,
+          href: hasChildren ? undefined : this.withBase(item.href),
+          hasChildren,
+          children,
+          ariaExpanded: hasChildren ? String(open) : null,
+          itemClass: open ? "nav__item nav__item--open" : "nav__item",
+          submenuClass: open
+            ? "nav__submenu nav__submenu--open"
+            : "nav__submenu"
+        };
+      });
+  }
+
+  // Footer shows a flat list of every leaf destination (group children +
+  // childless top items).
+  get footerLinks() {
+    const out = [];
+    this.navItems.forEach((item) => {
+      if (item.hasChildren) {
+        item.children.forEach((child) =>
+          out.push({
+            key: `f-${child.key}`,
+            label: child.label,
+            href: child.href
+          })
+        );
+      } else if (item.href) {
+        out.push({ key: `f-${item.key}`, label: item.label, href: item.href });
+      }
+    });
+    return out;
+  }
+
+  // Mobile / keyboard: toggle a group's submenu open. Desktop reveals it on
+  // hover/focus via CSS, so this is the accordion + a11y path.
+  toggleSubmenu(event) {
+    const { key } = event.currentTarget.dataset;
+    this._openKey = this._openKey === key ? null : key;
   }
 
   get mobileOpen() {
@@ -94,6 +158,7 @@ export default class SmiThemeLayout extends LightningElement {
 
   closeMobile() {
     this._mobileOpen = false;
+    this._openKey = null;
   }
 
   get year() {

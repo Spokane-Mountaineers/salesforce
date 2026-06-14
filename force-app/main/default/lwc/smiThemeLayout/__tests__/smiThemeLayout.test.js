@@ -115,4 +115,53 @@ describe("c-smi-theme-layout", () => {
     );
     expect(calendar.getAttribute("href")).toBe("/lwrsite/events");
   });
+
+  it("renders a dropdown group as a trigger with a submenu of links", async () => {
+    const el = await render();
+    await Promise.resolve();
+    const trigger = el.shadowRoot.querySelector(".nav__trigger");
+    expect(trigger.textContent).toContain("About");
+    expect(trigger.getAttribute("aria-expanded")).toBe("false");
+    const subLabels = [
+      ...el.shadowRoot.querySelectorAll(".nav__submenu .nav__sublink")
+    ].map((a) => a.textContent.trim());
+    expect(subLabels).toContain("About Us");
+    expect(subLabels).toContain("Our Mission");
+  });
+
+  it("toggles a submenu open on trigger click and reflects aria-expanded", async () => {
+    const el = await render();
+    await Promise.resolve();
+    const trigger = el.shadowRoot.querySelector(".nav__trigger");
+    expect(
+      trigger.parentElement.querySelector(".nav__submenu").className
+    ).not.toContain("nav__submenu--open");
+
+    trigger.click();
+    await Promise.resolve();
+    expect(trigger.getAttribute("aria-expanded")).toBe("true");
+    expect(
+      trigger.parentElement.querySelector(".nav__submenu").className
+    ).toContain("nav__submenu--open");
+  });
+
+  it("prefixes basePath onto submenu links", async () => {
+    const el = await render({ base: "/lwrsite" });
+    await Promise.resolve();
+    const aboutUs = [...el.shadowRoot.querySelectorAll(".nav__sublink")].find(
+      (a) => a.textContent.trim() === "About Us"
+    );
+    expect(aboutUs.getAttribute("href")).toBe("/lwrsite/about-us");
+  });
+
+  it("flattens group children into the footer nav", async () => {
+    const el = await render();
+    await Promise.resolve();
+    const footer = [...el.shadowRoot.querySelectorAll(".footer-nav__link")].map(
+      (a) => a.textContent.trim()
+    );
+    expect(footer).toContain("Calendar"); // childless top item
+    expect(footer).toContain("Our Mission"); // group child
+    expect(footer).not.toContain("About"); // the group label itself isn't a link
+  });
 });

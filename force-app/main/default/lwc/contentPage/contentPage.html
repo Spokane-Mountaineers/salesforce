@@ -1,0 +1,54 @@
+<template>
+  <article class="page">
+    <template lwc:if={hasPhotoHero}>
+      <section class="hero hero--photo">
+        <img class="hero__img" src={heroImageUrl} alt={heroAlt} />
+        <div class="hero__inner">
+          <template lwc:if={hasEyebrow}>
+            <p class="eyebrow">{eyebrow}</p>
+          </template>
+          <h1 class="hero__title">{heading}</h1>
+          <template lwc:if={hasSubtitle}>
+            <p class="hero__sub">{subtitle}</p>
+          </template>
+        </div>
+      </section>
+    </template>
+    <template lwc:else>
+      <section class="hero hero--gradient">
+        <div class="hero__inner">
+          <template lwc:if={hasEyebrow}>
+            <p class="eyebrow">{eyebrow}</p>
+          </template>
+          <h1 class="hero__title">{heading}</h1>
+          <template lwc:if={hasSubtitle}>
+            <p class="hero__sub">{subtitle}</p>
+          </template>
+        </div>
+      </section>
+    </template>
+
+    <div class="wrap">
+      <div class="main">
+        <template lwc:if={hasBody}>
+          <div class="body" lwc:dom="manual" lwc:ref="body"></div>
+        </template>
+      </div>
+
+      <template lwc:if={hasRelated}>
+        <aside class="related">
+          <template lwc:if={relatedHeading}>
+            <h2 class="related__head">{relatedHeading}</h2>
+          </template>
+          <ul class="related__list">
+            <template for:each={links} for:item="link">
+              <li key={link.key} class="related__item">
+                <a href={link.href}>{link.label}</a>
+              </li>
+            </template>
+          </ul>
+        </aside>
+      </template>
+    </div>
+  </article>
+</template>

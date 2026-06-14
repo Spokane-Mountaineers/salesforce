@@ -64,3 +64,6 @@ docs/plans/_reference/
 thoughts/
 settings.local.json
 
+
+# Legacy prod Aura ExperienceBundle — retrieved read-only for the LWR content port; never commit
+force-app/main/default/experiences/

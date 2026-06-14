@@ -24,3 +24,5 @@ force-app/main/default/sites/**
 
 # LWC Jest
 **/__tests__/**
+# Legacy prod Aura site is read-only reference; do not deploy/track
+force-app/main/default/experiences

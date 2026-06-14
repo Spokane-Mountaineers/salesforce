@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "About_Us",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-about-us",
+    "urlPrefix": "about-us"
+  },
+  "title": "About Us",
+  "type": "sfdc_cms__route",
+  "urlName": "about-us"
+}
