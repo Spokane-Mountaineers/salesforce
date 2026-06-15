@@ -211,6 +211,64 @@
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
+/* Vendor cards: a responsive grid of partner deals (logo, name, deal, link). */
+.body .vendor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+.body .vendor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+}
+.body .vendor img {
+  margin: 0 0 4px;
+  max-height: 64px;
+  width: auto;
+  align-self: flex-start;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.body .vendor h3 {
+  margin: 0;
+}
+.body .vendor p {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.body .vendor .vendor__meta {
+  font-size: 13.5px;
+  color: var(--ink-faint);
+}
+.body .vendor code {
+  font-family: var(--font-mono, ui-monospace, Menlo, monospace);
+  font-size: 0.85em;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1px 6px;
+  color: var(--pine);
+}
+.body .vendor a {
+  margin-top: auto;
+  font-weight: 600;
+  text-decoration: none;
+}
+.body .vendor a:hover {
+  text-decoration: underline;
+}
+
 /* Photo gallery: a responsive grid; images crop to a tidy aspect ratio. */
 .body .gallery {
   display: grid;
