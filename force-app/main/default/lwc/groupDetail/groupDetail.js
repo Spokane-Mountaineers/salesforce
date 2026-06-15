@@ -51,11 +51,28 @@ export default class GroupDetail extends LightningElement {
     }
   }
 
+  // Activity groups still live in the legacy community network, so join/leave,
+  // notifications, posting, and admin management don't work cross-network yet.
+  // Until the data migration moves groups into the LWR network, the group page
+  // is read-only (browse + events + read the feed). Flip this to true once the
+  // groups are migrated. See docs: Technical Reference > Website Migration.
+  writeEnabled = false;
+
   get isGuest() {
     return isGuest;
   }
   get hasGroup() {
     return Boolean(this.group);
+  }
+  // Feed is read-only while write is disabled, or for non-members.
+  get feedReadOnly() {
+    return !this.writeEnabled || this.notMember;
+  }
+  get showMembership() {
+    return this.writeEnabled;
+  }
+  get showAdminPanel() {
+    return this.writeEnabled && Boolean(this.group?.isAdmin);
   }
   get typeLabel() {
     return this.group?.isPublic ? "Public group" : "Private group";

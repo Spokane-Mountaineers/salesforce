@@ -78,6 +78,13 @@
   border-top: 1px solid var(--line);
 }
 
+.membership-note {
+  margin-top: 16px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
 /* Membership controls */
 .membership {
   display: flex;

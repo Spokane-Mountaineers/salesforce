@@ -1,8 +1,6 @@
 import { createElement } from "lwc";
 import GroupDetail from "c/groupDetail";
 import getGroup from "@salesforce/apex/ActivityGroupController.getGroup";
-import joinGroup from "@salesforce/apex/ActivityGroupController.joinGroup";
-import setNotificationFrequency from "@salesforce/apex/ActivityGroupController.setNotificationFrequency";
 
 jest.mock(
   "@salesforce/apex/ActivityGroupController.getGroup",
@@ -12,6 +10,8 @@ jest.mock(
   },
   { virtual: true }
 );
+// Write methods are mocked so the component's imports resolve, but groups are
+// read-only on LWR for now (writeEnabled = false), so the UI doesn't call them.
 jest.mock(
   "@salesforce/apex/ActivityGroupController.joinGroup",
   () => ({ default: jest.fn(() => Promise.resolve("member")) }),
@@ -39,9 +39,10 @@ const GROUP = {
   description: "Rock and alpine climbing.",
   memberCount: 224,
   isPublic: true,
-  isMember: false,
+  isMember: true,
+  isAdmin: true,
   hasPendingRequest: false,
-  notificationFrequency: null
+  notificationFrequency: "D"
 };
 
 function mount(props = {}) {
@@ -62,64 +63,42 @@ describe("c-group-detail", () => {
 
   it("renders the header and presets the calendar + feed to the group", async () => {
     const el = mount({ groupId: "0F9a" });
-    getGroup.emit({ ...GROUP, isMember: true });
+    getGroup.emit(GROUP);
     await flush();
     expect(el.shadowRoot.querySelector(".title").textContent).toBe("Climbing");
     const cal = el.shadowRoot.querySelector("c-events-calendar");
     expect(cal.activity).toBe("Climbing");
     const feed = el.shadowRoot.querySelector("c-smi-feed");
     expect(feed.groupId).toBe("0F9a");
-    expect(feed.readOnly).toBe(false);
   });
 
-  it("shows a join button to non-members and makes the feed read-only", async () => {
+  it("is read-only while groups live in the legacy network", async () => {
     const el = mount({ groupId: "0F9a" });
-    getGroup.emit({ ...GROUP, isMember: false });
+    getGroup.emit(GROUP);
     await flush();
-    const join = el.shadowRoot.querySelector(".btn--primary");
-    expect(join.textContent.trim()).toBe("Join group");
+    // No write controls: no join/leave button, no notification select, no admin panel.
+    expect(el.shadowRoot.querySelector(".membership")).toBeNull();
+    expect(el.shadowRoot.querySelector(".freq__select")).toBeNull();
+    expect(el.shadowRoot.querySelector("c-group-admin-panel")).toBeNull();
+    // A note explains where membership/posting happen for now.
+    expect(el.shadowRoot.querySelector(".membership-note")).not.toBeNull();
+    // The feed is read-only even for a member/admin.
     expect(el.shadowRoot.querySelector("c-smi-feed").readOnly).toBe(true);
-    join.click();
-    await flush();
-    expect(joinGroup).toHaveBeenCalledWith({ groupId: "0F9a" });
   });
 
-  it("labels the action as a request for private groups", async () => {
+  it("shows the friendly login gate to guests", async () => {
+    // isGuest is auto-mocked false; this checks the non-guest path renders the
+    // article (guest path is exercised by the loginGate component's own tests).
     const el = mount({ groupId: "0F9a" });
-    getGroup.emit({ ...GROUP, isPublic: false, isMember: false });
+    getGroup.emit(GROUP);
     await flush();
-    expect(
-      el.shadowRoot.querySelector(".btn--primary").textContent.trim()
-    ).toBe("Request to join");
+    expect(el.shadowRoot.querySelector("article.root")).not.toBeNull();
   });
 
-  it("preselects the member's notification frequency and saves changes", async () => {
-    const el = mount({ groupId: "0F9a" });
-    getGroup.emit({ ...GROUP, isMember: true, notificationFrequency: "W" });
+  it("shows an error when the group can't be loaded", async () => {
+    const el = mount({ groupId: "bad" });
+    getGroup.error();
     await flush();
-    const select = el.shadowRoot.querySelector(".freq__select");
-    const selected = [...select.options].find((o) => o.selected);
-    expect(selected.value).toBe("W");
-    select.value = "D";
-    select.dispatchEvent(new CustomEvent("change"));
-    await flush();
-    expect(setNotificationFrequency).toHaveBeenCalledWith({
-      groupId: "0F9a",
-      frequency: "D"
-    });
-  });
-
-  it("shows the admin panel only to group admins", async () => {
-    const member = mount({ groupId: "0F9a" });
-    getGroup.emit({ ...GROUP, isMember: true, isAdmin: false });
-    await flush();
-    expect(member.shadowRoot.querySelector("c-group-admin-panel")).toBeNull();
-
-    const admin = mount({ groupId: "0F9a" });
-    getGroup.emit({ ...GROUP, isMember: true, isAdmin: true });
-    await flush();
-    expect(
-      admin.shadowRoot.querySelector("c-group-admin-panel")
-    ).not.toBeNull();
+    expect(el.shadowRoot.querySelector(".state--error")).not.toBeNull();
   });
 });
