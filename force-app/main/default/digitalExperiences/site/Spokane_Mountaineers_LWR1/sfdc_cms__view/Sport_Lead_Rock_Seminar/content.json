@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"b57ea11f-44b5-427a-9810-1ad8e316d588\", \"columns\": [{\"UUID\": \"5eba1704-5eac-4497-a5ff-c13002d0d327\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Sport Lead Rock Seminar",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Sport Lead School at a glance</strong></h3><p><strong>TUITION -</strong> $ 110</p><p><strong>CLASS SIZE -</strong> 12</p><p><strong>COURSE DURATION -</strong> Two evening classes and two Saturday classess over the course of two weeks.</p><p><strong>TEXT -</strong> <a href=\"https://www.vdiffclimbing.com/ebook-sport/\">VDiff: Sport Climbing Basics</a></p><p><strong>HOURS of INSTRUCTION -</strong> 21+</p><p><strong>Questions?</strong> Contact the School Director(s)</p><p>You must be a member to participate.</p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><h1><strong>Sport Lead School</strong></h1>\n<h2><strong>The 2026 Sport Lead School application will open April 8, 2026.</strong></h2>\n\n<p><img alt=\"\" data-asset=\"schools/Heather_Janaejpg.jpg\"></p>\n<h4><br></h4>\n<p><strong>Sport Lead School Director(s) -</strong> <a href=\"mailto: sportlead@spokanemountaineers.org\">Kelsey Hollenbaugh</a></p>\n<h4><br></h4>\n<h4><strong>Course Description:</strong></h4>\n<p>Sport Lead Seminar teaches essential skills for safely and effectively lead climbing bolt-protected routes. Skills taught include, but are not limited to:</p>\n<ul>\n <li>Lead belaying (with both ATC &amp; GRIGRI</li>\n <li>Use of quickdraws to Clip Bolts and the Rope</li>\n <li>Cleaning Quickdraws from Bolts</li>\n <li>Cleaning Anchors &amp; Lowering</li>\n <li>Safe Fall Technique</li>\n</ul>\n\n<h4><strong>Course Schedule, Spring, 2026:</strong></h4>\n<ul>\n <li>Lecture: Evening of June 10th, Evening</li>\n <li>Outdoor Session I: June 13th, 8am\u20134pm (Q'emiln Park, Post Falls)</li>\n <li>Indoor Session: June 17th, Evening (Wild Walls Climbing Gym)</li>\n <li>Outdoor Session II: June 20th, 8am\u20134pm (Q'emiln Park, Post Falls)</li>\n</ul>\n\n<h4>Course Requirements:</h4>\n<ul>\n <li>Students should be able to climb up to and including 5.8 comfortably and efficiently on top rope</li>\n <li>Students should feel comfortable with all aspects of Top Rope Climbing. This includes</li>\n <li>Tying into the Rope</li>\n <li>Belaying</li>\n <li>Building a Top Rope Anchor</li>\n <li>Gear Required</li>\n <li>Students will need the following gear for Sport Lead School</li>\n <li>Helmet</li>\n <li>Harness</li>\n <li>Rock Shoes</li>\n <li>Chalk Bag</li>\n <li>ATC Belay Device</li>\n <li>Three Pear or D-shaped Locking Carabiners</li>\n <li>Two Personal Anchor Systems (e.g., nylon or dyneema slings, Metolius PAS 22, Petzl Connect, or 8mm cord)</li>\n</ul>\n\n<h4><strong>Application Process</strong></h4>\n<p>The course is limited to 12 participants. Participants must be 18 or older (students 15 to 18 may participate if accompanied by a parent or legal guardian). All participants must be members of the Spokane Mountaineers. <a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join now</strong></a> if you are not a member already. Selection criteria considered will include, but not be limited to, date application was submitted, climbing experience, committment to the dates of the course, and previous participation with the Spokane Mountaineers.</p>\n\n<p>The application link below will take you to a form. Please fill this out carefully and completely.</p><button\n type=\"button\">\n <a href=https://forms.gle/DjbM8sNCy6mDZ1hZ8/>Application</a>\n</button>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "cf63108e-2064-4543-934c-bf490f6fa1aa",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "5eba1704-5eac-4497-a5ff-c13002d0d327",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "b57ea11f-44b5-427a-9810-1ad8e316d588",
+              "type": "component"
+            }
+          ],
+          "id": "60de413d-935d-4cf5-8990-8b051fe5f20c",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Sport Lead Rock Seminar \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Sport Lead Rock Seminar | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "4e9ca467-88d3-4423-9be9-ba5b3bfdd7d8",
+              "type": "component"
+            }
+          ],
+          "id": "2b686fcf-6993-4441-97d4-ae85af4f789d",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "20c429f5-887f-415c-a6b2-4cec70dfd017",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-sport-lead-rock-seminar"
+  },
+  "title": "Sport Lead Rock Seminar",
+  "type": "sfdc_cms__view",
+  "urlName": "sport-lead-rock-seminar"
+}

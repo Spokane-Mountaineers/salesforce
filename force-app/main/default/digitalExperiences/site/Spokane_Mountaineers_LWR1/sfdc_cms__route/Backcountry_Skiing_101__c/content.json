@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Backcountry_Skiing_101",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-backcountry-skiing-101",
+    "urlPrefix": "backcountry-skiing-101"
+  },
+  "title": "Backcountry Skiing 101",
+  "type": "sfdc_cms__route",
+  "urlName": "backcountry-skiing-101"
+}

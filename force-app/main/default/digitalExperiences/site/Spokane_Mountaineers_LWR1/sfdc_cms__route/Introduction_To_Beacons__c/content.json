@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Introduction_To_Beacons",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-introduction-to-beacons",
+    "urlPrefix": "introduction-to-beacons"
+  },
+  "title": "Introduction to Beacons",
+  "type": "sfdc_cms__route",
+  "urlName": "introduction-to-beacons"
+}

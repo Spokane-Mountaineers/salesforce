@@ -211,6 +211,50 @@
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
+/* Course catalog: a directory of schools/seminars/courses as compact cards. */
+.body .section-sub {
+  margin: -2px 0 14px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+}
+.body .course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 12px;
+  margin: 14px 0 30px;
+}
+.body .course-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--moss);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1.25;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.15s ease,
+    border-left-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.body .course-card:hover {
+  transform: translateY(-2px);
+  border-left-color: var(--rust);
+}
+.body .course-card .go {
+  flex: 0 0 auto;
+  color: var(--rust);
+  font-weight: 700;
+}
+
 /* Vendor cards: a responsive grid of partner deals (logo, name, deal, link). */
 .body .vendor-grid {
   display: grid;

@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"0f6921bb-2fe3-4769-83a5-b5bf4b343e84\", \"columns\": [{\"UUID\": \"472d3ff8-f0d8-41b1-b9c5-d521a9862589\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Rock Climbing School",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Rock Climbing School General Info</strong></h3><p><strong>TUITION -</strong> $ 110</p><p> ( Available to Non-members: Tuition + membership fee.)</p><p><strong>CLASS SIZE -</strong> 16</p><p><strong>COURSE DURATION -</strong> 1 Weekday evening, 2 Weekends, Late April and Early May.</p><p><strong>TEXT -</strong> Rock Climbing 2nd Ed.: Mastering Basic Skills (Donahue &amp; Luebben)</p><p><strong>HOURS of INSTRUCTION -</strong> 30+</p><p>Questions? Contact the School Director(s): <a href=\"mailto:rockschool@spokanemountaineers.org\">rockschool@spokanemountaineers.org</a></p><p>You must be a member to participate.</p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><h6><strong>Rock School</strong></h6>\n<h2><strong>The 2026 Rock School application will open at 6:00 pm Feb. 20, 2026.</strong></h2>\n\n<p><strong><img alt=\"\" data-asset=\"schools/Rock_School.jpg\"></strong></p>\n<h5><em>For me, climbing is a form of exploration that inspires me to confront my own inner nature within nature.</em></h5>\n<h5><em>It\u2019s a means of experiencing a state of consciousness where there are no distractions or expectations.</em></h5>\n<h5><em>This intuitive state of being is what allows me to experience moments of true freedom and harmony.</em></h5>\n<h2><strong> ~ Lynn Hill</strong></h2>\n<p><strong>___________________________________________________________________________________________________________________________________________________________________________________</strong></p>\n\n<p>The Spokane Mountaineers rock climbing curriculum starts with Rock School. Rock School provides participants the opportunity to learn and practice the skills needed to begin top rope climbing outdoors. The course is designed for beginning climbers, including climbers who are transitioning from the gym to the outdoors.</p>\n\n<p><strong>Rock School Director(s) - </strong><a href=\"mailto:rockschool@spokanemountaineers.org\">Brannen Morris</a></p>\n\n<p>Indoor Session - April 22th, 5:30-8:30pm. Location TBD.</p>\n<p>Outdoor sessions I &amp; II - April 25-26, 8am to 4pm. Location TBD</p>\n<p>Outdoor Sessions III &amp; IV - May 2-3, 8am to 4pm. Location TBD</p>\n<p>Cost: $110</p>\n\n<p>Rock School is designed to teach the basics of outdoor rock climbing including:</p>\n<ul>\n <li>how to tie in to a climbing rope</li>\n <li>proper belay technique</li>\n <li>safe climbing practice, such as \"buddy checks\"</li>\n <li>climbing technique</li>\n <li>rappelling</li>\n <li>use of established anchors to set up a top rope system</li>\n <li>an introduction to building anchors using natural features</li>\n</ul>\n\n<p>The $110 course fee will be billed upon acceptance to the course. The course is limited to 16 participants. Participants must be 15 or older and those under 18 must submit written parental approval. All participants must be members of the Spokane Mountaineers. <a href=\"https://donorbox.org/spokane-mountaineers-membership-2\">Join now</a> if you are not a member already!</p>\n\n<p><strong>Application Process:</strong></p>\n\n<p>The application link below will take you to a form. Please fill this out carefully and completely.</p>\n\n<p>You will be notified of the status of your application within a few days of its submission. If you have been accepted to Rock School, we will provide you with payment information at that time. Thank you!</p><button\n type=\"button\">\n <a href=https://forms.gle/wWKXTju2kCRKivdZ9>Application</a>\n</button>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "9817c826-ed94-409f-827e-684482c2ccb2",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "472d3ff8-f0d8-41b1-b9c5-d521a9862589",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "0f6921bb-2fe3-4769-83a5-b5bf4b343e84",
+              "type": "component"
+            }
+          ],
+          "id": "bf1b3aed-0161-46a8-8ac6-60eb65bbe1a2",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Rock Climbing School \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Rock Climbing School | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "e4ddd5f1-820b-4e2e-9be1-49d9cd4146af",
+              "type": "component"
+            }
+          ],
+          "id": "a2cd2ccc-5db6-4ed8-a597-0a13ecb41005",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "7451b6eb-d957-4391-b276-d70d72774eb8",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-rock-climbing-school"
+  },
+  "title": "Rock Climbing School",
+  "type": "sfdc_cms__view",
+  "urlName": "rock-climbing-school"
+}

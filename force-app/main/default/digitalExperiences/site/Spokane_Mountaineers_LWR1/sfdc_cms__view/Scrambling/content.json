@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"83148040-f20c-49d0-aa5c-d4bf79acb405\", \"columns\": [{\"UUID\": \"f966b668-349c-4167-aa98-ac139b7556a9\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Scrambling",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Scramble School at a glance</strong></h3><p><strong>TUITION -</strong> $65.00</p><p><strong>CLASS SIZE -</strong> 12</p><p>COURSE DURATION - 2 weeks</p><p>Two weekday evening classes</p><p>Local Saturday skills training</p><p>Full Saturday Backcountry Scramble</p><p>HOURS of INSTRUCTION<strong> -</strong> 16+</p><p>Please direct questions to School Directors</p><p>Open to Spokane Mountaineer Members Only</p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><p><strong>Scramble School</strong></p><h4>The 2026 application will open in early July</h4><p><img data-asset=\"schools/scrambling_1.jpg\" alt=\"scrambling diagram\"></p><p><strong>Course Description:</strong></p><p>Scrambling is generally characterized as off-trail travel to gain access to lakes, peaks, or other features not connected</p><p>by a maintained trail. Scrambling may be described as \u201cnon-technical\u201d climbing that utilizes hands, but not ropes. This</p><p>course emphasizes safe travel over rocky terrain, including methods for protection and assistance, when needed.</p><p>Outdoor sessions will provide hands on instruction on basic skills, culminating in a Graduation Scramble. Previous</p><p>events have tackled Harrison Peak: 7.8 miles round trip w/2600\u2019 gain</p><p><strong>Scramble School Director(s) -</strong> <a href=\"mailto: scrambling@spokanemountaineers.org\">Michael Pinter and Tyler Nyman</a></p><p><strong>Course Requirements:</strong></p><p>Students should be experienced hikers, prepared to hike multiple miles with over 2000\u2019 of gain. Students should</p><p>already be familiar with using maps or apps to navigate established trails. This course will focus on off-trail navigation</p><p>skills. Backcountry experience preferred.</p><p><strong>Required equipment includes:</strong></p><p>Climbing Helmet (Mountaineers will have some loaners)</p><p>Sturdy hiking shoes or boots (leather recommended)</p><p><strong>Course Schedule 2026: (dates tentative)</strong></p><p>Lecture I \u2013 Thursday, Sept. 24th, 6-8 pm (Saranac Building, downtown)</p><p>Outdoor Session I \u2013 Saturday, Sept 26th 8 am \u2013 4 pm (Minnehaha)</p><p>Lecture II \u2013 Thursday, Oct. 1st, 6-8 pm (Saranac Building, downtown)</p><p>Outdoor Session I \u2013 Saturday, Oct 3rd 8 am \u2013 4 pm (TBD, Pyramid Peak?)</p><p><strong>Application Process</strong></p><p>The course is limited to 12 participants. All participants must be Spokane Mountaineer Members and 18 years of age</p><p>or older. Selection criteria considered will include (but not limited to) application submission date, hiking experience,</p><p>course dates commitment, and previous Spokane Mountaineer participation.</p><p>The application link below will take you to a form. Please fill this out carefully and completely.</p><button\n type=\"button\">\n <a href=https://forms.gle/3uaFRopaUJAJj3gE9/viewform?usp=header/>Application</a>\n</button>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "d0fa4ec2-08e2-4c5c-b117-934a03c63ddb",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "f966b668-349c-4167-aa98-ac139b7556a9",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "83148040-f20c-49d0-aa5c-d4bf79acb405",
+              "type": "component"
+            }
+          ],
+          "id": "561b8178-85b1-48cb-9c62-b9633e594f50",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Scrambling \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Scrambling | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "0dfe0e67-6440-4edc-b2fe-703da0a4ae2c",
+              "type": "component"
+            }
+          ],
+          "id": "f3dff569-e8b0-40f2-85d4-3900617e3545",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "b1d1e8a1-3a7a-4db7-871a-2544cc07478f",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-scrambling"
+  },
+  "title": "Scrambling",
+  "type": "sfdc_cms__view",
+  "urlName": "scrambling"
+}

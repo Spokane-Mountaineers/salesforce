@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Multipitch_Sport_School",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-multipitch-sport-school",
+    "urlPrefix": "multipitch-sport-school"
+  },
+  "title": "Multipitch Sport School",
+  "type": "sfdc_cms__route",
+  "urlName": "multipitch-sport-school"
+}

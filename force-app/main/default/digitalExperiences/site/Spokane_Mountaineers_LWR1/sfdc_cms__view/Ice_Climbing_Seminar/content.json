@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"ca61afbe-f088-4874-8425-54407ab886b6\", \"columns\": [{\"UUID\": \"a2b7094c-f050-403a-a784-983ffa483299\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Ice Climbing Seminar",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Ice Climbing Seminar at a Glance</strong></h3>\n\n<p><strong>TUITION - $125</strong></p>\n\n<p><strong>CLASS SIZE - 12 to 16</strong></p>\n\n<p><strong>COURSE DURATION - Wednesday evening, January 7th and MLK Weekend, January 16 to 19. </strong></p>\n\n<p><strong>HOURS OF INSTRUCTION - 16+</strong></p>\n\n<p>Questions? Contact School Directors, Taylor Brown &amp; Li Ciavola</p>\n\n<p>You must be a member to participate. Not yet a member?</p>\n<p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p>\n\n<p><img alt=\"\" data-asset=\"schools/Ice_Seminar.jpg\"></p><p><strong>Ice Climbing Seminar</strong></p><p>The Ice Seminar 2026 application will open at 8am, Monday, December 8th at 8am.</p><h4><strong>Course Description:</strong></h4><p>Ice Climbing Seminar introduces students to the fundamentals of ice climbing, ice climging specific gear, and efficient movement on ice. The outdoor sessions will be held in Hyalite Canyon outside of Bozeman, Montana.</p><p><strong>Beginner and Intermediate Ice Seminars</strong></p><p><u>Beginner Ice</u></p><p>Beginners will learn the basics of ice climbing techniques and efficient movement with a focus on building good habits. Students will be on top-rope the entire time. Must have rock climbing and belaying experience.</p><p>Personal gear required - Mountain boots, harness, belay device, helmet, cold weather clothing, and crampons. Bringing technical ice tools is preferred, but not mandatory.</p><p><u>Intermediate Ice</u></p><p>Designed for those with ice climbing experience and are looking to advance their skills, climb harder/steeper routes, and perhaps try leading ice.</p><p>Personal gear required - Beginner Ice equipment plus crampons and ice tools</p><p><strong>** Students indicate which seminar they are interested in when completing the application below. **</strong></p><h4><strong>Course Schedule, Winter 2026:</strong></h4><ul><li>Lecture - Wed, January 7th, 6:30 to 8pm (Location TBD)</li><li>Outdoor Session I - Sat, January 17 (Hyalite Canyon, Bozeman, MT)</li><li>Outdoor Session II - Sun,January 18 (Hyalite Canyon, Bozeman, MT)</li><li>Travel Days - Friday January 16 and Monday January 19th)</li></ul><p><strong>** Students and instructors are responsible for arranging their own transportation and lodging. **</strong></p><h4><strong>Application Process</strong></h4><p>Course size is limited to 12 students including up to 4 intermediate students. Participants must be 18 or older. All participants must be members of the Spokane Mountaineers. <a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join now</strong></a> if you are not a member already. Selection criteria considered will include, but not be limited to, date application was submitted, climbing experience, committment to the dates of the course, and previous participation with the Spokane Mountaineers. Applicants will be notified of their acceptance status by late December.</p><p>The 2026 application opens December 8th at 8:00 a.m.</p><p>The application link below will take you to a form. Please fill this out carefully and completely.</p><button\n type=\"button\">\n <a href=https://forms.gle/kSkaBXrGFZA27Bth7/>Application</a>\n</button>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "04af8c1d-a999-4bf1-a46f-e5da3bba5365",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "a2b7094c-f050-403a-a784-983ffa483299",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "ca61afbe-f088-4874-8425-54407ab886b6",
+              "type": "component"
+            }
+          ],
+          "id": "d57936dc-6506-41e4-af81-818f39027bf5",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Ice Climbing Seminar \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Ice Climbing Seminar | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "9d374b27-a958-4525-8be2-7221a0cf1fe4",
+              "type": "component"
+            }
+          ],
+          "id": "96527aea-c526-4fe7-bbd9-abd6d642b8a9",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "74417e71-6da4-4f40-bf6a-5d834541fa21",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-ice-climbing-seminar"
+  },
+  "title": "Ice Climbing Seminar",
+  "type": "sfdc_cms__view",
+  "urlName": "ice-climbing-seminar"
+}

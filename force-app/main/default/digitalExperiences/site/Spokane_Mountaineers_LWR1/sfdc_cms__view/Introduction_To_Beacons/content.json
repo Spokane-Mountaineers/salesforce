@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"717a11b7-d986-4cc0-a3f0-4247596e5a68\", \"columns\": [{\"UUID\": \"fbfb1d72-7f45-4f17-925d-9ed4cc41705c\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Introduction to Beacons",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><b>Introduction to Beacons</b></h3><h3><b>General Info</b></h3><p><b>TUITION - </b>$$</p><p> ( Non-members: $$ + membership fee.)</p><p><b>CLASS SIZE LIMIT - </b>50</p><p><b>COURSE DURATION - </b>Dec or January</p><p>HOURS OF INSTRUCTION - 8</p><p>Questions? Contact the School Director</p><p>You must be a member to participate. Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><b>Join Today!</b></a></p><h1><b>Introduction to Beacons</b></h1><p>under construction</p>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "09a625a1-895e-4a77-935b-0324a38c9959",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "fbfb1d72-7f45-4f17-925d-9ed4cc41705c",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "717a11b7-d986-4cc0-a3f0-4247596e5a68",
+              "type": "component"
+            }
+          ],
+          "id": "a56532e5-c025-47ff-86d6-d2ea92b5b77a",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Introduction to Beacons \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Introduction to Beacons | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "53225f92-3e9f-4348-a0ac-91050c7b5d85",
+              "type": "component"
+            }
+          ],
+          "id": "5f8255e7-32cd-4a47-9cd1-dcd12e27afc0",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "00067554-d0e3-494a-a0bd-8c373e66e06d",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-introduction-to-beacons"
+  },
+  "title": "Introduction to Beacons",
+  "type": "sfdc_cms__view",
+  "urlName": "introduction-to-beacons"
+}

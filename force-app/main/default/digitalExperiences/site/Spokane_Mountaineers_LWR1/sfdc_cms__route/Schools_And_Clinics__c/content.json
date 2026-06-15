@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Schools_And_Clinics",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-schools-and-clinics",
+    "urlPrefix": "schools-and-clinics"
+  },
+  "title": "Schools and Clinics",
+  "type": "sfdc_cms__route",
+  "urlName": "schools-and-clinics"
+}

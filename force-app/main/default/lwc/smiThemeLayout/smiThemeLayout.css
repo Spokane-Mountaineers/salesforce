@@ -176,6 +176,8 @@
   border-top: 2px solid var(--rust);
   border-radius: 4px 4px 12px 12px;
   box-shadow: 0 14px 34px -14px rgba(18, 46, 34, 0.5);
+  max-height: 70vh;
+  overflow-y: auto;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);

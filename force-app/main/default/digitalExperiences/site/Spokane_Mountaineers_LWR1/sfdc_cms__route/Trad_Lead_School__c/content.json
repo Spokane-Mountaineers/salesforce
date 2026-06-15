@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Trad_Lead_School",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-trad-lead-school",
+    "urlPrefix": "trad-lead-school"
+  },
+  "title": "Trad Lead School",
+  "type": "sfdc_cms__route",
+  "urlName": "trad-lead-school"
+}

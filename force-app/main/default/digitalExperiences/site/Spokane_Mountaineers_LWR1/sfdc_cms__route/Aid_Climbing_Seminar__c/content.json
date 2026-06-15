@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Aid_Climbing_Seminar",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-aid-climbing-seminar",
+    "urlPrefix": "aid-climbing-seminar"
+  },
+  "title": "Aid Climbing Seminar",
+  "type": "sfdc_cms__route",
+  "urlName": "aid-climbing-seminar"
+}

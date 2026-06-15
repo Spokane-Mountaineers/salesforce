@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Sport_Lead_Rock_Seminar",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-sport-lead-rock-seminar",
+    "urlPrefix": "sport-lead-rock-seminar"
+  },
+  "title": "Sport Lead Rock Seminar",
+  "type": "sfdc_cms__route",
+  "urlName": "sport-lead-rock-seminar"
+}

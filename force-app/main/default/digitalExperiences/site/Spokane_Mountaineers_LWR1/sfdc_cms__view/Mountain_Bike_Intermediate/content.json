@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"e21eb728-1dcf-46bf-92a6-c1edd946f141\", \"columns\": [{\"UUID\": \"c28f5242-88df-42db-86f9-116a80a330e6\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Mountain Bike Intermediate",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Mountain Bike Intermediate at a Glance</strong></h3><p><strong>TUITION -</strong> $ 50</p><p><strong>CLASS SIZE -</strong> 10</p><p><strong>COURSE DURATION -</strong> Single weekend day, May 2nd or 23rd</p><p><strong>HOURS of INSTRUCTION -</strong> 5+</p><p><strong>Questions?</strong> Contact the <a href=\"mailto:crockett54@comcast.net\">School Instructor</a></p><p>You must be a member to participate.</p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><p><strong>Mountain Biking Intermediate 2026</strong></p>\n\n<p><strong><img alt=\"\" data-asset=\"schools/image5.jpg\"></strong><img alt=\"\" data-asset=\"schools/Mtn_Bike_Fundaments_Duane_Crockett4.jpg\"><img alt=\"\" data-asset=\"schools/image11.jpg\"></p>\n\n\n<p><strong>Course Details</strong></p>\n\n<p>Riders, This is a 1 day Mountain Biking Intermediate course (Dates for 2026: May 2nd or 23rd)</p>\n\n<p><strong>Time: </strong>Arrive at 8:30 am to sign in and ready for a prompt 9 am start; the class will end at 2 pm</p>\n\n<p><strong>Location:</strong> Spokane Area. Location listed in event calendar writeup, visible with <a href=\"https://www.spokanemountaineers.org/s/event-registration/a12Um000001rpBtIAI/introduction-to-mountain-biking-fundamentals\">member login</a>. </p>\n\n<p><strong>Sign up required on</strong><a href=\"/events\"><strong> club event calendar.</strong></a> (member log in required)</p>\n\n<p><strong>Cost:</strong> The class will cost $50; Please bring cash</p>\n\n<p><strong>Agenda</strong></p>\n<p>1. Discuss Three Essentials.</p>\n<p> a. Pedals Level and equally weighted</p>\n<p> b. Index finger covering the brakes at all times</p>\n<p> c. Eyes scanning ahead</p>\n<p>2. Riding Position. Tall Ready, Low Ready</p>\n<p>3. Bike Body Separation. Fore and Aft, Side to Side</p>\n<p>4. Braking</p>\n<p>a. Discuss foot position</p>\n<p>5. Cornering.</p>\n<p> a. 9 techniques to make you safer and faster</p>\n<p>6. Rock Dodge</p>\n<p>7. Ride small Circle</p>\n<p>8. Ride Tight Switch Back</p>\n<p>9. Balancing Drills; Ratcheting, Track Stand, Track stand Race, Ratchet into Log</p>\n<p>10. Front Wheel Lift</p>\n<p>11. Manual infused Front wheel lift</p>\n<p>12. Hopping. Brakes on hopping.</p>\n<p> a. Discuss the foot wedge</p>\n<p>13. Move to location to Practice Climbing, Descending and Corning.</p>\n<p>14. Lunch</p>\n<p>15. Move to East side.</p>\n<p>16. Practice Body absorption on Pump Track.</p>\n<p>17. Riding a short steep incline using front wheel lift.</p>\n<p>18. Riding a large steep decline</p>\n<p>19. Practice both on natural features.</p>\n<p>20. Ride a skinny</p>\n<p>21. Learn to jump.</p>\n<p>22. Learn to ride Drops on Wooden Ramps</p>\n<p> a. Front wheel lift</p>\n<p> b. Manual infused Front wheel lift.</p>\n<p>23. Do a ride to practice their new skills</p>\n<p>24. Learn Steps to wheely</p>\n\n<p>Your lead instructor is Duane Crockett, Level 1 BICP certified instructor. Ref. <a href=\"https://icp.bike/level-1-certification\">https://icp.bike/level-1-certification</a> </p>\n\n<p>If you have any questions about the content please contact <a href=\"mailto:crockett54@comcast.net\">Duane by email</a>.</p>\n\n<p><strong>Event Pre-Requisites</strong></p>\n<ul>\n <li>Helmet</li>\n <li>Food and water</li>\n <li>Mountain Bike in good working condition. A dropper post is recommended.</li>\n <li>Basic ability to ride a mountain bike on dirt on green level trails</li>\n <li>Your skill level can be intermediate or advanced and its recommended that you attend the fundamentals class prior to joining this intermediate class to brush up on your technique.</li>\n <li>Smiles</li>\n</ul>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "60b24b96-8f73-45d6-b991-0c619e08d839",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "c28f5242-88df-42db-86f9-116a80a330e6",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "e21eb728-1dcf-46bf-92a6-c1edd946f141",
+              "type": "component"
+            }
+          ],
+          "id": "87305264-3210-4e1f-87ba-08d10c423fd4",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Mountain Bike Intermediate \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Mountain Bike Intermediate | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "8a32d877-0beb-42c6-aa99-6bdcf69cd1cf",
+              "type": "component"
+            }
+          ],
+          "id": "a248cfa8-75c5-4fee-830d-1d3e08eb7391",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "753cf61f-4461-4969-9709-6b0793ef827b",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-mountain-bike-intermediate"
+  },
+  "title": "Mountain Bike Intermediate",
+  "type": "sfdc_cms__view",
+  "urlName": "mountain-bike-intermediate"
+}

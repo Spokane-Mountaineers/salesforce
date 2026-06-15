@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"6d45f565-20d6-4d43-bf32-2e8ebb368af5\", \"columns\": [{\"UUID\": \"dfbe6db7-58d2-49bc-80a9-0ac83c4b07af\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Schools & Clinics",
+                        "subtitle": "Schools, seminars, and clinics for every level.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<p>The Spokane Mountaineers run a full slate of schools, seminars, and clinics each year \u2014 from multi-session programs that build skills from the ground up to focused seminars and safety courses. Pick a program below to learn more and find dates.</p><h2>Schools</h2><p class=\"section-sub\">Multi-session programs that take you from the basics to leading your own trips.</p><div class=\"course-grid\"><a class=\"course-card\" href=\"/rock-climbing-school\"><span>Rock Climbing School</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/mountain-school\"><span>Mountain School</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/backpack-school\"><span>Backpack School</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/trad-lead-school\"><span>Trad Lead School</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/backcountry-ski-school\"><span>Backcountry Ski School</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/multipitch-sport-school\"><span>Multipitch Sport School</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/scrambling\"><span>Scrambling</span><span class=\"go\">\u2192</span></a></div><h2>Seminars</h2><p class=\"section-sub\">Shorter, skill-specific sessions.</p><div class=\"course-grid\"><a class=\"course-card\" href=\"/aid-climbing-seminar\"><span>Aid Climbing Seminar</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/crack-climbing-seminar\"><span>Crack Climbing Seminar</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/ice-climbing-seminar\"><span>Ice Climbing Seminar</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/alpine-climbing-seminar\"><span>Alpine Climbing Seminar</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/sport-lead-rock-seminar\"><span>Sport Lead Rock Seminar</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/leadership-development-seminar\"><span>Leadership Development Seminar</span><span class=\"go\">\u2192</span></a></div><h2>Courses &amp; Clinics</h2><p class=\"section-sub\">Safety, rescue, and discipline-specific training.</p><div class=\"course-grid\"><a class=\"course-card\" href=\"/wilderness-first-aid-course\"><span>Wilderness First Aid</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/wilderness-first-responder-course\"><span>Wilderness First Responder</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/high-angle-rescue\"><span>High Angle Rescue</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/introduction-to-beacons\"><span>Introduction to Beacons</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/backcountry-skiing-101\"><span>Backcountry Skiing 101</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/mountain-bike-fundamentals\"><span>Mountain Bike Fundamentals</span><span class=\"go\">\u2192</span></a><a class=\"course-card\" href=\"/mountain-bike-intermediate\"><span>Mountain Bike Intermediate</span><span class=\"go\">\u2192</span></a></div><h2>For leaders</h2><div class=\"course-grid\"><a class=\"course-card\" href=\"/for-school-directors-and-chairs\"><span>For School Directors & Chairs</span><span class=\"go\">\u2192</span></a></div>",
+                        "relatedHeading": "",
+                        "relatedLinks": ""
+                      },
+                      "definition": "c:contentPage",
+                      "id": "4fed119b-6d0f-4445-86dd-6bad73094181",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "dfbe6db7-58d2-49bc-80a9-0ac83c4b07af",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "6d45f565-20d6-4d43-bf32-2e8ebb368af5",
+              "type": "component"
+            }
+          ],
+          "id": "10afffa3-8244-4581-8288-2ccbc2d31183",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Schools and Clinics \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Schools and Clinics | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "0270f315-b498-41d3-a801-5f2cf08370f1",
+              "type": "component"
+            }
+          ],
+          "id": "dc5304ea-dec4-4b5f-bf23-8ebd2550104c",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "23102b42-5e64-4c49-ac84-a931132668d2",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-schools-and-clinics"
+  },
+  "title": "Schools and Clinics",
+  "type": "sfdc_cms__view",
+  "urlName": "schools-and-clinics"
+}

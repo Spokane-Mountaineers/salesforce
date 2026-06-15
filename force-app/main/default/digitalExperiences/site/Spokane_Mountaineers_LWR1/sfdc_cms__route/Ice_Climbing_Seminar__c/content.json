@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Ice_Climbing_Seminar",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-ice-climbing-seminar",
+    "urlPrefix": "ice-climbing-seminar"
+  },
+  "title": "Ice Climbing Seminar",
+  "type": "sfdc_cms__route",
+  "urlName": "ice-climbing-seminar"
+}

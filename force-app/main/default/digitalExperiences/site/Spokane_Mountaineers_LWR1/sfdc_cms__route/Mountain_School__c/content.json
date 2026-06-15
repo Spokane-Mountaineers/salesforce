@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Mountain_School",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-mountain-school",
+    "urlPrefix": "mountain-school"
+  },
+  "title": "Mountain School",
+  "type": "sfdc_cms__route",
+  "urlName": "mountain-school"
+}

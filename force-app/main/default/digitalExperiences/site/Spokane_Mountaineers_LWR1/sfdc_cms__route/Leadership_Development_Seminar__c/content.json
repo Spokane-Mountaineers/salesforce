@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Leadership_Development_Seminar",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-leadership-development-seminar",
+    "urlPrefix": "leadership-development-seminar"
+  },
+  "title": "Leadership Development Seminar",
+  "type": "sfdc_cms__route",
+  "urlName": "leadership-development-seminar"
+}

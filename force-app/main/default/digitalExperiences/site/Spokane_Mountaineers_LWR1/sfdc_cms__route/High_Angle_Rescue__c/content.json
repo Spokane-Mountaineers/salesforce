@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "High_Angle_Rescue",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-high-angle-rescue",
+    "urlPrefix": "high-angle-rescue"
+  },
+  "title": "High Angle Rescue",
+  "type": "sfdc_cms__route",
+  "urlName": "high-angle-rescue"
+}

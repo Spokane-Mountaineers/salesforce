@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "For_School_Directors_And_Chairs",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-for-school-directors-and-chairs",
+    "urlPrefix": "for-school-directors-and-chairs"
+  },
+  "title": "For School Directors and Chairs",
+  "type": "sfdc_cms__route",
+  "urlName": "for-school-directors-and-chairs"
+}

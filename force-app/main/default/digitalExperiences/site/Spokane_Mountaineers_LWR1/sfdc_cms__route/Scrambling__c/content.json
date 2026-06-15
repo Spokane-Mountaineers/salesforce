@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Scrambling",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-scrambling",
+    "urlPrefix": "scrambling"
+  },
+  "title": "Scrambling",
+  "type": "sfdc_cms__route",
+  "urlName": "scrambling"
+}

@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Backpack_School",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-backpack-school",
+    "urlPrefix": "backpack-school"
+  },
+  "title": "Backpack School",
+  "type": "sfdc_cms__route",
+  "urlName": "backpack-school"
+}

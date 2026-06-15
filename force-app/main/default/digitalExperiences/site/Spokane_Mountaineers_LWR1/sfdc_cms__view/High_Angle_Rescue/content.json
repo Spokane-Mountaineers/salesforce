@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"9f3352be-9247-4d79-a9c6-12bf5682b881\", \"columns\": [{\"UUID\": \"89f16a2b-1f40-49b9-914c-550e9d420ca6\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "High Angle Rescue",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>High Angle Rescue Seminar</strong></h3><h3><strong>General Info</strong></h3><p><strong>TUITION - $100 </strong></p><p> <strong>CLASS SIZE LIMIT - 10</strong></p><p><strong>COURSE DURATION - </strong> 2 Days, 1st full weekend in October</p><p><strong>HOURS OF INSTRUCTION</strong> - 16+</p><p>Questions? Email the seminar director(s).</p><p>You must be a member to participate.</p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><h1><strong>High Angle Rescue Seminar</strong></h1><p><strong>The 2026 Application will open late Summer, 2026.</strong></p><p>High Angle Rescue Seminar is designed to introduce multi-pitch climbers to the skills of self rescue. These skills are necessary if a leader or the second falls and becomes injured or if the second is unable to complete a difficult section of a climb.</p><p><strong>Fall 2025</strong></p><p><strong>Dates - </strong>Saturday &amp; Sunday, October 4 &amp; 5, 2025</p><p><strong>Location - </strong>Q'emiln Park, Post Falls ID</p><p><strong>Cost - </strong>First time participant - $100</p><p>Need a refresher? - $50 (if you have taken within the last 3 years)</p><p><strong>Seminar Director(s) - </strong><a href=\"mailto: highanglerescue@spokanemountaineers.org\"><strong>Andrew Ratcliff &amp; Lindsay Morgan-Chutas</strong></a></p><p><strong>Overview:</strong></p><ul><li>Review of anchor building</li><li>Raising and lowering systems with proper back ups</li><li>Advanced rappelling</li><li>Tandem rappels</li><li>Counter-balance rappels</li><li>Extended rappels</li><li>Alternative rappel devices</li><li>Ascending the rope</li><li>Rescue scenario practice</li></ul><p><strong>Prerequisites:</strong></p><ul><li>Active Spokane Mountaineers Membership</li><li>Trad Lead School or instructor's approval required</li><li>Comfortable leading or following multi-pitch</li></ul><p><strong>Gear Requirements</strong></p><ul><li>Helmet, Harness &amp; Approach Shoes</li><li>ATC (BD Guide is recommended)</li><li>Two 6mm by 5 meter long prusik cords</li><li>One 13.5\" Sterling Hollow Block (recommended) or short prusik</li><li>Carabineers - 5 locking, 5 non-locking</li><li>Slings - 2 doubles, 2 singles</li><li>Gloves</li></ul><p><strong>Application Process</strong></p><p>The course is limited to 10 participants. Participants must be 18 or older. All participants must be members of the Spokane Mountaineers. <a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join now</strong></a> if you are not a member already. All participants must be members of the Spokane Mountaineers. Selection criteria considered will include, but not be limited to, date application was submitted, climbing experience, and previous participation with the Spokane Mountaineers. </p><button\n type=\"button\">\n <a href=https://forms.gle/6wrsu6ruxj2XayoB6/>Application</a>\n</button>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "6e0a15b0-b6ec-4ab9-a98c-2e0fd24c61ff",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "89f16a2b-1f40-49b9-914c-550e9d420ca6",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "9f3352be-9247-4d79-a9c6-12bf5682b881",
+              "type": "component"
+            }
+          ],
+          "id": "0ff644ff-2bb9-493e-9701-ee3798cf7c15",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "High Angle Rescue \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "High Angle Rescue | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "31d56e81-427c-48bb-ab62-c8876359d2a9",
+              "type": "component"
+            }
+          ],
+          "id": "447f4b5a-7345-4c51-88b4-ca42bfb1cf34",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "20445564-c493-4187-a66a-245483d8abfc",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-high-angle-rescue"
+  },
+  "title": "High Angle Rescue",
+  "type": "sfdc_cms__view",
+  "urlName": "high-angle-rescue"
+}

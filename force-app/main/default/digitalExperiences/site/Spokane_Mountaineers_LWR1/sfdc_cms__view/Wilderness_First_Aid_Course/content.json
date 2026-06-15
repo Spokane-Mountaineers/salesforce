@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"5220c247-e57b-4fc7-9af2-f3766109e340\", \"columns\": [{\"UUID\": \"ab854b07-adce-4e04-827d-27977fe936e4\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Wilderness First Aid",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Wilderness First Aid Certification Course </strong></h3><h3><strong>At a glance </strong></h3><h3><br></h3><p><strong>TUITION - </strong>$206 for members, $256 for non-members</p><p><strong>CLASS SIZE LIMIT - 30 (AdvancedRegistration Required)</strong></p><p><strong>COURSE DURATION - 2 days / 16 hours</strong></p><p>This course will be taught both indoors and outdoors. </p><p>Questions? <a href=\"mailto:clubcomms@spokanemountaineers.org\"> </a><a href=\"mailto:clubcomms@spokanemountaineers.org\">Wilderness Medicine</a></p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><p><img data-asset=\"schools/wildernessFirstAidCourse_1.jpg\" alt=\"wildernessFirstAidCourse diagram\"></p><h1>Wilderness First Aid</h1><h1>A Certification Course taught by Longleaf Wilderness Medicine</h1><p>Wilderness First Aid Knowledge is one of the most important skill sets to have in the backcountry. </p><p>Wilderness First Aid teaches skills necessary when professional medical help is an indefinite time or distance away.</p><p>Environmental aspects of backcountry emergency situations will be covered in detail.</p><p>We partner with <a href=\"https://www.longleafmedical.com/\">Longleaf Wilderness Medicine</a> to teach this course over two eight-hour days. </p><p>The certification received upon completion of the course is good for two years.</p><p><strong>Dates -</strong> October 25-26, 2025</p><p><strong>Location - Turnbull National Wildlife Refuge</strong></p><p><strong>Cost -</strong> $206 for members, $256 for nonmembers (includes $6 fee for online registration on Long Leaf Website). </p><p><strong>Member Discount Code - M</strong>embers can get $50 off. Find code on June 4, 2025 Post or on the Event on the <a href=\"https://www.spokanemountaineers.org/s/event-registration/a12Um000001k7AnIAI/wilderness-first-aid-wfa-class\">Club Calendar on October 25</a> on the member website <a href=\"https://www.spokanemountaineers.org/s/feed/0D5Um00001IbZqLKAV\"><strong>Click Here</strong></a> (requires member log in)</p><p><a href=\"https://www.longleafmedical.com/oct25-wfa-spokane.html\"><strong>Registration -</strong> Long Leaf Website</a> </p><p>Questions? <a href=\"mailto:clubcomms@spokanemountaineers.org\">Wilderness Medicine</a></p>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "82f5925a-dd4a-4f71-97de-65115bf77c70",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "ab854b07-adce-4e04-827d-27977fe936e4",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "5220c247-e57b-4fc7-9af2-f3766109e340",
+              "type": "component"
+            }
+          ],
+          "id": "50bd57ff-66c8-4fca-a35f-68e8332d65e1",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Wilderness First Aid \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Wilderness First Aid | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "b3fe890b-3398-4033-b435-040b34cb2b66",
+              "type": "component"
+            }
+          ],
+          "id": "8d88cd7a-a2a6-45ce-a05d-5323d1522f58",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "6d8ccd3f-8a8c-4630-ae2f-991dcdea267f",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-wilderness-first-aid-course"
+  },
+  "title": "Wilderness First Aid",
+  "type": "sfdc_cms__view",
+  "urlName": "wilderness-first-aid-course"
+}

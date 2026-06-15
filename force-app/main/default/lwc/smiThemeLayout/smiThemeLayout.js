@@ -20,7 +20,6 @@ import basePath from "@salesforce/community/basePath";
 const DEFAULT_NAV = [
   { label: "Home", href: "/" },
   { label: "Calendar", href: "/events" },
-  { label: "Schools & Clinics", href: "/schools-and-clinics" },
   { label: "Activities", href: "/activities" },
   {
     label: "About",
@@ -39,6 +38,51 @@ const DEFAULT_NAV = [
       { label: "Member Discounts", href: "/member-discounts" },
       { label: "Member Resources", href: "/member-resources" },
       { label: "Logo & Gear", href: "/club-logo-gear" }
+    ]
+  },
+  {
+    // Every school/seminar/course is reachable directly here (the dropdown
+    // scrolls if it's tall); the overview page presents the same set as a
+    // grouped, designed directory.
+    label: "Schools & Clinics",
+    children: [
+      { label: "All Schools & Clinics", href: "/schools-and-clinics" },
+      { label: "Rock Climbing School", href: "/rock-climbing-school" },
+      { label: "Mountain School", href: "/mountain-school" },
+      { label: "Backpack School", href: "/backpack-school" },
+      { label: "Trad Lead School", href: "/trad-lead-school" },
+      { label: "Backcountry Ski School", href: "/backcountry-ski-school" },
+      { label: "Multipitch Sport School", href: "/multipitch-sport-school" },
+      { label: "Scrambling", href: "/scrambling" },
+      { label: "Aid Climbing Seminar", href: "/aid-climbing-seminar" },
+      { label: "Crack Climbing Seminar", href: "/crack-climbing-seminar" },
+      { label: "Ice Climbing Seminar", href: "/ice-climbing-seminar" },
+      { label: "Alpine Climbing Seminar", href: "/alpine-climbing-seminar" },
+      { label: "Sport Lead Rock Seminar", href: "/sport-lead-rock-seminar" },
+      {
+        label: "Leadership Development Seminar",
+        href: "/leadership-development-seminar"
+      },
+      { label: "Wilderness First Aid", href: "/wilderness-first-aid-course" },
+      {
+        label: "Wilderness First Responder",
+        href: "/wilderness-first-responder-course"
+      },
+      { label: "High Angle Rescue", href: "/high-angle-rescue" },
+      { label: "Introduction to Beacons", href: "/introduction-to-beacons" },
+      { label: "Backcountry Skiing 101", href: "/backcountry-skiing-101" },
+      {
+        label: "Mountain Bike Fundamentals",
+        href: "/mountain-bike-fundamentals"
+      },
+      {
+        label: "Mountain Bike Intermediate",
+        href: "/mountain-bike-intermediate"
+      },
+      {
+        label: "For School Directors & Chairs",
+        href: "/for-school-directors-and-chairs"
+      }
     ]
   },
   {

@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Mountain_Bike_Intermediate",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-mountain-bike-intermediate",
+    "urlPrefix": "mountain-bike-intermediate"
+  },
+  "title": "Mountain Bike Intermediate",
+  "type": "sfdc_cms__route",
+  "urlName": "mountain-bike-intermediate"
+}

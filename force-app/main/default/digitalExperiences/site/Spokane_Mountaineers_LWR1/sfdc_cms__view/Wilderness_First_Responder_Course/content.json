@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"f5ec061d-a9cc-4020-8fd0-c9b9ce96b6f7\", \"columns\": [{\"UUID\": \"5489a0a7-f24b-460a-b627-f69ef565021d\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Wilderness First Responder",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Wilderness First Responder Hybrid First Aid Course At a glance</strong></h3><h3><br></h3><p><strong>TUITION - </strong>$706 for members, $756 for non-members</p><p><strong>CLASS SIZE LIMIT - 12 to 24</strong></p><p><strong>COURSE DURATION - 5 days / 40 in class hours + 40 hours of additional self guided learning (completed before Feb 10, 2024)</strong></p><p>This course will be taught both indoors and outdoors. </p><p>Questions? </p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><p><img data-asset=\"schools/wildernessFirstResponderCourse_1.jpg\" alt=\"wildernessFirstResponderCourse diagram\"></p><h1>Wilderness First Responder Hybrid First Aid Course</h1><h1>A Certification Course taught by Longleaf Wilderness Medicine</h1><p><strong>Register now for the February 2024 course! </strong></p><p><strong>We must meet a minimum of 12 registrations by Dec 19th for this course to occur. </strong></p><p>Wilderness First Responder is the next step in understanding and developing one of the most important skill sets to have in the backcountry.</p><p>Wilderness First Responder teaches skills necessary when professional medical help is an indefinite time or distance away.</p><p>Environmental aspects of backcountry emergency situations will be covered in detail.</p><p>We partner with <a href=\"https://www.longleafmedical.com/\">Longleaf Wilderness Medicine</a> to teach this course over 5 days and 40 additional hours of self guided learning required to be completed before Feb 10th. </p><p><strong>Dates -</strong>Saturday and Sunday, Feb 10 and 11 and Saturday, Sunday and Monday - Feb 17, 18, and 19 8am-5:30PM Pacific Time</p><p><strong>Location - </strong>Exact details will be provided upon registration. </p><p><strong>Cost -</strong> $706 for Spokane Mountaineers members, $756 for non-members (Price includes Longleaf online processing fee of $6.00).</p><p><strong>Registration -</strong> Registration is open now for Feb 2024<strong>.</strong> <a href=\"https://www.longleafmedical.com/feb24-wfr-cheney.html\"><strong>Click here to register </strong></a>. Members can use code <strong>SMWFR2024</strong> to receive $50 discount. Membership status will be verified for anyone using this code. </p>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "682a701a-08a9-4711-81c4-a429561cad43",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "5489a0a7-f24b-460a-b627-f69ef565021d",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "f5ec061d-a9cc-4020-8fd0-c9b9ce96b6f7",
+              "type": "component"
+            }
+          ],
+          "id": "91795dfe-5c1d-452b-acb6-d1b6f98a42f6",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Wilderness First Responder \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Wilderness First Responder | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "b363b4e5-bed7-4632-851c-c49a7e12e2be",
+              "type": "component"
+            }
+          ],
+          "id": "394dea2c-6fcc-4ee2-9a49-9cb594aa9bbb",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "a51e362e-9669-43c6-9f52-963ff77176b9",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-wilderness-first-responder-course"
+  },
+  "title": "Wilderness First Responder",
+  "type": "sfdc_cms__view",
+  "urlName": "wilderness-first-responder-course"
+}

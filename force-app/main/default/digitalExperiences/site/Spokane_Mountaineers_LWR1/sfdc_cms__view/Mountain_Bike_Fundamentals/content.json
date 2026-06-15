@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"dc8bee60-c363-48c9-afe8-b266ba199ed1\", \"columns\": [{\"UUID\": \"f8f1a59f-3a03-451f-9d87-7eaa1ec3d522\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Mountain Bike Fundamentals",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Mtn Biking Fundamentals at a Glance</strong></h3><p><strong>TUITION -</strong> $ 50</p><p><strong>CLASS SIZE -</strong> 10</p><p><strong>COURSE DURATION -</strong> Single weekend day,</p><p>(Dates for 2026: April 18th, June 13 th, June 27th, or July 11th)</p><p><strong>HOURS of INSTRUCTION -</strong> 5+</p><p><strong>Questions?</strong> Contact the <a href=\"mailto:crockett54@comcast.net\">School Instructor</a></p><p>You must be a member to participate.</p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><p><strong>Introduction to Mountain Biking Fundamentals 2026</strong></p>\n\n\n<p><strong><img alt=\"\" data-asset=\"schools/Mtn_Bike_Fundaments_Duane_Crockett1.jpg\"><img alt=\"\" data-asset=\"schools/Mtn_Bike_Fundaments_Duane_Crockett.jpg\"></strong><img alt=\"\" data-asset=\"schools/Mtn_Bike_Fundaments_Duane_Crockett2.jpg\"></p>\n\n\n<p><strong>Course Details</strong></p>\n\n<p>Riders, This is a 1 day Introduction to Mountain Biking Fundamentals course (Dates for 2026: April 18th, June 13 th, June 27th, or July 11th)</p>\n\n<p><strong>Time: </strong>Arrive at 8:30 am to sign in and ready for a prompt 9 am start; the class will end at 2 pm</p>\n\n<p><strong>Location:</strong> Spokane Area. Location listed in event calendar writeup, visible with <a href=\"https://www.spokanemountaineers.org/s/event-registration/a12Um000001rpBtIAI/introduction-to-mountain-biking-fundamentals\">member login</a>. </p>\n\n<p><strong>Sign up required on</strong><a href=\"/events\"><strong> club event calendar.</strong></a> (member log in required)</p>\n\n<p><strong>Cost:</strong> The class will cost $50; Please bring cash</p>\n\n<p>1. Discuss Three Essentials</p>\n<p> - Pedals Level and equally weighted</p>\n<p> - Index finger covering the brakes at all times</p>\n<p> - Eyes scanning ahead</p>\n<p>2. Riding Position - Tall Ready, Low Ready</p>\n<p>3. Bike Body Separation - Fore and Aft, Side to Side</p>\n<p>4. Braking - including foot position</p>\n<p>5. Cornering - techniques to make you safer and faster</p>\n<p>6. Rock Dodge</p>\n<p>7. Ride small Circle</p>\n<p>8. Ride Tight Switch Back</p>\n<p>9. Ratcheting, Track Stand, Race, Ratchet into Log</p>\n<p>10. Front Wheel Lift</p>\n<p>11. Manual infused Front wheel lift</p>\n<p>12. Hopping - Brakes on hopping - Hopping front wheel left and Right</p>\n<p> - Discuss the foot wedge</p>\n<p>13. Move to location to Practice Climbing, Descending and Corning</p>\n<p>14. Lunch</p>\n<p>15. Ride a skinny</p>\n<p>16. Do a ride to practice your new skills</p>\n\n<p>Your lead instructor is Duane Crockett, Level 1 BICP certified instructor. Ref. <a href=\"https://icp.bike/level-1-certification\">https://icp.bike/level-1-certification</a> </p>\n\n<p>If you have any questions about the content please contact <a href=\"mailto:crockett54@comcast.net\">Duane by email</a>.</p>\n\n<p><strong>Event Pre-Requisites</strong></p>\n<ul>\n <li>Discovery Pass</li>\n <li>Helmet</li>\n <li>Food and water</li>\n <li>Mountain Bike in good working condition.</li>\n <li>The following equipment is recommended:</li>\n <li>Seat post dropper, </li>\n <li>Front Fork shock or Full suspension </li>\n <li> Flat Pedals </li>\n <li>Basic ability to ride a mountain bike on dirt on green level trails</li>\n <li>Smiles</li>\n</ul>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "ceca696f-c5ac-4c14-b887-013af6cb8004",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "f8f1a59f-3a03-451f-9d87-7eaa1ec3d522",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "dc8bee60-c363-48c9-afe8-b266ba199ed1",
+              "type": "component"
+            }
+          ],
+          "id": "63082a59-2c8b-40b0-89dd-65c90a845b2a",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Mountain Bike Fundamentals \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Mountain Bike Fundamentals | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "936aa6d5-f7d0-421c-8161-54a1e215a45f",
+              "type": "component"
+            }
+          ],
+          "id": "4202292b-dd1e-47f4-83c0-660fec40f7d9",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "be93b3cb-84f0-465f-a1e2-d907b7b11380",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-mountain-bike-fundamentals"
+  },
+  "title": "Mountain Bike Fundamentals",
+  "type": "sfdc_cms__view",
+  "urlName": "mountain-bike-fundamentals"
+}

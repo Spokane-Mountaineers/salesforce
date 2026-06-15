@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Wilderness_First_Aid_Course",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-wilderness-first-aid-course",
+    "urlPrefix": "wilderness-first-aid-course"
+  },
+  "title": "Wilderness First Aid",
+  "type": "sfdc_cms__route",
+  "urlName": "wilderness-first-aid-course"
+}

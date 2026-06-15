@@ -2,11 +2,15 @@ import { LightningElement, api } from "lwc";
 import basePath from "@salesforce/community/basePath";
 import CONTENT_ASSETS from "@salesforce/resourceUrl/content_assets";
 import CONTENT_IMG_CHALET from "@salesforce/resourceUrl/content_img_chalet";
+import CONTENT_IMG_SCHOOLS from "@salesforce/resourceUrl/content_img_schools";
 
 // Images ship as static resources (CDN-cached, versioned). A single resource
-// caps at 5 MB, so heavy galleries get their own resource; a "group/" prefix on
-// the data-asset token selects it. Add a resource + map entry per group.
-const IMAGE_RESOURCES = { chalet: CONTENT_IMG_CHALET };
+// caps at 5 MB, so heavy galleries/sections get their own resource; a "group/"
+// prefix on the data-asset token selects it. Add a resource + map entry per group.
+const IMAGE_RESOURCES = {
+  chalet: CONTENT_IMG_CHALET,
+  schools: CONTENT_IMG_SCHOOLS
+};
 
 /**
  * Reusable Alpine Field Guide content page for ported legacy marketing/info

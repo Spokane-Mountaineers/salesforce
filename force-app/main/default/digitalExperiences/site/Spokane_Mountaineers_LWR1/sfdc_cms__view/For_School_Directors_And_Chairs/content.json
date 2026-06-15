@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"88bfadd9-fef4-447b-9df5-f872969e47ed\", \"columns\": [{\"UUID\": \"d10fbf92-e5cd-4b31-ac85-7fc7cda5be5f\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "For School Directors & Chairs",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>School Directors and Chairs, thank you for organizing our schools and clinics. </strong></h3><h4>The Ecomm Team is here to assist you and provide services to make marketing and filling your available seats easier. </h4><h4>All Schools and Clinics are organized by Activity Groups/Committees or Club Leadership, who determine how applications and tuition is handled.</h4><h4>Please submit all changes to any of these existing school pages by email to ecomm@spokanemountaineers.org Please attach any artwork or images you wish to include as well. Ecomm will assist with content creation if needed. Any questions, please reach out. If something is missing or confusing, we will reach out and may provide suggestions to improve the process being used. </h4><h4><br></h4><h4>We will do our best to complete the work within seven days. </h4><p><strong>Stages of our school pages and what we might need from you</strong></p><ol><li><strong>Marketing for the coming school and announcement of when application open (recommend at least 3 months prior)</strong></li><li><strong>Applications Open (updates when application is closed)</strong></li><li><strong>School is in progress (notification of full roster)</strong></li><li><strong>School is completed (page edited to reflect to watch for updates on next school)</strong></li></ol><p><strong>Leaving information posted after the school has fill has let potential participants know what to expect for the coming year. </strong></p>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "f8e8c4ff-c38d-4801-adc5-beb3c5a2502c",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "d10fbf92-e5cd-4b31-ac85-7fc7cda5be5f",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "88bfadd9-fef4-447b-9df5-f872969e47ed",
+              "type": "component"
+            }
+          ],
+          "id": "7f7daab0-9204-49b2-85ed-beee6598c388",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "For School Directors and Chairs \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "For School Directors and Chairs | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "dacaaf69-985a-4bca-8e80-ac9b1029411f",
+              "type": "component"
+            }
+          ],
+          "id": "9831d903-820b-4b9c-b1e6-2235b53fd47b",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "1750125d-1de2-444c-ae5c-3e03d9f835e3",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-for-school-directors-and-chairs"
+  },
+  "title": "For School Directors and Chairs",
+  "type": "sfdc_cms__view",
+  "urlName": "for-school-directors-and-chairs"
+}

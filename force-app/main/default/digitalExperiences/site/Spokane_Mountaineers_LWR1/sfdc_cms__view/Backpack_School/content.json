@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"85f0819d-496e-4da9-a064-bbf159d0773e\", \"columns\": [{\"UUID\": \"19ed7713-31d2-48a1-ba00-b8e328200e2e\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Backpack School",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Backpack School at a glance</strong></h3><p><strong>TUITION - $70.00</strong></p><p><strong>CLASS SIZE LIMIT - </strong>50</p><p><strong>COURSE DURATION - Weekly classes Mar 26 thru May 14 (see writeup for detail)</strong></p><p><strong>HOURS O</strong><strong>F INSTRUCTION </strong>- 50+</p><p><strong>LOCATION </strong>- TBA: Spokane Valley</p><p><strong>QUESTIONS</strong> - Contact the <a href=\"mailto:bpschool@spokanemountaineers.org\">School Directors (Derrek &amp; John) </a></p><p>You must be a member to participate.</p><p><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSeFzYe1mCXde9TXrXuxAcQwvpqLfZ86Rkfktg374HluPEEqVg/viewform?usp=preview\"><strong><u>Click this link to access the application form</u></strong></a></p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>Join Today!</strong></a></p><p> <a href=\"mailto:bpschool@spokanemountaineers.org\"> Email the directors</a></p><h3><img alt=\"\" data-asset=\"schools/BackpackSchoolWeb2026.jpg\"></h3>\n\n<h3><br></h3>\n<h3><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSeFzYe1mCXde9TXrXuxAcQwvpqLfZ86Rkfktg374HluPEEqVg/viewform?usp=preview\"><strong><u>Click this link to access the application form</u></strong></a></h3>\n<h3><br></h3>\n<h3><strong>Our popular Backpack School will be offered in spring of 2026. </strong></h3>\n<h3><br></h3>\n<h3><strong>This excellent course has proven to be very popular, and for good reasons! </strong></h3>\n<h3><br></h3>\n<h3><strong>Applications will be accepted beginning Tuesday, February 17, 2026 at 6PM. </strong></h3>\n<h3><br></h3>\n<h3><strong>Classes will begin Thursday, 3/26 at 6-8:30PM and run every Thursday. Please also prepare for an outdoor session on Saturday 5/9 and the overnight campout one weekend in May.</strong></h3>\n<h3><br></h3>\n<h3><strong>To apply, you must be a current club member. We expect the class to fill very quickly when registration opens and would suggest putting this date and time on the calendar to ensure you secure a spot this year! Last year, the class was full within an hour. </strong></h3>\n\n<h3>For 2026, the application link will be posted on our clubwide calendar as a Hiking activity on Feb 17th at 6pm. The event write up will include a link to the application form. You must be able to log into our site to apply. If you are a new member, we recommend you verify your membership login and find the event in the calendar before the 17th.</h3>\n\n<h3>Your best chance to get enrolled in this course next year is to <a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"> </a><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><strong>join up now</strong></a> and get active with our club. We offer a great selection of volunteer-led hiking, backpacking, climbing, and other outdoor activities for all levels, and you don\u2019t necessarily need to have completed any of our educational courses to participate. Your membership dues help build and maintain the trails and lands we all use for outdoor recreation. Members also have access to our rustic chalet and 40 acres on Mount Spokane, as well as discounts at local outdoor equipment vendors.</h3>\n\n<p><strong>2026 DIRECTORS:</strong> <a href=\"mailto:bpschool@spokanemountaineers.org\">School Directors (Derrek and John)</a></p>\n\n<p><strong>BACKPACK SCHOOL OVERVIEW</strong></p>\n<p><strong>Backpack School is an introductory course intended for individuals who are interested in learning the fundamentals of backpacking and wilderness travel. Course instruction includes topics such as: clothing and gear, meal preparation, water treatment, first aid, navigation, trip planning, Leave No Trace principles and more! No previous backpacking experience is necessary to join. The class runs Thursday evening for 8 weeks. There will be an weekend overnight shakedown event, where students will have the opportunity to test their gear and hone their skills at a nearby campground. There will also be an outdoor session for practicing map and compass navigation. The course culminates with a two-night graduation backpack trip over Memorial Day weekend or other times during the summer.</strong></p>\n\n<p><strong>All course instructors are volunteers, working countless hours behind the scenes to provide you with high quality instruction and unforgettable experiences. Our volunteers are as passionate about sharing their knowledge as they are about the wild places where they spend their free time. The goal for this course is to help you build your confidence and competence as a backpacker, while having fun and providing for safety. We believe that the Spokane Mountaineers offer some of the best classes in the great outdoors!</strong></p>\n\n<p><strong>Previous hiking experience is helpful but not required. Students are encouraged to work on physical conditioning throughout the duration of the course by participating in group hikes. Students will be required to participate in at least three training hikes as part of the course. In doing so, you should be capable of carrying a 30-45 pound backpack for up to 6 miles over for your graduation backpack trip. There is no need to make gear purchases right away, as major equipment for backpacking will be discussed in detail during class. This will help you make wise decisions while shopping for gear.</strong></p>\n\n<p><strong>Tuition for Backpack School 2026 is $70 and includes:</strong></p>\n<p><strong>Customized course text to supplement both indoor and outdoor sessions</strong></p>\n<ul>\n <li>Over 50 hours of instruction</li>\n <li>Our Backpacking Manual</li>\n <li>First Aid manual</li>\n <li>Backpack School shirt upon meeting graduation requirements. </li>\n</ul>\n\n<p><strong>Age requirements:</strong></p>\n<ul>\n <li>Adults 18 and older may register.</li>\n <li>Students 15-17 years of age may register but must have a waiver (available from the Directors) signed by their parent or guardian(s).</li>\n <li>Students 12-14 years of age may be welcomed at the discretion of the school directors and must be accompanied by a parent or legal guardian at all times during club events either as a student themselves or an instructor.</li>\n</ul>\n\n<p><strong>Graduation Requirements</strong></p>\n<ul>\n <li>Attend at least 7 of the 8 indoor classes</li>\n <li>First Aid and Map &amp; Compass Outdoor are mandatory</li>\n <li>Complete at least 3 training hikes with the club</li>\n <li>Completion of at least one two-night or longer backpack trip with the club</li>\n <li>Participate in one 3 hour (at least) trail work activity. Check with School Directors for a list of conservation organizations we partner with for trail work. </li>\n</ul>\n\n<p><strong>If you missed out on enrolling in last year's class, the club will be offering supplemental educational opportunities offered to members by the Hiking Activity Group throughout the season, which will focus on some of the topics and skills that are part of the Backpack School curriculum. These will be open to members at no additional charge. Here\u2019s a sampling of what we hope to offer this season:</strong></p>\n<ul>\n <li>An outdoor cooking class and demo</li>\n <li>Navigation primer: map, compass, and GPS</li>\n <li>Outdoor gear swap, where you can find great deals on used equipment from other club members.</li>\n <li>Discount on Wilderness First Aid Certification course in the fall.</li>\n</ul>\n\n<h3><strong>A chance to join in on our many offerings of volunteer-led day hikes and backpack trips in the coming season. You needn\u2019t be a Backpack School grad to participate in our trips. Our leaders can show you some premier hikes, and the planning is done for you. Learn some great tips from other trip participants and meet some wonderful folks and share the experience.</strong></h3>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "0cf78461-35a2-4872-82d1-608b4357fe2d",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "19ed7713-31d2-48a1-ba00-b8e328200e2e",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "85f0819d-496e-4da9-a064-bbf159d0773e",
+              "type": "component"
+            }
+          ],
+          "id": "0e5798aa-3b92-459c-8ec7-c66abdd33b3a",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Backpack School \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Backpack School | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "35709d86-5118-48b8-be02-67b9575fab92",
+              "type": "component"
+            }
+          ],
+          "id": "c07be6b6-11b0-4375-a082-64c0d9331407",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "09edc26c-f9b7-4d1c-8605-7a0d9cd0d5bd",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-backpack-school"
+  },
+  "title": "Backpack School",
+  "type": "sfdc_cms__view",
+  "urlName": "backpack-school"
+}

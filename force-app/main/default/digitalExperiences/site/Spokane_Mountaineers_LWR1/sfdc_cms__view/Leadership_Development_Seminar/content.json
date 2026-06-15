@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"9af976be-4880-461c-afa0-4ac4159fbedd\", \"columns\": [{\"UUID\": \"5ecdea6c-8afb-4023-bcdb-1d96b1249635\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Leadership Development Seminar",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Leadership Development Seminar</strong></h3><h3><strong>General Info</strong></h3><p><strong>TUITION - Free to Members</strong></p><p><strong>CLASS SIZE LIMIT - 10</strong></p><p><strong>COURSE DURATION - </strong>Spring and Fall</p><p>HOURS OF INSTRUCTION - 3</p><p>Questions? Contact the LeadershipTraining@spokanemountaineers.org</p><p>You must be a member to participate. Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\">Join Today!</a></p><h2>Leadership Development</h2><p> <img src=\"https://lh5.googleusercontent.com/PUAh9v_pAeLW6X-ON_y1j1Mlasbv2mKX5RZulwv_4RG1w3Y_YJzbYmEhHOZf9HXvePEEIVZTSU8yCbR1KE_CnLwJF4m0FTbkCVWp8eOkIs32_yY1fLqDMWtWug5JOXMdvBqw7aIU=s0\" alt=\"Leadership Development School\" height=\"327\" width=\"624\"></p><p>The Spokane Mountaineers develops leaders by expanding from the foundation of its climbing and backpacking schools to include basic leadership training as well as wilderness first aid and CPR. The more leaders we recruit the more events we have available.</p><p>The first half of the seminar focuses on the policies and procedures for leading trips and events. The second half of the seminar takes more of a discussion format on a variety of leadership topics. The topic is selected by the instructor and announced prior to the event. This seminar is open to all members. It is intended to keep experienced leaders up to date on the latest club practices, educate prospective leaders wanting to lead trips, and show new members more of how the club functions.</p>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "65b76409-35a4-40c3-9cb7-ac78f688f448",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "5ecdea6c-8afb-4023-bcdb-1d96b1249635",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "9af976be-4880-461c-afa0-4ac4159fbedd",
+              "type": "component"
+            }
+          ],
+          "id": "dbda7644-5d78-4676-9ce3-a2932a076ca7",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Leadership Development Seminar \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Leadership Development Seminar | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "56695d7d-6bdb-4b63-9f27-a8410b4204fe",
+              "type": "component"
+            }
+          ],
+          "id": "42114cbe-992f-45d9-a919-a6c4fb30f928",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "77ae7158-9b98-4f1a-a4b0-34f43093da75",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-leadership-development-seminar"
+  },
+  "title": "Leadership Development Seminar",
+  "type": "sfdc_cms__view",
+  "urlName": "leadership-development-seminar"
+}

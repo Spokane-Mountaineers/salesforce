@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Rock_Climbing_School",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-rock-climbing-school",
+    "urlPrefix": "rock-climbing-school"
+  },
+  "title": "Rock Climbing School",
+  "type": "sfdc_cms__route",
+  "urlName": "rock-climbing-school"
+}

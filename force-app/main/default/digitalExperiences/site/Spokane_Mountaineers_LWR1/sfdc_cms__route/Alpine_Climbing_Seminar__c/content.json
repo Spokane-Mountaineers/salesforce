@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Alpine_Climbing_Seminar",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-alpine-climbing-seminar",
+    "urlPrefix": "alpine-climbing-seminar"
+  },
+  "title": "Alpine Climbing Seminar",
+  "type": "sfdc_cms__route",
+  "urlName": "alpine-climbing-seminar"
+}

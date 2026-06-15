@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Mountain_Bike_Fundamentals",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-mountain-bike-fundamentals",
+    "urlPrefix": "mountain-bike-fundamentals"
+  },
+  "title": "Mountain Bike Fundamentals",
+  "type": "sfdc_cms__route",
+  "urlName": "mountain-bike-fundamentals"
+}

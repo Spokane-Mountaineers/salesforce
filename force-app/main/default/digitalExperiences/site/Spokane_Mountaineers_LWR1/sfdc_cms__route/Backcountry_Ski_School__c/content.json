@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Backcountry_Ski_School",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-backcountry-ski-school",
+    "urlPrefix": "backcountry-ski-school"
+  },
+  "title": "Backcountry Ski School",
+  "type": "sfdc_cms__route",
+  "urlName": "backcountry-ski-school"
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>application/zip</contentType>
+    <description>Schools &amp; Clinics page images (LWR content port). Binaries exported from production and web-optimized.</description>
+</StaticResource>

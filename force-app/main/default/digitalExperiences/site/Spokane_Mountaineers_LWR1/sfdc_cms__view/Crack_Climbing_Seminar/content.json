@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"173daaee-3274-4f30-919e-29f0d962fad6\", \"columns\": [{\"UUID\": \"e2eed8f2-625c-48ba-8571-9025e9ac5a30\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Schools & Clinics",
+                        "heading": "Crack Climbing Seminar",
+                        "subtitle": "",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><b>Crack Climbing Seminar</b></h3><h3><b>General Info</b></h3><p><b>TUITION - </b>Free to members</p><p><b>CLASS SIZE LIMIT - </b>6</p><p><b>COURSE DURATION - </b>3rd Saturday in October</p><p><b>HOURS OF INSTRUCTION</b> - 8+</p><p><b>Questions? </b> Contact Seminar Instructors Bob Loomis or Brett Barna</p><p>You must be a member with rock climbing experience to 5.8 to participate.</p><p>Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><b>Join Today!</b></a></p><p><img src=\"https://lh6.googleusercontent.com/ghyfX_1uxv2nqzmZ5E1PpfLuUcuXcs3aSPwyj516R85qUooSNR1UiWCPRTMQ7O--oT22rLalEUhsHHUDWiLM4Ter4c2Ry6odNtEvD50X__dvTSxfKP5ySWRCBCt0RCdwMUggGA83=s0\" alt=\"Crack Slimbing Tape\" height=\"201\" width=\"113\"></p><p><b>Crack Climbing Seminar </b></p><h5><b>Course Details</b></h5><p>The Mountaineers are offering a one day crack climbing seminar.</p><p> It will be on Saturday 17 October, 2020</p><p>The location will be Frenchman\u2019s Coulee aka Vantage\u2014about two hours driving time west of Spokane on I-90 (there are printed guidebooks and online resources such as Mountain Project &gt; <a href=\"https://www.mountainproject.com/\">https://www.mountainproject.com</a> &lt; if you wish to research the area). </p><p>Participants are responsible for their own transportation. </p><p>The seminar will start with gathering in the climbers\u2019 main parking lot (next to the outhouse) just off the old Vantage road at 8:00 am. The seminar finishes that day later in the afternoon\u2014likely around 4:00 pm.</p><p> People should bring at least one roll of athletic tape and/or \"crack gloves.\u201dCrack climbing can be abrasive, so long pants, a long sleeved zip-T shirt, etc., are recommended. Students are expected to bring their own ropes and protection (cams, nuts, etc.), rock shoes, harness, and personal gear\u2014none will be provided.</p><p>The student limit is six, though if an additional student is motivated, experienced, and self-sufficient; up to eight students may be allowed. </p><h4><br></h4><p>Prerequisites: All students must have completed the SM Rock School and Sport Lead School and/or have several years of competent rock-climbing experience up to 5.8. </p><p>We will cover basic hand taping techniques, the basics of the common crack sizes (tips, thin fingers, off-hands, hand, fist, and off-width), efficient movement, and efficient protection ideas, etc. If inclement weather prevents the seminar from occurring that day, then the seminar will be rescheduled. If an alternate day is chosen due to the weather, then the instructor or assistant will contact you with that information.</p><p>Instructor: Bob Loomis, (M) 509.710.5102, &gt; bploomis@comcast.net &lt;. Assistant: Brett Barna, (M) 208.773.5474, &gt; brettjbarna@gmail.com &lt;</p><p>Prospective students should contact the instructor or assistant if wishing to attend at least two weeks in advance, and have signed the SM trip/event liability waiver form (available on the SM website), ready to give to the instructor or assistant prior to or on the morning of the seminar, otherwise the student will not be able to participate as per club policy.</p><p>The seminar is free. In lieu of a student fee the instructor and assistant ask students to consider a donation to the club\u2019s conservation fund. Contributions will not be monitored and on the honor system.</p><p>Participants are encouraged to be respectful of each other in this pandemic time. If one shows signs of COVID-19 and/or suspects one has been exposed to the virus, please do not attend. Current club policy is that club events occur with all participants following CDC guidelines to limit virus exposure, and you are asked to adhere to that policy.</p>",
+                        "relatedHeading": "Browse",
+                        "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "5a5cdf7b-a37a-449d-8b5a-58450f424333",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "e2eed8f2-625c-48ba-8571-9025e9ac5a30",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "173daaee-3274-4f30-919e-29f0d962fad6",
+              "type": "component"
+            }
+          ],
+          "id": "e7c5e814-c1f8-470b-930f-9b0f22eac694",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Crack Climbing Seminar \u2014 Spokane Mountaineers",
+                "dxpStyle": {},
+                "pageTitle": "Crack Climbing Seminar | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "04204758-38a6-4f6c-a985-60f7f81a3819",
+              "type": "component"
+            }
+          ],
+          "id": "1444ecd9-91ed-437d-9b6b-f9ae0494e0db",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "229fe47c-0b02-47e5-b733-2400dfc33723",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-crack-climbing-seminar"
+  },
+  "title": "Crack Climbing Seminar",
+  "type": "sfdc_cms__view",
+  "urlName": "crack-climbing-seminar"
+}
