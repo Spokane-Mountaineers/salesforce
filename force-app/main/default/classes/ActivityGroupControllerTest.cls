@@ -137,6 +137,129 @@ private class ActivityGroupControllerTest {
     }
   }
 
+  @isTest
+  static void joinGroup_publicJoinsWithDailyDefault() {
+    CollaborationGroup g = [
+      SELECT Id
+      FROM CollaborationGroup
+      WHERE Name = 'SMTestAlpha Group'
+      LIMIT 1
+    ];
+    User u = buildStandardUser();
+    System.runAs(u) {
+      Test.startTest();
+      String result = ActivityGroupController.joinGroup(g.Id);
+      Test.stopTest();
+      System.assertEquals('member', result);
+      CollaborationGroupMember m = [
+        SELECT NotificationFrequency
+        FROM CollaborationGroupMember
+        WHERE CollaborationGroupId = :g.Id AND MemberId = :u.Id
+        LIMIT 1
+      ];
+      System.assertEquals(
+        'D',
+        m.NotificationFrequency,
+        'new members should default to a daily digest'
+      );
+    }
+  }
+
+  @isTest
+  static void joinGroup_privateCreatesRequest() {
+    CollaborationGroup g = [
+      SELECT Id
+      FROM CollaborationGroup
+      WHERE Name = 'SMTestBravo Group'
+      LIMIT 1
+    ];
+    User u = buildStandardUser();
+    System.runAs(u) {
+      Test.startTest();
+      String result = ActivityGroupController.joinGroup(g.Id);
+      Test.stopTest();
+      System.assertEquals('requested', result);
+      System.assertEquals(
+        1,
+        [
+          SELECT COUNT()
+          FROM CollaborationGroupMemberRequest
+          WHERE CollaborationGroupId = :g.Id AND RequesterId = :u.Id
+        ]
+      );
+    }
+  }
+
+  @isTest
+  static void setNotificationFrequency_updatesMembership() {
+    CollaborationGroup g = [
+      SELECT Id
+      FROM CollaborationGroup
+      WHERE Name = 'SMTestAlpha Group'
+      LIMIT 1
+    ];
+    User u = buildStandardUser();
+    System.runAs(u) {
+      ActivityGroupController.joinGroup(g.Id);
+      Test.startTest();
+      ActivityGroupController.setNotificationFrequency(g.Id, 'W');
+      Test.stopTest();
+      System.assertEquals(
+        'W',
+        [
+          SELECT NotificationFrequency
+          FROM CollaborationGroupMember
+          WHERE CollaborationGroupId = :g.Id AND MemberId = :u.Id
+          LIMIT 1
+        ]
+        .NotificationFrequency
+      );
+    }
+  }
+
+  @isTest
+  static void setNotificationFrequency_rejectsBadValue() {
+    CollaborationGroup g = [
+      SELECT Id
+      FROM CollaborationGroup
+      WHERE Name = 'SMTestAlpha Group'
+      LIMIT 1
+    ];
+    Test.startTest();
+    try {
+      ActivityGroupController.setNotificationFrequency(g.Id, 'Hourly');
+      System.assert(false, 'expected an invalid-frequency error');
+    } catch (Exception e) {
+      System.assert(true);
+    }
+    Test.stopTest();
+  }
+
+  @isTest
+  static void leaveGroup_removesMembership() {
+    CollaborationGroup g = [
+      SELECT Id
+      FROM CollaborationGroup
+      WHERE Name = 'SMTestAlpha Group'
+      LIMIT 1
+    ];
+    User u = buildStandardUser();
+    System.runAs(u) {
+      ActivityGroupController.joinGroup(g.Id);
+      Test.startTest();
+      ActivityGroupController.leaveGroup(g.Id);
+      Test.stopTest();
+      System.assertEquals(
+        0,
+        [
+          SELECT COUNT()
+          FROM CollaborationGroupMember
+          WHERE CollaborationGroupId = :g.Id AND MemberId = :u.Id
+        ]
+      );
+    }
+  }
+
   static User buildStandardUser() {
     Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User' LIMIT 1];
     User u = new User(

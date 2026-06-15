@@ -77,6 +77,70 @@
   padding-top: 8px;
   border-top: 1px solid var(--line);
 }
+
+/* Membership controls */
+.membership {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+.pending {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.freq {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.freq__select {
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.15s;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+.btn--primary {
+  background: var(--rust);
+  color: #fff;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--pine);
+  border-color: var(--line);
+}
+.btn--ghost:hover {
+  border-color: var(--pine);
+}
 .state {
   font-size: 16px;
   color: var(--ink-soft);

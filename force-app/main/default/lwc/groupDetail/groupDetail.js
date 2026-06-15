@@ -1,13 +1,23 @@
 import { LightningElement, api, wire } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
+import { refreshApex } from "@salesforce/apex";
 import basePath from "@salesforce/community/basePath";
 import getGroup from "@salesforce/apex/ActivityGroupController.getGroup";
+import joinGroup from "@salesforce/apex/ActivityGroupController.joinGroup";
+import leaveGroup from "@salesforce/apex/ActivityGroupController.leaveGroup";
+import setNotificationFrequency from "@salesforce/apex/ActivityGroupController.setNotificationFrequency";
 
-// Activity-group page: group header + that group's upcoming events (the events
-// calendar preset to this group). The id arrives as the ?recordId= URL param.
-// Chairs still manage membership and approve events in Salesforce — this page is
-// read-only over the group; members create events via the calendar/new-event
-// flow, which routes to the chair's approval process.
+const FREQUENCIES = [
+  { value: "P", label: "Every post" },
+  { value: "D", label: "Daily digest" },
+  { value: "W", label: "Weekly digest" },
+  { value: "N", label: "Never" }
+];
+
+// Activity-group page: group header + membership controls (join/leave, email
+// notification frequency) + the group's events + its feed. The id arrives as the
+// ?recordId= URL param. Chairs still approve events in Salesforce; this page is
+// read/browse + self-service membership. New members default to a daily digest.
 export default class GroupDetail extends LightningElement {
   @api recordId;
   @api groupId;
@@ -15,6 +25,8 @@ export default class GroupDetail extends LightningElement {
   urlRecordId;
   group;
   errorMessage;
+  busy = false;
+  _wired;
 
   @wire(CurrentPageReference)
   setPageRef(pageRef) {
@@ -26,13 +38,14 @@ export default class GroupDetail extends LightningElement {
   }
 
   @wire(getGroup, { groupId: "$effectiveId" })
-  wiredGroup({ data, error }) {
-    if (data) {
-      this.group = data;
+  wiredGroup(result) {
+    this._wired = result;
+    if (result.data) {
+      this.group = result.data;
       this.errorMessage = undefined;
-    } else if (error) {
+    } else if (result.error) {
       this.errorMessage =
-        error?.body?.message || "This group could not be loaded.";
+        result.error?.body?.message || "This group could not be loaded.";
       this.group = undefined;
     }
   }
@@ -40,18 +53,72 @@ export default class GroupDetail extends LightningElement {
   get hasGroup() {
     return Boolean(this.group);
   }
-
   get typeLabel() {
     return this.group?.isPublic ? "Public group" : "Private group";
   }
-
   get memberLabel() {
     if (!this.group) return "";
     const n = this.group.memberCount;
     return `${n} ${n === 1 ? "member" : "members"}`;
   }
-
   get backUrl() {
     return `${basePath}/activities`;
+  }
+
+  // Membership state
+  get isMember() {
+    return Boolean(this.group?.isMember);
+  }
+  get notMember() {
+    return !this.isMember;
+  }
+  get showJoin() {
+    return this.group && !this.group.isMember && !this.group.hasPendingRequest;
+  }
+  get joinLabel() {
+    return this.group?.isPublic ? "Join group" : "Request to join";
+  }
+  get showPending() {
+    return Boolean(this.group?.hasPendingRequest);
+  }
+
+  // Notification frequency select (current value preselected).
+  get frequencyOptions() {
+    const current = this.group?.notificationFrequency || "D";
+    return FREQUENCIES.map((f) => ({ ...f, selected: f.value === current }));
+  }
+
+  async handleJoin() {
+    this.busy = true;
+    try {
+      await joinGroup({ groupId: this.group.id });
+      await refreshApex(this._wired);
+    } catch (e) {
+      this.errorMessage = e?.body?.message || "Could not join the group.";
+    } finally {
+      this.busy = false;
+    }
+  }
+
+  async handleLeave() {
+    this.busy = true;
+    try {
+      await leaveGroup({ groupId: this.group.id });
+      await refreshApex(this._wired);
+    } catch (e) {
+      this.errorMessage = e?.body?.message || "Could not leave the group.";
+    } finally {
+      this.busy = false;
+    }
+  }
+
+  async handleFrequencyChange(event) {
+    const frequency = event.target.value;
+    try {
+      await setNotificationFrequency({ groupId: this.group.id, frequency });
+    } catch (e) {
+      this.errorMessage =
+        e?.body?.message || "Could not update your notifications.";
+    }
   }
 }

@@ -13,6 +13,40 @@
         <template lwc:if={group.description}>
           <p class="desc">{group.description}</p>
         </template>
+
+        <div class="membership">
+          <template lwc:if={showJoin}>
+            <button
+              class="btn btn--primary"
+              onclick={handleJoin}
+              disabled={busy}
+            >
+              {joinLabel}
+            </button>
+          </template>
+          <template lwc:if={showPending}>
+            <span class="pending">Request pending approval</span>
+          </template>
+          <template lwc:if={isMember}>
+            <label class="freq">
+              <span class="freq__label">Email notifications</span>
+              <select class="freq__select" onchange={handleFrequencyChange}>
+                <template for:each={frequencyOptions} for:item="f">
+                  <option key={f.value} value={f.value} selected={f.selected}>
+                    {f.label}
+                  </option>
+                </template>
+              </select>
+            </label>
+            <button
+              class="btn btn--ghost"
+              onclick={handleLeave}
+              disabled={busy}
+            >
+              Leave group
+            </button>
+          </template>
+        </div>
       </header>
 
       <template lwc:if={group.isAdmin}>
@@ -28,7 +62,11 @@
       </section>
 
       <section class="feed">
-        <c-smi-feed group-id={group.id} heading="Group feed"></c-smi-feed>
+        <c-smi-feed
+          group-id={group.id}
+          heading="Group feed"
+          read-only={notMember}
+        ></c-smi-feed>
       </section>
     </template>
   </article>

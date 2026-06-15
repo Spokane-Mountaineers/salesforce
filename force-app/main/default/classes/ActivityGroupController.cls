@@ -64,9 +64,62 @@ public with sharing class ActivityGroupController {
         'That group does not exist or you do not have access to it'
       );
     }
+    GroupSelector sel = new GroupSelector();
+    Id uid = UserInfo.getUserId();
+    CollaborationGroupMember mine = sel.myMembership(groupId, uid);
     GroupDTO dto = new GroupDTO(g, coreGroupNames().contains(g.Name));
     dto.isAdmin = admin;
+    dto.isMember = mine != null;
+    dto.notificationFrequency = mine == null
+      ? null
+      : mine.NotificationFrequency;
+    dto.hasPendingRequest =
+      !dto.isMember && sel.hasPendingRequest(groupId, uid);
     return dto;
+  }
+
+  /**
+   * Join a group: public groups join immediately; private groups create a
+   * pending request for the admin to approve. Returns 'member' or 'requested'.
+   */
+  @AuraEnabled
+  public static String joinGroup(Id groupId) {
+    GroupSelector sel = new GroupSelector();
+    CollaborationGroup g = sel.oneGroup(groupId);
+    if (g == null) {
+      throw new AuraHandledException('That group does not exist.');
+    }
+    Id uid = UserInfo.getUserId();
+    if (sel.isMember(groupId, uid)) {
+      return 'member';
+    }
+    if (g.CollaborationType == 'Public') {
+      sel.addMember(groupId, uid);
+      return 'member';
+    }
+    if (!sel.hasPendingRequest(groupId, uid)) {
+      sel.addRequest(groupId, uid);
+    }
+    return 'requested';
+  }
+
+  /** Leave a group (removes the running user's membership). */
+  @AuraEnabled
+  public static void leaveGroup(Id groupId) {
+    new GroupSelector().removeMembership(groupId, UserInfo.getUserId());
+  }
+
+  /**
+   * Set the running member's email notification frequency for the group.
+   * Values: 'P' each post, 'D' daily digest, 'W' weekly digest, 'N' never.
+   * New members default to daily ('D') on join.
+   */
+  @AuraEnabled
+  public static void setNotificationFrequency(Id groupId, String frequency) {
+    if (!new Set<String>{ 'P', 'D', 'W', 'N' }.contains(frequency)) {
+      throw new AuraHandledException('Invalid notification frequency.');
+    }
+    new GroupSelector().setFrequency(groupId, UserInfo.getUserId(), frequency);
   }
 
   /** The group's members + any pending join requests. Admin-only (management). */
@@ -214,13 +267,67 @@ public with sharing class ActivityGroupController {
     }
 
     Boolean isMember(Id groupId, Id uid) {
+      return myMembership(groupId, uid) != null;
+    }
+
+    CollaborationGroupMember myMembership(Id groupId, Id uid) {
+      List<CollaborationGroupMember> m = [
+        SELECT Id, NotificationFrequency
+        FROM CollaborationGroupMember
+        WHERE CollaborationGroupId = :groupId AND MemberId = :uid
+        LIMIT 1
+      ];
+      return m.isEmpty() ? null : m[0];
+    }
+
+    Boolean hasPendingRequest(Id groupId, Id uid) {
       return ![
           SELECT Id
-          FROM CollaborationGroupMember
-          WHERE CollaborationGroupId = :groupId AND MemberId = :uid
+          FROM CollaborationGroupMemberRequest
+          WHERE
+            CollaborationGroupId = :groupId
+            AND RequesterId = :uid
+            AND Status = 'Pending'
           LIMIT 1
         ]
         .isEmpty();
+    }
+
+    void addMember(Id groupId, Id uid) {
+      // New members default to a daily digest (was weekly by default).
+      insert new CollaborationGroupMember(
+        CollaborationGroupId = groupId,
+        MemberId = uid,
+        NotificationFrequency = 'D'
+      );
+    }
+
+    void addRequest(Id groupId, Id uid) {
+      // Status isn't writable on insert; it defaults to 'Pending'.
+      insert new CollaborationGroupMemberRequest(
+        CollaborationGroupId = groupId,
+        RequesterId = uid
+      );
+    }
+
+    void removeMembership(Id groupId, Id uid) {
+      List<CollaborationGroupMember> m = [
+        SELECT Id
+        FROM CollaborationGroupMember
+        WHERE CollaborationGroupId = :groupId AND MemberId = :uid
+      ];
+      if (!m.isEmpty()) {
+        delete m;
+      }
+    }
+
+    void setFrequency(Id groupId, Id uid, String frequency) {
+      CollaborationGroupMember m = myMembership(groupId, uid);
+      if (m == null) {
+        throw new AuraHandledException('You are not a member of this group.');
+      }
+      m.NotificationFrequency = frequency;
+      update m;
     }
 
     List<CollaborationGroupMember> membersOf(Id groupId) {
@@ -259,6 +366,12 @@ public with sharing class ActivityGroupController {
     public Boolean isCore;
     @AuraEnabled
     public Boolean isAdmin = false;
+    @AuraEnabled
+    public Boolean isMember = false;
+    @AuraEnabled
+    public Boolean hasPendingRequest = false;
+    @AuraEnabled
+    public String notificationFrequency; // P/D/W/N, null when not a member
 
     public GroupDTO(CollaborationGroup g, Boolean isCore) {
       this.id = g.Id;

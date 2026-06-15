@@ -2,30 +2,35 @@
   <section class="feed">
     <h2 class="feed__title">{heading}</h2>
 
-    <div class="composer">
-      <textarea
-        class="composer__input"
-        rows="3"
-        placeholder="Share an update with the club…"
-        value={draft}
-        oninput={handleInput}
-        aria-label="Write a post"
-      ></textarea>
-      <div class="composer__actions">
-        <template lwc:if={errorMessage}>
-          <span class="composer__error" role="alert">{errorMessage}</span>
-        </template>
-        <button
-          class="btn btn--primary"
-          type="button"
-          onclick={handlePost}
-          disabled={postDisabled}
-        >
-          <template lwc:if={posting}>Posting…</template>
-          <template lwc:else>Post</template>
-        </button>
+    <template lwc:if={readOnly}>
+      <p class="join-hint">Join this group to post.</p>
+    </template>
+    <template lwc:else>
+      <div class="composer">
+        <textarea
+          class="composer__input"
+          rows="3"
+          placeholder="Share an update with the club…"
+          value={draft}
+          oninput={handleInput}
+          aria-label="Write a post"
+        ></textarea>
+        <div class="composer__actions">
+          <template lwc:if={errorMessage}>
+            <span class="composer__error" role="alert">{errorMessage}</span>
+          </template>
+          <button
+            class="btn btn--primary"
+            type="button"
+            onclick={handlePost}
+            disabled={postDisabled}
+          >
+            <template lwc:if={posting}>Posting…</template>
+            <template lwc:else>Post</template>
+          </button>
+        </div>
       </div>
-    </div>
+    </template>
 
     <template lwc:if={hasPosts}>
       <ul class="posts">

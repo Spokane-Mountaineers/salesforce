@@ -10,6 +10,11 @@ import postToChatter from "@salesforce/apex/ChatterPublisherController.postToCha
 export default class SmiFeed extends LightningElement {
   @api groupId;
   @api heading = "Club Feed";
+  // Hide the composer (read-only feed). Defaults false so existing placements
+  // keep posting; the group page sets it for non-members so they read but can't
+  // post. (Inverted vs. a "canPost" flag because a boolean @api must default
+  // false, and canPost is already the post-button enable getter below.)
+  @api readOnly = false;
 
   @track draft = "";
   @track posting = false;
