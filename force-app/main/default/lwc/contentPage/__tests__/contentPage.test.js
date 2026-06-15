@@ -64,6 +64,21 @@ describe("c-content-page", () => {
     expect(img.getAttribute("loading")).toBe("lazy");
   });
 
+  it("resolves a group-prefixed data-asset to the gallery resource", async () => {
+    const el = mount({
+      heading: "Chalet",
+      bodyHtml:
+        '<div class="gallery"><img data-asset="chalet/IMG_6757.jpeg" alt="" /></div>'
+    });
+    await flush();
+    const img = el.shadowRoot.querySelector(".gallery img");
+    // The "chalet/" prefix maps to the content_img_chalet resource and is
+    // stripped from the filename portion.
+    expect(img.getAttribute("src")).toMatch(
+      /content_img_chalet\/IMG_6757\.jpeg$/
+    );
+  });
+
   it("resolves site-relative related links through basePath and renders them", () => {
     const el = mount({
       relatedHeading: "More About Us",

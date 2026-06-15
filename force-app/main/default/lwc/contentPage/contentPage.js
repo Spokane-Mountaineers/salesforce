@@ -1,6 +1,12 @@
 import { LightningElement, api } from "lwc";
 import basePath from "@salesforce/community/basePath";
 import CONTENT_ASSETS from "@salesforce/resourceUrl/content_assets";
+import CONTENT_IMG_CHALET from "@salesforce/resourceUrl/content_img_chalet";
+
+// Images ship as static resources (CDN-cached, versioned). A single resource
+// caps at 5 MB, so heavy galleries get their own resource; a "group/" prefix on
+// the data-asset token selects it. Add a resource + map entry per group.
+const IMAGE_RESOURCES = { chalet: CONTENT_IMG_CHALET };
 
 /**
  * Reusable Alpine Field Guide content page for ported legacy marketing/info
@@ -102,14 +108,37 @@ export default class ContentPage extends LightningElement {
       host.appendChild(document.importNode(node, true));
     });
     // Resolve migrated images. Authors write a host-neutral token carrying the
-    // filename (<img data-asset="history.jpg">); we point it at the
-    // content_assets static resource (binaries exported from prod, since sandbox
-    // file data isn't copied). Keeps committed markup free of host/site prefixes.
+    // filename (<img data-asset="history.jpg">), optionally with a group prefix
+    // for galleries in their own resource (<img data-asset="chalet/IMG_1.jpeg">).
+    // Binaries are exported from prod (sandbox file data isn't copied). Keeps
+    // committed markup free of host/site prefixes.
     host.querySelectorAll("img[data-asset]").forEach((img) => {
-      img.setAttribute("src", `${CONTENT_ASSETS}/${img.dataset.asset}`);
+      img.setAttribute("src", this.assetUrl(img.dataset.asset));
       if (!img.getAttribute("loading")) {
         img.setAttribute("loading", "lazy");
       }
     });
+    // Site-relative links in the body need the community basePath too (so they
+    // resolve under /lwrsite etc.). Absolute URLs, anchors and mailto: are left
+    // alone, and links already under basePath aren't double-prefixed.
+    if (basePath) {
+      host.querySelectorAll('a[href^="/"]').forEach((anchor) => {
+        const href = anchor.getAttribute("href");
+        if (!href.startsWith(`${basePath}/`) && href !== basePath) {
+          anchor.setAttribute("href", `${basePath}${href}`);
+        }
+      });
+    }
+  }
+
+  assetUrl(token) {
+    const slash = token.indexOf("/");
+    if (slash > -1) {
+      const base = IMAGE_RESOURCES[token.slice(0, slash)];
+      if (base) {
+        return `${base}/${token.slice(slash + 1)}`;
+      }
+    }
+    return `${CONTENT_ASSETS}/${token}`;
   }
 }

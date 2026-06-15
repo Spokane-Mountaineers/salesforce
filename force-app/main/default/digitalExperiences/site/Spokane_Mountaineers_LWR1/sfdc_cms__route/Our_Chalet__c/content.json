@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Our_Chalet",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-our-chalet",
+    "urlPrefix": "our-chalet"
+  },
+  "title": "Our Chalet",
+  "type": "sfdc_cms__route",
+  "urlName": "our-chalet"
+}

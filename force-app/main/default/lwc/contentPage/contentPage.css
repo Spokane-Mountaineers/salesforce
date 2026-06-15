@@ -211,6 +211,19 @@
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
+/* Photo gallery: a responsive grid; images crop to a tidy aspect ratio. */
+.body .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.body .gallery img {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
 .body ul li::marker {
   color: var(--moss);
 }
