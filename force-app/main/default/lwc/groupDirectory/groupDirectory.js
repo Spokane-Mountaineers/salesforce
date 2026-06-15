@@ -1,4 +1,5 @@
 import { LightningElement, wire } from "lwc";
+import isGuest from "@salesforce/user/isGuest";
 import basePath from "@salesforce/community/basePath";
 import getGroups from "@salesforce/apex/ActivityGroupController.getGroups";
 
@@ -44,6 +45,9 @@ export default class GroupDirectory extends LightningElement {
   }
   get hasOthers() {
     return this.otherGroups.length > 0;
+  }
+  get isGuest() {
+    return isGuest;
   }
   get hasGroups() {
     return this.groups.length > 0;

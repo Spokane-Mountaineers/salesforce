@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
 import { refreshApex } from "@salesforce/apex";
+import isGuest from "@salesforce/user/isGuest";
 import basePath from "@salesforce/community/basePath";
 import getGroup from "@salesforce/apex/ActivityGroupController.getGroup";
 import joinGroup from "@salesforce/apex/ActivityGroupController.joinGroup";
@@ -50,6 +51,9 @@ export default class GroupDetail extends LightningElement {
     }
   }
 
+  get isGuest() {
+    return isGuest;
+  }
   get hasGroup() {
     return Boolean(this.group);
   }

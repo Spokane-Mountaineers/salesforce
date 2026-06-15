@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Login Gate</masterLabel>
+    <description
+  >Friendly "please sign in" card for guests reaching member-only content; the sign-in link returns them to the current page.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="heading" type="String" label="Heading" />
+            <property name="message" type="String" label="Message" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

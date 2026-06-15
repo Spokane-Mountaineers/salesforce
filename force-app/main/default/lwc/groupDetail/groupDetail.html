@@ -1,5 +1,11 @@
 <template>
-  <article class="root">
+  <template lwc:if={isGuest}>
+    <c-login-gate
+      heading="Sign in to view this group"
+      message="Activity groups, their events, and discussion are for members. Please sign in to continue."
+    ></c-login-gate>
+  </template>
+  <article lwc:else class="root">
     <template lwc:if={errorMessage}>
       <p class="state state--error">{errorMessage}</p>
     </template>

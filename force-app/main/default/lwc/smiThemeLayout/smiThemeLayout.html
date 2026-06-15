@@ -89,10 +89,20 @@
           </ul>
           <div class="nav__auth">
             <template lwc:if={isGuest}>
-              <a class="smi-btn smi-btn--primary" href={loginLink}>Log in</a>
+              <a
+                class="smi-btn smi-btn--primary"
+                href={loginLink}
+                onclick={closeMobile}
+                >Log in</a
+              >
             </template>
             <template lwc:else>
-              <a class="smi-btn smi-btn--ghost" href={logoutLink}>Log out</a>
+              <a
+                class="smi-btn smi-btn--ghost"
+                href={logoutLink}
+                onclick={closeMobile}
+                >Log out</a
+              >
             </template>
           </div>
         </nav>

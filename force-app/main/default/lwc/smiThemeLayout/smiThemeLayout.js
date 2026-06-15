@@ -21,6 +21,7 @@ const DEFAULT_NAV = [
   { label: "Home", href: "/" },
   { label: "Calendar", href: "/events" },
   { label: "Schools & Clinics", href: "/schools-and-clinics" },
+  { label: "Activities", href: "/activities" },
   {
     label: "About",
     children: [
@@ -40,10 +41,6 @@ const DEFAULT_NAV = [
       { label: "Logo & Gear", href: "/club-logo-gear" }
     ]
   },
-  // Activity groups are dynamic and club-managed (CollaborationGroups), so this
-  // is a single link to the directory — not a hardcoded dropdown. The directory
-  // features the core groups and lists the rest.
-  { label: "Activities", href: "/activities" },
   {
     label: "News",
     children: [
@@ -82,8 +79,19 @@ export default class SmiThemeLayout extends LightningElement {
     return this.withBase(this.homeHref);
   }
 
+  // Carry the current page as startURL so logging in returns the member here
+  // (not the default landing), unless they're already on the login page.
   get loginLink() {
-    return this.withBase(this.loginHref);
+    const base = this.withBase(this.loginHref);
+    try {
+      const here = window.location.pathname + window.location.search;
+      if (here && here.indexOf(this.loginHref) === -1) {
+        return `${base}?startURL=${encodeURIComponent(here)}`;
+      }
+    } catch (e) {
+      // window unavailable (SSR) — fall back to the plain login link.
+    }
+    return base;
   }
 
   get logoutLink() {
