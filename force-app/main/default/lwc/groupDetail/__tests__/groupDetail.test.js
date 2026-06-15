@@ -49,6 +49,20 @@ describe("c-group-detail", () => {
     expect(cal.activity).toBe("Climbing");
   });
 
+  it("shows the admin panel only to group admins", async () => {
+    const member = mount({ groupId: "0F9a" });
+    getGroup.emit({ ...GROUP, isAdmin: false });
+    await Promise.resolve();
+    expect(member.shadowRoot.querySelector("c-group-admin-panel")).toBeNull();
+
+    const admin = mount({ groupId: "0F9a" });
+    getGroup.emit({ ...GROUP, isAdmin: true });
+    await Promise.resolve();
+    const panel = admin.shadowRoot.querySelector("c-group-admin-panel");
+    expect(panel).not.toBeNull();
+    expect(panel.groupId).toBe("0F9a");
+  });
+
   it("shows an error when the group can't be loaded", async () => {
     const el = mount({ groupId: "bad" });
     getGroup.error();

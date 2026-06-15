@@ -1,0 +1,86 @@
+<template>
+  <section class="panel">
+    <header class="panel__head">
+      <span class="badge">Group admin</span>
+      <h2 class="panel__title">Manage this group</h2>
+    </header>
+
+    <template lwc:if={message}>
+      <p class="msg">{message}</p>
+    </template>
+
+    <div class="block">
+      <label class="label" for="desc">Group description</label>
+      <textarea
+        id="desc"
+        class="textarea"
+        rows="4"
+        value={draftDescription}
+        onchange={handleDescChange}
+      ></textarea>
+      <button
+        class="btn btn--primary"
+        onclick={saveDescription}
+        disabled={busy}
+      >
+        Save description
+      </button>
+    </div>
+
+    <template lwc:if={hasRequests}>
+      <div class="block">
+        <h3 class="block__title">Pending join requests</h3>
+        <ul class="list">
+          <template for:each={requests} for:item="r">
+            <li key={r.recordId} class="row">
+              <span class="row__name">{r.name}</span>
+              <span class="row__actions">
+                <button
+                  class="btn btn--small btn--primary"
+                  data-id={r.recordId}
+                  data-status="Accepted"
+                  onclick={handleRequest}
+                >
+                  Approve
+                </button>
+                <button
+                  class="btn btn--small btn--ghost"
+                  data-id={r.recordId}
+                  data-status="Declined"
+                  onclick={handleRequest}
+                >
+                  Decline
+                </button>
+              </span>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </template>
+
+    <template lwc:if={hasMembers}>
+      <div class="block">
+        <h3 class="block__title">Members</h3>
+        <ul class="list">
+          <template for:each={members} for:item="m">
+            <li key={m.recordId} class="row">
+              <span class="row__name">
+                {m.name}
+                <template lwc:if={m.isAdmin}>
+                  <span class="role">Admin</span>
+                </template>
+              </span>
+              <button
+                class="btn btn--small btn--ghost"
+                data-id={m.recordId}
+                onclick={handleRemove}
+              >
+                Remove
+              </button>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </template>
+  </section>
+</template>

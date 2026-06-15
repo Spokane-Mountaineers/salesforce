@@ -15,6 +15,13 @@
         </template>
       </header>
 
+      <template lwc:if={group.isAdmin}>
+        <c-group-admin-panel
+          group-id={group.id}
+          description={group.description}
+        ></c-group-admin-panel>
+      </template>
+
       <section class="events">
         <h2 class="events__title">Upcoming events</h2>
         <c-events-calendar activity={group.name}></c-events-calendar>

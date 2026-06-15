@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>Activity Group Admin Panel</masterLabel>
+    <description
+  >Standardized on-site management panel for an activity group's admin (edit description, manage members and join requests).</description>
+</LightningComponentBundle>

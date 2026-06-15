@@ -62,7 +62,124 @@ public with sharing class ActivityGroupController {
         'That group does not exist or you do not have access to it'
       );
     }
-    return new GroupDTO(groups[0], coreGroupNames().contains(groups[0].Name));
+    GroupDTO dto = new GroupDTO(
+      groups[0],
+      coreGroupNames().contains(groups[0].Name)
+    );
+    dto.isAdmin = isCurrentUserAdmin(groupId);
+    return dto;
+  }
+
+  /** The group's members + any pending join requests. Admin-only (management). */
+  @AuraEnabled(cacheable=true)
+  public static MemberList getMembers(Id groupId) {
+    assertAdmin(groupId);
+    MemberList result = new MemberList();
+    for (CollaborationGroupMember m : [
+      SELECT Id, MemberId, Member.Name, CollaborationRole
+      FROM CollaborationGroupMember
+      WHERE CollaborationGroupId = :groupId
+      ORDER BY CollaborationRole, Member.Name
+      LIMIT 1000
+    ]) {
+      result.members.add(
+        new MemberDTO(
+          m.Id,
+          m.MemberId,
+          m.Member.Name,
+          m.CollaborationRole == 'Admin'
+        )
+      );
+    }
+    for (CollaborationGroupMemberRequest r : [
+      SELECT Id, RequesterId, Requester.Name
+      FROM CollaborationGroupMemberRequest
+      WHERE CollaborationGroupId = :groupId AND Status = 'Pending'
+      ORDER BY Requester.Name
+      LIMIT 1000
+    ]) {
+      result.requests.add(
+        new MemberDTO(r.Id, r.RequesterId, r.Requester.Name, false)
+      );
+    }
+    return result;
+  }
+
+  /** Admin: update the group's description. */
+  @AuraEnabled
+  public static void updateGroupDescription(Id groupId, String description) {
+    assertAdmin(groupId);
+    CollaborationGroup g = [
+      SELECT Id, Description
+      FROM CollaborationGroup
+      WHERE Id = :groupId
+      LIMIT 1
+    ];
+    g.Description = description;
+    update g;
+  }
+
+  /** Admin: remove a member (by their CollaborationGroupMember id). */
+  @AuraEnabled
+  public static void removeMember(Id memberRecordId) {
+    CollaborationGroupMember m = [
+      SELECT Id, CollaborationGroupId
+      FROM CollaborationGroupMember
+      WHERE Id = :memberRecordId
+      LIMIT 1
+    ];
+    assertAdmin(m.CollaborationGroupId);
+    delete m;
+  }
+
+  /** Admin: approve or decline a pending join request. */
+  @AuraEnabled
+  public static void setJoinRequestStatus(Id requestId, String status) {
+    if (status != 'Accepted' && status != 'Declined') {
+      throw new AuraHandledException('Status must be Accepted or Declined.');
+    }
+    CollaborationGroupMemberRequest r = [
+      SELECT Id, CollaborationGroupId, Status
+      FROM CollaborationGroupMemberRequest
+      WHERE Id = :requestId
+      LIMIT 1
+    ];
+    assertAdmin(r.CollaborationGroupId);
+    r.Status = status;
+    update r;
+  }
+
+  // ---- admin checks -------------------------------------------------------
+
+  /** True when the running user owns or is an Admin member of the group. */
+  private static Boolean isCurrentUserAdmin(Id groupId) {
+    Id uid = UserInfo.getUserId();
+    for (CollaborationGroup g : [
+      SELECT OwnerId
+      FROM CollaborationGroup
+      WHERE Id = :groupId
+      LIMIT 1
+    ]) {
+      if (g.OwnerId == uid) {
+        return true;
+      }
+    }
+    return ![
+        SELECT Id
+        FROM CollaborationGroupMember
+        WHERE
+          CollaborationGroupId = :groupId
+          AND MemberId = :uid
+          AND CollaborationRole = 'Admin'
+        LIMIT 1
+      ]
+      .isEmpty();
+  }
+
+  private static void assertAdmin(Id groupId) {
+    if (!isCurrentUserAdmin(groupId)) {
+      throw new AuraHandledException('Only a group administrator can do that.');
+    }
   }
 
   public class GroupDTO {
@@ -78,6 +195,8 @@ public with sharing class ActivityGroupController {
     public Boolean isPublic;
     @AuraEnabled
     public Boolean isCore;
+    @AuraEnabled
+    public Boolean isAdmin = false;
 
     public GroupDTO(CollaborationGroup g, Boolean isCore) {
       this.id = g.Id;
@@ -86,6 +205,31 @@ public with sharing class ActivityGroupController {
       this.memberCount = g.MemberCount == null ? 0 : g.MemberCount;
       this.isPublic = g.CollaborationType == 'Public';
       this.isCore = isCore;
+    }
+  }
+
+  public class MemberList {
+    @AuraEnabled
+    public List<MemberDTO> members = new List<MemberDTO>();
+    @AuraEnabled
+    public List<MemberDTO> requests = new List<MemberDTO>();
+  }
+
+  public class MemberDTO {
+    @AuraEnabled
+    public Id recordId; // CollaborationGroupMember or ...MemberRequest id
+    @AuraEnabled
+    public Id userId;
+    @AuraEnabled
+    public String name;
+    @AuraEnabled
+    public Boolean isAdmin;
+
+    public MemberDTO(Id recordId, Id userId, String name, Boolean isAdmin) {
+      this.recordId = recordId;
+      this.userId = userId;
+      this.name = name;
+      this.isAdmin = isAdmin;
     }
   }
 }
