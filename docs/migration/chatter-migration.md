@@ -21,7 +21,63 @@ can join and post on the new site.
 So full group functionality on LWR requires the groups (and their members and
 feed history) to exist in the LWR network.
 
-## Is migration possible?
+## Critical platform constraint (discovered during de-risking)
+
+Two platform rules make a naive "recreate the groups in the LWR network" plan
+impossible while the legacy site is still up:
+
+- **`CollaborationGroup.NetworkId` is not writeable.** You cannot move a group
+  from one network to another by updating it (confirmed: "Field is not writeable:
+  CollaborationGroup.NetworkId"). A group's network is fixed when it's created.
+- **Group names are unique org-wide.** You cannot create a second "Climbing" in
+  the LWR network while the legacy "Climbing" still exists (confirmed: "An active
+  or archived group with this name already exists").
+
+Together these mean: you can't move groups, and you can't copy them under their
+real names while the originals exist. Any migration has to deal with the name
+collision, which forces one of the approaches below.
+
+## Revised options
+
+### Option A — Rename-and-recreate at cutover (within the one org)
+
+Pre-cutover, create the LWR-network groups under temporary names (via
+`ConnectApi.ChatterGroups.createGroup` targeting the LWR community), and migrate
+members and feed history into them (idempotent, re-runnable). At cutover, in a
+tight sequence: archive/rename the legacy groups to free the names, then rename
+the LWR groups to their real names.
+
+- Pros: keeps native Chatter (mentions, group notifications, our daily-digest
+  default), reuses the work already done.
+- Cons: a delicate cutover window, name juggling, and the legacy groups must be
+  retired as part of it. Feed-history copy still needs "Set Audit Fields."
+
+### Option B — Move activity groups off Chatter to a custom data model
+
+Stop using `CollaborationGroup` for activity groups. Model them as custom objects
+(group, membership, post) owned by the LWR site, with no network binding. Migrate
+the feed content into the custom post object (record copy, with Set Audit Fields
+for original author/date).
+
+- Pros: removes the network-binding problem entirely; migration becomes a
+  straightforward record copy; full control over the model.
+- Cons: the largest build — re-implements grouping, membership, and the feed off
+  Chatter, and loses native Chatter features (we'd own notifications, mentions,
+  etc.). The Activity Groups feature already built on `CollaborationGroup` would
+  be re-pointed at the custom model.
+
+### Option C — Keep Chatter on the legacy community; revisit later
+
+Ship the LWR site with group pages that browse/read (which works cross-network),
+and keep join/post pointed at the legacy community for now, or hide them until a
+decision is made. Defer the data move.
+
+### Option D — Salesforce Support / supported migration path
+
+Open a case with Salesforce to confirm whether there's any supported way to move
+groups between networks or convert the community, before committing to A or B.
+
+## Is migration possible? (mechanics, once an approach is chosen)
 
 Yes, with one important prerequisite and some known caveats. The pieces:
 
