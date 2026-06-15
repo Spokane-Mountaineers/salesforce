@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Club_Logo_Gear",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-club-logo-gear",
+    "urlPrefix": "club-logo-gear"
+  },
+  "title": "Logo and Gear",
+  "type": "sfdc_cms__route",
+  "urlName": "club-logo-gear"
+}

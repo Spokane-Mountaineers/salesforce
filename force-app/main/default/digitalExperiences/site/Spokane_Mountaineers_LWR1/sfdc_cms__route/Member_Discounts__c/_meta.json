@@ -1,0 +1,5 @@
+{
+  "apiName": "Member_Discounts__c",
+  "path": "routes",
+  "type": "sfdc_cms__route"
+}

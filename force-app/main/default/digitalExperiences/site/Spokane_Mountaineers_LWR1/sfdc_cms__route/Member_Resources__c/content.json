@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Member_Resources",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-member-resources",
+    "urlPrefix": "member-resources"
+  },
+  "title": "Member Resources",
+  "type": "sfdc_cms__route",
+  "urlName": "member-resources"
+}

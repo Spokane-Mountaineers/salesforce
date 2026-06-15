@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"c5b3ca7f-706e-40dd-8bb3-6266eb590388\", \"columns\": [{\"UUID\": \"4675312d-1027-4f70-b950-2a1551d958fb\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Membership",
+                        "heading": "Logo & Gear",
+                        "subtitle": "Custom Spokane Mountaineers apparel.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h2><strong>Check out our Club Logo Gear. </strong></h2><h2><br></h2><p><strong>We have established a relationship with BSI Apparel in Spokane for custom personal orders. (See below)</strong></p><h4><a href=\"https://bsiapparel.chipply.com/mountaineers/\"><strong>Click here to go to BSI Apparel and place an order</strong></a> for Jacket, Hat or Cap. </h4><h5>Order New or Add club logo to what you already have</h5><h5><br></h5><h5>Watch Clubwide for new products. as they become available.</h5><p><img data-asset=\"club_logo_gear.png\" alt=\"Spokane Mountaineers logo gear\"> </p>",
+                        "relatedHeading": "Membership",
+                        "relatedLinks": "[{\"label\":\"Membership Benefits\",\"path\":\"/member-benefits\"},{\"label\":\"Member Discounts\",\"path\":\"/member-discounts\"},{\"label\":\"Member Resources\",\"path\":\"/member-resources\"},{\"label\":\"Logo & Gear\",\"path\":\"/club-logo-gear\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "3c550978-be19-4744-b1ad-396d7654525d",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "4675312d-1027-4f70-b950-2a1551d958fb",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "c5b3ca7f-706e-40dd-8bb3-6266eb590388",
+              "type": "component"
+            }
+          ],
+          "id": "14e44e94-44b4-4d81-86b0-969a0c548981",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Order custom Spokane Mountaineers logo apparel through BSI Apparel.",
+                "dxpStyle": {},
+                "pageTitle": "Logo & Gear | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "753ba989-6e54-4916-8a01-e5f94553f6c2",
+              "type": "component"
+            }
+          ],
+          "id": "9461a9f1-124f-4f7c-b0c6-af6e992b23ef",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "961f0101-b4f7-4f51-9122-582e2fc73e1e",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-club-logo-gear"
+  },
+  "title": "Logo and Gear",
+  "type": "sfdc_cms__view",
+  "urlName": "club-logo-gear"
+}

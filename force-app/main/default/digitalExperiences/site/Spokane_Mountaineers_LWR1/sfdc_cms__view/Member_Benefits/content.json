@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"4e6aa7cc-ea68-41a3-855f-0fd6f5e60b55\", \"columns\": [{\"UUID\": \"4eff93b9-254d-4dd4-9f57-bf36e2ad4b2b\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Membership",
+                        "heading": "Membership Benefits",
+                        "subtitle": "Why join the Spokane Mountaineers.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h3><strong>Enjoyment of The Great Outdoors</strong></h3><p>Being a Spokane Mountaineer means being invited to participate in some of hundreds of volunteer-led outdoor activities for all levels of ability.</p><h3><strong>Knowledge Base</strong></h3><p>The Spokane Mountaineers have compiled a century's worth of expertise in outdoor activities based in the Inland Northwest. We boast more than a few members who have become world class climbers, as well as leaders who may introduce you to a new world of local adventure right in our own back yard. Our members have literally written the book about the outdoor adventures we know in our area. We love what we do and we?re happy to share it with you. As an all-volunteer organization, this wealth of knowledge is available to you as part of your membership.</p><h3><br></h3><h3><strong>Help Keep the Wild Places Wild</strong></h3><p>The Club's conservation efforts have a great history of adding to and maintaining access to the venues where we play. A portion of your membership dues goes toward conservation efforts in the Inland Northwest. Our volunteer Conservation Committee monitors issues regarding access to wild places and acts to protect it. We do volunteer trail work projects as stewards of these areas. Membership in the Club is a great way to get involved.</p><h3><br></h3><h3><strong>Our Chalet on Mount Spokane</strong></h3><p>The Club owns a chalet situated on forty acres on Mount Spokane. As a member, you have full access to our clubhouse in the high country. It's a great place to spend a ski weekend or just get away to enjoy the view and some mountain air.</p><h3><br></h3><h3><strong>Stay Informed</strong></h3><p>The Club's newsletter, The Kinnikinnick, is published quarterly to let our members learn about our activities and news. We feature stories from past events and highlight our members activities and achievements.</p><p>Our Web site has all the latest club activity information and our social media platform lets members tap into our wealth of outdoor expertise in real time.</p><p>Members have access to an extensive library of outdoor guide and history books as well as an excellent collection of maps.</p><h3><br></h3><h3><strong>Meet New Friends</strong></h3><p>Being a Spokane Mountaineer is a great way to meet people who share interests with you. You will meet folks who share a love of the outdoors and who subscribe to a healthy lifestyle. In addition to our outdoor activities, we offer social events throughout the season.</p><h3><br></h3><h3><strong>Expand Your Skills</strong></h3><p>Our schools and clinics allow you, the member, to learn from highly skilled volunteer instructors. Alpinists who first roped up in our Mountain School have gone on to scale the world's great peaks. Our Backpack School, Winter Travel Clinic, and Mountain Bike Skills Clinic give students the skills to be safe, confident and comfortable in their element. Rock and ice climbing courses will teach you best practices so that refining your craft is fun and safe.</p><h3><br></h3><h3><strong>An Excellent Value</strong></h3><p>All Spokane Mountaineers events are offered at our cost. If you compare similar commercially available programs, especially those like our Schools and Clinics, you may see prices in the thousands.</p><ul><li>Our conservation funding efforts are managed by volunteers, so we get the most value added per dollar.</li><li>We make efforts to carpool to our events to save on transportation costs.</li></ul><h3><strong>Community Discounts </strong></h3><ul><li>We partner with local like minded businesses and outfitters to offer discounted services to our members. </li></ul>",
+                        "relatedHeading": "Membership",
+                        "relatedLinks": "[{\"label\":\"Membership Benefits\",\"path\":\"/member-benefits\"},{\"label\":\"Member Discounts\",\"path\":\"/member-discounts\"},{\"label\":\"Member Resources\",\"path\":\"/member-resources\"},{\"label\":\"Logo & Gear\",\"path\":\"/club-logo-gear\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "af7a8de7-8e10-4123-9d60-0b983d1e204d",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "4eff93b9-254d-4dd4-9f57-bf36e2ad4b2b",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "4e6aa7cc-ea68-41a3-855f-0fd6f5e60b55",
+              "type": "component"
+            }
+          ],
+          "id": "89e9a4b1-0fc8-49c7-abcd-c9899389cbf0",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "The benefits of joining the Spokane Mountaineers \u2014 activities, knowledge, community, and more.",
+                "dxpStyle": {},
+                "pageTitle": "Membership Benefits | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "335f03e6-aed9-49ee-892a-2edfe42dd272",
+              "type": "component"
+            }
+          ],
+          "id": "254dd33d-f19e-40b9-a235-20e09fd6364f",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "5bada0a7-e57b-49f2-90bf-5e7c44e47995",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-member-benefits"
+  },
+  "title": "Membership Benefits",
+  "type": "sfdc_cms__view",
+  "urlName": "member-benefits"
+}

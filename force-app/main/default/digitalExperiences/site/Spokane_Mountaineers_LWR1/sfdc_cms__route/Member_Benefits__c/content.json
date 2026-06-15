@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Member_Benefits",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-member-benefits",
+    "urlPrefix": "member-benefits"
+  },
+  "title": "Membership Benefits",
+  "type": "sfdc_cms__route",
+  "urlName": "member-benefits"
+}

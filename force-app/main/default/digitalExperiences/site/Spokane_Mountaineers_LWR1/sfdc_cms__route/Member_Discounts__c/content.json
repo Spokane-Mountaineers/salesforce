@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Member_Discounts",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-member-discounts",
+    "urlPrefix": "member-discounts"
+  },
+  "title": "Member Discounts",
+  "type": "sfdc_cms__route",
+  "urlName": "member-discounts"
+}

@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"56fb0f29-5020-4891-a46d-443d0f873321\", \"columns\": [{\"UUID\": \"2b448c11-8cd8-4950-8f68-dba153b23407\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Membership",
+                        "heading": "Member Resources",
+                        "subtitle": "Documents, maps, and references.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<h1><b>Resources available to our Members and Leaders</b></h1><p>Click on any document to download or link to view.</p><p><strong>Online Resources</strong></p><h3><a href=\"http://www.librarything.com/profile/SpokaneMountaineers\"><strong>Spokane Mountaineers Library Catalog</strong></a></h3><p><strong>Map &amp; Trail Resources</strong></p><ul><li><a href=\"https://experience.arcgis.com/experience/9ab8d03e2bec4d7fbfc27ba836e70aed/page/Regional-Series\">USDA Forest Service Regional Series Online Maps</a></li><li><a href=\"https://ngmdb.usgs.gov/topoview/\">USGS Topo Maps</a> (download free or order paid printed topo maps)</li><li><a href=\"https://mapstore.mytopo.com/\">My Topo</a> (free print-your-own topo maps, includes Canada)</li><li><a href=\"https://www.alltrails.com/\">AllTrails</a> (a paid map &amp; trail subscription service)</li><li><a href=\"https://www.usgs.gov/faqs/how-do-i-find-download-or-order-topographic-maps\">How to download and print a topo map from USGS Web site</a></li></ul><p><strong>Local Public Lands</strong></p><ul><li><a href=\"https://www.fs.usda.gov/r06/colville\">Colville National Forest</a></li><li><a href=\"https://www.fs.usda.gov/r01/kootenai\">Kootenai National Forest</a></li><li><a href=\"https://www.fs.usda.gov/r01/idahopanhandle\">Idaho Panhandle National Forest</a></li><li><a href=\"https://www.fs.usda.gov/r01/lolo\">Lolo National Forest</a></li><li><a href=\"https://www.fs.usda.gov/r06/umatilla\">Umatilla National Forest</a></li><li><a href=\"https://www.fs.usda.gov/r06/okanogan-wenatchee\">Okanagan/Wenatchee National Forest</a></li><li><a href=\"https://www.fs.usda.gov/r06/mbs\">Mt. Baker Snoqualamie National Forest</a></li><li><a href=\"https://www.blm.gov/oregon-washington\">Bureau Of Land Management Recreation Washington/Oregon</a></li></ul><h3><strong>Avalanche Information &amp; Forecasts</strong></h3><ul><li><a href=\"https://avalanche.org/\">American Avalanche Association</a> (avalanche.org)</li><li><a href=\"https://avalanche.ca/map\">Canadian Avalanche Center</a></li><li><a href=\"https://www.idahopanhandleavalanche.org/\">Idaho Panhandle Avalanche Information</a></li><li><a href=\"https://missoulaavalanche.org/\">Missoula, Montana Area</a></li><li><a href=\"https://nwac.us/\">Northwest Avalanche Center</a></li><li><a href=\"https://www.mtavalanche.com/\">Southwest Montana</a></li><li><a href=\"https://utahavalanchecenter.org/\">Utah Avalanche Center</a></li><li><a href=\"https://avalanche.org/us-avalanche-centers/\">U.S. Avalanche Centers</a></li></ul><h3><strong>Conservation Organizations</strong></h3><ul><li><a href=\"http://www.dishmanhills.org/\">Dishman Hills Conservancy</a></li><li><a href=\"https://www.wta.org/\">Washington Trails Association</a></li><li><a href=\"https://conservationnw.org/\">Conservation Northwest</a></li><li><a href=\"https://inlandnwland.org/\">Inland Northwest Land Trust</a></li><li><a href=\"https://www.landscouncil.org/\">The Lands Council</a></li><li><a href=\"https://landtrustalliance.org/\">The Lands Trust Alliance</a></li><li><a href=\"https://www.spokanecounty.gov/1592/Conservation-Futures\">Spokane County Conservation Futures at Work</a></li><li><a href=\"https://tpl.org/\">The Trust for Public Lands</a></li><li><a href=\"https://wawild.org/\">Washington Wild</a></li><li><a href=\"https://www.wec-ct.org/\">Washington Environmental Council</a></li></ul><h3><strong>Outdoor Recreation Organizations</strong></h3><ul><li><a href=\"https://americanalpineclub.org/\">American Alpine Club</a></li><li><a href=\"https://www.aldhawest.org/\">American Long Distance Hikers Association - West</a></li><li><a href=\"https://alpineclubofcanada.ca/\">Alpine Club of Canada</a></li><li><a href=\"https://www.camp4.com/\">Camp4</a></li><li><a href=\"https://dishmanhills.org/\">Dishman Hills Conservancy</a></li><li><a href=\"https://kootenaymountaineeringclub.ca/\">Kootenay Mountaineering Club</a></li><li><a href=\"https://mazamas.org/\">Mazamas</a></li><li>The (<a href=\"https://www.mountaineers.org/\">Seattle) Mountaineers</a> (no Affiliation to Spokane Mountaineers)</li><li><a href=\"http://www.olympiamountaineers.org/\">Olympia Mountaineers</a> (branch of Seattle Mountaineers)</li><li><a href=\"https://www.sckc.club/\">Spokane Canoe and Kayak Club</a></li><li><a href=\"https://www.spokanerowing.org/\">Spokane River Rowing Association</a></li></ul><h3><strong>Other Outdoor Recreation Resources</strong></h3><ul><li><a href=\"https://www.inlandnwroutes.com/\">Inland NW Routes</a></li><li> <a href=\"https://libraries.wsu.edu/blog/2025/08/29/rare-mountaineering-books-donated-to-wsu-libraries-by-alums-and-climbers/\">Joe Collins/John Roskelly Climbing Book Collection</a> at WSU</li><li><a href=\"https://americanalpineclub.org/safeoutside\">SafeOutside</a></li></ul>",
+                        "relatedHeading": "Membership",
+                        "relatedLinks": "[{\"label\":\"Membership Benefits\",\"path\":\"/member-benefits\"},{\"label\":\"Member Discounts\",\"path\":\"/member-discounts\"},{\"label\":\"Member Resources\",\"path\":\"/member-resources\"},{\"label\":\"Logo & Gear\",\"path\":\"/club-logo-gear\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "1f23c986-aac1-40ac-b24f-87f59db71332",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "2b448c11-8cd8-4950-8f68-dba153b23407",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "56fb0f29-5020-4891-a46d-443d0f873321",
+              "type": "component"
+            }
+          ],
+          "id": "2b7d0ff4-08b3-42a3-b3d6-1bd2bb8e3377",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Documents, maps, and online resources for Spokane Mountaineers members and leaders.",
+                "dxpStyle": {},
+                "pageTitle": "Member Resources | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "4b10d534-9e3e-4964-b907-5bd582549dbc",
+              "type": "component"
+            }
+          ],
+          "id": "feac2945-ac4e-4ab9-b73f-3febf041f59f",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "853779ab-0318-4d87-8481-fcccffa98a7d",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-member-resources"
+  },
+  "title": "Member Resources",
+  "type": "sfdc_cms__view",
+  "urlName": "member-resources"
+}

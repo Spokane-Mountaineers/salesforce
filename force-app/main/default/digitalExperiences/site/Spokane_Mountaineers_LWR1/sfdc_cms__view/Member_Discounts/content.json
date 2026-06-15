@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"5bba7ecf-c090-4698-ab54-7b6d042e9ea6\", \"columns\": [{\"UUID\": \"8afe60bc-f76c-4460-adfe-05820fdd1b22\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Membership",
+                        "heading": "Member Discounts",
+                        "subtitle": "Partner deals for members.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<p><strong>We have partnered with community businesses and organizations and are fortunate to receive discounts for our members. </strong></p>\n\n<p>If you know of a business or organization who may have services our members frequently access or may be interested in, contact any Club Leader with a contact and we will see what we can do to enhance the value of Club Membership. </p>\n\n<p>As of May 4th, 2025 these are our available discounts:</p>\n<p><img alt=\"\" data-asset=\"Discounts_May_2024.jpg\"></p>\n\n<p>New in Feb 2025 <img alt=\"\" data-asset=\"Outdoorsly_Logo.jpg\"></p>\n<p>We have parterned with Outdoorly, an online outdoor gear shop tailored to outdoor experts.</p>\n<p>They've agreed to give all our members access to their exclusive discounts. This site has good discounts on quite a few big name brands and a lot of small start up brands. Some of the brands they have are Mammut, Grivel, Nalgene, Nathan, Obermeyer, and Weston.</p>\n\n<p>The sign up code is exclusively for our members so, please do not share outside of our membership. As a bonus, anyone who is an instructor will have access to a different code that contains a higher discount. Membersho who help with our Instruction or Lead Activities can take advantage of even bigger savings. Contact Activity Chairs for Instructor Code.</p>\n\n<p>So far our members have had great experience with them. Shipping is fairly slow and all sales are final.</p>\n\n<p><a href=\"https://www.outdoorly.com/\">www.outdoorly.com</a></p>\n<p>Member code: <a href=\"https://www.outdoorly.com/signup?invitation_code=SPMTNER-MEM-OUT\">SPMTNER-MEM-OUT</a></p>\n\n<p>New March 2025<img data-asset=\"member_discounts_evergreen.png\" alt=\"Partner logo\"></p>\n<p>Opened their doors on March 15th. They are similar to Rambleraven and hope to fill the void left in Spokane by their closing. They are a consignment store that also sells new items. Their goal is to sell everything you would find at REI. Currently they need more items brought in for consignment so if you have extra outdoor gear laying around please consider bringing it in to the store.</p>\n\n<p>They have agreed to benefit the club in two ways:</p>\n\n<p>1- You can sign up for their \"Cosign for a Cause\" program and specify the Spokane Mountaineers to receive the proceeds. How that program works is the amount your items make for consignment get donated to the club.</p>\n\n<p>2- All of our members will receive a $25 voucher there to purchase items. All you have to do is show your Spokane Mountaineers user profile to them once logged on to the website so they know you are an active member.</p>\n\n<p>You can follow their Instagram and Facebook accounts</p>\n<p>Website: <a href=\"https://www.evergreengearexchange.com/\">www.evergreengearexchange.com</a></p>\n<p>Address: 1007 E Trent Ave, Spokane, WA</p>\n\n<p>New April 2025 <img data-asset=\"member_discounts_coeur.png\" alt=\"Partner logo\"></p>\n<p>The Coeur Climbing Company is offering $10 off on a gym membership. They will waive the initiation fee.</p>\n\n<p>Show them your member profile from our website so they know you are an active member with us!</p>\n\n<p>They also may hold special events for our members so be on the lookout for that in the future.</p>\n\n<p>We are excited to offer this benefit for our Northern Idaho members and are exited to partner with another great local company.</p>\n\n<p>Website: <a href=\"https://coeurclimbing.com/\">https://coeurclimbing.com/</a></p>\n<p>Address: 764 S. Clearwater Loop, Suite 101, Post Falls., ID</p>\n\n<p>New May 2025 <img data-asset=\"member_discounts_solnix.png\" alt=\"Partner logo\"> </p>\n\n<p>Solnix (formerly Shred) is offering all our members 15% off one full priced item with some exclusions (Garmin devices, bikes, Go-Pro, OneWheel). The discount is only for current members and only in store.</p>\n\n<p>Recently they have started carrying climbing gear and will be expanding their offering in the future. Currently they have items from Mammut, Black Diamond, La Sportive and soon adding Scarpa. They are also willing to special order any items our members might need that they don't have in stock from those brands. Special order items will not be returnable.</p>\n\n<p>Also, be on the lookout for future events hosted by Solnix. They will be posted to the club calendar in advance.</p>\n\n<p>We are excited to support Solnix as they grow into climbing gear.</p>\n\n<p>Solnix has also been very involved in our local outdoor community. Some of their employees also volunteer with IPAC and one of them helped teach a rescue fundamentals course I took this year.</p>\n\n<p>Go check them out and make sure to show your membership profile on our website to use your discount!</p>\n\n<p>Website: <a href=\"https://www.solnix.com/\">https://www.solnix.com/</a></p>\n<p> Address: 4505 N Division St, Spokane, WA</p>",
+                        "relatedHeading": "Membership",
+                        "relatedLinks": "[{\"label\":\"Membership Benefits\",\"path\":\"/member-benefits\"},{\"label\":\"Member Discounts\",\"path\":\"/member-discounts\"},{\"label\":\"Member Resources\",\"path\":\"/member-resources\"},{\"label\":\"Logo & Gear\",\"path\":\"/club-logo-gear\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "7c4560fa-9d47-4bdb-a06d-df90e8a402e8",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "8afe60bc-f76c-4460-adfe-05820fdd1b22",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "5bba7ecf-c090-4698-ab54-7b6d042e9ea6",
+              "type": "component"
+            }
+          ],
+          "id": "d3e56d51-69f7-4f4f-ae85-b3103f666948",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Partner discounts available to Spokane Mountaineers members.",
+                "dxpStyle": {},
+                "pageTitle": "Member Discounts | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "9b04f948-88b2-4ae5-8bba-f28cea6f3227",
+              "type": "component"
+            }
+          ],
+          "id": "1d9fce72-29a7-4ec0-9f0b-94c191440c94",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "a98276fd-9757-4753-ad05-6254c02034f8",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-member-discounts"
+  },
+  "title": "Member Discounts",
+  "type": "sfdc_cms__view",
+  "urlName": "member-discounts"
+}

@@ -1,0 +1,5 @@
+{
+  "apiName": "Member_Discounts",
+  "path": "views",
+  "type": "sfdc_cms__view"
+}
