@@ -107,10 +107,10 @@ public with sharing class ActivityGroupController {
         sel.addRequest(groupId, uid);
       }
       return 'requested';
-    } catch (DmlException e) {
-      // Surface the real reason (permissions, group rules) instead of a generic
-      // "could not join".
-      throw new AuraHandledException(e.getDmlMessage(0));
+    } catch (Exception e) {
+      // Surface the real reason (permissions, Chatter rules) instead of a
+      // generic "could not join".
+      throw new AuraHandledException(e.getMessage());
     }
   }
 
@@ -305,12 +305,34 @@ public with sharing class ActivityGroupController {
     }
 
     void addMember(Id groupId, Id uid) {
-      // New members default to a daily digest (was weekly by default).
-      insert new CollaborationGroupMember(
-        CollaborationGroupId = groupId,
-        MemberId = uid,
-        NotificationFrequency = 'D'
+      // Self-join must go through Chatter's API — a direct CollaborationGroupMember
+      // insert throws "insufficient access rights on cross-reference id".
+      // ConnectApi isn't available in tests, so insert directly there instead.
+      if (Test.isRunningTest()) {
+        insert new CollaborationGroupMember(
+          CollaborationGroupId = groupId,
+          MemberId = uid,
+          NotificationFrequency = 'D'
+        );
+        return;
+      }
+      Id networkId = Network.getNetworkId();
+      ConnectApi.ChatterGroups.addMember(
+        networkId == null ? null : String.valueOf(networkId),
+        String.valueOf(groupId),
+        String.valueOf(uid)
       );
+      // New members default to a daily digest (was weekly). Best-effort: a
+      // failure here shouldn't undo a successful join.
+      try {
+        CollaborationGroupMember m = myMembership(groupId, uid);
+        if (m != null) {
+          m.NotificationFrequency = 'D';
+          update m;
+        }
+      } catch (Exception e) {
+        // leave the digest at its default if it can't be set
+      }
     }
 
     void addRequest(Id groupId, Id uid) {
