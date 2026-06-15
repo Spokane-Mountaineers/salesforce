@@ -14,8 +14,13 @@ import basePath from "@salesforce/community/basePath";
 // community basePath so they resolve under the site prefix (/lwrsite in staging,
 // whatever prod serves) rather than the bare domain root. Grouped content pages
 // are added here as each batch of the legacy content port lands.
+// Ordered so direct links and dropdowns don't intersperse: quick-access direct
+// links first (Home, Calendar, Schools & Clinics), then the browse-by-section
+// dropdowns, then the member dashboard in its conventional far-right slot.
 const DEFAULT_NAV = [
   { label: "Home", href: "/" },
+  { label: "Calendar", href: "/events" },
+  { label: "Schools & Clinics", href: "/schools-and-clinics" },
   {
     label: "About",
     children: [
@@ -49,8 +54,6 @@ const DEFAULT_NAV = [
       { label: "Club-wide", href: "/group-clubwide" }
     ]
   },
-  { label: "Schools & Clinics", href: "/schools-and-clinics" },
-  { label: "Calendar", href: "/events" },
   {
     label: "News",
     children: [
