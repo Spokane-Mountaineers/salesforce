@@ -21,12 +21,10 @@ public with sharing class ChatterPublisherController {
 
     try {
       // Verify the group exists and user has access
-      List<CollaborationGroup> groups = [
-        SELECT Id, Name, CollaborationType
-        FROM CollaborationGroup
-        WHERE Id = :groupId
-        LIMIT 1
-      ];
+      // without sharing: Chatter scopes group visibility to the user's network,
+      // which hides club groups from community members and yields a false
+      // "not found". ConnectApi still enforces who may actually post.
+      List<CollaborationGroup> groups = new GroupReader().byId(groupId);
 
       if (groups.isEmpty()) {
         throw new AuraHandledException(
@@ -116,12 +114,10 @@ public with sharing class ChatterPublisherController {
     }
 
     try {
-      List<CollaborationGroup> groups = [
-        SELECT Id, Name, CollaborationType
-        FROM CollaborationGroup
-        WHERE Id = :groupId
-        LIMIT 1
-      ];
+      // without sharing: Chatter scopes group visibility to the user's network,
+      // which hides club groups from community members and yields a false
+      // "not found". ConnectApi still enforces who may actually post.
+      List<CollaborationGroup> groups = new GroupReader().byId(groupId);
 
       if (groups.isEmpty()) {
         throw new AuraHandledException(
@@ -276,5 +272,22 @@ public with sharing class ChatterPublisherController {
     result = result.replaceAll('\n\n\n+', '\n\n');
 
     return result.trim();
+  }
+
+  /**
+   * Looks up a group bypassing Chatter's network visibility scoping, so a
+   * community member's post isn't wrongly rejected as "group not found". This
+   * only confirms the group exists — ConnectApi still enforces whether the
+   * running user may post to it (group membership).
+   */
+  private without sharing class GroupReader {
+    List<CollaborationGroup> byId(Id groupId) {
+      return [
+        SELECT Id, Name, CollaborationType
+        FROM CollaborationGroup
+        WHERE Id = :groupId
+        LIMIT 1
+      ];
+    }
   }
 }
