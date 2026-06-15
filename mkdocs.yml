@@ -26,6 +26,15 @@ nav:
       - Send as Org Email from Hotmail: staff-guides/send-as-gmail-from-hotmail.md
   - Technical Reference:
       - Style Guide: brand/style-guide.md
+      - Website Migration:
+          - migration/index.md
+          - Architecture & Deploy Model: migration/architecture.md
+          - Design System & Page Patterns: migration/design-system.md
+          - Authentication & Access: migration/auth-and-access.md
+          - Content Page Port: migration/content-port.md
+          - Activity Groups: migration/activity-groups.md
+          - Chatter Data Migration: migration/chatter-migration.md
+          - Remaining Work & Cutover: migration/remaining-work.md
       - Developer Guides:
           - developer-guides/index.md
           - Configure Custom Login Page: developer-guides/configure-custom-login-page.md
