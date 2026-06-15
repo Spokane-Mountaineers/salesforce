@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Group",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-group",
+    "urlPrefix": "group"
+  },
+  "title": "Activity Group",
+  "type": "sfdc_cms__route",
+  "urlName": "group"
+}

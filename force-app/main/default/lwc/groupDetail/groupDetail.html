@@ -1,0 +1,24 @@
+<template>
+  <article class="root">
+    <template lwc:if={errorMessage}>
+      <p class="state state--error">{errorMessage}</p>
+    </template>
+
+    <template lwc:if={hasGroup}>
+      <header class="head">
+        <a class="back" href={backUrl}>← All activity groups</a>
+        <p class="eyebrow">{typeLabel}</p>
+        <h1 class="title">{group.name}</h1>
+        <p class="meta">{memberLabel}</p>
+        <template lwc:if={group.description}>
+          <p class="desc">{group.description}</p>
+        </template>
+      </header>
+
+      <section class="events">
+        <h2 class="events__title">Upcoming events</h2>
+        <c-events-calendar activity={group.name}></c-events-calendar>
+      </section>
+    </template>
+  </article>
+</template>

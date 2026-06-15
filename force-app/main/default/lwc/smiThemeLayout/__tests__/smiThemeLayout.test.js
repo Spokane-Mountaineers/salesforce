@@ -167,6 +167,6 @@ describe("c-smi-theme-layout", () => {
     const headings = [
       ...el.shadowRoot.querySelectorAll(".footer-col__head")
     ].map((h) => h.textContent.trim());
-    expect(headings).toEqual(["About", "Membership", "Activities", "News"]);
+    expect(headings).toEqual(["About", "Membership", "News"]);
   });
 });

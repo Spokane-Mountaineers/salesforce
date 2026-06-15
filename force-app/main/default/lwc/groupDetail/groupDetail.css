@@ -1,0 +1,81 @@
+:host {
+  --paper: #f4efe3;
+  --card: #fbf8f0;
+  --ink: #1c2520;
+  --ink-soft: #54605a;
+  --ink-faint: #8a938c;
+  --pine: #1e4b38;
+  --rust: #b14a1e;
+  --sky: #2c6a8c;
+  --line: rgba(28, 37, 32, 0.14);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
+  display: block;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+.root {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 36px 24px 80px;
+}
+.back {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sky);
+  text-decoration: none;
+  margin-bottom: 18px;
+}
+.back:hover {
+  text-decoration: underline;
+}
+.eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin: 0 0 8px;
+}
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 5.5vw, 48px);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--pine);
+  margin: 0 0 8px;
+}
+.meta {
+  font-size: 14px;
+  color: var(--ink-faint);
+  margin: 0 0 16px;
+}
+.desc {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 70ch;
+  margin: 0 0 8px;
+  white-space: pre-line;
+}
+.events {
+  margin-top: 36px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.events__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  color: var(--pine);
+  margin: 18px 0 12px;
+}
+.state {
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+.state--error {
+  color: var(--rust);
+}

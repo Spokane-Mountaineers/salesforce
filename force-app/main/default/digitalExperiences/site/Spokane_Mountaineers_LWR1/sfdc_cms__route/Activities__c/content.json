@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Activities",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-activities",
+    "urlPrefix": "activities"
+  },
+  "title": "Activities",
+  "type": "sfdc_cms__route",
+  "urlName": "activities"
+}

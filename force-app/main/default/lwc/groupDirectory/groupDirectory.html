@@ -1,0 +1,60 @@
+<template>
+  <section class="root">
+    <header class="head">
+      <p class="eyebrow">Spokane Mountaineers</p>
+      <h1 class="title">Activity Groups</h1>
+      <p class="sub">
+        Our activities run through member-led groups. Browse a group to see what
+        it’s about and its upcoming events.
+      </p>
+    </header>
+
+    <template lwc:if={hasError}>
+      <p class="state state--error">{error}</p>
+    </template>
+
+    <template lwc:if={isEmpty}>
+      <p class="state">No activity groups to show yet.</p>
+    </template>
+
+    <template lwc:if={hasCore}>
+      <h2 class="section-title">Core activity groups</h2>
+      <ul class="grid">
+        <template for:each={coreGroups} for:item="g">
+          <li key={g.id} class="card card--core">
+            <a class="card__link" href={g.url}>
+              <div class="card__top">
+                <h3 class="card__name">{g.name}</h3>
+                <span class={g.typeClass}>{g.typeLabel}</span>
+              </div>
+              <template lwc:if={g.description}>
+                <p class="card__desc">{g.description}</p>
+              </template>
+              <p class="card__meta">{g.memberLabel}</p>
+            </a>
+          </li>
+        </template>
+      </ul>
+    </template>
+
+    <template lwc:if={hasOthers}>
+      <h2 class="section-title">More groups</h2>
+      <ul class="grid">
+        <template for:each={otherGroups} for:item="g">
+          <li key={g.id} class="card">
+            <a class="card__link" href={g.url}>
+              <div class="card__top">
+                <h3 class="card__name">{g.name}</h3>
+                <span class={g.typeClass}>{g.typeLabel}</span>
+              </div>
+              <template lwc:if={g.description}>
+                <p class="card__desc">{g.description}</p>
+              </template>
+              <p class="card__meta">{g.memberLabel}</p>
+            </a>
+          </li>
+        </template>
+      </ul>
+    </template>
+  </section>
+</template>

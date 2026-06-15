@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Activity Group Page</masterLabel>
+    <description
+  >An activity group's page: header plus that group's upcoming events. Reads the group id from the ?recordId= URL param.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+        name="groupId"
+        type="String"
+        label="Group Id (optional; defaults to the ?recordId= URL param)"
+      />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

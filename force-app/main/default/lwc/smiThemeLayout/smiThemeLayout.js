@@ -40,20 +40,10 @@ const DEFAULT_NAV = [
       { label: "Logo & Gear", href: "/club-logo-gear" }
     ]
   },
-  {
-    label: "Activities",
-    children: [
-      { label: "Climbing", href: "/group-climbing" },
-      { label: "Hiking", href: "/group-hiking" },
-      { label: "Skiing", href: "/group-skiing" },
-      { label: "Paddling", href: "/group-paddling" },
-      { label: "Mountain Biking", href: "/group-mountain-biking" },
-      { label: "Road Biking", href: "/group-road-biking" },
-      { label: "Conservation", href: "/group-conservation" },
-      { label: "The Chalet", href: "/group-chalet" },
-      { label: "Club-wide", href: "/group-clubwide" }
-    ]
-  },
+  // Activity groups are dynamic and club-managed (CollaborationGroups), so this
+  // is a single link to the directory — not a hardcoded dropdown. The directory
+  // features the core groups and lists the rest.
+  { label: "Activities", href: "/activities" },
   {
     label: "News",
     children: [

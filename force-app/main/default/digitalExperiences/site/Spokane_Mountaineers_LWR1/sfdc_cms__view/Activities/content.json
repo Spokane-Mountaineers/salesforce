@@ -1,0 +1,82 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"509f6378-a6ff-44c5-9aa7-0555f728693b\", \"columns\": [{\"UUID\": \"9da353c2-971c-47f2-aa87-d3ba2e0189cb\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {}
+                      },
+                      "definition": "c:groupDirectory",
+                      "id": "833488c4-de4b-4a88-8d52-e0733c2f556f",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "9da353c2-971c-47f2-aa87-d3ba2e0189cb",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "509f6378-a6ff-44c5-9aa7-0555f728693b",
+              "type": "component"
+            }
+          ],
+          "id": "89e9ee33-4274-4d41-ac18-5ef795d80cd6",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "Browse the Spokane Mountaineers' activity groups and their upcoming events.",
+                "dxpStyle": {},
+                "pageTitle": "Activity Groups | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "c920219c-9cb7-49f6-b7c0-927b1bf1ca76",
+              "type": "component"
+            }
+          ],
+          "id": "5c0b375b-8081-44e1-8d3b-2cebd4391102",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "afeba796-a793-4e09-9b08-06ed4433e510",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-activities"
+  },
+  "title": "Activities",
+  "type": "sfdc_cms__view",
+  "urlName": "activities"
+}

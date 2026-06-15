@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from "lwc";
+import { LightningElement, api, track, wire } from "lwc";
 import basePath from "@salesforce/community/basePath";
 import getEvents from "@salesforce/apex/EventController.getEvents";
 
@@ -28,6 +28,15 @@ export default class EventsCalendar extends LightningElement {
   @track viewYear;
   @track viewMonth; // 0-based
   @track activityGroup = "";
+
+  // Preset/lock the calendar to one activity group (used by the per-group page).
+  @api
+  get activity() {
+    return this.activityGroup;
+  }
+  set activity(value) {
+    this.activityGroup = value || "";
+  }
 
   events = [];
   error;
