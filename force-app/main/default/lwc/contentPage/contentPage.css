@@ -202,6 +202,15 @@
 .body li {
   margin: 0 0 8px;
 }
+.body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 24px auto;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
 .body ul li::marker {
   color: var(--moss);
 }

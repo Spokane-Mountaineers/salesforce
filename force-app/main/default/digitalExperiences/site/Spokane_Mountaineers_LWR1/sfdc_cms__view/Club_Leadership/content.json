@@ -1,0 +1,90 @@
+{
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "",
+                "sectionConfig": "{\"UUID\": \"f84d2fc7-6a81-4c12-823f-97a5a388097f\", \"columns\": [{\"UUID\": \"ea225a0f-b56c-41af-aad5-847daf52098f\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "eyebrow": "Spokane Mountaineers",
+                        "heading": "Club Leadership",
+                        "subtitle": "Learn, teach, and help lead the club.",
+                        "heroImageUrl": "",
+                        "heroAlt": "",
+                        "bodyHtml": "<p>One of the most exciting things about the Spokane Mountaineers is the opportunity not only to learn but also to teach others how to more fully participate in the outdoors. Participation in a leadership capacity often starts with coming back to be an instructor in one of the courses you had a blast taking as a student. Many choose to go further \u2014 through leadership development, joining a committee that organizes programs, or even through Board and Officer service.</p><p><img data-asset=\"Leadership_Progression_copy.jpg\" alt=\"Leadership progression at the Spokane Mountaineers \u2014 from student to instructor to committee, board, and officer roles\"></p><p>The official leadership governance of the Spokane Mountaineers comprises a Board of Directors and Officers (President, Vice President, Secretary, and Treasurer). The President and Vice President serve one-year terms, while the Treasurer, Secretary, and Board members serve two-year terms. Electronic nomination and elections are held once a year, with final results presented at the Annual Business Meeting on the first Monday in October. All current members may be nominated and run for office \u2014 if you\u2019re interested in serving, reach out to <a href=\"mailto:secretary@spokanemountaineers.org\">secretary@spokanemountaineers.org</a>.</p><p>The Spokane Mountaineers, Inc. is incorporated in the state of Washington as a 501(c)(3) nonprofit corporation. Dues and contributions go toward the benefit of our community, membership, and mission.</p>",
+                        "relatedHeading": "More About Us",
+                        "relatedLinks": "[{\"label\":\"About Us\",\"path\":\"/about-us\"},{\"label\":\"Our Mission\",\"path\":\"/our-mission\"},{\"label\":\"Our History\",\"path\":\"/100-years\"},{\"label\":\"Our Chalet\",\"path\":\"/our-chalet\"},{\"label\":\"Club Leadership\",\"path\":\"/club-leadership\"}]"
+                      },
+                      "definition": "c:contentPage",
+                      "id": "3b00606b-28b4-475d-9675-5eef95a61a44",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "ea225a0f-b56c-41af-aad5-847daf52098f",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "f84d2fc7-6a81-4c12-823f-97a5a388097f",
+              "type": "component"
+            }
+          ],
+          "id": "41c34a26-d62b-45c8-8b8f-5e4c77441622",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "How the Spokane Mountaineers is led \u2014 Board of Directors and Officers, elections, and how members can serve.",
+                "dxpStyle": {},
+                "pageTitle": "Club Leadership | Spokane Mountaineers",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "4b3f843b-3f16-49ce-b2fb-a20b20057cc2",
+              "type": "component"
+            }
+          ],
+          "id": "f54fa2e3-7230-4003-86ef-16902b009db8",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "ee7395b1-9222-4d8f-8831-a09486bbd1c9",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "custom-club-leadership"
+  },
+  "title": "Club Leadership",
+  "type": "sfdc_cms__view",
+  "urlName": "club-leadership"
+}

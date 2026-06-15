@@ -1,0 +1,12 @@
+{
+  "contentBody": {
+    "activeViewId": "Club_Leadership",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-club-leadership",
+    "urlPrefix": "club-leadership"
+  },
+  "title": "Club Leadership",
+  "type": "sfdc_cms__route",
+  "urlName": "club-leadership"
+}
