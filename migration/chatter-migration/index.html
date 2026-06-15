@@ -1700,15 +1700,87 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#is-migration-possible" class="md-nav__link">
+  <a href="#critical-platform-constraint-discovered-during-de-risking" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Is migration possible?
+        Critical platform constraint (discovered during de-risking)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Is migration possible?">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revised-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revised options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Revised options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-rename-and-recreate-at-cutover-within-the-one-org" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A — Rename-and-recreate at cutover (within the one org)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-move-activity-groups-off-chatter-to-a-custom-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B — Move activity groups off Chatter to a custom data model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-keep-chatter-on-the-legacy-community-revisit-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C — Keep Chatter on the legacy community; revisit later
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-d-salesforce-support-supported-migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option D — Salesforce Support / supported migration path
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#is-migration-possible-mechanics-once-an-approach-is-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is migration possible? (mechanics, once an approach is chosen)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Is migration possible? (mechanics, once an approach is chosen)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3472,15 +3544,87 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#is-migration-possible" class="md-nav__link">
+  <a href="#critical-platform-constraint-discovered-during-de-risking" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Is migration possible?
+        Critical platform constraint (discovered during de-risking)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Is migration possible?">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revised-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revised options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Revised options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-rename-and-recreate-at-cutover-within-the-one-org" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option A — Rename-and-recreate at cutover (within the one org)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-move-activity-groups-off-chatter-to-a-custom-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option B — Move activity groups off Chatter to a custom data model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-keep-chatter-on-the-legacy-community-revisit-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option C — Keep Chatter on the legacy community; revisit later
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-d-salesforce-support-supported-migration-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option D — Salesforce Support / supported migration path
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#is-migration-possible-mechanics-once-an-approach-is-chosen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Is migration possible? (mechanics, once an approach is chosen)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Is migration possible? (mechanics, once an approach is chosen)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3657,7 +3801,54 @@ can join and post on the new site.</p>
 </ul>
 <p>So full group functionality on LWR requires the groups (and their members and
 feed history) to exist in the LWR network.</p>
-<h2 id="is-migration-possible">Is migration possible?<a class="headerlink" href="#is-migration-possible" title="Permanent link">&para;</a></h2>
+<h2 id="critical-platform-constraint-discovered-during-de-risking">Critical platform constraint (discovered during de-risking)<a class="headerlink" href="#critical-platform-constraint-discovered-during-de-risking" title="Permanent link">&para;</a></h2>
+<p>Two platform rules make a naive "recreate the groups in the LWR network" plan
+impossible while the legacy site is still up:</p>
+<ul>
+<li><strong><code>CollaborationGroup.NetworkId</code> is not writeable.</strong> You cannot move a group
+  from one network to another by updating it (confirmed: "Field is not writeable:
+  CollaborationGroup.NetworkId"). A group's network is fixed when it's created.</li>
+<li><strong>Group names are unique org-wide.</strong> You cannot create a second "Climbing" in
+  the LWR network while the legacy "Climbing" still exists (confirmed: "An active
+  or archived group with this name already exists").</li>
+</ul>
+<p>Together these mean: you can't move groups, and you can't copy them under their
+real names while the originals exist. Any migration has to deal with the name
+collision, which forces one of the approaches below.</p>
+<h2 id="revised-options">Revised options<a class="headerlink" href="#revised-options" title="Permanent link">&para;</a></h2>
+<h3 id="option-a-rename-and-recreate-at-cutover-within-the-one-org">Option A — Rename-and-recreate at cutover (within the one org)<a class="headerlink" href="#option-a-rename-and-recreate-at-cutover-within-the-one-org" title="Permanent link">&para;</a></h3>
+<p>Pre-cutover, create the LWR-network groups under temporary names (via
+<code>ConnectApi.ChatterGroups.createGroup</code> targeting the LWR community), and migrate
+members and feed history into them (idempotent, re-runnable). At cutover, in a
+tight sequence: archive/rename the legacy groups to free the names, then rename
+the LWR groups to their real names.</p>
+<ul>
+<li>Pros: keeps native Chatter (mentions, group notifications, our daily-digest
+  default), reuses the work already done.</li>
+<li>Cons: a delicate cutover window, name juggling, and the legacy groups must be
+  retired as part of it. Feed-history copy still needs "Set Audit Fields."</li>
+</ul>
+<h3 id="option-b-move-activity-groups-off-chatter-to-a-custom-data-model">Option B — Move activity groups off Chatter to a custom data model<a class="headerlink" href="#option-b-move-activity-groups-off-chatter-to-a-custom-data-model" title="Permanent link">&para;</a></h3>
+<p>Stop using <code>CollaborationGroup</code> for activity groups. Model them as custom objects
+(group, membership, post) owned by the LWR site, with no network binding. Migrate
+the feed content into the custom post object (record copy, with Set Audit Fields
+for original author/date).</p>
+<ul>
+<li>Pros: removes the network-binding problem entirely; migration becomes a
+  straightforward record copy; full control over the model.</li>
+<li>Cons: the largest build — re-implements grouping, membership, and the feed off
+  Chatter, and loses native Chatter features (we'd own notifications, mentions,
+  etc.). The Activity Groups feature already built on <code>CollaborationGroup</code> would
+  be re-pointed at the custom model.</li>
+</ul>
+<h3 id="option-c-keep-chatter-on-the-legacy-community-revisit-later">Option C — Keep Chatter on the legacy community; revisit later<a class="headerlink" href="#option-c-keep-chatter-on-the-legacy-community-revisit-later" title="Permanent link">&para;</a></h3>
+<p>Ship the LWR site with group pages that browse/read (which works cross-network),
+and keep join/post pointed at the legacy community for now, or hide them until a
+decision is made. Defer the data move.</p>
+<h3 id="option-d-salesforce-support-supported-migration-path">Option D — Salesforce Support / supported migration path<a class="headerlink" href="#option-d-salesforce-support-supported-migration-path" title="Permanent link">&para;</a></h3>
+<p>Open a case with Salesforce to confirm whether there's any supported way to move
+groups between networks or convert the community, before committing to A or B.</p>
+<h2 id="is-migration-possible-mechanics-once-an-approach-is-chosen">Is migration possible? (mechanics, once an approach is chosen)<a class="headerlink" href="#is-migration-possible-mechanics-once-an-approach-is-chosen" title="Permanent link">&para;</a></h2>
 <p>Yes, with one important prerequisite and some known caveats. The pieces:</p>
 <table>
 <thead>
@@ -3800,7 +3991,7 @@ until a group exists in the LWR network — a small, reversible change.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 15, 2026 04:58:49 UTC">June 15, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 15, 2026 13:24:45 UTC">June 15, 2026</span>
   </span>
 
     
