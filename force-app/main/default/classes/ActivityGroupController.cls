@@ -89,18 +89,29 @@ public with sharing class ActivityGroupController {
     if (g == null) {
       throw new AuraHandledException('That group does not exist.');
     }
+    if (g.IsArchived) {
+      throw new AuraHandledException(
+        'This group is archived and isn’t accepting new members.'
+      );
+    }
     Id uid = UserInfo.getUserId();
     if (sel.isMember(groupId, uid)) {
       return 'member';
     }
-    if (g.CollaborationType == 'Public') {
-      sel.addMember(groupId, uid);
-      return 'member';
+    try {
+      if (g.CollaborationType == 'Public') {
+        sel.addMember(groupId, uid);
+        return 'member';
+      }
+      if (!sel.hasPendingRequest(groupId, uid)) {
+        sel.addRequest(groupId, uid);
+      }
+      return 'requested';
+    } catch (DmlException e) {
+      // Surface the real reason (permissions, group rules) instead of a generic
+      // "could not join".
+      throw new AuraHandledException(e.getDmlMessage(0));
     }
-    if (!sel.hasPendingRequest(groupId, uid)) {
-      sel.addRequest(groupId, uid);
-    }
-    return 'requested';
   }
 
   /** Leave a group (removes the running user's membership). */
@@ -235,7 +246,7 @@ public with sharing class ActivityGroupController {
 
     CollaborationGroup oneGroup(Id groupId) {
       List<CollaborationGroup> g = [
-        SELECT Id, Name, Description, MemberCount, CollaborationType
+        SELECT Id, Name, Description, MemberCount, CollaborationType, IsArchived
         FROM CollaborationGroup
         WHERE Id = :groupId
         LIMIT 1

@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from "lwc";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
+import isGuest from "@salesforce/user/isGuest";
 import USER_ID from "@salesforce/user/Id";
 import NAME_FIELD from "@salesforce/schema/User.FirstName";
 import getMyRegistrations from "@salesforce/apex/EventController.getMyRegistrations";
@@ -21,6 +22,10 @@ export default class BasecampDashboard extends LightningElement {
   firstName;
   registrations = [];
   posts = [];
+
+  get isGuest() {
+    return isGuest;
+  }
 
   @wire(getRecord, { recordId: USER_ID, fields: [NAME_FIELD] })
   wiredUser({ data }) {

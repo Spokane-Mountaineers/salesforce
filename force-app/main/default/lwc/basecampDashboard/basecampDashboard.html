@@ -1,5 +1,11 @@
 <template>
-  <section class="basecamp">
+  <template lwc:if={isGuest}>
+    <c-login-gate
+      heading="Sign in to My Mountaineers"
+      message="Your member dashboard — upcoming events, trip reports, and quick actions — is just behind sign-in."
+    ></c-login-gate>
+  </template>
+  <section lwc:else class="basecamp">
     <div class="status-strip">
       <span class="status-strip__hi">{greeting}</span>
       <a class="status-strip__card" href={memberCardHref}>Membership card ▸</a>
