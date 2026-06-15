@@ -307,6 +307,11 @@
   align-items: center;
   gap: 10px;
 }
+.footer-brand__logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
 .footer-brand__name {
   font-family: var(--font-display);
   font-weight: 600;

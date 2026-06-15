@@ -29,13 +29,8 @@
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href={homeLink} title={siteName}>
-          <template lwc:if={logoUrl}>
-            <img class="brand__logo" src={logoUrl} alt={siteName} />
-          </template>
-          <template lwc:else>
-            <span class="brand__mark" aria-hidden="true">▲</span>
-            <span class="brand__name">{siteName}</span>
-          </template>
+          <img class="brand__logo" src={logoSrc} alt={siteName} />
+          <span class="brand__name">{siteName}</span>
         </a>
 
         <button
@@ -116,7 +111,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
-          <span class="brand__mark" aria-hidden="true">▲</span>
+          <img class="footer-brand__logo" src={logoSrc} alt={siteName} />
           <span class="footer-brand__name">{siteName}</span>
         </div>
         <nav class="footer-nav" aria-label="Footer">

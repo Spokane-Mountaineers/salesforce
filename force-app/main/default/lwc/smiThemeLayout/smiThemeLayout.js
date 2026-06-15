@@ -1,6 +1,12 @@
 import { LightningElement, api } from "lwc";
 import isGuest from "@salesforce/user/isGuest";
 import basePath from "@salesforce/community/basePath";
+import SMI_LOGO from "@salesforce/resourceUrl/smi_logo";
+import FAVICON from "@salesforce/resourceUrl/favicon_ico";
+
+// Set once per page load (the theme layout renders once); a module flag avoids
+// a forbidden document-level query to dedupe.
+let faviconSet = false;
 
 // Alpine Field Guide theme layout for the LWR site (plan §9.1): header with
 // logo, primary nav, and member/login state; footer; topographic background
@@ -106,8 +112,32 @@ export default class SmiThemeLayout extends LightningElement {
   _mobileOpen = false;
   _openKey = null;
 
+  // The theme layout wraps every page, so set the favicon here. Best-effort:
+  // if the runtime blocks document.head, set it via the site's head markup in
+  // Builder instead (the favicon_ico static resource is deployed either way).
+  connectedCallback() {
+    if (faviconSet) {
+      return;
+    }
+    try {
+      const link = document.createElement("link");
+      link.rel = "icon";
+      link.type = "image/x-icon";
+      link.href = FAVICON;
+      document.head.appendChild(link);
+      faviconSet = true;
+    } catch (e) {
+      // favicon will be set via Builder head markup instead
+    }
+  }
+
   get isGuest() {
     return isGuest;
+  }
+
+  // The Spokane Mountaineers logo (Builder can override via logoUrl).
+  get logoSrc() {
+    return this.logoUrl || SMI_LOGO;
   }
 
   // Prefix the community basePath onto a root-relative href so links resolve
