@@ -10,17 +10,18 @@
  * never touch that, so no web-dev involvement is needed for group operations.
  */
 public with sharing class ActivityGroupController {
-  /** Visible activity groups for the directory, busiest first. */
+  /**
+   * Visible activity groups for the directory, busiest first: every public group
+   * plus any private group the user belongs to. Public club groups are meant to
+   * be discoverable, but Chatter scopes group visibility to the user's network,
+   * which hides them from community members — so the read runs `without sharing`
+   * and we apply the public/own-private rule ourselves.
+   */
   @AuraEnabled(cacheable=true)
   public static List<GroupDTO> getGroups() {
     Set<String> core = coreGroupNames();
     List<GroupDTO> groups = new List<GroupDTO>();
-    for (CollaborationGroup g : [
-      SELECT Id, Name, Description, MemberCount, CollaborationType
-      FROM CollaborationGroup
-      ORDER BY MemberCount DESC NULLS LAST, Name ASC
-      LIMIT 200
-    ]) {
+    for (CollaborationGroup g : new GroupSelector().visibleGroups()) {
       groups.add(new GroupDTO(g, core.contains(g.Name)));
     }
     return groups;
@@ -45,28 +46,26 @@ public with sharing class ActivityGroupController {
     return names;
   }
 
-  /** One activity group for its page. */
+  /** One activity group for its page (public, or private if the user belongs). */
   @AuraEnabled(cacheable=true)
   public static GroupDTO getGroup(Id groupId) {
     if (groupId == null) {
       throw new AuraHandledException('A group id is required');
     }
-    List<CollaborationGroup> groups = [
-      SELECT Id, Name, Description, MemberCount, CollaborationType
-      FROM CollaborationGroup
-      WHERE Id = :groupId
-      LIMIT 1
-    ];
-    if (groups.isEmpty()) {
+    CollaborationGroup g = new GroupSelector().oneGroup(groupId);
+    Boolean admin = isCurrentUserAdmin(groupId);
+    if (
+      g == null ||
+      (g.CollaborationType != 'Public' &&
+      !admin &&
+      !isMember(groupId))
+    ) {
       throw new AuraHandledException(
         'That group does not exist or you do not have access to it'
       );
     }
-    GroupDTO dto = new GroupDTO(
-      groups[0],
-      coreGroupNames().contains(groups[0].Name)
-    );
-    dto.isAdmin = isCurrentUserAdmin(groupId);
+    GroupDTO dto = new GroupDTO(g, coreGroupNames().contains(g.Name));
+    dto.isAdmin = admin;
     return dto;
   }
 
@@ -74,14 +73,9 @@ public with sharing class ActivityGroupController {
   @AuraEnabled(cacheable=true)
   public static MemberList getMembers(Id groupId) {
     assertAdmin(groupId);
+    GroupSelector sel = new GroupSelector();
     MemberList result = new MemberList();
-    for (CollaborationGroupMember m : [
-      SELECT Id, MemberId, Member.Name, CollaborationRole
-      FROM CollaborationGroupMember
-      WHERE CollaborationGroupId = :groupId
-      ORDER BY CollaborationRole, Member.Name
-      LIMIT 1000
-    ]) {
+    for (CollaborationGroupMember m : sel.membersOf(groupId)) {
       result.members.add(
         new MemberDTO(
           m.Id,
@@ -91,13 +85,7 @@ public with sharing class ActivityGroupController {
         )
       );
     }
-    for (CollaborationGroupMemberRequest r : [
-      SELECT Id, RequesterId, Requester.Name
-      FROM CollaborationGroupMemberRequest
-      WHERE CollaborationGroupId = :groupId AND Status = 'Pending'
-      ORDER BY Requester.Name
-      LIMIT 1000
-    ]) {
+    for (CollaborationGroupMemberRequest r : sel.requestsOf(groupId)) {
       result.requests.add(
         new MemberDTO(r.Id, r.RequesterId, r.Requester.Name, false)
       );
@@ -149,36 +137,110 @@ public with sharing class ActivityGroupController {
     update r;
   }
 
-  // ---- admin checks -------------------------------------------------------
+  // ---- access checks ------------------------------------------------------
 
   /** True when the running user owns or is an Admin member of the group. */
   private static Boolean isCurrentUserAdmin(Id groupId) {
-    Id uid = UserInfo.getUserId();
-    for (CollaborationGroup g : [
-      SELECT OwnerId
-      FROM CollaborationGroup
-      WHERE Id = :groupId
-      LIMIT 1
-    ]) {
-      if (g.OwnerId == uid) {
-        return true;
-      }
-    }
-    return ![
-        SELECT Id
-        FROM CollaborationGroupMember
-        WHERE
-          CollaborationGroupId = :groupId
-          AND MemberId = :uid
-          AND CollaborationRole = 'Admin'
-        LIMIT 1
-      ]
-      .isEmpty();
+    return new GroupSelector().isAdmin(groupId, UserInfo.getUserId());
+  }
+
+  /** True when the running user belongs to the group. */
+  private static Boolean isMember(Id groupId) {
+    return new GroupSelector().isMember(groupId, UserInfo.getUserId());
   }
 
   private static void assertAdmin(Id groupId) {
     if (!isCurrentUserAdmin(groupId)) {
       throw new AuraHandledException('Only a group administrator can do that.');
+    }
+  }
+
+  /**
+   * Chatter scopes CollaborationGroup visibility to the running user's network,
+   * which hides club groups from community members. These reads run `without
+   * sharing` so the controller can apply its own public/member/admin rules.
+   */
+  private without sharing class GroupSelector {
+    List<CollaborationGroup> visibleGroups() {
+      Id uid = UserInfo.getUserId();
+      Set<Id> mine = new Set<Id>();
+      for (CollaborationGroupMember m : [
+        SELECT CollaborationGroupId
+        FROM CollaborationGroupMember
+        WHERE MemberId = :uid
+      ]) {
+        mine.add(m.CollaborationGroupId);
+      }
+      return [
+        SELECT Id, Name, Description, MemberCount, CollaborationType
+        FROM CollaborationGroup
+        WHERE CollaborationType = 'Public' OR Id IN :mine
+        ORDER BY MemberCount DESC NULLS LAST, Name ASC
+        LIMIT 200
+      ];
+    }
+
+    CollaborationGroup oneGroup(Id groupId) {
+      List<CollaborationGroup> g = [
+        SELECT Id, Name, Description, MemberCount, CollaborationType
+        FROM CollaborationGroup
+        WHERE Id = :groupId
+        LIMIT 1
+      ];
+      return g.isEmpty() ? null : g[0];
+    }
+
+    Boolean isAdmin(Id groupId, Id uid) {
+      for (CollaborationGroup g : [
+        SELECT OwnerId
+        FROM CollaborationGroup
+        WHERE Id = :groupId
+        LIMIT 1
+      ]) {
+        if (g.OwnerId == uid) {
+          return true;
+        }
+      }
+      return ![
+          SELECT Id
+          FROM CollaborationGroupMember
+          WHERE
+            CollaborationGroupId = :groupId
+            AND MemberId = :uid
+            AND CollaborationRole = 'Admin'
+          LIMIT 1
+        ]
+        .isEmpty();
+    }
+
+    Boolean isMember(Id groupId, Id uid) {
+      return ![
+          SELECT Id
+          FROM CollaborationGroupMember
+          WHERE CollaborationGroupId = :groupId AND MemberId = :uid
+          LIMIT 1
+        ]
+        .isEmpty();
+    }
+
+    List<CollaborationGroupMember> membersOf(Id groupId) {
+      return [
+        SELECT Id, MemberId, Member.Name, CollaborationRole
+        FROM CollaborationGroupMember
+        WHERE CollaborationGroupId = :groupId
+        ORDER BY CollaborationRole, Member.Name
+        LIMIT 1000
+      ];
+    }
+
+    List<CollaborationGroupMemberRequest> requestsOf(Id groupId) {
+      return [
+        SELECT Id, RequesterId, Requester.Name
+        FROM CollaborationGroupMemberRequest
+        WHERE CollaborationGroupId = :groupId AND Status = 'Pending'
+        ORDER BY Requester.Name
+        LIMIT 1000
+      ];
     }
   }
 
