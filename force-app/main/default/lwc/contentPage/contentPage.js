@@ -1,5 +1,6 @@
 import { LightningElement, api } from "lwc";
 import basePath from "@salesforce/community/basePath";
+import CONTENT_ASSETS from "@salesforce/resourceUrl/content_assets";
 
 /**
  * Reusable Alpine Field Guide content page for ported legacy marketing/info
@@ -99,6 +100,16 @@ export default class ContentPage extends LightningElement {
     const parsed = new DOMParser().parseFromString(next, "text/html");
     Array.from(parsed.body.childNodes).forEach((node) => {
       host.appendChild(document.importNode(node, true));
+    });
+    // Resolve migrated images. Authors write a host-neutral token carrying the
+    // filename (<img data-asset="history.jpg">); we point it at the
+    // content_assets static resource (binaries exported from prod, since sandbox
+    // file data isn't copied). Keeps committed markup free of host/site prefixes.
+    host.querySelectorAll("img[data-asset]").forEach((img) => {
+      img.setAttribute("src", `${CONTENT_ASSETS}/${img.dataset.asset}`);
+      if (!img.getAttribute("loading")) {
+        img.setAttribute("loading", "lazy");
+      }
     });
   }
 }

@@ -53,6 +53,17 @@ describe("c-content-page", () => {
     expect(body.querySelector("strong").textContent).toBe("1915");
   });
 
+  it("resolves data-asset images to the content_assets static resource", async () => {
+    const el = mount({
+      heading: "History",
+      bodyHtml: '<p><img data-asset="history.jpg" alt="History" /></p>'
+    });
+    await flush();
+    const img = el.shadowRoot.querySelector(".body img");
+    expect(img.getAttribute("src")).toMatch(/\/history\.jpg$/);
+    expect(img.getAttribute("loading")).toBe("lazy");
+  });
+
   it("resolves site-relative related links through basePath and renders them", () => {
     const el = mount({
       relatedHeading: "More About Us",
