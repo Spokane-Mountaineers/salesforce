@@ -72,6 +72,11 @@
   color: var(--pine);
   margin: 18px 0 12px;
 }
+.feed {
+  margin-top: 36px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
 .state {
   font-size: 16px;
   color: var(--ink-soft);

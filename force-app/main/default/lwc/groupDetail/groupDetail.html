@@ -26,6 +26,10 @@
         <h2 class="events__title">Upcoming events</h2>
         <c-events-calendar activity={group.name}></c-events-calendar>
       </section>
+
+      <section class="feed">
+        <c-smi-feed group-id={group.id} heading="Group feed"></c-smi-feed>
+      </section>
     </template>
   </article>
 </template>

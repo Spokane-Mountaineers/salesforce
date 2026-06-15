@@ -47,6 +47,9 @@ describe("c-group-detail", () => {
     const cal = el.shadowRoot.querySelector("c-events-calendar");
     expect(cal).not.toBeNull();
     expect(cal.activity).toBe("Climbing");
+    const feed = el.shadowRoot.querySelector("c-smi-feed");
+    expect(feed).not.toBeNull();
+    expect(feed.groupId).toBe("0F9a");
   });
 
   it("shows the admin panel only to group admins", async () => {
