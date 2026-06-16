@@ -34,10 +34,34 @@ on the normalized username and always reports success (so the page never reveals
 whether an account exists). The "forgot password" link points at the LWR site's
 own `/ForgotPassword` route, not the Aura `/CommunitiesForgotPassword` VF page.
 
-There is one open item: in testing, the reset email did not always arrive. The
-likely causes are email rate limits during heavy testing or an unverified
-community sender address. This needs confirmation against production
-deliverability settings before cutover.
+### Why the reset email wasn't arriving
+
+Three independent causes, found by walking the path on staging:
+
+1. **Unverified sender (the real bug).** The site's sender was
+   `webdev5@spokanemountaineers.org`, which is not a verified Org-Wide Email
+   Address. Experience Cloud silently drops forgot-password and welcome mail
+   when the configured sender isn't verified. The fix is to set the sender to a
+   verified address — `admin@spokanemountaineers.org`. This is the value now in
+   `SITE_SENDER_EMAIL` (`.env.staging` / `.env.production`).
+
+    `Network.EmailSenderAddress` is read-only to both the Metadata API and Apex,
+    so it **cannot** be deployed — it must be set once per org in the UI:
+    _Experience Workspaces → (Spokane Mountaineers LWR) → Administration →
+    Emails → Sender Email Address_ → pick the verified address → Save. The env
+    var documents the intended value and feeds `just create-site` on a fresh org.
+
+2. **Sandbox email masking.** A sandbox refresh appends `.invalid` to every
+   user's email, so reset mail to most staging members can't be delivered. Test
+   with an account whose email has been de-masked to a real inbox. This does not
+   affect production.
+
+3. **Site status.** While the site is `UnderConstruction`, the public
+   forgot-password page is reachable only via authenticated preview. It works
+   for everyone once the site is activated.
+
+Deliverability itself is fine — an anonymous-Apex send test succeeded, and the
+Forgot Password / Welcome / Change Password community templates are active.
 
 ## Terms & Conditions login flow
 

@@ -34,9 +34,12 @@ and retire the standard-Event mirror now that the calendar binds directly to
 
 ### Password reset email delivery
 
-The branded reset page works, but the reset email did not reliably arrive in
-testing. Confirm production email deliverability (sender verification, rate
-limits) before cutover.
+Root-caused (see [Auth & access → Why the reset email wasn't arriving](auth-and-access.md#why-the-reset-email-wasnt-arriving)).
+The sender must be a verified Org-Wide Email Address; it's now set to
+`admin@spokanemountaineers.org` in the env config. Because
+`Network.EmailSenderAddress` can't be deployed, the one remaining step is to set
+it by hand in Experience Workspaces → Administration → Emails (per org, staging
+and prod).
 
 ## Cutover checklist
 
