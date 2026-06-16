@@ -36,6 +36,40 @@ export default class ContentPage extends LightningElement {
   @api relatedLinks;
 
   _rendered;
+  _bodyBound = false;
+  lightboxSrc;
+  lightboxAlt = "";
+
+  connectedCallback() {
+    this._onKeydown = (e) => {
+      if (e.key === "Escape") {
+        this.closeLightbox();
+      }
+    };
+    window.addEventListener("keydown", this._onKeydown);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("keydown", this._onKeydown);
+  }
+
+  get isLightboxOpen() {
+    return Boolean(this.lightboxSrc);
+  }
+
+  // Click any image in the prose/gallery to enlarge it.
+  handleBodyClick(event) {
+    const img = event.target.closest("img");
+    if (img) {
+      this.lightboxSrc = img.currentSrc || img.src;
+      this.lightboxAlt = img.alt || "";
+    }
+  }
+
+  closeLightbox() {
+    this.lightboxSrc = undefined;
+    this.lightboxAlt = "";
+  }
 
   get hasPhotoHero() {
     return Boolean(this.heroImageUrl);
@@ -111,6 +145,11 @@ export default class ContentPage extends LightningElement {
     Array.from(parsed.body.childNodes).forEach((node) => {
       host.appendChild(document.importNode(node, true));
     });
+    // Delegate image clicks once (the body is rebuilt in place, the host stays).
+    if (!this._bodyBound) {
+      host.addEventListener("click", (e) => this.handleBodyClick(e));
+      this._bodyBound = true;
+    }
     // Resolve migrated images. Authors write a host-neutral token carrying the
     // filename (<img data-asset="history.jpg">), optionally with a group prefix
     // for galleries in their own resource (<img data-asset="chalet/IMG_1.jpeg">).

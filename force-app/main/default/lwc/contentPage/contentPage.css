@@ -194,13 +194,34 @@
   font-weight: 700;
   color: var(--ink);
 }
-.body ul,
-.body ol {
-  margin: 0 0 18px;
-  padding-left: 1.3em;
+/* Lists read as a scannable field-guide checklist: a rust marker, clear spacing,
+   and a hanging indent so wrapped lines line up under the text. */
+.body ul {
+  list-style: none;
+  margin: 0 0 22px;
+  padding-left: 0;
 }
-.body li {
-  margin: 0 0 8px;
+.body ul > li {
+  position: relative;
+  padding-left: 1.6em;
+  margin: 0 0 10px;
+}
+.body ul > li::before {
+  content: "▸";
+  position: absolute;
+  left: 0.15em;
+  top: 0;
+  color: var(--rust);
+  font-weight: 700;
+  font-size: 0.95em;
+}
+.body ol {
+  margin: 0 0 22px;
+  padding-left: 1.5em;
+}
+.body ol > li {
+  margin: 0 0 10px;
+  padding-left: 0.2em;
 }
 .body img {
   display: block;
@@ -345,13 +366,47 @@
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
-.body ul li::marker {
-  color: var(--moss);
-}
-.body ol li::marker {
+.body ol > li::marker {
   color: var(--rust);
   font-family: var(--font-display);
   font-weight: 600;
+}
+
+/* Click any prose/gallery image to enlarge it. */
+.body img {
+  cursor: zoom-in;
+}
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 4vmin;
+  background: rgba(18, 24, 20, 0.86);
+  cursor: zoom-out;
+  border: 0;
+  animation: cp-fade 0.18s ease;
+}
+.lightbox__img {
+  max-width: 94vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  background: #fff;
+}
+@keyframes cp-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox {
+    animation: none;
+  }
 }
 
 /* ---------------------------------------------------------------------------

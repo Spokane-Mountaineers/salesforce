@@ -50,5 +50,17 @@
         </aside>
       </template>
     </div>
+
+    <template lwc:if={isLightboxOpen}>
+      <div
+        class="lightbox"
+        onclick={closeLightbox}
+        role="button"
+        tabindex="-1"
+        aria-label="Close enlarged image"
+      >
+        <img class="lightbox__img" src={lightboxSrc} alt={lightboxAlt} />
+      </div>
+    </template>
   </article>
 </template>

@@ -97,6 +97,24 @@ describe("c-content-page", () => {
     );
   });
 
+  it("opens a lightbox when a body image is clicked", async () => {
+    const el = mount({
+      heading: "Chalet",
+      bodyHtml: '<p><img src="photo.jpg" alt="A photo" /></p>'
+    });
+    await flush();
+    expect(el.shadowRoot.querySelector(".lightbox")).toBeNull();
+    el.shadowRoot.querySelector(".body img").click();
+    await flush();
+    const box = el.shadowRoot.querySelector(".lightbox");
+    expect(box).not.toBeNull();
+    expect(box.querySelector(".lightbox__img").alt).toBe("A photo");
+    // Clicking the overlay closes it.
+    box.click();
+    await flush();
+    expect(el.shadowRoot.querySelector(".lightbox")).toBeNull();
+  });
+
   it("ignores malformed related-links JSON without throwing", () => {
     const el = mount({ relatedHeading: "More", relatedLinks: "{not json" });
     expect(el.shadowRoot.querySelectorAll(".related__item a")).toHaveLength(0);
