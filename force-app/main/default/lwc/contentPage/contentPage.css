@@ -211,6 +211,25 @@
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
+/* Enrollment-closed callout + de-emphasized (dead) application link text. */
+.body .enroll-closed {
+  margin: 18px 0 22px;
+  padding: 14px 18px;
+  background: var(--rust-soft, #f3e2d6);
+  border-left: 4px solid var(--rust);
+  border-radius: 10px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.body .enroll-closed strong {
+  color: var(--rust);
+}
+.body .muted {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
 /* Course catalog: a directory of schools/seminars/courses as compact cards. */
 .body .section-sub {
   margin: -2px 0 14px;
