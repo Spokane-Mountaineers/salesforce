@@ -111,11 +111,34 @@ export default class SmiThemeLayout extends LightningElement {
 
   _mobileOpen = false;
   _openKey = null;
+  showTop = false;
 
-  // The theme layout wraps every page, so set the favicon here. Best-effort:
-  // if the runtime blocks document.head, set it via the site's head markup in
-  // Builder instead (the favicon_ico static resource is deployed either way).
+  // The theme layout wraps every page, so set the favicon here and watch scroll
+  // for the back-to-top button.
   connectedCallback() {
+    this.setFavicon();
+    this._onScroll = () => {
+      this.showTop = (window.pageYOffset || window.scrollY || 0) > 400;
+    };
+    try {
+      window.addEventListener("scroll", this._onScroll, { passive: true });
+    } catch (e) {
+      // scroll not observable in this runtime — button just won't auto-show
+    }
+  }
+
+  disconnectedCallback() {
+    try {
+      window.removeEventListener("scroll", this._onScroll);
+    } catch (e) {
+      // nothing to clean up
+    }
+  }
+
+  // Best-effort favicon: if the runtime blocks document.head, set it via the
+  // site's head markup in Builder (the favicon_ico static resource deploys
+  // either way).
+  setFavicon() {
     if (faviconSet) {
       return;
     }
@@ -128,6 +151,14 @@ export default class SmiThemeLayout extends LightningElement {
       faviconSet = true;
     } catch (e) {
       // favicon will be set via Builder head markup instead
+    }
+  }
+
+  scrollToTop() {
+    try {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (e) {
+      window.scrollTo(0, 0);
     }
   }
 

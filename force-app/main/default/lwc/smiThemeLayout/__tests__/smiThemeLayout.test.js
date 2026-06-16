@@ -154,6 +154,26 @@ describe("c-smi-theme-layout", () => {
     expect(aboutUs.getAttribute("href")).toBe("/lwrsite/about-us");
   });
 
+  it("reveals the back-to-top button only after scrolling past the threshold", async () => {
+    const el = await render();
+    await Promise.resolve();
+    // Hidden at the top of the page.
+    expect(el.shadowRoot.querySelector(".to-top")).toBeNull();
+
+    window.pageYOffset = 500;
+    window.dispatchEvent(new CustomEvent("scroll"));
+    await Promise.resolve();
+    const btn = el.shadowRoot.querySelector(".to-top");
+    expect(btn).not.toBeNull();
+
+    // Clicking it scrolls to the top (smooth, with a fallback).
+    const spy = jest.spyOn(window, "scrollTo").mockImplementation(() => {});
+    btn.click();
+    expect(spy).toHaveBeenCalledWith({ top: 0, behavior: "smooth" });
+    spy.mockRestore();
+    window.pageYOffset = 0;
+  });
+
   it("renders a grouped sitemap footer mirroring the header IA", async () => {
     const el = await render();
     await Promise.resolve();

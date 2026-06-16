@@ -144,5 +144,17 @@
         </p>
       </div>
     </footer>
+
+    <template lwc:if={showTop}>
+      <button
+        class="to-top"
+        type="button"
+        onclick={scrollToTop}
+        aria-label="Back to top"
+        title="Back to top"
+      >
+        <span class="to-top__arrow" aria-hidden="true">↑</span>
+      </button>
+    </template>
   </div>
 </template>
