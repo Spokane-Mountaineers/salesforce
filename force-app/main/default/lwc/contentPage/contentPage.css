@@ -234,33 +234,51 @@
 }
 /* "At a glance" facts: individual label/value tiles (one column on phones,
    filling out on wider screens — no empty trailing cell). */
+/* "At a glance" spec plate — a single field-guide data box of label↔value
+   rows rather than scattered tiles. A flex column (not a grid) so an odd
+   number of facts never leaves an empty cell, and long values
+   ("$275 + Volunteer requirements") wrap under their label instead of
+   stretching a tile. Capped width so it reads as a tidy data plate. */
 .body .facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 10px;
-  margin: 18px 0 26px;
-}
-.body .fact {
+  display: flex;
+  flex-direction: column;
+  max-width: 440px;
+  margin: 20px 0 28px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--moss);
-  border-radius: 10px;
-  padding: 12px 15px;
+  border-top: 3px solid var(--rust);
+  border-radius: 12px;
+  overflow: hidden;
   box-shadow: var(--shadow);
 }
+.body .fact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 18px;
+  padding: 11px 18px;
+  border-top: 1px solid var(--line);
+}
+.body .fact:first-child {
+  border-top: 0;
+}
 .body .fact__k {
-  display: block;
+  flex: 0 0 auto;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--rust);
-  margin-bottom: 3px;
+  line-height: 1.5;
 }
 .body .fact__v {
-  font-size: 15.5px;
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: right;
+  font-size: 15px;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.4;
   color: var(--ink);
 }
 
