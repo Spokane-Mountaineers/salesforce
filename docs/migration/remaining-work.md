@@ -35,11 +35,13 @@ and retire the standard-Event mirror now that the calendar binds directly to
 ### Password reset email delivery
 
 Root-caused (see [Auth & access → Why the reset email wasn't arriving](auth-and-access.md#why-the-reset-email-wasnt-arriving)).
-The sender must be a verified Org-Wide Email Address; it's now set to
-`admin@spokanemountaineers.org` in the env config. Because
-`Network.EmailSenderAddress` can't be deployed, the one remaining step is to set
-it by hand in Experience Workspaces → Administration → Emails (per org, staging
-and prod).
+Two stacked causes: the sender wasn't a verified Org-Wide Email Address (now set
+to `admin@spokanemountaineers.org` in env config), and the
+`spokanemountaineers.org` domain has no DKIM key, so Salesforce can't authenticate
+mail from it. The remaining steps are UI/DNS only (neither DKIM keys nor
+`Network.EmailSenderAddress` is deployable): DKIM-authenticate the domain, publish
+the CNAME records, then set the site sender — per org, staging and prod. The
+runbook is in the auth doc.
 
 ## Cutover checklist
 

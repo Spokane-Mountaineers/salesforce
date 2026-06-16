@@ -36,32 +36,58 @@ own `/ForgotPassword` route, not the Aura `/CommunitiesForgotPassword` VF page.
 
 ### Why the reset email wasn't arriving
 
-Three independent causes, found by walking the path on staging:
+The platform is healthy — an anonymous-Apex send test succeeded, and the Forgot
+Password / Welcome / Change Password community templates are active. The mail
+fails for two stacked reasons, plus two staging-only caveats.
 
-1. **Unverified sender (the real bug).** The site's sender was
-   `webdev5@spokanemountaineers.org`, which is not a verified Org-Wide Email
-   Address. Experience Cloud silently drops forgot-password and welcome mail
-   when the configured sender isn't verified. The fix is to set the sender to a
-   verified address — `admin@spokanemountaineers.org`. This is the value now in
-   `SITE_SENDER_EMAIL` (`.env.staging` / `.env.production`).
+**1. The sender address isn't a verified Org-Wide Email Address.** The site
+sends as `webdev5@spokanemountaineers.org`, which isn't an OWEA (and isn't even a
+real mailbox). Experience Cloud drops forgot-password and welcome mail when the
+configured sender isn't verified. It must point at a verified OWEA —
+`admin@spokanemountaineers.org`. That's the value now in `SITE_SENDER_EMAIL`
+(`.env.staging` / `.env.production`).
 
-    `Network.EmailSenderAddress` is read-only to both the Metadata API and Apex,
-    so it **cannot** be deployed — it must be set once per org in the UI:
-    _Experience Workspaces → (Spokane Mountaineers LWR) → Administration →
-    Emails → Sender Email Address_ → pick the verified address → Save. The env
-    var documents the intended value and feeds `just create-site` on a fresh org.
+`Network.EmailSenderAddress` is read-only to both the Metadata API and Apex, so
+it **cannot** be deployed — set it once per org in the UI: _Experience
+Workspaces → (Spokane Mountaineers LWR) → Administration → Emails → Sender Email
+Address_ → pick the verified address → Save. The env var documents the intended
+value and feeds `just create-site` on a fresh org.
 
-2. **Sandbox email masking.** A sandbox refresh appends `.invalid` to every
-   user's email, so reset mail to most staging members can't be delivered. Test
-   with an account whose email has been de-masked to a real inbox. This does not
-   affect production.
+**2. The `spokanemountaineers.org` domain isn't authenticated (DKIM).** The org
+has zero DKIM keys (`SELECT Id FROM EmailDomainKey` returns nothing), so
+Salesforce isn't authorized to sign mail as `@spokanemountaineers.org`. A verified
+OWEA on an unauthenticated domain still fails SPF/DKIM alignment at the recipient
+(Gmail spam-folders or rejects), and Salesforce is rolling out a hard block on
+sends from unverified domains. The durable fix is to DKIM-authenticate the domain
+(runbook below), after which any `@spokanemountaineers.org` sender is club-branded
+_and_ deliverable.
 
-3. **Site status.** While the site is `UnderConstruction`, the public
-   forgot-password page is reachable only via authenticated preview. It works
-   for everyone once the site is activated.
+#### Runbook: authenticate the domain and turn on reset mail
 
-Deliverability itself is fine — an anonymous-Apex send test succeeded, and the
-Forgot Password / Welcome / Change Password community templates are active.
+Per org (do it in staging first, then prod at cutover — the selectors differ, so
+publish both sets of DNS records):
+
+1. **Create a DKIM key.** Setup → _DKIM Keys_ → **Create New Key**. Domain
+   `spokanemountaineers.org`, key size 2048, match the exact domain. Salesforce
+   generates a key pair and shows **two CNAME records** (a primary and an
+   alternate selector, for rotation).
+2. **Publish the CNAMEs** in the `spokanemountaineers.org` DNS zone exactly as
+   shown. Wait for propagation (minutes to a few hours).
+3. **Activate the key.** Back on the DKIM Keys page, activate it — Salesforce
+   validates the CNAMEs resolve before it will sign with them.
+4. **Set the site sender** to `admin@spokanemountaineers.org` (the manual step
+   from cause #1). If a send still fails, open that OWEA and enable _Allow All
+   Profiles_ (community mail can send from an automated context).
+5. **Test** the forgot-password page with an account whose email is a real inbox
+   (see the sandbox caveat below).
+
+**Staging-only caveat A — email masking.** A sandbox refresh appends `.invalid`
+to every user's email, so reset mail to most staging members can't be delivered.
+Test with a de-masked account. Doesn't affect production.
+
+**Staging-only caveat B — site status.** While the site is `UnderConstruction`,
+the public forgot-password page is reachable only via authenticated preview. It
+works for everyone once the site is activated.
 
 ## Terms & Conditions login flow
 
