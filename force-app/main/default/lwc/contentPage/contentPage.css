@@ -412,20 +412,76 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 4vmin;
-  background: rgba(18, 24, 20, 0.86);
-  cursor: zoom-out;
-  border: 0;
+  background: rgba(18, 24, 20, 0.88);
   animation: cp-fade 0.18s ease;
 }
 .lightbox__img {
-  max-width: 94vw;
+  position: relative;
+  z-index: 1;
+  max-width: 90vw;
   max-height: 90vh;
   border-radius: 10px;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
   background: #fff;
+  cursor: zoom-out;
+}
+/* Tap zones pinned to the left/right edges, above the image so they're always
+   tappable (touch + click); arrow keys also page through. */
+.lightbox__zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: clamp(60px, 16vw, 150px);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lightbox__zone--prev {
+  left: 0;
+  justify-content: flex-start;
+  padding-left: 2vmin;
+}
+.lightbox__zone--next {
+  right: 0;
+  justify-content: flex-end;
+  padding-right: 2vmin;
+}
+.lightbox__chev {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 9vw, 84px);
+  line-height: 1;
+  color: rgba(244, 239, 227, 0.78);
+  transition: color 0.15s;
+}
+.lightbox__zone:hover .lightbox__chev,
+.lightbox__zone:focus-visible .lightbox__chev {
+  color: #fff;
+}
+.lightbox__close {
+  position: absolute;
+  top: 2vmin;
+  right: 2vmin;
+  z-index: 4;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox__close:hover {
+  background: rgba(0, 0, 0, 0.55);
 }
 @keyframes cp-fade {
   from {

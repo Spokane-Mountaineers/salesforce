@@ -52,14 +52,39 @@
     </div>
 
     <template lwc:if={isLightboxOpen}>
-      <div
-        class="lightbox"
-        onclick={closeLightbox}
-        role="button"
-        tabindex="-1"
-        aria-label="Close enlarged image"
-      >
-        <img class="lightbox__img" src={lightboxSrc} alt={lightboxAlt} />
+      <div class="lightbox" onclick={closeLightbox}>
+        <template lwc:if={hasGallery}>
+          <button
+            class="lightbox__zone lightbox__zone--prev"
+            type="button"
+            onclick={prevImage}
+            aria-label="Previous image"
+          >
+            <span class="lightbox__chev" aria-hidden="true">‹</span>
+          </button>
+          <button
+            class="lightbox__zone lightbox__zone--next"
+            type="button"
+            onclick={nextImage}
+            aria-label="Next image"
+          >
+            <span class="lightbox__chev" aria-hidden="true">›</span>
+          </button>
+        </template>
+        <img
+          class="lightbox__img"
+          src={lightboxSrc}
+          alt={lightboxAlt}
+          onclick={closeFromImage}
+        />
+        <button
+          class="lightbox__close"
+          type="button"
+          onclick={closeLightbox}
+          aria-label="Close"
+        >
+          ×
+        </button>
       </div>
     </template>
   </article>

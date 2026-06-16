@@ -115,6 +115,28 @@ describe("c-content-page", () => {
     expect(el.shadowRoot.querySelector(".lightbox")).toBeNull();
   });
 
+  it("pages through a gallery with the left/right zones", async () => {
+    const el = mount({
+      heading: "Gallery",
+      bodyHtml:
+        '<div class="gallery"><img src="a.jpg" alt="First"/>' +
+        '<img src="b.jpg" alt="Second"/><img src="c.jpg" alt="Third"/></div>'
+    });
+    await flush();
+    // Open at the first image.
+    el.shadowRoot.querySelectorAll(".body img")[0].click();
+    await flush();
+    expect(el.shadowRoot.querySelector(".lightbox__img").alt).toBe("First");
+    // Next zone advances; prev zone goes back and wraps.
+    el.shadowRoot.querySelector(".lightbox__zone--next").click();
+    await flush();
+    expect(el.shadowRoot.querySelector(".lightbox__img").alt).toBe("Second");
+    el.shadowRoot.querySelector(".lightbox__zone--prev").click();
+    el.shadowRoot.querySelector(".lightbox__zone--prev").click();
+    await flush();
+    expect(el.shadowRoot.querySelector(".lightbox__img").alt).toBe("Third");
+  });
+
   it("ignores malformed related-links JSON without throwing", () => {
     const el = mount({ relatedHeading: "More", relatedLinks: "{not json" });
     expect(el.shadowRoot.querySelectorAll(".related__item a")).toHaveLength(0);

@@ -37,13 +37,20 @@ export default class ContentPage extends LightningElement {
 
   _rendered;
   _bodyBound = false;
-  lightboxSrc;
-  lightboxAlt = "";
+  _images = [];
+  lightboxIndex = -1;
 
   connectedCallback() {
     this._onKeydown = (e) => {
+      if (this.lightboxIndex < 0) {
+        return;
+      }
       if (e.key === "Escape") {
         this.closeLightbox();
+      } else if (e.key === "ArrowLeft") {
+        this.prevImage();
+      } else if (e.key === "ArrowRight") {
+        this.nextImage();
       }
     };
     window.addEventListener("keydown", this._onKeydown);
@@ -54,21 +61,64 @@ export default class ContentPage extends LightningElement {
   }
 
   get isLightboxOpen() {
-    return Boolean(this.lightboxSrc);
+    return this.lightboxIndex >= 0;
+  }
+  get lightboxSrc() {
+    const img = this._images[this.lightboxIndex];
+    return img && img.src;
+  }
+  get lightboxAlt() {
+    const img = this._images[this.lightboxIndex];
+    return (img && img.alt) || "";
+  }
+  // Only show prev/next affordances when there's more than one image.
+  get hasGallery() {
+    return this._images.length > 1;
   }
 
-  // Click any image in the prose/gallery to enlarge it.
+  // Click any image in the prose/gallery to open the lightbox at that image.
   handleBodyClick(event) {
     const img = event.target.closest("img");
-    if (img) {
-      this.lightboxSrc = img.currentSrc || img.src;
-      this.lightboxAlt = img.alt || "";
+    if (!img) {
+      return;
+    }
+    const host = this.refs && this.refs.body;
+    const imgs = host ? Array.from(host.querySelectorAll("img")) : [img];
+    this._images = imgs.map((el) => ({
+      src: el.currentSrc || el.src,
+      alt: el.alt || ""
+    }));
+    this.lightboxIndex = Math.max(0, imgs.indexOf(img));
+  }
+
+  prevImage(event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    const n = this._images.length;
+    if (n) {
+      this.lightboxIndex = (this.lightboxIndex - 1 + n) % n;
+    }
+  }
+
+  nextImage(event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    const n = this._images.length;
+    if (n) {
+      this.lightboxIndex = (this.lightboxIndex + 1) % n;
     }
   }
 
   closeLightbox() {
-    this.lightboxSrc = undefined;
-    this.lightboxAlt = "";
+    this.lightboxIndex = -1;
+  }
+
+  // Tapping the image itself closes (a clear dismiss on mobile and desktop).
+  closeFromImage(event) {
+    event.stopPropagation();
+    this.closeLightbox();
   }
 
   get hasPhotoHero() {
