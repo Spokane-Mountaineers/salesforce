@@ -232,21 +232,21 @@
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
 }
-/* "At a glance" facts: a divided card of label/value tiles. */
+/* "At a glance" facts: individual label/value tiles (one column on phones,
+   filling out on wider screens — no empty trailing cell). */
 .body .facts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
   margin: 18px 0 26px;
-  box-shadow: var(--shadow);
 }
 .body .fact {
   background: var(--card);
-  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--moss);
+  border-radius: 10px;
+  padding: 12px 15px;
+  box-shadow: var(--shadow);
 }
 .body .fact__k {
   display: block;

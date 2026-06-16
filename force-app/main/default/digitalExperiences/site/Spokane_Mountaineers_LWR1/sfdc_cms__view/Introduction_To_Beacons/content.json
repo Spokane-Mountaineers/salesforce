@@ -30,7 +30,7 @@
                         "subtitle": "",
                         "heroImageUrl": "",
                         "heroAlt": "",
-                        "bodyHtml": "<h3><b>Introduction to Beacons</b></h3><h3><b>General Info</b></h3><p><b>TUITION - </b>$$</p><p> ( Non-members: $$ + membership fee.)</p><p><b>CLASS SIZE LIMIT - </b>50</p><p><b>COURSE DURATION - </b>Dec or January</p><p>HOURS OF INSTRUCTION - 8</p><p>Questions? Contact the School Director</p><p>You must be a member to participate. Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><b>Join Today!</b></a></p><h1><b>Introduction to Beacons</b></h1><p>under construction</p>",
+                        "bodyHtml": "<h3><b>Introduction to Beacons</b></h3><h3><b>General Info</b></h3><div class=\"facts\"><div class=\"fact\"><span class=\"fact__k\">Tuition</span><span class=\"fact__v\">$$</span></div><div class=\"fact\"><span class=\"fact__k\">Class size</span><span class=\"fact__v\">50</span></div><div class=\"fact\"><span class=\"fact__k\">Duration</span><span class=\"fact__v\">Dec or January</span></div><div class=\"fact\"><span class=\"fact__k\">Hours</span><span class=\"fact__v\">8</span></div></div><p> ( Non-members: $$ + membership fee.)</p><p>Questions? Contact the School Director</p><p>You must be a member to participate. Not yet a member?</p><p><a href=\"https://donorbox.org/spokane-mountaineers-membership-2\"><b>Join Today!</b></a></p><h1><b>Introduction to Beacons</b></h1><p>under construction</p>",
                         "relatedHeading": "Browse",
                         "relatedLinks": "[{\"label\":\"All Schools & Clinics\",\"path\":\"/schools-and-clinics\"}]"
                       },
