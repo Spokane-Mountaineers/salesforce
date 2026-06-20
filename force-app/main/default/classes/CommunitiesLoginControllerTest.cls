@@ -46,14 +46,11 @@ private class CommunitiesLoginControllerTest {
     CommunitiesLoginController controller = new CommunitiesLoginController();
     Test.stopTest();
 
-    // Verify default startURL contains the switch path
-    System.assert(
-      controller.startUrl.contains('servlet/networks/switch'),
-      'Start URL should default to the network switch path'
-    );
-    System.assert(
-      controller.startUrl.contains('startURL=%2Fs%2F'),
-      'Start URL should redirect to /s/ after the switch'
+    // Verify default startURL is /s/
+    System.assertEquals(
+      '/s/',
+      controller.startUrl,
+      'Start URL should default to /s/'
     );
   }
 

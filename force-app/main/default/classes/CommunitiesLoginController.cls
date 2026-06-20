@@ -38,13 +38,6 @@ public without sharing class CommunitiesLoginController {
    * @return Default community start URL (switch path)
    */
   private String getDefaultStartUrl() {
-    String networkId = getNetworkId();
-    if (String.isNotBlank(networkId)) {
-      return '/servlet/networks/switch?networkId=' +
-        networkId +
-        '&startURL=' +
-        EncodingUtil.urlEncode('/s/', 'UTF-8');
-    }
     return '/s/';
   }
 
@@ -244,11 +237,17 @@ public without sharing class CommunitiesLoginController {
       String destUrl = String.isNotBlank(startUrl) ? startUrl : '/s/';
 
       // Extract the real destination if startUrl is the switch servlet
-      if (destUrl.contains('/servlet/networks/switch') && destUrl.contains('startURL=')) {
+      if (
+        destUrl.contains('/servlet/networks/switch') &&
+        destUrl.contains('startURL=')
+      ) {
         Integer startIndex = destUrl.indexOf('startURL=') + 9;
         String encodedInnerUrl = destUrl.substring(startIndex);
         if (encodedInnerUrl.contains('&')) {
-          encodedInnerUrl = encodedInnerUrl.substring(0, encodedInnerUrl.indexOf('&'));
+          encodedInnerUrl = encodedInnerUrl.substring(
+            0,
+            encodedInnerUrl.indexOf('&')
+          );
         }
         destUrl = EncodingUtil.urlDecode(encodedInnerUrl, 'UTF-8');
       }
