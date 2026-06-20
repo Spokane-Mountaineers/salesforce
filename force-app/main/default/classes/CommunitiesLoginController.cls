@@ -42,30 +42,6 @@ public without sharing class CommunitiesLoginController {
   }
 
   /**
-   * Helper to retrieve the Network ID for the Spokane Mountaineers community
-   *
-   * @return Network ID or null if not found
-   */
-  private String getNetworkId() {
-    try {
-      // Query the Network ID for the main community
-      // Using 'without sharing' controller allows access to this record
-      List<Network> networks = [
-        SELECT Id
-        FROM Network
-        WHERE Name = 'Spokane Mountaineers'
-        LIMIT 1
-      ];
-      if (!networks.isEmpty()) {
-        return networks[0].Id;
-      }
-    } catch (Exception e) {
-      // Log error or handle gracefully
-    }
-    return null;
-  }
-
-  /**
    * Handle login form submission
    * Normalizes username by appending .smi suffix if not present and authenticates user
    *
