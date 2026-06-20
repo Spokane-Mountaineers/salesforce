@@ -343,4 +343,30 @@ private class CommunitiesLoginControllerTest {
       'Admin login URL should include the site parameter'
     );
   }
+
+  /**
+   * Test admin login URL generation with a startURL containing network switch
+   */
+  @IsTest
+  static void testGetAdminLoginUrlWithSwitchStartUrl() {
+    PageReference pageRef = Page.CommunitiesLogin;
+    pageRef.getParameters()
+      .put(
+        'startURL',
+        '/servlet/networks/switch?networkId=0DB1N000000blZRWAY&startURL=%2Fs%2Fevents'
+      );
+    Test.setCurrentPage(pageRef);
+
+    CommunitiesLoginController controller = new CommunitiesLoginController();
+
+    Test.startTest();
+    String adminLoginUrl = controller.getAdminLoginUrl();
+    Test.stopTest();
+
+    System.assertNotEquals(null, adminLoginUrl);
+    System.assert(
+      adminLoginUrl.contains('url=%2Fs%2Fevents'),
+      'Should extract and encode inner startURL from switch URL'
+    );
+  }
 }
