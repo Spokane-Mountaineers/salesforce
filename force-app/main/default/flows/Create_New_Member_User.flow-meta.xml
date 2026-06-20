@@ -90,6 +90,11 @@
         <expression>LEFT({!Get_Contact.FirstName},5)</expression>
     </formulas>
     <formulas>
+        <name>formula_FederationId</name>
+        <dataType>String</dataType>
+        <expression>LOWER(TRIM({!Get_Contact.Email}))</expression>
+    </formulas>
+    <formulas>
         <name>formula_Username</name>
         <dataType>String</dataType>
         <expression>{!Get_Contact.Email}&amp;&quot;.smi&quot;</expression>
@@ -216,6 +221,12 @@
             <field>EmailEncodingKey</field>
             <value>
                 <stringValue>ISO-8859-1</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FederationIdentifier</field>
+            <value>
+                <elementReference>formula_FederationId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
