@@ -5,6 +5,8 @@
   --ink-faint: #8a938c;
   --pine: #1e4b38;
   --rust: #b14a1e;
+  --moss: #6e9173;
+  --sky: #2c6a8c;
   --line: rgba(28, 37, 32, 0.14);
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
@@ -40,10 +42,71 @@
   color: var(--ink-faint);
   margin: 0 0 28px;
 }
+
+/* Prose styling for rich text body */
 .body {
   font-size: 18px;
-  line-height: 1.72;
+  line-height: 1.75;
+  color: var(--ink);
+  display: block;
 }
+.body p {
+  margin: 0 0 1.25rem;
+}
+.body h2,
+.body h3,
+.body h4 {
+  font-family: var(--font-display);
+  color: var(--pine);
+  margin: 1.8rem 0 0.8rem;
+  font-weight: 600;
+}
+.body h2 {
+  font-size: 24px;
+}
+.body h3 {
+  font-size: 20px;
+}
+.body a {
+  color: var(--sky);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--sky);
+  transition: color 0.2s;
+}
+.body a:hover {
+  color: var(--pine);
+  border-bottom-style: solid;
+}
+.body ul,
+.body ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+.body ul {
+  list-style-type: disc;
+}
+.body ul li::marker {
+  color: var(--moss);
+}
+.body ol {
+  list-style-type: decimal;
+}
+.body li {
+  margin-bottom: 0.5rem;
+}
+.body blockquote {
+  border-left: 4px solid var(--rust);
+  background: var(--paper-2);
+  padding: 12px 18px;
+  margin: 1.5rem 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  border-radius: 0 8px 8px 0;
+}
+.body blockquote p {
+  margin: 0;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

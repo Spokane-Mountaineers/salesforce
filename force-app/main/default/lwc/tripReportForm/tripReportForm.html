@@ -1,8 +1,8 @@
 <template>
   <form class="form" onsubmit={handleSubmit}>
     <header class="head">
-      <p class="eyebrow">New Trip Report</p>
-      <h1 class="title">Share where you went</h1>
+      <p class="eyebrow">{eyebrowText}</p>
+      <h1 class="title">{titleText}</h1>
     </header>
 
     <template lwc:if={errorMessage}>
@@ -24,7 +24,11 @@
     <div class="row">
       <label class="field">
         <span class="label">Activity</span>
-        <select data-field="activity" onchange={handleChange}>
+        <select
+          data-field="activity"
+          onchange={handleChange}
+          value={form.activity}
+        >
           <option value="">—</option>
           <template for:each={activityOptions} for:item="opt">
             <option key={opt} value={opt}>{opt}</option>
@@ -33,7 +37,11 @@
       </label>
       <label class="field">
         <span class="label">Difficulty</span>
-        <select data-field="difficulty" onchange={handleChange}>
+        <select
+          data-field="difficulty"
+          onchange={handleChange}
+          value={form.difficulty}
+        >
           <option value="">—</option>
           <template for:each={difficultyOptions} for:item="opt">
             <option key={opt} value={opt}>{opt}</option>
@@ -45,7 +53,12 @@
     <div class="row">
       <label class="field">
         <span class="label">Trip date</span>
-        <input type="date" data-field="tripDate" onchange={handleChange} />
+        <input
+          type="date"
+          data-field="tripDate"
+          onchange={handleChange}
+          value={form.tripDate}
+        />
       </label>
       <label class="field">
         <span class="label">Location / region</span>
@@ -59,18 +72,37 @@
       </label>
     </div>
 
+    <template lwc:if={hasControlledTags}>
+      <div class="field">
+        <span class="label">Controlled Tags</span>
+        <div class="chips" role="group" aria-label="Select controlled tags">
+          <template for:each={controlledTags} for:item="tag">
+            <button
+              key={tag.id}
+              class={tag.className}
+              data-id={tag.id}
+              onclick={handleToggleTag}
+              type="button"
+            >
+              #{tag.name}
+            </button>
+          </template>
+        </div>
+      </div>
+    </template>
+
     <label class="field">
       <span class="label">Trip report</span>
-      <textarea
+      <lightning-input-rich-text
         data-field="body"
-        rows="10"
+        value={form.body}
         onchange={handleChange}
         placeholder="How was the route? Conditions, beta, the good and the type-2 fun…"
-      ></textarea>
+      ></lightning-input-rich-text>
     </label>
 
     <label class="field">
-      <span class="label">Tags (comma-separated)</span>
+      <span class="label">Free Tags (comma-separated)</span>
       <input
         type="text"
         data-field="freeTags"
@@ -81,7 +113,7 @@
       />
     </label>
 
-    <div class="actions">
+    <div class="actions font-body">
       <button
         class="smi-btn smi-btn--primary"
         type="submit"
@@ -89,6 +121,38 @@
       >
         <template lwc:if={submitting}>Saving…</template>
         <template lwc:else>Publish trip report</template>
+      </button>
+
+      <button
+        class="smi-btn smi-btn--ghost"
+        type="button"
+        onclick={handleSaveDraft}
+        disabled={submitting}
+        style="margin-left: 10px"
+      >
+        Save Draft
+      </button>
+
+      <template lwc:if={isDraftEdit}>
+        <button
+          class="smi-btn smi-btn--danger"
+          type="button"
+          onclick={handleDeleteDraft}
+          disabled={submitting}
+          style="margin-left: 10px"
+        >
+          Delete Draft
+        </button>
+      </template>
+
+      <button
+        class="smi-btn smi-btn--ghost"
+        type="button"
+        onclick={handleCancel}
+        disabled={submitting}
+        style="margin-left: 10px"
+      >
+        Cancel
       </button>
     </div>
   </form>

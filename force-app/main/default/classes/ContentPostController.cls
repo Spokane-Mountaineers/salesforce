@@ -59,9 +59,26 @@ public with sharing class ContentPostController {
     }
     soql += ' ORDER BY Publish_Date__c DESC NULLS LAST, CreatedDate DESC LIMIT 200';
 
+    List<Content_Post__c> posts = Database.query(soql);
+    Map<Id, List<String>> postToTagNames = new Map<Id, List<String>>();
+    for (Content_Post_Tag__c cpt : [
+      SELECT Content_Post__c, Content_Tag__r.Name
+      FROM Content_Post_Tag__c
+      WHERE Content_Post__c IN :posts
+    ]) {
+      if (!postToTagNames.containsKey(cpt.Content_Post__c)) {
+        postToTagNames.put(cpt.Content_Post__c, new List<String>());
+      }
+      postToTagNames.get(cpt.Content_Post__c).add(cpt.Content_Tag__r.Name);
+    }
+
     List<PostDTO> results = new List<PostDTO>();
-    for (Content_Post__c p : Database.query(soql)) {
-      results.add(new PostDTO(p));
+    for (Content_Post__c p : posts) {
+      PostDTO dto = new PostDTO(p);
+      if (postToTagNames.containsKey(p.Id)) {
+        dto.displayTags.addAll(postToTagNames.get(p.Id));
+      }
+      results.add(dto);
     }
     return results;
   }
@@ -97,7 +114,16 @@ public with sharing class ContentPostController {
         'That post does not exist or you do not have access to it'
       );
     }
-    return new PostDTO(posts[0], true);
+    PostDTO dto = new PostDTO(posts[0], true);
+    for (Content_Post_Tag__c cpt : [
+      SELECT Content_Tag__c, Content_Tag__r.Name
+      FROM Content_Post_Tag__c
+      WHERE Content_Post__c = :posts[0].Id
+    ]) {
+      dto.tagIds.add(cpt.Content_Tag__c);
+      dto.displayTags.add(cpt.Content_Tag__r.Name);
+    }
+    return dto;
   }
 
   /** Active controlled tags for the filter UI. */
@@ -129,7 +155,8 @@ public with sharing class ContentPostController {
     Date tripDate,
     String location,
     String difficulty,
-    String freeTags
+    String freeTags,
+    List<Id> tagIds
   ) {
     if (String.isBlank(title)) {
       throw new AuraHandledException('A title is required');
@@ -138,20 +165,15 @@ public with sharing class ContentPostController {
     Content_Post__c post = new Content_Post__c(
       RecordTypeId = tripRtId,
       Title__c = title.trim(),
-      Body__c = body,
+      Body__c = sanitizeHtml(body),
       Activity__c = activity,
       Trip_Date__c = tripDate,
       Location__c = location,
       Difficulty__c = difficulty,
       Free_Tags__c = freeTags,
       Visibility__c = 'Internal',
-      Status__c = 'Published',
-      Publish_Date__c = Date.today()
+      Status__c = 'Draft'
     );
-    // Gate on object Create (honors the Trip_Report_Author permission set) — a
-    // member without it can't author. The record type is forced server-side, so
-    // we insert in system mode rather than `as user` (which would also demand a
-    // profile-level record-type assignment members don't need).
     if (!Schema.sObjectType.Content_Post__c.isCreateable()) {
       throw new AuraHandledException(
         'You do not have permission to create trip reports.'
@@ -159,10 +181,224 @@ public with sharing class ContentPostController {
     }
     try {
       insert post;
+
+      if (tagIds != null && !tagIds.isEmpty()) {
+        List<Content_Post_Tag__c> postTags = new List<Content_Post_Tag__c>();
+        for (Id tagId : tagIds) {
+          postTags.add(
+            new Content_Post_Tag__c(
+              Content_Post__c = post.Id,
+              Content_Tag__c = tagId
+            )
+          );
+        }
+        insert postTags;
+      }
     } catch (DmlException e) {
       throw new AuraHandledException(e.getDmlMessage(0));
     }
     return post.Id;
+  }
+
+  @AuraEnabled
+  public static void updateTripReport(
+    Id postId,
+    String title,
+    String body,
+    String activity,
+    Date tripDate,
+    String location,
+    String difficulty,
+    String freeTags,
+    String status,
+    List<Id> tagIds
+  ) {
+    if (postId == null) {
+      throw new AuraHandledException('Post ID is required');
+    }
+    if (!Schema.sObjectType.Content_Post__c.isUpdateable()) {
+      throw new AuraHandledException(
+        'You do not have permission to edit trip reports.'
+      );
+    }
+    List<Content_Post__c> posts = [
+      SELECT OwnerId, Status__c, Visibility__c, Publish_Date__c
+      FROM Content_Post__c
+      WHERE Id = :postId
+      LIMIT 1
+    ];
+    if (posts.isEmpty()) {
+      throw new AuraHandledException(
+        'You do not have permission to edit this trip report.'
+      );
+    }
+    Content_Post__c post = posts[0];
+
+    if (
+      post.OwnerId != UserInfo.getUserId() &&
+      !UserInfo.getProfileId().equals(getAdminProfileId())
+    ) {
+      throw new AuraHandledException(
+        'You do not have permission to edit this trip report.'
+      );
+    }
+
+    post.Title__c = title == null ? null : title.trim();
+    post.Body__c = sanitizeHtml(body);
+    post.Activity__c = activity;
+    post.Trip_Date__c = tripDate;
+    post.Location__c = location;
+    post.Difficulty__c = difficulty;
+    post.Free_Tags__c = freeTags;
+
+    if (String.isNotBlank(status)) {
+      post.Status__c = status;
+      if (status == 'Published' && post.Publish_Date__c == null) {
+        post.Publish_Date__c = Date.today();
+      }
+    }
+
+    try {
+      update post;
+
+      if (tagIds != null) {
+        delete [
+          SELECT Id
+          FROM Content_Post_Tag__c
+          WHERE Content_Post__c = :postId
+        ];
+        if (!tagIds.isEmpty()) {
+          List<Content_Post_Tag__c> postTags = new List<Content_Post_Tag__c>();
+          for (Id tagId : tagIds) {
+            postTags.add(
+              new Content_Post_Tag__c(
+                Content_Post__c = postId,
+                Content_Tag__c = tagId
+              )
+            );
+          }
+          insert postTags;
+        }
+      }
+    } catch (DmlException e) {
+      throw new AuraHandledException(e.getDmlMessage(0));
+    }
+  }
+
+  @AuraEnabled
+  public static void deleteOwnDraft(Id postId) {
+    if (postId == null) {
+      throw new AuraHandledException('Post ID is required');
+    }
+    if (!Schema.sObjectType.Content_Post__c.isDeletable()) {
+      throw new AuraHandledException(
+        'You do not have permission to delete trip reports.'
+      );
+    }
+    List<Content_Post__c> posts = [
+      SELECT OwnerId, Status__c
+      FROM Content_Post__c
+      WHERE Id = :postId
+      LIMIT 1
+    ];
+    if (posts.isEmpty()) {
+      throw new AuraHandledException(
+        'You do not have permission to delete this trip report.'
+      );
+    }
+    Content_Post__c post = posts[0];
+    if (post.OwnerId != UserInfo.getUserId()) {
+      throw new AuraHandledException(
+        'You do not have permission to delete this trip report.'
+      );
+    }
+    if (post.Status__c != 'Draft') {
+      throw new AuraHandledException('You can only delete drafts.');
+    }
+    try {
+      delete post;
+    } catch (DmlException e) {
+      throw new AuraHandledException(e.getDmlMessage(0));
+    }
+  }
+
+  @AuraEnabled(cacheable=true)
+  public static List<PostDTO> getMyPosts() {
+    Id currentUserId = UserInfo.getUserId();
+    List<Content_Post__c> posts = [
+      SELECT
+        Id,
+        Name,
+        Title__c,
+        Status__c,
+        Visibility__c,
+        Activity__c,
+        Publish_Date__c,
+        Trip_Date__c,
+        Location__c,
+        Difficulty__c,
+        Free_Tags__c,
+        RecordType.DeveloperName,
+        Owner.Name
+      FROM Content_Post__c
+      WHERE
+        OwnerId = :currentUserId
+        AND RecordType.DeveloperName = 'Trip_Report'
+      ORDER BY CreatedDate DESC
+    ];
+    Map<Id, List<String>> postToTagNames = new Map<Id, List<String>>();
+    for (Content_Post_Tag__c cpt : [
+      SELECT Content_Post__c, Content_Tag__r.Name
+      FROM Content_Post_Tag__c
+      WHERE Content_Post__c IN :posts
+    ]) {
+      if (!postToTagNames.containsKey(cpt.Content_Post__c)) {
+        postToTagNames.put(cpt.Content_Post__c, new List<String>());
+      }
+      postToTagNames.get(cpt.Content_Post__c).add(cpt.Content_Tag__r.Name);
+    }
+
+    List<PostDTO> results = new List<PostDTO>();
+    for (Content_Post__c p : posts) {
+      PostDTO dto = new PostDTO(p);
+      if (postToTagNames.containsKey(p.Id)) {
+        dto.displayTags.addAll(postToTagNames.get(p.Id));
+      }
+      results.add(dto);
+    }
+    return results;
+  }
+
+  public static String sanitizeHtml(String html) {
+    if (String.isBlank(html)) {
+      return '';
+    }
+    String cleaned = html.replaceAll(
+      '(?i)<script[^>]*?>[\\s\\S]*?</script>',
+      ''
+    );
+    cleaned = cleaned.replaceAll(
+      '(?i)\\son\\w+\\s*=\\s*("[^"]*"|\'[^\']*\'|[^>\\s]+)',
+      ''
+    );
+    cleaned = cleaned.replaceAll(
+      '(?i)(href|src)\\s*=\\s*("[^"]*javascript:[^"]*"|\'[^\']*javascript:[^\']*\'|[^>\\s]*javascript:[^>\\s]*)',
+      '$1="#"'
+    );
+    cleaned = cleaned.replaceAll(
+      '(?i)<(iframe|embed|object|frame|frameset|meta|link)[^>]*?>',
+      ''
+    );
+    cleaned = cleaned.replaceAll(
+      '(?i)</(iframe|embed|object|frame|frameset|meta|link)>',
+      ''
+    );
+    return cleaned;
+  }
+
+  private static Id getAdminProfileId() {
+    return [SELECT Id FROM Profile WHERE Name = 'System Administrator' LIMIT 1]
+    .Id;
   }
 
   private static Id recordTypeId(String developerName) {
@@ -208,6 +444,10 @@ public with sharing class ContentPostController {
     @AuraEnabled
     public List<String> freeTags;
     @AuraEnabled
+    public List<String> displayTags;
+    @AuraEnabled
+    public List<Id> tagIds;
+    @AuraEnabled
     public String recordType;
     @AuraEnabled
     public String authorName;
@@ -230,6 +470,8 @@ public with sharing class ContentPostController {
       this.recordType = p.RecordType.DeveloperName;
       this.authorName = p.Owner.Name;
       this.freeTags = splitTags(p.Free_Tags__c);
+      this.displayTags = new List<String>(this.freeTags);
+      this.tagIds = new List<Id>();
       if (includeBody) {
         this.body = p.Body__c;
       }

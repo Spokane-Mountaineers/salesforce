@@ -5,6 +5,7 @@
   --ink-soft: #54605a;
   --pine: #1e4b38;
   --rust: #b14a1e;
+  --line: rgba(28, 37, 32, 0.14);
   --line-strong: rgba(28, 37, 32, 0.26);
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-body: "Public Sans VF", "Public Sans", system-ui, sans-serif;
@@ -88,8 +89,54 @@
     grid-template-columns: 1fr;
   }
 }
-.actions {
+
+/* Controlled tags selector chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 8px;
+  margin-bottom: 8px;
+}
+.chip {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  color: var(--pine);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.chip:hover {
+  border-color: var(--line-strong);
+}
+.chip--on {
+  background: var(--pine);
+  color: #eaf2ec;
+  border-color: var(--pine);
+}
+
+/* Styling overrides for rich text editor */
+lightning-input-rich-text {
+  --slds-c-textarea-color-background: var(--card);
+  --slds-c-textarea-font-family: var(--font-body);
+  --slds-c-textarea-font-size: 16px;
+  --slds-c-textarea-color-text: var(--ink);
+  --slds-c-input-color-border-focus: var(--pine);
+  --slds-c-textarea-line-height: 1.6;
+}
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .smi-btn {
   display: inline-flex;
@@ -112,6 +159,24 @@
 .smi-btn--primary {
   background: var(--rust);
   color: #fff;
+}
+.smi-btn--primary:hover:not(:disabled) {
+  background: #9c3f19;
+}
+.smi-btn--ghost {
+  background: transparent;
+  color: var(--pine);
+  border: 1px solid var(--pine);
+}
+.smi-btn--ghost:hover:not(:disabled) {
+  background: var(--paper-2);
+}
+.smi-btn--danger {
+  background: #c33a3a;
+  color: #fff;
+}
+.smi-btn--danger:hover:not(:disabled) {
+  background: #a12b2b;
 }
 .smi-btn:disabled {
   opacity: 0.6;

@@ -1,0 +1,100 @@
+<template>
+  <div class="container">
+    <template lwc:if={editingPostId}>
+      <c-trip-report-form
+        record-id={editingPostId}
+        onupdated={handleFormSuccess}
+        ondeleted={handleFormDeleted}
+        oncancel={handleFormCancel}
+      ></c-trip-report-form>
+    </template>
+    <template lwc:else>
+      <template lwc:if={creatingPost}>
+        <c-trip-report-form
+          oncreated={handleFormSuccess}
+          oncancel={handleFormCancel}
+        ></c-trip-report-form>
+      </template>
+      <template lwc:else>
+        <header class="head">
+          <div>
+            <p class="eyebrow">Member Portal</p>
+            <h1 class="title">My Trip Reports</h1>
+          </div>
+          <button class="smi-btn smi-btn--primary" onclick={handleNewPost}>
+            New Trip Report
+          </button>
+        </header>
+
+        <template lwc:if={errorMessage}>
+          <p class="error" role="alert">{errorMessage}</p>
+        </template>
+
+        <section class="section">
+          <h2 class="section-title">Drafts</h2>
+          <template lwc:if={hasDrafts}>
+            <ul class="list">
+              <template for:each={drafts} for:item="d">
+                <li key={d.id} class="item">
+                  <div class="item-main">
+                    <h3 class="item-title">{d.title}</h3>
+                    <p class="item-meta">{d.meta}</p>
+                  </div>
+                  <div class="item-actions">
+                    <button
+                      class="smi-btn smi-btn--ghost"
+                      data-id={d.id}
+                      onclick={handleEdit}
+                    >
+                      Edit Draft
+                    </button>
+                    <button
+                      class="smi-btn smi-btn--danger"
+                      data-id={d.id}
+                      onclick={handleDelete}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </template>
+          <template lwc:else>
+            <p class="empty-state">No drafts. Share a new journey above!</p>
+          </template>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">Published Reports</h2>
+          <template lwc:if={hasPublished}>
+            <ul class="list">
+              <template for:each={published} for:item="p">
+                <li key={p.id} class="item">
+                  <div class="item-main">
+                    <a href={p.detailUrl} class="item-link">
+                      <h3 class="item-title">{p.title}</h3>
+                    </a>
+                    <p class="item-meta">{p.meta}</p>
+                  </div>
+                  <div class="item-actions">
+                    <button
+                      class="smi-btn smi-btn--ghost"
+                      data-id={p.id}
+                      onclick={handleEdit}
+                    >
+                      Edit Post
+                    </button>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </template>
+          <template lwc:else>
+            <p class="empty-state">No published trip reports yet.</p>
+          </template>
+        </section>
+      </template>
+    </template>
+  </div>
+</template>

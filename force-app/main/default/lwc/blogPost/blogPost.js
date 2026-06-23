@@ -48,7 +48,7 @@ export default class BlogPost extends LightningElement {
   }
 
   get tags() {
-    return this.post?.freeTags || [];
+    return this.post?.displayTags || [];
   }
 
   get hasTags() {
