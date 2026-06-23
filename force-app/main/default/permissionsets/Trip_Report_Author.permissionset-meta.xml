@@ -31,6 +31,15 @@
         <viewAllRecords>false</viewAllRecords>
         <modifyAllRecords>false</modifyAllRecords>
     </objectPermissions>
+    <objectPermissions>
+        <object>Content_Post_Photo__c</object>
+        <allowCreate>true</allowCreate>
+        <allowRead>true</allowRead>
+        <allowEdit>true</allowEdit>
+        <allowDelete>true</allowDelete>
+        <viewAllRecords>false</viewAllRecords>
+        <modifyAllRecords>false</modifyAllRecords>
+    </objectPermissions>
     <fieldPermissions>
         <field>Content_Post__c.Activity__c</field>
         <readable>true</readable>
@@ -66,7 +75,34 @@
         <readable>true</readable>
         <editable>true</editable>
     </fieldPermissions>
-    <!-- Title__c, Status__c, Visibility__c are required fields; FLS can't be
-         set on them (they're implicitly editable on create) and the Trip Report
-         Author needs object Create which covers them. -->
+    <fieldPermissions>
+        <field>Content_Post_Photo__c.Aspect_Ratio__c</field>
+        <readable>true</readable>
+        <editable>true</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Content_Post_Photo__c.Caption__c</field>
+        <readable>true</readable>
+        <editable>true</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Content_Post_Photo__c.Consent_Confirmed__c</field>
+        <readable>true</readable>
+        <editable>true</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Content_Post_Photo__c.Credit__c</field>
+        <readable>true</readable>
+        <editable>true</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Content_Post_Photo__c.Public_Url__c</field>
+        <readable>true</readable>
+        <editable>true</editable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <field>Content_Post_Photo__c.Sort_Order__c</field>
+        <readable>true</readable>
+        <editable>true</editable>
+    </fieldPermissions>
 </PermissionSet>

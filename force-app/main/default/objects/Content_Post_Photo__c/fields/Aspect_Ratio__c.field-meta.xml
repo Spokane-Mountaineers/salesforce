@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aspect_Ratio__c</fullName>
+    <description>Aspect ratio of the image (e.g. 16:9, 4:3).</description>
+    <externalId>false</externalId>
+    <label>Aspect Ratio</label>
+    <length>10</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
