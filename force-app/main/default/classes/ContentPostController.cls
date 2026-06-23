@@ -594,6 +594,36 @@ public with sharing class ContentPostController {
   }
 
   @AuraEnabled
+  public static void updatePhotoMetadata(
+    Id photoId,
+    String altText,
+    String caption,
+    String credit,
+    Boolean consentConfirmed
+  ) {
+    if (photoId == null) {
+      throw new AuraHandledException('Photo ID is required');
+    }
+    if (String.isBlank(altText)) {
+      throw new AuraHandledException('Alt Text is required');
+    }
+    Content_Post_Photo__c cpp = new Content_Post_Photo__c(
+      Id = photoId,
+      Alt_Text__c = altText.trim(),
+      Caption__c = caption == null ? null : caption.trim(),
+      Credit__c = credit == null ? null : credit.trim(),
+      Consent_Confirmed__c = consentConfirmed
+    );
+    try {
+      update cpp;
+    } catch (DmlException e) {
+      throw new AuraHandledException(
+        'Failed to update photo details: ' + e.getDmlMessage(0)
+      );
+    }
+  }
+
+  @AuraEnabled
   public static void deletePhoto(Id photoId) {
     if (photoId == null) {
       throw new AuraHandledException('Photo ID is required');

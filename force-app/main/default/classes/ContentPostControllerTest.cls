@@ -695,6 +695,22 @@ private class ContentPostControllerTest {
       System.assertEquals('Beautiful mountains', photos[0].altText);
       System.assertEquals('Summit sunset', photos[0].caption);
 
+      // Test metadata update
+      ContentPostController.updatePhotoMetadata(
+        photoId,
+        'Updated Alt Text',
+        'Updated Caption',
+        'Updated Credit',
+        false
+      );
+
+      photos = ContentPostController.getPostPhotos(postId);
+      System.assertEquals(1, photos.size());
+      System.assertEquals('Updated Alt Text', photos[0].altText);
+      System.assertEquals('Updated Caption', photos[0].caption);
+      System.assertEquals('Updated Credit', photos[0].credit);
+      System.assertEquals(false, photos[0].consentConfirmed);
+
       // Delete photo
       ContentPostController.deletePhoto(photoId);
       Test.stopTest();
