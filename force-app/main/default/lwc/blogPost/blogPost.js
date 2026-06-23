@@ -34,6 +34,7 @@ export default class BlogPost extends LightningElement {
     if (data) {
       this.post = data;
       this.errorMessage = undefined;
+      this.updateSeoTags();
     } else if (error) {
       this.errorMessage =
         error?.body?.message || "This post could not be loaded.";
@@ -45,6 +46,7 @@ export default class BlogPost extends LightningElement {
   wiredPhotos({ data, error }) {
     if (data) {
       this.photos = data;
+      this.updateSeoTags();
     } else if (error) {
       console.error("Failed to load post photos", error);
     }
@@ -157,5 +159,42 @@ export default class BlogPost extends LightningElement {
     } else if (event.key === "Escape") {
       this.closeLightbox();
     }
+  }
+
+  updateSeoTags() {
+    if (!this.post) return;
+
+    document.title = `${this.post.title} | Spokane Mountaineers`;
+
+    const description = this.stripHtml(this.post.body || "").substring(0, 160);
+    this.setMetaTag("name", "description", description);
+    this.setMetaTag("property", "og:title", this.post.title);
+    this.setMetaTag("property", "og:description", description);
+    this.setMetaTag("property", "og:type", "article");
+
+    if (this.photos && this.photos.length > 0) {
+      this.setMetaTag(
+        "property",
+        "og:image",
+        this.photos[0].publicUrl || this.photos[0].memberUrl
+      );
+    }
+  }
+
+  setMetaTag(attrName, attrValue, content) {
+    let element = document.head.querySelector(
+      `meta[${attrName}="${attrValue}"]`
+    );
+    if (!element) {
+      element = document.createElement("meta");
+      element.setAttribute(attrName, attrValue);
+      document.head.appendChild(element);
+    }
+    element.setAttribute("content", content);
+  }
+
+  stripHtml(html) {
+    if (!html) return "";
+    return html.replace(/<[^>]*>/g, "");
   }
 }
