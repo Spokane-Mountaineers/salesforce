@@ -493,6 +493,176 @@ public with sharing class ContentPostController {
     }
   }
 
+  @AuraEnabled
+  public static Id uploadPhoto(
+    Id postId,
+    String fileName,
+    String base64Data,
+    String altText,
+    String caption,
+    String credit,
+    Boolean consentConfirmed,
+    Integer sortOrder,
+    String aspectRatio
+  ) {
+    if (postId == null) {
+      throw new AuraHandledException('Post ID is required');
+    }
+
+    ContentVersion cv = new ContentVersion(
+      Title = fileName,
+      PathOnClient = fileName,
+      VersionData = EncodingUtil.base64Decode(base64Data),
+      IsMajorVersion = true
+    );
+    try {
+      insert cv;
+    } catch (DmlException e) {
+      throw new AuraHandledException(
+        'Failed to upload file: ' + e.getDmlMessage(0)
+      );
+    }
+
+    Id conDocId = [
+      SELECT ContentDocumentId
+      FROM ContentVersion
+      WHERE Id = :cv.Id
+      LIMIT 1
+    ]
+    .ContentDocumentId;
+
+    ContentDocumentLink cdl = new ContentDocumentLink(
+      ContentDocumentId = conDocId,
+      LinkedEntityId = postId,
+      ShareType = 'V',
+      Visibility = 'AllUsers'
+    );
+    try {
+      insert cdl;
+    } catch (DmlException e) {
+      throw new AuraHandledException(
+        'Failed to link file to post: ' + e.getDmlMessage(0)
+      );
+    }
+
+    Content_Post_Photo__c cpp = new Content_Post_Photo__c(
+      Content_Post__c = postId,
+      Content_Document_Id__c = conDocId,
+      Alt_Text__c = altText,
+      Caption__c = caption,
+      Credit__c = credit,
+      Consent_Confirmed__c = consentConfirmed,
+      Sort_Order__c = sortOrder,
+      Aspect_Ratio__c = aspectRatio
+    );
+    try {
+      insert cpp;
+    } catch (DmlException e) {
+      throw new AuraHandledException(
+        'Failed to save photo metadata: ' + e.getDmlMessage(0)
+      );
+    }
+
+    return cpp.Id;
+  }
+
+  @AuraEnabled(cacheable=true)
+  public static List<PhotoDTO> getPostPhotos(Id postId) {
+    if (postId == null) {
+      throw new AuraHandledException('Post ID is required');
+    }
+    List<Content_Post_Photo__c> photos = [
+      SELECT
+        Id,
+        Content_Document_Id__c,
+        Alt_Text__c,
+        Caption__c,
+        Credit__c,
+        Consent_Confirmed__c,
+        Sort_Order__c,
+        Aspect_Ratio__c,
+        Public_Url__c
+      FROM Content_Post_Photo__c
+      WHERE Content_Post__c = :postId
+      ORDER BY Sort_Order__c ASC, CreatedDate ASC
+    ];
+    List<PhotoDTO> dtos = new List<PhotoDTO>();
+    for (Content_Post_Photo__c p : photos) {
+      dtos.add(new PhotoDTO(p));
+    }
+    return dtos;
+  }
+
+  @AuraEnabled
+  public static void deletePhoto(Id photoId) {
+    if (photoId == null) {
+      throw new AuraHandledException('Photo ID is required');
+    }
+    List<Content_Post_Photo__c> photos = [
+      SELECT Id, Content_Document_Id__c, Content_Post__r.OwnerId
+      FROM Content_Post_Photo__c
+      WHERE Id = :photoId
+      LIMIT 1
+    ];
+    if (photos.isEmpty()) {
+      throw new AuraHandledException('Photo not found');
+    }
+    Content_Post_Photo__c photo = photos[0];
+    if (photo.Content_Post__r.OwnerId != UserInfo.getUserId()) {
+      throw new AuraHandledException(
+        'You do not have permission to delete this photo.'
+      );
+    }
+
+    try {
+      delete new ContentDocument(Id = photo.Content_Document_Id__c);
+      delete photo;
+    } catch (DmlException e) {
+      throw new AuraHandledException(
+        'Failed to delete photo: ' + e.getDmlMessage(0)
+      );
+    }
+  }
+
+  public class PhotoDTO {
+    @AuraEnabled
+    public Id id;
+    @AuraEnabled
+    public String contentDocumentId;
+    @AuraEnabled
+    public String altText;
+    @AuraEnabled
+    public String caption;
+    @AuraEnabled
+    public String credit;
+    @AuraEnabled
+    public Boolean consentConfirmed;
+    @AuraEnabled
+    public Integer sortOrder;
+    @AuraEnabled
+    public String aspectRatio;
+    @AuraEnabled
+    public String publicUrl;
+    @AuraEnabled
+    public String memberUrl;
+
+    public PhotoDTO(Content_Post_Photo__c p) {
+      this.id = p.Id;
+      this.contentDocumentId = p.Content_Document_Id__c;
+      this.altText = p.Alt_Text__c;
+      this.caption = p.Caption__c;
+      this.credit = p.Credit__c;
+      this.consentConfirmed = p.Consent_Confirmed__c;
+      this.sortOrder = p.Sort_Order__c != null
+        ? p.Sort_Order__c.intValue()
+        : null;
+      this.aspectRatio = p.Aspect_Ratio__c;
+      this.publicUrl = p.Public_Url__c;
+      this.memberUrl =
+        '/sfc/servlet.shepherd/document/download/' + p.Content_Document_Id__c;
+    }
+  }
+
   private static List<String> splitTags(String csv) {
     List<String> out = new List<String>();
     if (String.isBlank(csv)) {

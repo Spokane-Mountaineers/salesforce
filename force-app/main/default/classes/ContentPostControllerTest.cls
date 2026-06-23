@@ -657,4 +657,50 @@ private class ContentPostControllerTest {
       'displayTags should not include Cascades anymore'
     );
   }
+
+  @isTest
+  static void photoUploadAndManagement_success() {
+    User author = authorUser();
+    Id postId;
+    System.runAs(author) {
+      postId = ContentPostController.createTripReport(
+        'Photo Post',
+        'Body',
+        'Climbing',
+        Date.today(),
+        'Beacon Rock',
+        'Moderate',
+        'fun',
+        new List<Id>()
+      );
+
+      Test.startTest();
+      Id photoId = ContentPostController.uploadPhoto(
+        postId,
+        'mountains.jpg',
+        EncodingUtil.base64Encode(Blob.valueOf('fake-image-content')),
+        'Beautiful mountains',
+        'Summit sunset',
+        'Jane Member',
+        true,
+        1,
+        '16:9'
+      );
+      System.assertNotEquals(null, photoId);
+
+      List<ContentPostController.PhotoDTO> photos = ContentPostController.getPostPhotos(
+        postId
+      );
+      System.assertEquals(1, photos.size());
+      System.assertEquals('Beautiful mountains', photos[0].altText);
+      System.assertEquals('Summit sunset', photos[0].caption);
+
+      // Delete photo
+      ContentPostController.deletePhoto(photoId);
+      Test.stopTest();
+
+      photos = ContentPostController.getPostPhotos(postId);
+      System.assertEquals(0, photos.size(), 'Photo should be deleted');
+    }
+  }
 }
