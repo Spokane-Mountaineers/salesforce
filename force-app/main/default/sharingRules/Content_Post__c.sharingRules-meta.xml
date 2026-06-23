@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Share_Published_Trip_Reports</fullName>
+        <accessLevel>Read</accessLevel>
+        <description
+    >Share published trip reports with all community members</description>
+        <label>Share Published Trip Reports</label>
+        <sharedTo>
+            <allCustomerPortalUsers />
+        </sharedTo>
+        <criteriaItems>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Published</value>
+        </criteriaItems>
+    </sharingCriteriaRules>
+    <sharingGuestRules>
+        <fullName>Share_Public_Trip_Reports_With_Guests</fullName>
+        <accessLevel>Read</accessLevel>
+        <description
+    >Share public approved trip reports with guest site visitors</description>
+        <label>Share Public Trip Reports With Guests</label>
+        <sharedTo>
+            <guestUser>Spokane_Mountaineers_LWR</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Published</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Visibility__c</field>
+            <operation>equals</operation>
+            <value>Public</value>
+        </criteriaItems>
+    </sharingGuestRules>
+</SharingRules>
