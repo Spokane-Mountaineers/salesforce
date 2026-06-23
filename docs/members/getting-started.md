@@ -16,8 +16,7 @@ and we'll resend it.
 
 ## Sign in
 
-Your username is your **email address with `.smi` added to the end** — for example,
-`you@example.com.smi`. If your membership email is a Google or Microsoft address,
+Your username is your email address. If your membership email is a Google or Microsoft address,
 you can sign in with one click instead of a password. See [Logging In](logging-in.md)
 for the details and for what to do if you're locked out.
 
@@ -53,6 +52,7 @@ from it. See [Events & Activity Groups](events-and-activity-groups.md).
 - :material-login: **[Logging In](logging-in.md)** — username, password reset, Google and Microsoft sign-in
 - :material-account-cog: **[Profile, Settings & Privacy](profile-settings-privacy.md)** — control what other members can see
 - :material-calendar-month: **[Events & Activity Groups](events-and-activity-groups.md)** — find trips and set your notifications
+- :material-slack: **[Slack Workspace](slack.md)** — log in and chat with other members
 - :material-bookshelf: **[Member Resources](member-resources.md)** — waiver, discounts, schools and clinics
 
 </div>
