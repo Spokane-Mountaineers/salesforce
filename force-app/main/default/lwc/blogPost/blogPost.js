@@ -1,6 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
 import getPost from "@salesforce/apex/ContentPostController.getPost";
+import getPostPhotos from "@salesforce/apex/ContentPostController.getPostPhotos";
 
 // Post detail (plan §3.4): rich body + metadata + tags + author + date. Placed
 // on the custom /post page, the id arrives as the ?recordId= URL param; it can
@@ -13,6 +14,11 @@ export default class BlogPost extends LightningElement {
   urlRecordId;
   post;
   errorMessage;
+
+  photos = [];
+  lightboxOpen = false;
+  currentPhotoIndex = 0;
+  _boundKeyHandler;
 
   @wire(CurrentPageReference)
   setPageRef(pageRef) {
@@ -35,6 +41,23 @@ export default class BlogPost extends LightningElement {
     }
   }
 
+  @wire(getPostPhotos, { postId: "$effectiveId" })
+  wiredPhotos({ data, error }) {
+    if (data) {
+      this.photos = data;
+    } else if (error) {
+      console.error("Failed to load post photos", error);
+    }
+  }
+
+  connectedCallback() {
+    this._boundKeyHandler = this.handleKeyDown.bind(this);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener("keydown", this._boundKeyHandler);
+  }
+
   get hasPost() {
     return Boolean(this.post);
   }
@@ -53,5 +76,86 @@ export default class BlogPost extends LightningElement {
 
   get hasTags() {
     return this.tags.length > 0;
+  }
+
+  get hasPhotos() {
+    return this.photos && this.photos.length > 0;
+  }
+
+  get processedPhotos() {
+    if (!this.photos) return [];
+    return this.photos.map((p) => {
+      const isPortrait =
+        p.aspectRatio === "4:5" ||
+        p.aspectRatio === "3:4" ||
+        p.aspectRatio === "Portrait" ||
+        p.aspectRatio === "9:16";
+      return {
+        ...p,
+        isPortrait
+      };
+    });
+  }
+
+  get formattedTripDate() {
+    if (!this.post?.tripDate) return "";
+    try {
+      const date = new Date(this.post.tripDate);
+      const options = { month: "short", year: "numeric", timeZone: "UTC" };
+      return date.toLocaleDateString("en-US", options);
+    } catch (e) {
+      return "";
+    }
+  }
+
+  get showNavigation() {
+    return this.photos.length > 1;
+  }
+
+  get currentPhoto() {
+    return this.photos[this.currentPhotoIndex];
+  }
+
+  get currentPhotoIndexDisplay() {
+    return `${this.currentPhotoIndex + 1} of ${this.photos.length}`;
+  }
+
+  openLightbox(event) {
+    this.currentPhotoIndex = parseInt(event.currentTarget.dataset.index, 10);
+    this.lightboxOpen = true;
+    window.addEventListener("keydown", this._boundKeyHandler);
+  }
+
+  closeLightbox() {
+    this.lightboxOpen = false;
+    window.removeEventListener("keydown", this._boundKeyHandler);
+  }
+
+  prevPhoto(event) {
+    if (event) event.stopPropagation();
+    if (this.photos.length <= 1) return;
+    this.currentPhotoIndex =
+      (this.currentPhotoIndex - 1 + this.photos.length) % this.photos.length;
+  }
+
+  nextPhoto(event) {
+    if (event) event.stopPropagation();
+    if (this.photos.length <= 1) return;
+    this.currentPhotoIndex = (this.currentPhotoIndex + 1) % this.photos.length;
+  }
+
+  stopBubble(event) {
+    event.stopPropagation();
+  }
+
+  handleKeyDown(event) {
+    if (!this.lightboxOpen) return;
+    if (event.key === "ArrowLeft") {
+      this.prevPhoto();
+    } else if (event.key === "ArrowRight") {
+      this.nextPhoto();
+    } else if (event.key === "Escape") {
+      this.closeLightbox();
+    }
   }
 }

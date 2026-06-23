@@ -16,12 +16,103 @@
         class="body"
       ></lightning-formatted-rich-text>
 
+      <!-- Photo Gallery Section -->
+      <template lwc:if={hasPhotos}>
+        <div class="gallery-section">
+          <h2 class="gallery-title">Gallery</h2>
+          <div class="gallery-grid">
+            <template
+              for:each={processedPhotos}
+              for:item="photo"
+              for:index="idx"
+            >
+              <div
+                key={photo.id}
+                class="gallery-item"
+                onclick={openLightbox}
+                data-index={idx}
+                role="button"
+                tabindex="0"
+                aria-label={photo.altText}
+              >
+                <c-smi-field-plate
+                  image-url={photo.memberUrl}
+                  alt={photo.altText}
+                  activity={post.activity}
+                  location={post.location}
+                  plate-date={formattedTripDate}
+                  title={photo.caption}
+                  portrait={photo.isPortrait}
+                ></c-smi-field-plate>
+              </div>
+            </template>
+          </div>
+        </div>
+      </template>
+
       <template lwc:if={hasTags}>
         <ul class="tags" aria-label="Tags">
           <template for:each={tags} for:item="t">
             <li key={t} class="tag">#{t}</li>
           </template>
         </ul>
+      </template>
+
+      <!-- Lightbox Modal -->
+      <template lwc:if={lightboxOpen}>
+        <div
+          class="lightbox-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image gallery lightbox"
+          onclick={closeLightbox}
+        >
+          <button
+            class="lightbox-btn lightbox-btn--close"
+            onclick={closeLightbox}
+            aria-label="Close lightbox"
+          >
+            ×
+          </button>
+
+          <template lwc:if={showNavigation}>
+            <button
+              class="lightbox-btn lightbox-btn--prev"
+              onclick={prevPhoto}
+              aria-label="Previous photo"
+            >
+              ‹
+            </button>
+            <button
+              class="lightbox-btn lightbox-btn--next"
+              onclick={nextPhoto}
+              aria-label="Next photo"
+            >
+              ›
+            </button>
+          </template>
+
+          <div class="lightbox-content" onclick={stopBubble}>
+            <figure class="lightbox-figure">
+              <img
+                src={currentPhoto.memberUrl}
+                alt={currentPhoto.altText}
+                class="lightbox-image"
+              />
+              <figcaption class="lightbox-caption">
+                <span class="lightbox-meta">
+                  {currentPhotoIndexDisplay} • {post.activity} • {post.location}
+                </span>
+                <template lwc:if={currentPhoto.caption}>
+                  <p class="lightbox-title">{currentPhoto.caption}</p>
+                </template>
+                <template lwc:if={currentPhoto.credit}>
+                  <p class="lightbox-credit">Photo by {currentPhoto.credit}</p>
+                </template>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
       </template>
     </template>
   </article>
