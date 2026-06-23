@@ -113,6 +113,111 @@
       />
     </label>
 
+    <template lwc:if={recordId}>
+      <div class="field photo-section">
+        <span class="label">Photos (Up to 15)</span>
+        <div class="photo-upload-zone">
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onchange={handleFileChange}
+            disabled={isUploading}
+            class="photo-file-input"
+            id="photo-file-input"
+          />
+          <label for="photo-file-input" class="photo-upload-label">
+            <span class="upload-icon">📷</span>
+            <span class="upload-text">Click or drag photos here to upload</span>
+          </label>
+        </div>
+        <template lwc:if={isUploading}>
+          <div class="upload-progress">
+            <lightning-spinner
+              alternative-text="Uploading photos..."
+              size="small"
+            ></lightning-spinner>
+            <p>Compressing and uploading photos...</p>
+          </div>
+        </template>
+
+        <template lwc:if={hasPhotos}>
+          <div class="photo-grid">
+            <template for:each={photos} for:item="photo">
+              <div key={photo.id} class="photo-card">
+                <div class="photo-preview-wrapper">
+                  <img
+                    src={photo.memberUrl}
+                    alt={photo.altText}
+                    class="photo-preview"
+                  />
+                  <button
+                    type="button"
+                    class="delete-photo-btn"
+                    data-id={photo.id}
+                    onclick={handleDeletePhoto}
+                    title="Delete Photo"
+                  >
+                    ×
+                  </button>
+                </div>
+                <div class="photo-metadata-fields">
+                  <label class="photo-subfield">
+                    <span class="photo-sublabel">Alt Text (Required) *</span>
+                    <input
+                      type="text"
+                      data-id={photo.id}
+                      data-field="altText"
+                      value={photo.altText}
+                      onblur={handlePhotoMetadataBlur}
+                      required
+                    />
+                  </label>
+                  <label class="photo-subfield">
+                    <span class="photo-sublabel">Caption</span>
+                    <input
+                      type="text"
+                      data-id={photo.id}
+                      data-field="caption"
+                      value={photo.caption}
+                      onblur={handlePhotoMetadataBlur}
+                    />
+                  </label>
+                  <label class="photo-subfield">
+                    <span class="photo-sublabel">Credit</span>
+                    <input
+                      type="text"
+                      data-id={photo.id}
+                      data-field="credit"
+                      value={photo.credit}
+                      onblur={handlePhotoMetadataBlur}
+                    />
+                  </label>
+                  <label class="photo-consent">
+                    <input
+                      type="checkbox"
+                      data-id={photo.id}
+                      data-field="consentConfirmed"
+                      checked={photo.consentConfirmed}
+                      onchange={handlePhotoConsentChange}
+                    />
+                    <span class="consent-text"
+                      >I have consent of everyone in this photo *</span
+                    >
+                  </label>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </template>
+    <template lwc:else>
+      <p class="photo-notice">
+        Note: You will be able to upload photos after saving your draft.
+      </p>
+    </template>
+
     <div class="actions font-body">
       <button
         class="smi-btn smi-btn--primary"

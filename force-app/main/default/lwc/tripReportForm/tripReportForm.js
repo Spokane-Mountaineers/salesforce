@@ -4,6 +4,11 @@ import updateTripReport from "@salesforce/apex/ContentPostController.updateTripR
 import deleteOwnDraft from "@salesforce/apex/ContentPostController.deleteOwnDraft";
 import getPost from "@salesforce/apex/ContentPostController.getPost";
 import getActiveTags from "@salesforce/apex/ContentPostController.getActiveTags";
+import uploadPhoto from "@salesforce/apex/ContentPostController.uploadPhoto";
+import getPostPhotos from "@salesforce/apex/ContentPostController.getPostPhotos";
+import updatePhotoMetadata from "@salesforce/apex/ContentPostController.updatePhotoMetadata";
+import deletePhoto from "@salesforce/apex/ContentPostController.deletePhoto";
+import { refreshApex } from "@salesforce/apex";
 
 const ACTIVITIES = [
   "Climbing",
@@ -33,6 +38,10 @@ export default class TripReportForm extends LightningElement {
   @track controlledTags = [];
   @track submitting = false;
   @track errorMessage = "";
+  @track photos = [];
+  @track isUploading = false;
+
+  wiredPhotosResult;
 
   postRecord;
   allTags = [];
@@ -45,6 +54,24 @@ export default class TripReportForm extends LightningElement {
       this.allTags = data;
       this.formatTags();
     }
+  }
+
+  @wire(getPostPhotos, { postId: "$recordId" })
+  wiredGetPostPhotos(result) {
+    this.wiredPhotosResult = result;
+    if (result.data) {
+      this.photos = result.data;
+      this.errorMessage = "";
+    } else if (result.error) {
+      if (this.recordId) {
+        this.errorMessage =
+          result.error?.body?.message || "Failed to load photos.";
+      }
+    }
+  }
+
+  get hasPhotos() {
+    return this.photos && this.photos.length > 0;
   }
 
   @wire(getPost, { postId: "$recordId" })
@@ -133,6 +160,22 @@ export default class TripReportForm extends LightningElement {
       this.errorMessage = "Please give your trip report a title.";
       return;
     }
+
+    if (status === "Published" && this.hasPhotos) {
+      for (const photo of this.photos) {
+        if (!photo.altText || !photo.altText.trim()) {
+          this.errorMessage =
+            "Please provide Alt Text for all uploaded photos before publishing.";
+          return;
+        }
+        if (!photo.consentConfirmed) {
+          this.errorMessage =
+            "Please confirm consent for all uploaded photos before publishing.";
+          return;
+        }
+      }
+    }
+
     this.submitting = true;
     try {
       if (this.recordId) {
@@ -204,5 +247,170 @@ export default class TripReportForm extends LightningElement {
 
   handleCancel() {
     this.dispatchEvent(new CustomEvent("cancel"));
+  }
+
+  async handleFileChange(event) {
+    const files = Array.from(event.target.files);
+    if (!files.length) return;
+
+    if (this.photos.length + files.length > 15) {
+      this.errorMessage = "You can upload up to 15 photos in a trip report.";
+      return;
+    }
+
+    this.isUploading = true;
+    this.errorMessage = "";
+
+    try {
+      for (const file of files) {
+        // eslint-disable-next-line no-await-in-loop
+        const processed = await this.processAndUploadFile(file);
+        // eslint-disable-next-line no-await-in-loop
+        await uploadPhoto({
+          postId: this.recordId,
+          fileName: processed.fileName,
+          base64Data: processed.base64Data,
+          altText: "Photo from " + (this.form.title || "trip report"),
+          caption: "",
+          credit: "",
+          consentConfirmed: false,
+          sortOrder: this.photos.length + 1,
+          aspectRatio: processed.aspectRatio
+        });
+      }
+      await refreshApex(this.wiredPhotosResult);
+    } catch (e) {
+      this.errorMessage =
+        e?.body?.message ||
+        e?.message ||
+        "Failed to upload one or more photos.";
+    } finally {
+      this.isUploading = false;
+      const inputEl = this.template.querySelector(".photo-file-input");
+      if (inputEl) {
+        inputEl.value = "";
+      }
+    }
+  }
+
+  processAndUploadFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const canvas = document.createElement("canvas");
+            let width = img.width;
+            let height = img.height;
+
+            const MAX_WIDTH = 1920;
+            const MAX_HEIGHT = 1080;
+
+            if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+              const widthRatio = MAX_WIDTH / width;
+              const heightRatio = MAX_HEIGHT / height;
+              const bestRatio = Math.min(widthRatio, heightRatio);
+              width = Math.round(width * bestRatio);
+              height = Math.round(height * bestRatio);
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
+            const base64Data = dataUrl.split(",")[1];
+            const aspectRatio = this.calculateAspectRatio(width, height);
+
+            resolve({
+              fileName: file.name,
+              base64Data,
+              aspectRatio
+            });
+          } catch (err) {
+            reject(err);
+          }
+        };
+        img.onerror = () => {
+          reject(new Error("Failed to load image into element"));
+        };
+        img.src = e.target.result;
+      };
+      reader.onerror = () => {
+        reject(new Error("Failed to read file"));
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  calculateAspectRatio(width, height) {
+    const ratio = width / height;
+    if (Math.abs(ratio - 1) < 0.15) {
+      return "1:1";
+    } else if (Math.abs(ratio - 1.5) < 0.15 || Math.abs(ratio - 0.67) < 0.15) {
+      return ratio > 1 ? "3:2" : "2:3";
+    } else if (Math.abs(ratio - 1.33) < 0.15 || Math.abs(ratio - 0.75) < 0.15) {
+      return ratio > 1 ? "4:3" : "3:4";
+    } else if (Math.abs(ratio - 1.78) < 0.15 || Math.abs(ratio - 0.56) < 0.15) {
+      return ratio > 1 ? "16:9" : "9:16";
+    } else if (Math.abs(ratio - 1.25) < 0.15 || Math.abs(ratio - 0.8) < 0.15) {
+      return ratio > 1 ? "5:4" : "4:5";
+    }
+    return ratio > 1 ? "Landscape" : "Portrait";
+  }
+
+  async handleDeletePhoto(event) {
+    const photoId = event.target.dataset.id;
+    this.errorMessage = "";
+    try {
+      await deletePhoto({ photoId });
+      await refreshApex(this.wiredPhotosResult);
+    } catch (e) {
+      this.errorMessage = e?.body?.message || "Failed to delete photo.";
+    }
+  }
+
+  handlePhotoMetadataBlur(event) {
+    const photoId = event.target.dataset.id;
+    const field = event.target.dataset.field;
+    const value = event.target.value;
+
+    const photo = this.photos.find((p) => p.id === photoId);
+    if (!photo) return;
+    if (photo[field] === value) return;
+
+    this.updatePhoto(photoId, field, value);
+  }
+
+  handlePhotoConsentChange(event) {
+    const photoId = event.target.dataset.id;
+    const value = event.target.checked;
+    this.updatePhoto(photoId, "consentConfirmed", value);
+  }
+
+  async updatePhoto(photoId, field, value) {
+    this.photos = this.photos.map((p) => {
+      if (p.id === photoId) {
+        return { ...p, [field]: value };
+      }
+      return p;
+    });
+
+    const photo = this.photos.find((p) => p.id === photoId);
+    try {
+      await updatePhotoMetadata({
+        photoId: photoId,
+        altText: photo.altText,
+        caption: photo.caption,
+        credit: photo.credit,
+        consentConfirmed: photo.consentConfirmed
+      });
+    } catch (e) {
+      this.errorMessage = e?.body?.message || "Failed to update photo details.";
+      await refreshApex(this.wiredPhotosResult);
+    }
   }
 }
