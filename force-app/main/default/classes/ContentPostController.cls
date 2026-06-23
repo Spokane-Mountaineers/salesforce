@@ -688,8 +688,14 @@ public with sharing class ContentPostController {
         : null;
       this.aspectRatio = p.Aspect_Ratio__c;
       this.publicUrl = p.Public_Url__c;
-      this.memberUrl =
-        '/sfc/servlet.shepherd/document/download/' + p.Content_Document_Id__c;
+      if (
+        UserInfo.getUserType() == 'Guest' && String.isNotBlank(p.Public_Url__c)
+      ) {
+        this.memberUrl = p.Public_Url__c;
+      } else {
+        this.memberUrl =
+          '/sfc/servlet.shepherd/document/download/' + p.Content_Document_Id__c;
+      }
     }
   }
 

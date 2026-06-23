@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submit_For_Public__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description
+  >Checked when the user wants to submit the post to be viewable by the public.</description>
+    <label>Submit For Public</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -719,4 +719,63 @@ private class ContentPostControllerTest {
       System.assertEquals(0, photos.size(), 'Photo should be deleted');
     }
   }
+
+  @isTest
+  static void postApproval_generatesContentDistributions() {
+    User author = authorUser();
+    Id postId;
+    System.runAs(author) {
+      postId = ContentPostController.createTripReport(
+        'Post for Approval',
+        '<p>Content</p>',
+        'Hiking',
+        Date.today(),
+        'Mt. Spokane',
+        'Easy',
+        'sunset',
+        new List<Id>()
+      );
+
+      Id photoId = ContentPostController.uploadPhoto(
+        postId,
+        'approved-peak.jpg',
+        EncodingUtil.base64Encode(Blob.valueOf('fake-image-data')),
+        'A beautiful peak',
+        'Sunset peak',
+        'Jane Member',
+        true,
+        1,
+        '3:2'
+      );
+
+      Test.startTest();
+      Content_Post__c post = [
+        SELECT Id, Public_Review_Status__c, Status__c, Visibility__c
+        FROM Content_Post__c
+        WHERE Id = :postId
+      ];
+      post.Public_Review_Status__c = 'Approved';
+      post.Status__c = 'Published';
+      post.Visibility__c = 'Public';
+      update post;
+      Test.stopTest();
+
+      Content_Post_Photo__c photo = [
+        SELECT Id, Public_Url__c
+        FROM Content_Post_Photo__c
+        WHERE Id = :photoId
+      ];
+      System.assertNotEquals(
+        null,
+        photo.Public_Url__c,
+        'Public URL should be generated'
+      );
+
+      List<ContentPostController.PhotoDTO> photos = ContentPostController.getPostPhotos(
+        postId
+      );
+      System.assertEquals(1, photos.size());
+      System.assertEquals(photo.Public_Url__c, photos[0].publicUrl);
+    }
+  }
 }
