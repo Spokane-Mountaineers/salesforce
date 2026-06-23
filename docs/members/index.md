@@ -25,6 +25,10 @@ New here? Start with [Getting Started](getting-started.md).
 
     Browse the calendar and join the groups that run the trips.
 
+- :material-slack: **[Slack Workspace](slack.md)**
+
+    Log in and chat with other members, coordinate trips, and share rides.
+
 - :material-bookshelf: **[Member Resources](member-resources.md)**
 
     The waiver, member discounts, and schools and clinics.
