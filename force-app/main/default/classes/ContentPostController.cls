@@ -24,7 +24,7 @@ public with sharing class ContentPostController {
     String soql =
       'SELECT Id, Name, Title__c, Status__c, Visibility__c, Activity__c, ' +
       'Publish_Date__c, Trip_Date__c, Location__c, Difficulty__c, Free_Tags__c, ' +
-      'RecordType.DeveloperName, Owner.Name ' +
+      'RecordType.DeveloperName, OwnerId, Owner.Name ' +
       'FROM Content_Post__c WHERE Status__c = :statusPublished';
     String statusPublished = 'Published';
     List<String> clauses = new List<String>();
@@ -104,6 +104,7 @@ public with sharing class ContentPostController {
         Difficulty__c,
         Free_Tags__c,
         RecordType.DeveloperName,
+        OwnerId,
         Owner.Name
       FROM Content_Post__c
       WHERE Id = :postId
@@ -451,6 +452,8 @@ public with sharing class ContentPostController {
     public String recordType;
     @AuraEnabled
     public String authorName;
+    @AuraEnabled
+    public Boolean canEdit;
 
     public PostDTO(Content_Post__c p) {
       this(p, false);
@@ -469,6 +472,9 @@ public with sharing class ContentPostController {
       this.difficulty = p.Difficulty__c;
       this.recordType = p.RecordType.DeveloperName;
       this.authorName = p.Owner.Name;
+      this.canEdit =
+        (p.OwnerId == UserInfo.getUserId()) ||
+        UserInfo.getProfileId().equals(getAdminProfileId());
       this.freeTags = splitTags(p.Free_Tags__c);
       this.displayTags = new List<String>(this.freeTags);
       this.tagIds = new List<Id>();

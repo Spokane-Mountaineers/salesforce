@@ -7,6 +7,7 @@ import getPostPhotos from "@salesforce/apex/ContentPostController.getPostPhotos"
 import updatePhotoMetadata from "@salesforce/apex/ContentPostController.updatePhotoMetadata";
 import deletePhoto from "@salesforce/apex/ContentPostController.deletePhoto";
 import { refreshApex } from "@salesforce/apex";
+import { CurrentPageReference } from "lightning/navigation";
 
 jest.mock(
   "@salesforce/apex/ContentPostController.createTripReport",
@@ -318,5 +319,19 @@ describe("c-trip-report-form", () => {
       credit: "Jane Member",
       consentConfirmed: false
     });
+  });
+
+  it("initializes recordId from CurrentPageReference when standalone", async () => {
+    const originalLocation = window.location;
+    delete window.location;
+    window.location = new URL("https://example.com/lwrsite/newtrip");
+
+    const el = mount();
+    CurrentPageReference.emit({ state: { recordId: "a00XYZ" } });
+    await Promise.resolve();
+
+    expect(el.recordId).toBe("a00XYZ");
+
+    window.location = originalLocation;
   });
 });

@@ -512,27 +512,30 @@ private class ContentPostControllerTest {
   }
 
   @isTest
-  static void createTripReport_portalUserWithoutPermSet_throws() {
+  static void createTripReport_portalUserWithoutPermSet_success() {
     User communityUser = createCommunityUser('PortalNoAuth', false);
+    Id newId;
     System.runAs(communityUser) {
       Test.startTest();
-      try {
-        ContentPostController.createTripReport(
-          'Should fail',
-          'body',
-          'Climbing',
-          Date.today(),
-          'Beacon Rock',
-          'Moderate',
-          'fun',
-          new List<Id>()
-        );
-        System.assert(false, 'Expected permission error');
-      } catch (AuraHandledException e) {
-        System.assert(true);
-      }
+      newId = ContentPostController.createTripReport(
+        'Should now succeed',
+        'body',
+        'Climbing',
+        Date.today(),
+        'Beacon Rock',
+        'Moderate',
+        'fun',
+        new List<Id>()
+      );
       Test.stopTest();
     }
+    System.assertNotEquals(null, newId, 'Post ID should be returned');
+    Content_Post__c post = [
+      SELECT OwnerId, Title__c
+      FROM Content_Post__c
+      WHERE Id = :newId
+    ];
+    System.assertEquals(communityUser.Id, post.OwnerId);
   }
 
   @isTest

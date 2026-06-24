@@ -9,7 +9,7 @@ import getPostPhotos from "@salesforce/apex/ContentPostController.getPostPhotos"
 import updatePhotoMetadata from "@salesforce/apex/ContentPostController.updatePhotoMetadata";
 import deletePhoto from "@salesforce/apex/ContentPostController.deletePhoto";
 import { refreshApex } from "@salesforce/apex";
-import { NavigationMixin } from "lightning/navigation";
+import { NavigationMixin, CurrentPageReference } from "lightning/navigation";
 import basePath from "@salesforce/community/basePath";
 
 const ACTIVITIES = [
@@ -26,6 +26,16 @@ const DIFFICULTIES = ["Easy", "Moderate", "Strenuous", "Technical"];
 
 export default class TripReportForm extends NavigationMixin(LightningElement) {
   @track _recordId;
+
+  @wire(CurrentPageReference)
+  setCurrentPageReference(pageRef) {
+    if (pageRef && pageRef.state) {
+      const rid = pageRef.state.recordId;
+      if (rid && this.isStandalone()) {
+        this._recordId = rid;
+      }
+    }
+  }
 
   @api
   get recordId() {

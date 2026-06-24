@@ -249,4 +249,23 @@ describe("c-blog-post", () => {
     await Promise.resolve();
     expect(el.shadowRoot.querySelector(".lightbox-overlay")).toBeNull();
   });
+
+  it("renders Edit button only when canEdit is true", async () => {
+    // 1. canEdit is false
+    let el = mount({ postId: "a001" });
+    getPost.emit({ ...POST, canEdit: false });
+    getPostPhotos.emit([]);
+    await Promise.resolve();
+    expect(el.shadowRoot.querySelector(".smi-btn--secondary")).toBeNull();
+    document.body.removeChild(el);
+
+    // 2. canEdit is true
+    el = mount({ postId: "a001" });
+    getPost.emit({ ...POST, canEdit: true });
+    getPostPhotos.emit([]);
+    await Promise.resolve();
+    const editBtn = el.shadowRoot.querySelector(".smi-btn--secondary");
+    expect(editBtn).not.toBeNull();
+    expect(editBtn.getAttribute("href")).toContain("/newtrip?recordId=a001");
+  });
 });

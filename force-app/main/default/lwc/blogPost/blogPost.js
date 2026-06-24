@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
+import basePath from "@salesforce/community/basePath";
 import getPost from "@salesforce/apex/ContentPostController.getPost";
 import getPostPhotos from "@salesforce/apex/ContentPostController.getPostPhotos";
 
@@ -14,6 +15,14 @@ export default class BlogPost extends LightningElement {
   urlRecordId;
   post;
   errorMessage;
+
+  get canEdit() {
+    return this.post && this.post.canEdit;
+  }
+
+  get editUrl() {
+    return `${basePath}/newtrip?recordId=${this.effectiveId}`;
+  }
 
   photos = [];
   lightboxOpen = false;

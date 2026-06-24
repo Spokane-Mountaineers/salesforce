@@ -26,7 +26,40 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--rust);
-  margin: 0 0 10px;
+  margin: 0;
+}
+.head__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.smi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.2s;
+}
+.smi-btn:hover {
+  transform: translateY(-1px);
+}
+.smi-btn--secondary {
+  background: var(--paper-2);
+  color: var(--pine);
+  border: 1px solid var(--line);
+}
+.smi-btn--secondary:hover {
+  background: rgba(28, 37, 32, 0.08);
 }
 .title {
   font-family: var(--font-display);

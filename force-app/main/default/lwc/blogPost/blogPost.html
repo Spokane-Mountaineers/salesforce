@@ -6,7 +6,12 @@
 
     <template lwc:if={hasPost}>
       <header class="head">
-        <p class="meta">{meta}</p>
+        <div class="head__top">
+          <p class="meta">{meta}</p>
+          <template lwc:if={canEdit}>
+            <a class="smi-btn smi-btn--secondary" href={editUrl}> Edit Post </a>
+          </template>
+        </div>
         <h1 class="title">{post.title}</h1>
         <p class="byline">By {post.authorName}</p>
       </header>
