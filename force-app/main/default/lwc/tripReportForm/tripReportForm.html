@@ -29,27 +29,23 @@
     <div class="row">
       <label class="field">
         <span class="label">Activity</span>
-        <select
-          data-field="activity"
-          onchange={handleChange}
-          value={form.activity}
-        >
+        <select data-field="activity" onchange={handleChange}>
           <option value="">—</option>
           <template for:each={activityOptions} for:item="opt">
-            <option key={opt} value={opt}>{opt}</option>
+            <option key={opt.value} value={opt.value} selected={opt.selected}>
+              {opt.label}
+            </option>
           </template>
         </select>
       </label>
       <label class="field">
         <span class="label">Difficulty</span>
-        <select
-          data-field="difficulty"
-          onchange={handleChange}
-          value={form.difficulty}
-        >
+        <select data-field="difficulty" onchange={handleChange}>
           <option value="">—</option>
           <template for:each={difficultyOptions} for:item="opt">
-            <option key={opt} value={opt}>{opt}</option>
+            <option key={opt.value} value={opt.value} selected={opt.selected}>
+              {opt.label}
+            </option>
           </template>
         </select>
       </label>
@@ -102,6 +98,7 @@
         data-field="body"
         value={form.body}
         onchange={handleChange}
+        formats={allowedFormats}
         placeholder="How was the route? Conditions, beta, the good and the type-2 fun…"
       ></lightning-input-rich-text>
     </label>

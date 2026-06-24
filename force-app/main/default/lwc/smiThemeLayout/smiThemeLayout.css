@@ -112,12 +112,12 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
 }
 .nav__list {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 18px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -129,6 +129,7 @@
   text-decoration: none;
   padding: 6px 0;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
   transition:
     color 0.18s,
     border-color 0.18s;
@@ -142,6 +143,48 @@
 .nav__auth {
   display: flex;
   align-items: center;
+}
+
+/* ── Anchor color reassert (LWR shadow-DOM fix) ──
+   The Experience Cloud runtime injects an author-origin `a:link`/`a:visited`
+   color rule into every component shadow root (specificity 0,1,1). That
+   outranks our plain class colors on <a> elements (0,1,0), so styled links —
+   the brand name, the top-level nav links, the Log out button — render in the
+   platform's default blue instead of the field-guide palette. Buttons aren't
+   matched by `a:link`, which is why the dropdown triggers stayed correct and
+   the links didn't. Re-declaring each intended color at :link/:visited (0,2,0)
+   wins it back; hover/focus already sit at 0,2,0 and were never affected. */
+.brand:link,
+.brand:visited {
+  color: var(--overlay-ink);
+}
+.nav__link:link,
+.nav__link:visited {
+  color: #d8e6dc;
+}
+.nav__sublink:link,
+.nav__sublink:visited {
+  color: var(--ink-soft);
+}
+.smi-btn--ghost:link,
+.smi-btn--ghost:visited {
+  color: var(--overlay-ink);
+}
+.smi-btn--primary:link,
+.smi-btn--primary:visited {
+  color: #fff;
+}
+.skip-link:link,
+.skip-link:visited {
+  color: #fff;
+}
+.footer-nav__link:link,
+.footer-nav__link:visited {
+  color: #cdddd2;
+}
+.footer-nav__primary .footer-nav__link:link,
+.footer-nav__primary .footer-nav__link:visited {
+  color: #eaf2ec;
 }
 
 /* ── Dropdown groups ── */
@@ -416,7 +459,10 @@
 }
 
 /* ── Mobile ── */
-@media (max-width: 980px) {
+/* Nine top-level items + brand + auth button need ~1150px to sit on one line,
+   so collapse to the hamburger below the content max-width rather than force a
+   cramped, wrapping horizontal bar. Lower this if the nav is ever trimmed. */
+@media (max-width: 1180px) {
   .hamburger {
     display: flex;
   }
@@ -491,6 +537,10 @@
   .nav__sublink {
     color: #cdddd2;
     padding: 11px 0;
+  }
+  .nav__sublink:link,
+  .nav__sublink:visited {
+    color: #cdddd2;
   }
   .nav__sublink:hover,
   .nav__sublink:focus-visible {

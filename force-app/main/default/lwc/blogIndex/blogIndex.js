@@ -1,5 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
-import { CurrentPageReference } from "lightning/navigation";
+import { CurrentPageReference, NavigationMixin } from "lightning/navigation";
 import basePath from "@salesforce/community/basePath";
 import isGuest from "@salesforce/user/isGuest";
 import getPublishedPosts from "@salesforce/apex/ContentPostController.getPublishedPosts";
@@ -19,7 +19,7 @@ const ACTIVITIES = [
   "Other"
 ];
 
-export default class BlogIndex extends LightningElement {
+export default class BlogIndex extends NavigationMixin(LightningElement) {
   @track activity = "";
   @track selectedTags = [];
   @track search = "";
@@ -32,13 +32,22 @@ export default class BlogIndex extends LightningElement {
   setCurrentPageReference(pageRef) {
     if (pageRef && pageRef.state) {
       if (pageRef.state.tag) {
-        const urlTag = pageRef.state.tag;
-        if (!this.selectedTags.includes(urlTag)) {
-          this.selectedTags = [urlTag];
-        }
+        this.selectedTags = pageRef.state.tag
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean);
+      } else {
+        this.selectedTags = [];
       }
       if (pageRef.state.activity) {
         this.activity = pageRef.state.activity;
+      } else {
+        this.activity = "";
+      }
+      if (pageRef.state.search) {
+        this.search = pageRef.state.search;
+      } else {
+        this.search = "";
       }
     }
   }
@@ -125,11 +134,13 @@ export default class BlogIndex extends LightningElement {
 
   handleSearch(event) {
     this.search = event.target.value;
+    this.updateUrl();
   }
 
   handleActivity(event) {
     const v = event.currentTarget.dataset.value;
     this.activity = this.activity === v ? "" : v;
+    this.updateUrl();
   }
 
   handleTag(event) {
@@ -139,14 +150,41 @@ export default class BlogIndex extends LightningElement {
     } else {
       this.selectedTags = [...this.selectedTags, v];
     }
+    this.updateUrl();
   }
 
   clearFilters() {
     this.activity = "";
     this.selectedTags = [];
     this.search = "";
-    const box = this.template.querySelector(".search-box");
-    if (box) box.value = "";
+    this.updateUrl();
+  }
+
+  updateUrl() {
+    this[NavigationMixin.Navigate]({
+      type: "standard__webPage",
+      attributes: {
+        url: this.buildUrl()
+      }
+    });
+  }
+
+  buildUrl() {
+    let url = `${basePath}/blog`;
+    const params = [];
+    if (this.activity) {
+      params.push(`activity=${encodeURIComponent(this.activity)}`);
+    }
+    if (this.selectedTags.length > 0) {
+      params.push(`tag=${encodeURIComponent(this.selectedTags.join(","))}`);
+    }
+    if (this.search) {
+      params.push(`search=${encodeURIComponent(this.search)}`);
+    }
+    if (params.length > 0) {
+      url += `?${params.join("&")}`;
+    }
+    return url;
   }
 
   reduceError(error) {

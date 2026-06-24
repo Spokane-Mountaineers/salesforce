@@ -54,12 +54,7 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
   }
 
   navigateToPost(postId) {
-    this[NavigationMixin.Navigate]({
-      type: "standard__webPage",
-      attributes: {
-        url: `${basePath}/post?recordId=${postId}`
-      }
-    });
+    window.location.href = `${basePath}/post?recordId=${postId}`;
   }
 
   navigateToBlog() {
@@ -89,11 +84,44 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
   @track isUploading = false;
 
   wiredPhotosResult;
-
   postRecord;
   allTags = [];
-  activityOptions = ACTIVITIES;
-  difficultyOptions = DIFFICULTIES;
+
+  allowedFormats = [
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "list",
+    "indent",
+    "align",
+    "link",
+    "clean",
+    "table",
+    "header",
+    "color",
+    "background",
+    "blockquote",
+    "code-block"
+  ];
+
+  get activityOptions() {
+    return ACTIVITIES.map((opt) => ({
+      value: opt,
+      label: opt,
+      selected: opt === this.form.activity
+    }));
+  }
+
+  get difficultyOptions() {
+    return DIFFICULTIES.map((opt) => ({
+      value: opt,
+      label: opt,
+      selected: opt === this.form.difficulty
+    }));
+  }
 
   @wire(getActiveTags)
   wiredTags({ data }) {
