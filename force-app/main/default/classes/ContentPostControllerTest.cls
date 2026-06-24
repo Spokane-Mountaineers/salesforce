@@ -176,7 +176,8 @@ private class ContentPostControllerTest {
         'Enchantments',
         'Strenuous',
         'larches, golden',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
       Test.stopTest();
     }
@@ -216,7 +217,8 @@ private class ContentPostControllerTest {
         'Location',
         'Easy',
         'tag',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
 
       Test.startTest();
@@ -230,7 +232,8 @@ private class ContentPostControllerTest {
         'Moderate',
         'tag1, tag2',
         'Published',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
       Test.stopTest();
     }
@@ -265,7 +268,8 @@ private class ContentPostControllerTest {
         'Location',
         'Easy',
         '',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
     }
 
@@ -282,7 +286,8 @@ private class ContentPostControllerTest {
           'Easy',
           '',
           'Published',
-          new List<Id>()
+          new List<Id>(),
+          false
         );
         System.assert(false, 'Expected validation error');
       } catch (AuraHandledException e) {
@@ -305,7 +310,8 @@ private class ContentPostControllerTest {
         'Location',
         'Easy',
         '',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
 
       Test.startTest();
@@ -334,7 +340,8 @@ private class ContentPostControllerTest {
         'Location',
         'Easy',
         '',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
       ContentPostController.updateTripReport(
         postId,
@@ -346,7 +353,8 @@ private class ContentPostControllerTest {
         'Easy',
         '',
         'Published',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
 
       Test.startTest();
@@ -374,7 +382,8 @@ private class ContentPostControllerTest {
         'Loc',
         'Easy',
         '',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
     }
     System.runAs(userB) {
@@ -386,7 +395,8 @@ private class ContentPostControllerTest {
         'Loc',
         'Easy',
         '',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
     }
 
@@ -410,7 +420,8 @@ private class ContentPostControllerTest {
         null,
         null,
         null,
-        new List<Id>()
+        new List<Id>(),
+        false
       );
       System.assert(false, 'Expected an exception for a blank title');
     } catch (AuraHandledException e) {
@@ -498,7 +509,8 @@ private class ContentPostControllerTest {
         'Beacon Rock',
         'Moderate',
         'fun',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
       Test.stopTest();
     }
@@ -525,7 +537,8 @@ private class ContentPostControllerTest {
         'Beacon Rock',
         'Moderate',
         'fun',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
       Test.stopTest();
     }
@@ -618,7 +631,8 @@ private class ContentPostControllerTest {
         'Beacon Rock',
         'Moderate',
         'fun',
-        new List<Id>{ tag.Id }
+        new List<Id>{ tag.Id },
+        false
       );
 
       ContentPostController.PostDTO dto = ContentPostController.getPost(postId);
@@ -644,7 +658,8 @@ private class ContentPostControllerTest {
         'Moderate',
         'fun',
         'Published',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
       Test.stopTest();
     }
@@ -674,7 +689,8 @@ private class ContentPostControllerTest {
         'Beacon Rock',
         'Moderate',
         'fun',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
 
       Test.startTest();
@@ -736,7 +752,8 @@ private class ContentPostControllerTest {
         'Mt. Spokane',
         'Easy',
         'sunset',
-        new List<Id>()
+        new List<Id>(),
+        false
       );
 
       Id photoId = ContentPostController.uploadPhoto(
@@ -780,5 +797,250 @@ private class ContentPostControllerTest {
       System.assertEquals(1, photos.size());
       System.assertEquals(photo.Public_Url__c, photos[0].publicUrl);
     }
+  }
+
+  @isTest
+  static void getPublishedPosts_filtersByMultipleTagsAdditive() {
+    Content_Post__c hiking = [
+      SELECT Id
+      FROM Content_Post__c
+      WHERE Title__c = 'Mount Spokane snowshoe'
+      LIMIT 1
+    ];
+    Content_Tag__c tagPowder = new Content_Tag__c(
+      Name = 'Powder',
+      Category__c = 'General',
+      Active__c = true
+    );
+    insert tagPowder;
+    insert new Content_Post_Tag__c(
+      Content_Post__c = hiking.Id,
+      Content_Tag__c = tagPowder.Id
+    );
+
+    Test.startTest();
+    List<ContentPostController.PostDTO> posts = ContentPostController.getPublishedPosts(
+      null,
+      'Cascades, Powder',
+      null
+    );
+    Test.stopTest();
+
+    System.assertEquals(
+      2,
+      posts.size(),
+      'Should find posts matching either Cascades OR Powder'
+    );
+  }
+
+  @isTest
+  static void triggerGating_nonApproverThrowsError() {
+    User communityUser = createCommunityUser('NonAppr', true);
+
+    System.runAs(communityUser) {
+      try {
+        Content_Post__c post = new Content_Post__c(
+          Title__c = 'Direct Public Post',
+          Status__c = 'Published',
+          Visibility__c = 'Public',
+          RecordTypeId = Schema.SObjectType.Content_Post__c.getRecordTypeInfosByDeveloperName()
+            .get('Trip_Report')
+            .getRecordTypeId()
+        );
+        insert post;
+        System.assert(
+          false,
+          'Expected validation exception for setting visibility to Public'
+        );
+      } catch (DmlException e) {
+        System.assert(
+          e.getMessage().contains('You do not have permission'),
+          'Unexpected error message: ' + e.getMessage()
+        );
+      }
+
+      try {
+        Content_Post__c post = new Content_Post__c(
+          Title__c = 'Direct Approved Post',
+          Status__c = 'Published',
+          Visibility__c = 'Internal',
+          Public_Review_Status__c = 'Approved',
+          RecordTypeId = Schema.SObjectType.Content_Post__c.getRecordTypeInfosByDeveloperName()
+            .get('Trip_Report')
+            .getRecordTypeId()
+        );
+        insert post;
+        System.assert(
+          false,
+          'Expected validation exception for setting status to Approved'
+        );
+      } catch (DmlException e) {
+        System.assert(
+          e.getMessage().contains('You do not have permission'),
+          'Unexpected error message: ' + e.getMessage()
+        );
+      }
+    }
+  }
+
+  @isTest
+  static void triggerGating_submitForPublicApprovalFlow() {
+    User communityUser = createCommunityUser('ApprFlow', true);
+    Id postId;
+
+    System.runAs(communityUser) {
+      postId = ContentPostController.createTripReport(
+        'Draft for Gating Test',
+        '<p>Content</p>',
+        'Hiking',
+        Date.today(),
+        'Beacon Rock',
+        'Easy',
+        'fun',
+        new List<Id>(),
+        false
+      );
+
+      Test.startTest();
+      ContentPostController.updateTripReport(
+        postId,
+        'Draft for Gating Test',
+        '<p>Content</p>',
+        'Hiking',
+        Date.today(),
+        'Beacon Rock',
+        'Easy',
+        'fun',
+        'Published',
+        new List<Id>(),
+        true
+      );
+      Test.stopTest();
+    }
+
+    Content_Post__c post = [
+      SELECT
+        Visibility__c,
+        Public_Review_Status__c,
+        OwnerId,
+        Submit_For_Public__c,
+        CreatedById
+      FROM Content_Post__c
+      WHERE Id = :postId
+    ];
+
+    System.assertEquals(
+      'Internal',
+      post.Visibility__c,
+      'Visibility should be Internal'
+    );
+    System.assertEquals(
+      'Pending',
+      post.Public_Review_Status__c,
+      'Review status should be Pending'
+    );
+    System.assertEquals(
+      true,
+      post.Submit_For_Public__c,
+      'Submit for public should be true'
+    );
+
+    Id qId = ContentPostService.getQueueId();
+    if (qId != null) {
+      System.assertEquals(
+        qId,
+        post.OwnerId,
+        'Owner should be the Content Approval queue'
+      );
+    }
+  }
+
+  @isTest
+  static void triggerGating_approverCanApproveOrReject() {
+    User communityUser = createCommunityUser('ApprFlow', true);
+    Id postId;
+
+    System.runAs(communityUser) {
+      postId = ContentPostController.createTripReport(
+        'Gating Test Post',
+        '<p>Content</p>',
+        'Hiking',
+        Date.today(),
+        'Beacon Rock',
+        'Easy',
+        'fun',
+        new List<Id>(),
+        false
+      );
+    }
+
+    Content_Post__c post = [
+      SELECT Id, Submit_For_Public__c, Public_Review_Status__c, OwnerId
+      FROM Content_Post__c
+      WHERE Id = :postId
+    ];
+    post.Submit_For_Public__c = true;
+    post.Public_Review_Status__c = 'Pending';
+    Id qId = ContentPostService.getQueueId();
+    if (qId != null) {
+      post.OwnerId = qId;
+    }
+    update post;
+
+    post = [
+      SELECT Visibility__c, Public_Review_Status__c, OwnerId
+      FROM Content_Post__c
+      WHERE Id = :postId
+    ];
+    System.assertEquals('Pending', post.Public_Review_Status__c);
+
+    User adminUser = [
+      SELECT Id
+      FROM User
+      WHERE Profile.Name = 'System Administrator' AND IsActive = TRUE
+      LIMIT 1
+    ];
+
+    System.runAs(adminUser) {
+      Test.startTest();
+      post.Public_Review_Status__c = 'Approved';
+      update post;
+      Test.stopTest();
+    }
+
+    post = [
+      SELECT Visibility__c, Public_Review_Status__c, OwnerId
+      FROM Content_Post__c
+      WHERE Id = :postId
+    ];
+    System.assertEquals('Public', post.Visibility__c);
+    System.assertEquals('Approved', post.Public_Review_Status__c);
+    System.assertEquals(communityUser.Id, post.OwnerId);
+
+    post.Submit_For_Public__c = true;
+    post.Public_Review_Status__c = 'Pending';
+    if (qId != null) {
+      post.OwnerId = qId;
+    }
+    update post;
+
+    System.runAs(adminUser) {
+      post.Public_Review_Status__c = 'Rejected';
+      update post;
+    }
+
+    post = [
+      SELECT
+        Visibility__c,
+        Public_Review_Status__c,
+        OwnerId,
+        Submit_For_Public__c
+      FROM Content_Post__c
+      WHERE Id = :postId
+    ];
+    System.assertEquals('Internal', post.Visibility__c);
+    System.assertEquals('Rejected', post.Public_Review_Status__c);
+    System.assertEquals(false, post.Submit_For_Public__c);
+    System.assertEquals(communityUser.Id, post.OwnerId);
   }
 }

@@ -140,6 +140,24 @@
   margin: 0;
 }
 
+.breadcrumb {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+}
+.breadcrumb-link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pine);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.breadcrumb-link:hover {
+  color: var(--rust);
+  text-decoration: underline;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -158,6 +176,22 @@
   background: var(--paper-2);
   color: var(--pine);
   border: 1px solid var(--line);
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.tag:hover {
+  background: var(--rust);
+  color: #fff;
+  border-color: var(--rust);
+}
+.tag-link {
+  color: inherit;
+  text-decoration: none;
+}
+.tag-link:hover {
+  color: inherit;
+  text-decoration: none;
 }
 .error {
   font-size: 16px;

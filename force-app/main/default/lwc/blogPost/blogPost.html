@@ -1,4 +1,7 @@
 <template>
+  <div class="breadcrumb font-body">
+    <a href={blogUrl} class="breadcrumb-link">‹ Back to Trip Reports</a>
+  </div>
   <article class="post">
     <template lwc:if={errorMessage}>
       <p class="error">{errorMessage}</p>
@@ -58,7 +61,9 @@
       <template lwc:if={hasTags}>
         <ul class="tags" aria-label="Tags">
           <template for:each={tags} for:item="t">
-            <li key={t} class="tag">#{t}</li>
+            <li key={t.name} class="tag">
+              <a href={t.url} class="tag-link">#{t.name}</a>
+            </li>
           </template>
         </ul>
       </template>

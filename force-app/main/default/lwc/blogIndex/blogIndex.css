@@ -272,7 +272,7 @@
   border-radius: 999px;
   border: 1px solid transparent;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: none !important;
   transition:
     transform 0.15s cubic-bezier(0.2, 0.7, 0.2, 1),
     background 0.2s;
@@ -281,9 +281,18 @@
   transform: translateY(-1px);
 }
 .smi-btn--primary {
-  background: var(--rust);
-  color: #fff;
+  background: var(--rust) !important;
+  color: #fff !important;
 }
 .smi-btn--primary:hover {
-  background: #9c3f19;
+  background: #9c3f19 !important;
+  color: #fff !important;
+}
+
+.lead__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

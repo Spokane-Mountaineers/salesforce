@@ -78,7 +78,8 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
     tripDate: null,
     location: "",
     difficulty: "",
-    freeTags: ""
+    freeTags: "",
+    submitForPublic: false
   };
   @track selectedTagIds = [];
   @track controlledTags = [];
@@ -131,7 +132,8 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
         tripDate: data.tripDate || null,
         location: data.location || "",
         difficulty: data.difficulty || "",
-        freeTags: (data.freeTags || []).join(", ")
+        freeTags: (data.freeTags || []).join(", "),
+        submitForPublic: data.submitForPublic || false
       };
       this.selectedTagIds = data.tagIds || [];
       this.formatTags();
@@ -170,7 +172,11 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
 
   handleChange(event) {
     const field = event.target.dataset.field;
-    this.form = { ...this.form, [field]: event.target.value };
+    const val =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.form = { ...this.form, [field]: val };
   }
 
   handleToggleTag(event) {
@@ -235,7 +241,8 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
           difficulty: this.form.difficulty,
           freeTags: this.form.freeTags,
           status: status,
-          tagIds: this.selectedTagIds
+          tagIds: this.selectedTagIds,
+          submitForPublic: this.form.submitForPublic
         });
         this.dispatchEvent(
           new CustomEvent("updated", { detail: { id: this.recordId } })
@@ -252,7 +259,8 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
           location: this.form.location,
           difficulty: this.form.difficulty,
           freeTags: this.form.freeTags,
-          tagIds: this.selectedTagIds
+          tagIds: this.selectedTagIds,
+          submitForPublic: this.form.submitForPublic
         });
 
         if (status === "Published") {
@@ -266,7 +274,8 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
             difficulty: this.form.difficulty,
             freeTags: this.form.freeTags,
             status: "Published",
-            tagIds: this.selectedTagIds
+            tagIds: this.selectedTagIds,
+            submitForPublic: this.form.submitForPublic
           });
         }
         this._recordId = id;
@@ -291,7 +300,7 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
       await deleteOwnDraft({ postId: this.recordId });
       this.dispatchEvent(new CustomEvent("deleted"));
       if (this.isStandalone()) {
-        this.navigateToBlog();
+        this.navigateToBasecamp();
       }
     } catch (e) {
       this.errorMessage =
@@ -304,8 +313,21 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
   handleCancel() {
     this.dispatchEvent(new CustomEvent("cancel"));
     if (this.isStandalone()) {
-      this.navigateToBlog();
+      this.navigateToBasecamp();
     }
+  }
+
+  navigateToBasecamp() {
+    this[NavigationMixin.Navigate]({
+      type: "standard__webPage",
+      attributes: {
+        url: `${basePath}/basecamp`
+      }
+    });
+  }
+
+  get blogUrl() {
+    return `${basePath}/blog`;
   }
 
   async handleFileChange(event) {

@@ -4,6 +4,165 @@
  * when a post is approved by staff.
  */
 public with sharing class ContentPostService {
+  private static Map<Id, Boolean> isAuthorizedMap = new Map<Id, Boolean>();
+  private static Id cachedQueueId;
+
+  public static Id getQueueId() {
+    if (cachedQueueId == null) {
+      List<Group> queues = [
+        SELECT Id
+        FROM Group
+        WHERE DeveloperName = 'Content_Approval' AND Type = 'Queue'
+        LIMIT 1
+      ];
+      if (!queues.isEmpty()) {
+        cachedQueueId = queues[0].Id;
+      }
+    }
+    return cachedQueueId;
+  }
+
+  public static Boolean isAuthorizedApprover() {
+    Id userId = UserInfo.getUserId();
+    if (isAuthorizedMap.containsKey(userId)) {
+      return isAuthorizedMap.get(userId);
+    }
+
+    Id profileId = UserInfo.getProfileId();
+    List<Profile> profiles = [
+      SELECT Name
+      FROM Profile
+      WHERE Id = :profileId
+      LIMIT 1
+    ];
+    if (!profiles.isEmpty() && profiles[0].Name == 'System Administrator') {
+      isAuthorizedMap.put(userId, true);
+      return true;
+    }
+
+    Set<Id> userGroupIds = new Set<Id>{ userId };
+    for (GroupMember gm : [
+      SELECT GroupId
+      FROM GroupMember
+      WHERE UserOrGroupId = :userId
+    ]) {
+      userGroupIds.add(gm.GroupId);
+    }
+
+    if (UserInfo.getUserType() == 'Standard') {
+      for (Group g : [
+        SELECT Id
+        FROM Group
+        WHERE DeveloperName = 'AllInternalUsers' AND Type = 'Organization'
+      ]) {
+        userGroupIds.add(g.Id);
+      }
+    }
+
+    Integer count = [
+      SELECT COUNT()
+      FROM GroupMember
+      WHERE
+        Group.DeveloperName = 'Content_Approval'
+        AND Group.Type = 'Queue'
+        AND UserOrGroupId IN :userGroupIds
+    ];
+
+    Boolean result = (count > 0);
+    isAuthorizedMap.put(userId, result);
+    return result;
+  }
+
+  public static void handleBeforeInsert(List<Content_Post__c> newPosts) {
+    Id tripRtId = Schema.SObjectType.Content_Post__c.getRecordTypeInfosByDeveloperName()
+      .get('Trip_Report')
+      .getRecordTypeId();
+    Id qId = getQueueId();
+    Boolean isApprover = isAuthorizedApprover();
+
+    for (Content_Post__c post : newPosts) {
+      if (post.RecordTypeId == tripRtId) {
+        if (!isApprover) {
+          if (
+            post.Visibility__c == 'Public' ||
+            post.Public_Review_Status__c == 'Approved'
+          ) {
+            post.addError(
+              'You do not have permission to publish this post publicly or approve it.'
+            );
+            continue;
+          }
+        }
+
+        if (post.Submit_For_Public__c == true) {
+          post.Visibility__c = 'Internal';
+          post.Public_Review_Status__c = 'Pending';
+          if (qId != null) {
+            post.OwnerId = qId;
+          }
+        }
+      }
+    }
+  }
+
+  public static void handleBeforeUpdate(
+    List<Content_Post__c> newPosts,
+    Map<Id, Content_Post__c> oldMap
+  ) {
+    Id tripRtId = Schema.SObjectType.Content_Post__c.getRecordTypeInfosByDeveloperName()
+      .get('Trip_Report')
+      .getRecordTypeId();
+    Id qId = getQueueId();
+    Boolean isApprover = isAuthorizedApprover();
+
+    for (Content_Post__c post : newPosts) {
+      if (post.RecordTypeId == tripRtId) {
+        Content_Post__c oldPost = oldMap.get(post.Id);
+
+        boolean visChangedToPublic = (post.Visibility__c == 'Public' &&
+        oldPost.Visibility__c != 'Public');
+        boolean statusChangedToApproved = (post.Public_Review_Status__c ==
+        'Approved' &&
+        oldPost.Public_Review_Status__c != 'Approved');
+
+        if (!isApprover) {
+          if (visChangedToPublic || statusChangedToApproved) {
+            post.addError(
+              'You do not have permission to publish this post publicly or approve it.'
+            );
+            continue;
+          }
+        }
+
+        // Handle requesting public visibility
+        boolean submitChangedToTrue = (post.Submit_For_Public__c == true &&
+        oldPost.Submit_For_Public__c != true);
+        if (submitChangedToTrue && !isApprover) {
+          post.Visibility__c = 'Internal';
+          post.Public_Review_Status__c = 'Pending';
+          if (qId != null) {
+            post.OwnerId = qId;
+          }
+        }
+
+        // Handle transitioning review status (done by approver)
+        if (oldPost.Public_Review_Status__c == 'Pending') {
+          if (post.Public_Review_Status__c == 'Approved') {
+            post.Visibility__c = 'Public';
+            post.OwnerId = post.CreatedById != null
+              ? post.CreatedById
+              : UserInfo.getUserId();
+          } else if (post.Public_Review_Status__c == 'Rejected') {
+            post.Visibility__c = 'Internal';
+            post.Submit_For_Public__c = false;
+            post.OwnerId = post.CreatedById != null
+              ? post.CreatedById
+              : UserInfo.getUserId();
+          }
+        }
+      }
+    }
+  }
   /**
    * Handles after-update trigger events on Content_Post__c.
    * Detects transition to 'Approved' public review status to generate public urls.

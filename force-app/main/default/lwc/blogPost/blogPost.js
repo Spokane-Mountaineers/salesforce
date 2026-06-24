@@ -82,7 +82,15 @@ export default class BlogPost extends LightningElement {
   }
 
   get tags() {
-    return this.post?.displayTags || [];
+    const rawTags = this.post?.displayTags || [];
+    return rawTags.map((t) => ({
+      name: t,
+      url: `${basePath}/blog?tag=${encodeURIComponent(t)}`
+    }));
+  }
+
+  get blogUrl() {
+    return `${basePath}/blog`;
   }
 
   get hasTags() {

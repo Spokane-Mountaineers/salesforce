@@ -1,4 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
+import { CurrentPageReference } from "lightning/navigation";
 import basePath from "@salesforce/community/basePath";
 import isGuest from "@salesforce/user/isGuest";
 import getPublishedPosts from "@salesforce/apex/ContentPostController.getPublishedPosts";
@@ -20,8 +21,27 @@ const ACTIVITIES = [
 
 export default class BlogIndex extends LightningElement {
   @track activity = "";
-  @track tag = "";
+  @track selectedTags = [];
   @track search = "";
+
+  get tag() {
+    return this.selectedTags.join(",");
+  }
+
+  @wire(CurrentPageReference)
+  setCurrentPageReference(pageRef) {
+    if (pageRef && pageRef.state) {
+      if (pageRef.state.tag) {
+        const urlTag = pageRef.state.tag;
+        if (!this.selectedTags.includes(urlTag)) {
+          this.selectedTags = [urlTag];
+        }
+      }
+      if (pageRef.state.activity) {
+        this.activity = pageRef.state.activity;
+      }
+    }
+  }
 
   get showNewReportLink() {
     return true;
@@ -70,7 +90,7 @@ export default class BlogIndex extends LightningElement {
     return this.tags.map((t) => ({
       label: t.name,
       value: t.name,
-      cls: t.name === this.tag ? "chip chip--on" : "chip"
+      cls: this.selectedTags.includes(t.name) ? "chip chip--on" : "chip"
     }));
   }
 
@@ -114,12 +134,16 @@ export default class BlogIndex extends LightningElement {
 
   handleTag(event) {
     const v = event.currentTarget.dataset.value;
-    this.tag = this.tag === v ? "" : v;
+    if (this.selectedTags.includes(v)) {
+      this.selectedTags = this.selectedTags.filter((t) => t !== v);
+    } else {
+      this.selectedTags = [...this.selectedTags, v];
+    }
   }
 
   clearFilters() {
     this.activity = "";
-    this.tag = "";
+    this.selectedTags = [];
     this.search = "";
     const box = this.template.querySelector(".search-box");
     if (box) box.value = "";

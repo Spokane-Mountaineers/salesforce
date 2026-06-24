@@ -24,7 +24,8 @@ public with sharing class ContentPostController {
     String soql =
       'SELECT Id, Name, Title__c, Status__c, Visibility__c, Activity__c, ' +
       'Publish_Date__c, Trip_Date__c, Location__c, Difficulty__c, Free_Tags__c, ' +
-      'RecordType.DeveloperName, OwnerId, Owner.Name ' +
+      'RecordType.DeveloperName, OwnerId, Owner.Name, Submit_For_Public__c, ' +
+      'CreatedById, CreatedBy.Name, CreatedBy.FirstName, CreatedBy.LastName ' +
       'FROM Content_Post__c WHERE Status__c = :statusPublished';
     String statusPublished = 'Published';
     List<String> clauses = new List<String>();
@@ -32,26 +33,41 @@ public with sharing class ContentPostController {
     if (String.isNotBlank(activity)) {
       clauses.add('Activity__c = :activity');
     }
-    // Pre-query tagged post ids: a semi-join sub-select can't live inside an OR
-    // / nested WHERE, but a bound `Id IN :set` can go anywhere.
+
     Set<Id> taggedPostIds = new Set<Id>();
     if (String.isNotBlank(tag)) {
-      for (Content_Post_Tag__c link : [
-        SELECT Content_Post__c
-        FROM Content_Post_Tag__c
-        WHERE Content_Tag__r.Name = :tag
-      ]) {
-        taggedPostIds.add(link.Content_Post__c);
+      List<String> tagNames = new List<String>();
+      for (String t : tag.split(',')) {
+        if (String.isNotBlank(t)) {
+          tagNames.add(t.trim());
+        }
       }
-      clauses.add('(Free_Tags__c LIKE :tagLike OR Id IN :taggedPostIds)');
+
+      if (!tagNames.isEmpty()) {
+        for (Content_Post_Tag__c link : [
+          SELECT Content_Post__c
+          FROM Content_Post_Tag__c
+          WHERE Content_Tag__r.Name IN :tagNames
+        ]) {
+          taggedPostIds.add(link.Content_Post__c);
+        }
+
+        List<String> tagOrClauses = new List<String>();
+        tagOrClauses.add('Id IN :taggedPostIds');
+        for (String name : tagNames) {
+          String escapedName = '%' + escape(name) + '%';
+          tagOrClauses.add('Free_Tags__c LIKE \'' + escapedName + '\'');
+        }
+        clauses.add('(' + String.join(tagOrClauses, ' OR ') + ')');
+      }
     }
+
     if (String.isNotBlank(search)) {
       clauses.add(
         '(Title__c LIKE :searchLike OR Location__c LIKE :searchLike ' +
         'OR Free_Tags__c LIKE :searchLike)'
       );
     }
-    String tagLike = '%' + escape(tag) + '%';
     String searchLike = '%' + escape(search) + '%';
 
     if (!clauses.isEmpty()) {
@@ -60,6 +76,24 @@ public with sharing class ContentPostController {
     soql += ' ORDER BY Publish_Date__c DESC NULLS LAST, CreatedDate DESC LIMIT 200';
 
     List<Content_Post__c> posts = Database.query(soql);
+
+    // Fetch featured photos
+    Set<Id> postIds = new Set<Id>();
+    for (Content_Post__c p : posts) {
+      postIds.add(p.Id);
+    }
+    Map<Id, Content_Post_Photo__c> postToFeaturedPhoto = new Map<Id, Content_Post_Photo__c>();
+    for (Content_Post_Photo__c cpp : [
+      SELECT Content_Post__c, Public_Url__c, Content_Document_Id__c
+      FROM Content_Post_Photo__c
+      WHERE Content_Post__c IN :postIds
+      ORDER BY Sort_Order__c ASC, CreatedDate ASC
+    ]) {
+      if (!postToFeaturedPhoto.containsKey(cpp.Content_Post__c)) {
+        postToFeaturedPhoto.put(cpp.Content_Post__c, cpp);
+      }
+    }
+
     Map<Id, List<String>> postToTagNames = new Map<Id, List<String>>();
     for (Content_Post_Tag__c cpt : [
       SELECT Content_Post__c, Content_Tag__r.Name
@@ -77,6 +111,19 @@ public with sharing class ContentPostController {
       PostDTO dto = new PostDTO(p);
       if (postToTagNames.containsKey(p.Id)) {
         dto.displayTags.addAll(postToTagNames.get(p.Id));
+      }
+      Content_Post_Photo__c featured = postToFeaturedPhoto.get(p.Id);
+      if (featured != null) {
+        if (
+          UserInfo.getUserType() == 'Guest' &&
+          String.isNotBlank(featured.Public_Url__c)
+        ) {
+          dto.featuredPhotoUrl = featured.Public_Url__c;
+        } else {
+          dto.featuredPhotoUrl =
+            '/sfc/servlet.shepherd/document/download/' +
+            featured.Content_Document_Id__c;
+        }
       }
       results.add(dto);
     }
@@ -105,7 +152,12 @@ public with sharing class ContentPostController {
         Free_Tags__c,
         RecordType.DeveloperName,
         OwnerId,
-        Owner.Name
+        Owner.Name,
+        Submit_For_Public__c,
+        CreatedById,
+        CreatedBy.Name,
+        CreatedBy.FirstName,
+        CreatedBy.LastName
       FROM Content_Post__c
       WHERE Id = :postId
       LIMIT 1
@@ -116,6 +168,27 @@ public with sharing class ContentPostController {
       );
     }
     PostDTO dto = new PostDTO(posts[0], true);
+    // Fetch featured photo
+    List<Content_Post_Photo__c> featuredPhotos = [
+      SELECT Public_Url__c, Content_Document_Id__c
+      FROM Content_Post_Photo__c
+      WHERE Content_Post__c = :posts[0].Id
+      ORDER BY Sort_Order__c ASC, CreatedDate ASC
+      LIMIT 1
+    ];
+    if (!featuredPhotos.isEmpty()) {
+      Content_Post_Photo__c featured = featuredPhotos[0];
+      if (
+        UserInfo.getUserType() == 'Guest' &&
+        String.isNotBlank(featured.Public_Url__c)
+      ) {
+        dto.featuredPhotoUrl = featured.Public_Url__c;
+      } else {
+        dto.featuredPhotoUrl =
+          '/sfc/servlet.shepherd/document/download/' +
+          featured.Content_Document_Id__c;
+      }
+    }
     for (Content_Post_Tag__c cpt : [
       SELECT Content_Tag__c, Content_Tag__r.Name
       FROM Content_Post_Tag__c
@@ -134,7 +207,13 @@ public with sharing class ContentPostController {
     for (Content_Tag__c t : [
       SELECT Id, Name, Category__c
       FROM Content_Tag__c
-      WHERE Active__c = TRUE
+      WHERE
+        Active__c = TRUE
+        AND Id IN (
+          SELECT Content_Tag__c
+          FROM Content_Post_Tag__c
+          WHERE Content_Post__r.Status__c = 'Published'
+        )
       ORDER BY Category__c, Name
     ]) {
       tags.add(new TagDTO(t));
@@ -157,7 +236,8 @@ public with sharing class ContentPostController {
     String location,
     String difficulty,
     String freeTags,
-    List<Id> tagIds
+    List<Id> tagIds,
+    Boolean submitForPublic
   ) {
     if (String.isBlank(title)) {
       throw new AuraHandledException('A title is required');
@@ -173,7 +253,11 @@ public with sharing class ContentPostController {
       Difficulty__c = difficulty,
       Free_Tags__c = freeTags,
       Visibility__c = 'Internal',
-      Status__c = 'Draft'
+      Status__c = 'Draft',
+      Submit_For_Public__c = (submitForPublic == true),
+      Public_Review_Status__c = (submitForPublic == true)
+        ? 'Pending'
+        : 'Not Requested'
     );
     if (!Schema.sObjectType.Content_Post__c.isCreateable()) {
       throw new AuraHandledException(
@@ -212,7 +296,8 @@ public with sharing class ContentPostController {
     String difficulty,
     String freeTags,
     String status,
-    List<Id> tagIds
+    List<Id> tagIds,
+    Boolean submitForPublic
   ) {
     if (postId == null) {
       throw new AuraHandledException('Post ID is required');
@@ -223,7 +308,13 @@ public with sharing class ContentPostController {
       );
     }
     List<Content_Post__c> posts = [
-      SELECT OwnerId, Status__c, Visibility__c, Publish_Date__c
+      SELECT
+        OwnerId,
+        Status__c,
+        Visibility__c,
+        Publish_Date__c,
+        Public_Review_Status__c,
+        CreatedById
       FROM Content_Post__c
       WHERE Id = :postId
       LIMIT 1
@@ -235,9 +326,11 @@ public with sharing class ContentPostController {
     }
     Content_Post__c post = posts[0];
 
+    Boolean isApprover = ContentPostService.isAuthorizedApprover();
     if (
       post.OwnerId != UserInfo.getUserId() &&
-      !UserInfo.getProfileId().equals(getAdminProfileId())
+      post.CreatedById != UserInfo.getUserId() &&
+      !isApprover
     ) {
       throw new AuraHandledException(
         'You do not have permission to edit this trip report.'
@@ -251,6 +344,22 @@ public with sharing class ContentPostController {
     post.Location__c = location;
     post.Difficulty__c = difficulty;
     post.Free_Tags__c = freeTags;
+
+    if (submitForPublic != null) {
+      post.Submit_For_Public__c = submitForPublic;
+      if (submitForPublic) {
+        if (
+          post.Public_Review_Status__c == 'Not Requested' ||
+          post.Public_Review_Status__c == null
+        ) {
+          post.Public_Review_Status__c = 'Pending';
+        }
+      } else {
+        if (post.Public_Review_Status__c == 'Pending') {
+          post.Public_Review_Status__c = 'Not Requested';
+        }
+      }
+    }
 
     if (String.isNotBlank(status)) {
       post.Status__c = status;
@@ -297,7 +406,7 @@ public with sharing class ContentPostController {
       );
     }
     List<Content_Post__c> posts = [
-      SELECT OwnerId, Status__c
+      SELECT OwnerId, Status__c, CreatedById
       FROM Content_Post__c
       WHERE Id = :postId
       LIMIT 1
@@ -308,7 +417,10 @@ public with sharing class ContentPostController {
       );
     }
     Content_Post__c post = posts[0];
-    if (post.OwnerId != UserInfo.getUserId()) {
+    if (
+      post.OwnerId != UserInfo.getUserId() &&
+      post.CreatedById != UserInfo.getUserId()
+    ) {
       throw new AuraHandledException(
         'You do not have permission to delete this trip report.'
       );
@@ -340,13 +452,36 @@ public with sharing class ContentPostController {
         Difficulty__c,
         Free_Tags__c,
         RecordType.DeveloperName,
-        Owner.Name
+        Owner.Name,
+        Submit_For_Public__c,
+        CreatedById,
+        CreatedBy.Name,
+        CreatedBy.FirstName,
+        CreatedBy.LastName
       FROM Content_Post__c
       WHERE
-        OwnerId = :currentUserId
+        (OwnerId = :currentUserId
+        OR CreatedById = :currentUserId)
         AND RecordType.DeveloperName = 'Trip_Report'
       ORDER BY CreatedDate DESC
     ];
+    // Gather featured photos for My Posts
+    Set<Id> postIds = new Set<Id>();
+    for (Content_Post__c p : posts) {
+      postIds.add(p.Id);
+    }
+    Map<Id, Content_Post_Photo__c> postToFeaturedPhoto = new Map<Id, Content_Post_Photo__c>();
+    for (Content_Post_Photo__c cpp : [
+      SELECT Content_Post__c, Public_Url__c, Content_Document_Id__c
+      FROM Content_Post_Photo__c
+      WHERE Content_Post__c IN :postIds
+      ORDER BY Sort_Order__c ASC, CreatedDate ASC
+    ]) {
+      if (!postToFeaturedPhoto.containsKey(cpp.Content_Post__c)) {
+        postToFeaturedPhoto.put(cpp.Content_Post__c, cpp);
+      }
+    }
+
     Map<Id, List<String>> postToTagNames = new Map<Id, List<String>>();
     for (Content_Post_Tag__c cpt : [
       SELECT Content_Post__c, Content_Tag__r.Name
@@ -364,6 +499,19 @@ public with sharing class ContentPostController {
       PostDTO dto = new PostDTO(p);
       if (postToTagNames.containsKey(p.Id)) {
         dto.displayTags.addAll(postToTagNames.get(p.Id));
+      }
+      Content_Post_Photo__c featured = postToFeaturedPhoto.get(p.Id);
+      if (featured != null) {
+        if (
+          UserInfo.getUserType() == 'Guest' &&
+          String.isNotBlank(featured.Public_Url__c)
+        ) {
+          dto.featuredPhotoUrl = featured.Public_Url__c;
+        } else {
+          dto.featuredPhotoUrl =
+            '/sfc/servlet.shepherd/document/download/' +
+            featured.Content_Document_Id__c;
+        }
       }
       results.add(dto);
     }
@@ -454,6 +602,10 @@ public with sharing class ContentPostController {
     public String authorName;
     @AuraEnabled
     public Boolean canEdit;
+    @AuraEnabled
+    public Boolean submitForPublic;
+    @AuraEnabled
+    public String featuredPhotoUrl;
 
     public PostDTO(Content_Post__c p) {
       this(p, false);
@@ -471,10 +623,25 @@ public with sharing class ContentPostController {
       this.location = p.Location__c;
       this.difficulty = p.Difficulty__c;
       this.recordType = p.RecordType.DeveloperName;
-      this.authorName = p.Owner.Name;
+      if (p.CreatedBy != null) {
+        if (
+          String.isNotBlank(p.CreatedBy.FirstName) &&
+          String.isNotBlank(p.CreatedBy.LastName)
+        ) {
+          this.authorName = p.CreatedBy.FirstName + ' ' + p.CreatedBy.LastName;
+        } else {
+          this.authorName = p.CreatedBy.Name;
+        }
+      } else if (p.Owner != null) {
+        this.authorName = p.Owner.Name;
+      } else {
+        this.authorName = '';
+      }
       this.canEdit =
         (p.OwnerId == UserInfo.getUserId()) ||
-        UserInfo.getProfileId().equals(getAdminProfileId());
+        (p.CreatedById == UserInfo.getUserId()) ||
+        ContentPostService.isAuthorizedApprover();
+      this.submitForPublic = p.Submit_For_Public__c;
       this.freeTags = splitTags(p.Free_Tags__c);
       this.displayTags = new List<String>(this.freeTags);
       this.tagIds = new List<Id>();

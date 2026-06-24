@@ -347,3 +347,42 @@ lightning-input-rich-text {
   color: var(--ink-soft);
   font-weight: 500;
 }
+
+.breadcrumb {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 24px 0;
+}
+.breadcrumb-link {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--pine);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.breadcrumb-link:hover {
+  color: var(--rust);
+  text-decoration: underline;
+}
+
+.field-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+.field-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--pine);
+  cursor: pointer;
+}
+.checkbox-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  user-select: none;
+}

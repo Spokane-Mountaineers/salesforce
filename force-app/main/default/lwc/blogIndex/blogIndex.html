@@ -3,7 +3,7 @@
     <header class="head">
       <div>
         <p class="eyebrow">Field Notes</p>
-        <h1 class="title">Trip Reports &amp; Club News</h1>
+        <h1 class="title">Trip Reports</h1>
       </div>
       <template lwc:if={showNewReportLink}>
         <a class="smi-btn smi-btn--primary" href={newReportUrl}>
@@ -66,42 +66,53 @@
     <template lwc:if={hasPosts}>
       <a class="lead" href={leadPost.detailUrl}>
         <div class="lead__plate">
-          <svg
-            class="lead__contour"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <pattern
-                id="topo-lead"
-                width="420"
-                height="420"
-                patternUnits="userSpaceOnUse"
-              >
-                <g
-                  fill="none"
-                  stroke="#1e4b38"
-                  stroke-opacity="0.05"
-                  stroke-width="1.5"
+          <template lwc:if={leadPost.featuredPhotoUrl}>
+            <img
+              src={leadPost.featuredPhotoUrl}
+              alt={leadPost.title}
+              class="lead__image"
+            />
+          </template>
+          <template lwc:else>
+            <svg
+              class="lead__contour"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <pattern
+                  id="topo-lead"
+                  width="420"
+                  height="420"
+                  patternUnits="userSpaceOnUse"
                 >
-                  <path d="M-20 120 C 90 60 170 180 280 120 S 460 60 540 140" />
-                  <path
-                    d="M-20 170 C 90 110 170 230 280 170 S 460 110 540 190"
-                  />
-                  <path
-                    d="M-20 220 C 90 160 170 280 280 220 S 460 160 540 240"
-                  />
-                  <path
-                    d="M-20 270 C 90 210 170 330 280 270 S 460 210 540 290"
-                  />
-                  <path
-                    d="M-20 320 C 90 260 170 380 280 320 S 460 260 540 340"
-                  />
-                </g>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#topo-lead)" />
-          </svg>
+                  <g
+                    fill="none"
+                    stroke="#1e4b38"
+                    stroke-opacity="0.05"
+                    stroke-width="1.5"
+                  >
+                    <path
+                      d="M-20 120 C 90 60 170 180 280 120 S 460 60 540 140"
+                    />
+                    <path
+                      d="M-20 170 C 90 110 170 230 280 170 S 460 110 540 190"
+                    />
+                    <path
+                      d="M-20 220 C 90 160 170 280 280 220 S 460 160 540 240"
+                    />
+                    <path
+                      d="M-20 270 C 90 210 170 330 280 270 S 460 210 540 290"
+                    />
+                    <path
+                      d="M-20 320 C 90 260 170 380 280 320 S 460 260 540 340"
+                    />
+                  </g>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#topo-lead)" />
+            </svg>
+          </template>
           <span class="lead__tag">Latest</span>
         </div>
         <div class="lead__body">
