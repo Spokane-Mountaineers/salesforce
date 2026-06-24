@@ -37,7 +37,7 @@ export default class BasecampDashboard extends LightningElement {
 
   get resolvedTripReportHref() {
     let href = this.tripReportHref;
-    if (href === "/trip-report/new") {
+    if (href && href.includes("trip-report/new")) {
       href = "/newtrip";
     }
     return this.withBase(href);

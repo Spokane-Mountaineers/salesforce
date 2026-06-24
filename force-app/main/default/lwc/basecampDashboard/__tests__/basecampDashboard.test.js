@@ -126,4 +126,24 @@ describe("c-basecamp-dashboard", () => {
     );
     expect(actions.some((t) => t.includes("Slack"))).toBe(true);
   });
+
+  it("resolves the trip report link correctly, rewriting trip-report/new variations", async () => {
+    // Default /trip-report/new
+    let el = mount();
+    await flush();
+    expect(
+      el.shadowRoot.querySelector(".action").getAttribute("href")
+    ).toContain("/newtrip");
+
+    document.body.removeChild(el);
+
+    // Variation: domain + path with trailing slash
+    el = mount({
+      tripReportHref: "https://spokanemountaineers.org/trip-report/new/"
+    });
+    await flush();
+    expect(el.shadowRoot.querySelector(".action").getAttribute("href")).toBe(
+      "/newtrip"
+    );
+  });
 });
