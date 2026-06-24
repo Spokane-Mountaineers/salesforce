@@ -24,10 +24,13 @@ export default class BlogIndex extends LightningElement {
   @track search = "";
 
   get showNewReportLink() {
-    return !isGuest;
+    return true;
   }
 
   get newReportUrl() {
+    if (isGuest) {
+      return `${basePath}/login?startURL=${encodeURIComponent(basePath + "/newtrip")}`;
+    }
     return `${basePath}/newtrip`;
   }
 

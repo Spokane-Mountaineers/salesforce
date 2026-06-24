@@ -138,22 +138,40 @@ describe("c-blog-index", () => {
     );
   });
 
-  it("renders new trip report button for authenticated users and hides for guests", async () => {
-    mockIsGuest = false;
+  it("renders new trip report button with login redirect for guests and direct link for members", async () => {
+    // Member path (default mockIsGuest is false)
     let el = mount();
     getPublishedPosts.emit(POSTS);
     await flush();
-    const btn = el.shadowRoot.querySelector(".smi-btn--primary");
+    let btn = el.shadowRoot.querySelector(".smi-btn--primary");
     expect(btn).not.toBeNull();
     expect(btn.getAttribute("href")).toBe("/newtrip");
 
     // Clean up
     document.body.removeChild(el);
+    jest.resetModules();
 
-    mockIsGuest = true;
-    el = mount();
-    getPublishedPosts.emit(POSTS);
+    // Re-mock as guest
+    jest.doMock("@salesforce/user/isGuest", () => ({ default: true }), {
+      virtual: true
+    });
+
+    const { createElement: createEl } = await import("lwc");
+    const { default: BlogIndexComponent } = await import("c/blogIndex");
+    const getPublishedPostsModule =
+      await import("@salesforce/apex/ContentPostController.getPublishedPosts");
+    const getPublishedPostsMocked =
+      getPublishedPostsModule.default.default ||
+      getPublishedPostsModule.default;
+
+    const elGuest = createEl("c-blog-index-guest", { is: BlogIndexComponent });
+    document.body.appendChild(elGuest);
+
+    getPublishedPostsMocked.emit(POSTS);
     await flush();
-    expect(el.shadowRoot.querySelector(".smi-btn--primary")).toBeNull();
+
+    btn = elGuest.shadowRoot.querySelector(".smi-btn--primary");
+    expect(btn).not.toBeNull();
+    expect(btn.getAttribute("href")).toContain("/login?startURL=");
   });
 });
