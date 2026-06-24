@@ -3,8 +3,17 @@ import BlogIndex from "c/blogIndex";
 import getPublishedPosts from "@salesforce/apex/ContentPostController.getPublishedPosts";
 import getActiveTags from "@salesforce/apex/ContentPostController.getActiveTags";
 
-// sfdx-lwc-jest auto-mocks @salesforce/apex imports used in @wire as test wire
-// adapters with .emit()/.error().
+let mockIsGuest = false;
+jest.mock(
+  "@salesforce/user/isGuest",
+  () => ({
+    get default() {
+      return mockIsGuest;
+    }
+  }),
+  { virtual: true }
+);
+
 jest.mock(
   "@salesforce/apex/ContentPostController.getPublishedPosts",
   () => {
@@ -127,5 +136,24 @@ describe("c-blog-index", () => {
     expect(el.shadowRoot.querySelector(".state--error").textContent).toContain(
       "boom"
     );
+  });
+
+  it("renders new trip report button for authenticated users and hides for guests", async () => {
+    mockIsGuest = false;
+    let el = mount();
+    getPublishedPosts.emit(POSTS);
+    await flush();
+    const btn = el.shadowRoot.querySelector(".smi-btn--primary");
+    expect(btn).not.toBeNull();
+    expect(btn.getAttribute("href")).toBe("/newtrip");
+
+    // Clean up
+    document.body.removeChild(el);
+
+    mockIsGuest = true;
+    el = mount();
+    getPublishedPosts.emit(POSTS);
+    await flush();
+    expect(el.shadowRoot.querySelector(".smi-btn--primary")).toBeNull();
   });
 });

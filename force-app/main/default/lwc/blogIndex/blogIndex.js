@@ -1,5 +1,6 @@
 import { LightningElement, wire, track } from "lwc";
 import basePath from "@salesforce/community/basePath";
+import isGuest from "@salesforce/user/isGuest";
 import getPublishedPosts from "@salesforce/apex/ContentPostController.getPublishedPosts";
 import getActiveTags from "@salesforce/apex/ContentPostController.getActiveTags";
 
@@ -21,6 +22,14 @@ export default class BlogIndex extends LightningElement {
   @track activity = "";
   @track tag = "";
   @track search = "";
+
+  get showNewReportLink() {
+    return !isGuest;
+  }
+
+  get newReportUrl() {
+    return `${basePath}/newtrip`;
+  }
 
   posts;
   postsError;

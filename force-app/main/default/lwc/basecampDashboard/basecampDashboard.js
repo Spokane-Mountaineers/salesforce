@@ -5,6 +5,7 @@ import USER_ID from "@salesforce/user/Id";
 import NAME_FIELD from "@salesforce/schema/User.FirstName";
 import getMyRegistrations from "@salesforce/apex/EventController.getMyRegistrations";
 import getPublishedPosts from "@salesforce/apex/ContentPostController.getPublishedPosts";
+import basePath from "@salesforce/community/basePath";
 
 // "Basecamp" member dashboard (plan §9.4, Option A): the staging point a member
 // organizes from — upcoming events, quick actions, and the latest from their
@@ -25,6 +26,33 @@ export default class BasecampDashboard extends LightningElement {
 
   get isGuest() {
     return isGuest;
+  }
+
+  withBase(href) {
+    if (!href || !href.startsWith("/")) {
+      return href;
+    }
+    return `${basePath}${href === "/" ? "" : href}` || "/";
+  }
+
+  get resolvedTripReportHref() {
+    let href = this.tripReportHref;
+    if (href === "/trip-report/new") {
+      href = "/newtrip";
+    }
+    return this.withBase(href);
+  }
+
+  get resolvedEventsHref() {
+    return this.withBase(this.eventsHref);
+  }
+
+  get resolvedMemberCardHref() {
+    return this.withBase(this.memberCardHref);
+  }
+
+  get resolvedSlackHref() {
+    return this.withBase(this.slackHref);
   }
 
   @wire(getRecord, { recordId: USER_ID, fields: [NAME_FIELD] })
@@ -56,7 +84,8 @@ export default class BasecampDashboard extends LightningElement {
       name: e.name,
       activityGroup: e.activityGroup,
       startTime: e.startTime,
-      location: e.location
+      location: e.location,
+      detailUrl: `${basePath}/event?recordId=${e.id}`
     }));
   }
 
@@ -68,7 +97,8 @@ export default class BasecampDashboard extends LightningElement {
     return this.posts.map((p) => ({
       id: p.id,
       title: p.title,
-      meta: [p.activity, p.location].filter((x) => x).join(" · ")
+      meta: [p.activity, p.location].filter((x) => x).join(" · "),
+      detailUrl: `${basePath}/post?recordId=${p.id}`
     }));
   }
 

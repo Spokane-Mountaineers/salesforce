@@ -1,8 +1,15 @@
 <template>
   <section class="blog">
     <header class="head">
-      <p class="eyebrow">Field Notes</p>
-      <h1 class="title">Trip Reports &amp; Club News</h1>
+      <div>
+        <p class="eyebrow">Field Notes</p>
+        <h1 class="title">Trip Reports &amp; Club News</h1>
+      </div>
+      <template lwc:if={showNewReportLink}>
+        <a class="smi-btn smi-btn--primary" href={newReportUrl}>
+          New Trip Report
+        </a>
+      </template>
     </header>
 
     <div class="controls">

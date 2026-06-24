@@ -87,6 +87,9 @@ describe("c-basecamp-dashboard", () => {
     expect(el.shadowRoot.querySelector(".evcard__name").textContent).toBe(
       "Beacon Practice"
     );
+    expect(
+      el.shadowRoot.querySelector(".evcard__link").getAttribute("href")
+    ).toBe("/event?recordId=a12A");
   });
 
   it("shows the empty state when there are no registrations", async () => {
@@ -101,6 +104,9 @@ describe("c-basecamp-dashboard", () => {
     getPublishedPosts.emit(POSTS);
     await flush();
     expect(el.shadowRoot.querySelectorAll(".postrow").length).toBe(4);
+    expect(
+      el.shadowRoot.querySelector(".postrow__link").getAttribute("href")
+    ).toBe("/post?recordId=p1");
   });
 
   it("shows the Slack link only when configured", async () => {

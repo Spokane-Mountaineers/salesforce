@@ -9,6 +9,8 @@ import getPostPhotos from "@salesforce/apex/ContentPostController.getPostPhotos"
 import updatePhotoMetadata from "@salesforce/apex/ContentPostController.updatePhotoMetadata";
 import deletePhoto from "@salesforce/apex/ContentPostController.deletePhoto";
 import { refreshApex } from "@salesforce/apex";
+import { NavigationMixin } from "lightning/navigation";
+import basePath from "@salesforce/community/basePath";
 
 const ACTIVITIES = [
   "Climbing",
@@ -22,8 +24,42 @@ const ACTIVITIES = [
 ];
 const DIFFICULTIES = ["Easy", "Moderate", "Strenuous", "Technical"];
 
-export default class TripReportForm extends LightningElement {
-  @api recordId;
+export default class TripReportForm extends NavigationMixin(LightningElement) {
+  @track _recordId;
+
+  @api
+  get recordId() {
+    return this._recordId;
+  }
+  set recordId(value) {
+    this._recordId = value;
+  }
+
+  isStandalone() {
+    try {
+      return window.location.pathname.includes("/newtrip");
+    } catch (e) {
+      return false;
+    }
+  }
+
+  navigateToPost(postId) {
+    this[NavigationMixin.Navigate]({
+      type: "standard__webPage",
+      attributes: {
+        url: `${basePath}/post?recordId=${postId}`
+      }
+    });
+  }
+
+  navigateToBlog() {
+    this[NavigationMixin.Navigate]({
+      type: "standard__webPage",
+      attributes: {
+        url: `${basePath}/blog`
+      }
+    });
+  }
 
   @track form = {
     title: "",
@@ -56,7 +92,7 @@ export default class TripReportForm extends LightningElement {
     }
   }
 
-  @wire(getPostPhotos, { postId: "$recordId" })
+  @wire(getPostPhotos, { postId: "$_recordId" })
   wiredGetPostPhotos(result) {
     this.wiredPhotosResult = result;
     if (result.data) {
@@ -74,7 +110,7 @@ export default class TripReportForm extends LightningElement {
     return this.photos && this.photos.length > 0;
   }
 
-  @wire(getPost, { postId: "$recordId" })
+  @wire(getPost, { postId: "$_recordId" })
   wiredPost({ data, error }) {
     if (data) {
       this.postRecord = data;
@@ -194,6 +230,9 @@ export default class TripReportForm extends LightningElement {
         this.dispatchEvent(
           new CustomEvent("updated", { detail: { id: this.recordId } })
         );
+        if (status === "Published" && this.isStandalone()) {
+          this.navigateToPost(this.recordId);
+        }
       } else {
         const id = await createTripReport({
           title: this.form.title,
@@ -220,7 +259,11 @@ export default class TripReportForm extends LightningElement {
             tagIds: this.selectedTagIds
           });
         }
+        this._recordId = id;
         this.dispatchEvent(new CustomEvent("created", { detail: { id } }));
+        if (status === "Published" && this.isStandalone()) {
+          this.navigateToPost(id);
+        }
       }
     } catch (e) {
       this.errorMessage =
@@ -237,6 +280,9 @@ export default class TripReportForm extends LightningElement {
     try {
       await deleteOwnDraft({ postId: this.recordId });
       this.dispatchEvent(new CustomEvent("deleted"));
+      if (this.isStandalone()) {
+        this.navigateToBlog();
+      }
     } catch (e) {
       this.errorMessage =
         e?.body?.message || "Sorry — the draft could not be deleted.";
@@ -247,6 +293,9 @@ export default class TripReportForm extends LightningElement {
 
   handleCancel() {
     this.dispatchEvent(new CustomEvent("cancel"));
+    if (this.isStandalone()) {
+      this.navigateToBlog();
+    }
   }
 
   async handleFileChange(event) {

@@ -251,3 +251,39 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.smi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 0.15s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.2s;
+}
+.smi-btn:hover {
+  transform: translateY(-1px);
+}
+.smi-btn--primary {
+  background: var(--rust);
+  color: #fff;
+}
+.smi-btn--primary:hover {
+  background: #9c3f19;
+}
