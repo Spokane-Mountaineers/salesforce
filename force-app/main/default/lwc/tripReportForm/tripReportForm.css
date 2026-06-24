@@ -386,3 +386,8 @@ lightning-input-rich-text {
   color: var(--ink-soft);
   user-select: none;
 }
+
+lightning-input-rich-text {
+  --slds-c-textarea-sizing-min-height: 400px;
+  display: block;
+}

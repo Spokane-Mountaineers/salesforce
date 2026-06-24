@@ -21,6 +21,7 @@ const ACTIVITIES = [
 
 export default class BlogIndex extends NavigationMixin(LightningElement) {
   @track activity = "";
+  @track selectedActivities = [];
   @track selectedTags = [];
   @track search = "";
 
@@ -32,16 +33,27 @@ export default class BlogIndex extends NavigationMixin(LightningElement) {
   setCurrentPageReference(pageRef) {
     if (pageRef && pageRef.state) {
       if (pageRef.state.tag) {
-        this.selectedTags = pageRef.state.tag
-          .split(",")
-          .map((t) => t.trim())
-          .filter(Boolean);
+        const rawTag = pageRef.state.tag;
+        this.selectedTags = Array.isArray(rawTag)
+          ? rawTag
+          : rawTag
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean);
       } else {
         this.selectedTags = [];
       }
       if (pageRef.state.activity) {
-        this.activity = pageRef.state.activity;
+        const rawAct = pageRef.state.activity;
+        this.selectedActivities = Array.isArray(rawAct)
+          ? rawAct
+          : rawAct
+              .split(",")
+              .map((a) => a.trim())
+              .filter(Boolean);
+        this.activity = this.selectedActivities.join(",");
       } else {
+        this.selectedActivities = [];
         this.activity = "";
       }
       if (pageRef.state.search) {
@@ -91,7 +103,7 @@ export default class BlogIndex extends NavigationMixin(LightningElement) {
     return ACTIVITIES.map((a) => ({
       label: a,
       value: a,
-      cls: a === this.activity ? "chip chip--on" : "chip"
+      cls: this.selectedActivities.includes(a) ? "chip chip--on" : "chip"
     }));
   }
 
@@ -139,7 +151,12 @@ export default class BlogIndex extends NavigationMixin(LightningElement) {
 
   handleActivity(event) {
     const v = event.currentTarget.dataset.value;
-    this.activity = this.activity === v ? "" : v;
+    if (this.selectedActivities.includes(v)) {
+      this.selectedActivities = this.selectedActivities.filter((a) => a !== v);
+    } else {
+      this.selectedActivities = [...this.selectedActivities, v];
+    }
+    this.activity = this.selectedActivities.join(",");
     this.updateUrl();
   }
 
@@ -154,6 +171,7 @@ export default class BlogIndex extends NavigationMixin(LightningElement) {
   }
 
   clearFilters() {
+    this.selectedActivities = [];
     this.activity = "";
     this.selectedTags = [];
     this.search = "";
@@ -172,8 +190,10 @@ export default class BlogIndex extends NavigationMixin(LightningElement) {
   buildUrl() {
     let url = `${basePath}/blog`;
     const params = [];
-    if (this.activity) {
-      params.push(`activity=${encodeURIComponent(this.activity)}`);
+    if (this.selectedActivities.length > 0) {
+      params.push(
+        `activity=${encodeURIComponent(this.selectedActivities.join(","))}`
+      );
     }
     if (this.selectedTags.length > 0) {
       params.push(`tag=${encodeURIComponent(this.selectedTags.join(","))}`);

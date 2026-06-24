@@ -31,7 +31,15 @@ public with sharing class ContentPostController {
     List<String> clauses = new List<String>();
 
     if (String.isNotBlank(activity)) {
-      clauses.add('Activity__c = :activity');
+      List<String> activities = new List<String>();
+      for (String act : activity.split(',')) {
+        if (String.isNotBlank(act)) {
+          activities.add(act.trim());
+        }
+      }
+      if (!activities.isEmpty()) {
+        clauses.add('Activity__c IN :activities');
+      }
     }
 
     Set<Id> taggedPostIds = new Set<Id>();

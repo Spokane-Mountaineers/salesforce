@@ -386,6 +386,22 @@ tbody td:first-child {
   text-decoration-thickness: 2px;
 }
 
+/* ── Anchor color reassert (LWR shadow-DOM fix) ──
+   Under the site's synthetic shadow DOM the global theme's `a:link`/`a:visited`
+   color leaks in and outranks our element/class colors on real (href) links,
+   tinting them the platform's default blue. Re-declare each intended color at
+   :link/:visited so it wins, ordered base→specific so the help box's white
+   links override the sky prose base. The TOC links carry no href, so they're
+   not `:link`/`:visited` and need no reassert. */
+.faq-root a:link,
+.faq-root a:visited {
+  color: var(--sky);
+}
+.help a:link,
+.help a:visited {
+  color: #fff;
+}
+
 /* Entrance animation */
 @keyframes rise {
   from {

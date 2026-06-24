@@ -576,6 +576,25 @@
   text-underline-offset: 3px;
 }
 
+/* ── Anchor color reassert (LWR shadow-DOM fix) ──
+   Under the site's synthetic shadow DOM the global theme's `a:link`/`a:visited`
+   color leaks in and outranks our colors on real (href) links, tinting them the
+   platform's default blue. Re-declare each intended color at :link/:visited:
+   the sky prose base, the dark course-card directory tiles (which would
+   otherwise inherit the sky base), and the muted related-rail links. */
+.body a:link,
+.body a:visited {
+  color: var(--sky);
+}
+.body .course-card:link,
+.body .course-card:visited {
+  color: var(--ink);
+}
+.related__item a:link,
+.related__item a:visited {
+  color: var(--ink-soft);
+}
+
 /* ---------------------------------------------------------------------------
    Entrance motion — a quiet staggered rise, matching the site's .smi-rise
    --------------------------------------------------------------------------- */
