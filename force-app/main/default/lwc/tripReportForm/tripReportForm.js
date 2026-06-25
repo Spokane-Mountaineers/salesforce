@@ -343,7 +343,15 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
   handleCancel() {
     this.dispatchEvent(new CustomEvent("cancel"));
     if (this.isStandalone()) {
-      this.navigateToBasecamp();
+      if (
+        typeof window !== "undefined" &&
+        window.history &&
+        window.history.length > 1
+      ) {
+        window.history.back();
+      } else {
+        this.navigateToBasecamp();
+      }
     }
   }
 

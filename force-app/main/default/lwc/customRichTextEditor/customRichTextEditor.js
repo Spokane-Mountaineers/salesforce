@@ -11,6 +11,7 @@ export default class CustomRichTextEditor extends LightningElement {
   lastSentValue = "";
   quillInitialized = false;
   quill;
+  globalClickListener;
 
   @api
   get value() {
@@ -24,6 +25,29 @@ export default class CustomRichTextEditor extends LightningElement {
         this.quill.root.innerHTML = this._value;
         this.lastSentValue = this._value;
       }
+    }
+  }
+
+  connectedCallback() {
+    // Setup global listener to dismiss drop downs on click outside (Shadow DOM helper)
+    this.globalClickListener = (event) => {
+      if (!this.quill) return;
+      const path = event.composedPath();
+      const expandedPickers = this.template.querySelectorAll(
+        ".ql-picker.ql-expanded"
+      );
+      expandedPickers.forEach((picker) => {
+        if (!path.includes(picker)) {
+          picker.classList.remove("ql-expanded");
+        }
+      });
+    };
+    document.addEventListener("click", this.globalClickListener);
+  }
+
+  disconnectedCallback() {
+    if (this.globalClickListener) {
+      document.removeEventListener("click", this.globalClickListener);
     }
   }
 
@@ -79,9 +103,92 @@ export default class CustomRichTextEditor extends LightningElement {
       this.lastSentValue = this._value;
     }
 
+    // Force selection update on click/keyup to sync toolbar state in Shadow DOM
+    this.quill.root.addEventListener("keyup", () => {
+      if (this.quill) {
+        this.quill.selection.update("user");
+      }
+    });
+    this.quill.root.addEventListener("click", () => {
+      if (this.quill) {
+        this.quill.selection.update("user");
+      }
+    });
+
+    // Intercept Enter key inside heading blocks to automatically format newline as normal
+    this.quill.keyboard.addBinding({
+      key: "Enter",
+      handler: (range, context) => {
+        if (context.format.header) {
+          this.quill.insertText(range.index, "\n", "user");
+          this.quill.formatLine(range.index + 1, 1, "header", false, "user");
+          this.quill.setSelection(range.index + 1, "user");
+          return false;
+        }
+        return true;
+      }
+    });
+
+    // Drag-and-drop support for inline pictures
+    const editorRoot = this.quill.root;
+    editorRoot.addEventListener("dragover", (event) => {
+      event.preventDefault();
+    });
+
+    editorRoot.addEventListener("drop", async (event) => {
+      event.preventDefault();
+      const files = event.dataTransfer.files;
+      if (files && files.length > 0) {
+        let index = this.quill.getLength();
+        const currentSel = this.quill.getSelection();
+        if (currentSel) {
+          index = currentSel.index;
+        }
+
+        for (const file of files) {
+          if (file.type.startsWith("image/")) {
+            try {
+              // eslint-disable-next-line no-await-in-loop
+              const processed = await this.compressImage(file);
+              const base64Src = `data:image/jpeg;base64,${processed.base64Data}`;
+              this.quill.insertEmbed(index, "image", base64Src);
+              index += 1;
+            } catch (err) {
+              // eslint-disable-next-line no-console
+              console.error("Error dropping image: ", err);
+            }
+          }
+        }
+      }
+    });
+
+    // Paste from clipboard support for inline pictures
+    editorRoot.addEventListener("paste", async (event) => {
+      const items = (event.clipboardData || window.clipboardData).items;
+      for (const item of items) {
+        if (item.type.indexOf("image") === 0) {
+          event.preventDefault();
+          const file = item.getAsFile();
+          try {
+            // eslint-disable-next-line no-await-in-loop
+            const processed = await this.compressImage(file);
+            const base64Src = `data:image/jpeg;base64,${processed.base64Data}`;
+            const range = this.quill.getSelection();
+            const index = range ? range.index : this.quill.getLength();
+            this.quill.insertEmbed(index, "image", base64Src);
+          } catch (err) {
+            // eslint-disable-next-line no-console
+            console.error("Error pasting image: ", err);
+          }
+        }
+      }
+    });
+
+    // Add tooltips to formatting options
+    this.addTooltips();
+
     this.quill.on("text-change", () => {
       const html = this.quill.root.innerHTML;
-      // If editor contains empty paragraph (Quill default when blank), treat it as empty string
       const normalizedHtml = html === "<p><br></p>" ? "" : html;
       this._value = normalizedHtml;
       this.lastSentValue = normalizedHtml;
@@ -91,6 +198,44 @@ export default class CustomRichTextEditor extends LightningElement {
         })
       );
     });
+  }
+
+  addTooltips() {
+    const tooltips = {
+      "ql-bold": "Bold",
+      "ql-italic": "Italic",
+      "ql-underline": "Underline",
+      "ql-strike": "Strikethrough",
+      "ql-blockquote": "Blockquote",
+      "ql-code-block": "Code Block",
+      "ql-link": "Insert Link",
+      "ql-image": "Insert Image",
+      "ql-clean": "Clear Formatting"
+    };
+
+    for (const selector in tooltips) {
+      if (Object.prototype.hasOwnProperty.call(tooltips, selector)) {
+        const elements = this.template.querySelectorAll("." + selector);
+        elements.forEach((el) => {
+          el.setAttribute("title", tooltips[selector]);
+        });
+      }
+    }
+
+    // Specially handle lists because they have values
+    const orderedList = this.template.querySelector(
+      '.ql-list[value="ordered"]'
+    );
+    if (orderedList) orderedList.setAttribute("title", "Numbered List");
+
+    const bulletList = this.template.querySelector('.ql-list[value="bullet"]');
+    if (bulletList) bulletList.setAttribute("title", "Bulleted List");
+
+    // Specially handle headers picker
+    const picker = this.template.querySelector(".ql-header.ql-picker");
+    if (picker) {
+      picker.setAttribute("title", "Heading Format");
+    }
   }
 
   handleImageHandler() {
@@ -108,8 +253,6 @@ export default class CustomRichTextEditor extends LightningElement {
         const range = this.quill.getSelection();
         const base64Src = `data:image/jpeg;base64,${processed.base64Data}`;
 
-        // Insert the compressed base64 image into the editor
-        // Note: selection index fallback to end of text if range is null
         const index = range ? range.index : this.quill.getLength();
         this.quill.insertEmbed(index, "image", base64Src);
       } catch (err) {

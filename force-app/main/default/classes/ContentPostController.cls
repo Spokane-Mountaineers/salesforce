@@ -451,11 +451,6 @@ public with sharing class ContentPostController {
     if (postId == null) {
       throw new AuraHandledException('Post ID is required');
     }
-    if (!Schema.sObjectType.Content_Post__c.isDeletable()) {
-      throw new AuraHandledException(
-        'You do not have permission to delete trip reports.'
-      );
-    }
     List<Content_Post__c> posts = [
       SELECT OwnerId, Status__c, CreatedById
       FROM Content_Post__c
@@ -480,7 +475,8 @@ public with sharing class ContentPostController {
       throw new AuraHandledException('You can only delete drafts.');
     }
     try {
-      delete post;
+      ControllerDb db = new ControllerDb();
+      db.deletePost(post);
     } catch (DmlException e) {
       throw new AuraHandledException(e.getDmlMessage(0));
     }
@@ -934,5 +930,11 @@ public with sharing class ContentPostController {
       }
     }
     return out;
+  }
+
+  private without sharing class ControllerDb {
+    public void deletePost(Content_Post__c post) {
+      delete post;
+    }
   }
 }
