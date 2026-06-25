@@ -1,4 +1,5 @@
 /* eslint-disable @lwc/lwc/no-inner-html */
+/* eslint-disable @lwc/lwc/no-async-operation */
 import { LightningElement, api } from "lwc";
 import { loadStyle, loadScript } from "lightning/platformResourceLoader";
 import quilljs from "@salesforce/resourceUrl/quilljs";
@@ -12,6 +13,7 @@ export default class CustomRichTextEditor extends LightningElement {
   quillInitialized = false;
   quill;
   globalClickListener;
+  savedRange;
 
   @api
   get value() {
@@ -33,14 +35,15 @@ export default class CustomRichTextEditor extends LightningElement {
     this.globalClickListener = (event) => {
       if (!this.quill) return;
       const path = event.composedPath();
-      const expandedPickers = this.template.querySelectorAll(
-        ".ql-picker.ql-expanded"
-      );
-      expandedPickers.forEach((picker) => {
-        if (!path.includes(picker)) {
+      // Only collapse pickers if the click path does NOT include our component host
+      if (!path.includes(this.template.host)) {
+        const expandedPickers = this.template.querySelectorAll(
+          ".ql-picker.ql-expanded"
+        );
+        expandedPickers.forEach((picker) => {
           picker.classList.remove("ql-expanded");
-        }
-      });
+        });
+      }
     };
     document.addEventListener("click", this.globalClickListener);
   }
@@ -103,6 +106,31 @@ export default class CustomRichTextEditor extends LightningElement {
       this.lastSentValue = this._value;
     }
 
+    // Track active selection range to preserve highlighting across toolbar interactions
+    this.quill.on("selection-change", (range) => {
+      if (range) {
+        this.savedRange = range;
+      }
+    });
+
+    // Intercept toolbar clicks and restore highlighting
+    const toolbar = this.template.querySelector(".ql-toolbar");
+    if (toolbar) {
+      toolbar.addEventListener("click", () => {
+        if (this.savedRange && this.quill) {
+          setTimeout(() => {
+            if (this.quill && this.savedRange) {
+              this.quill.setSelection(
+                this.savedRange.index,
+                this.savedRange.length,
+                "silent"
+              );
+            }
+          }, 50);
+        }
+      });
+    }
+
     // Force selection update on click/keyup to sync toolbar state in Shadow DOM
     this.quill.root.addEventListener("keyup", () => {
       if (this.quill) {
@@ -113,6 +141,83 @@ export default class CustomRichTextEditor extends LightningElement {
       if (this.quill) {
         this.quill.selection.update("user");
       }
+    });
+
+    // Custom formatting togglers
+    const toggleFormat = (formatName) => {
+      const current = this.quill.getFormat();
+      this.quill.format(formatName, !current[formatName], "user");
+    };
+
+    const toggleList = (listType) => {
+      const current = this.quill.getFormat();
+      this.quill.format(
+        "list",
+        current.list === listType ? false : listType,
+        "user"
+      );
+    };
+
+    // Custom cross-platform shortcuts
+    const bindings = [
+      {
+        key: "1",
+        shortKey: true,
+        altKey: true,
+        handler: () => this.quill.format("header", 1, "user")
+      },
+      {
+        key: "2",
+        shortKey: true,
+        altKey: true,
+        handler: () => this.quill.format("header", 2, "user")
+      },
+      {
+        key: "3",
+        shortKey: true,
+        altKey: true,
+        handler: () => this.quill.format("header", 3, "user")
+      },
+      {
+        key: "0",
+        shortKey: true,
+        altKey: true,
+        handler: () => this.quill.format("header", false, "user")
+      },
+      {
+        key: "C",
+        shortKey: true,
+        shiftKey: true,
+        handler: () => toggleFormat("code-block")
+      },
+      {
+        key: "B",
+        shortKey: true,
+        shiftKey: true,
+        handler: () => toggleFormat("blockquote")
+      },
+      {
+        key: "8",
+        shortKey: true,
+        shiftKey: true,
+        handler: () => toggleList("bullet")
+      },
+      {
+        key: "7",
+        shortKey: true,
+        shiftKey: true,
+        handler: () => toggleList("ordered")
+      },
+      {
+        key: "\\",
+        shortKey: true,
+        handler: () =>
+          this.quill.removeFormat(this.quill.getSelection(), "user")
+      }
+    ];
+
+    bindings.forEach((binding) => {
+      this.quill.keyboard.addBinding(binding);
     });
 
     // Intercept Enter key inside heading blocks to automatically format newline as normal
@@ -201,23 +306,30 @@ export default class CustomRichTextEditor extends LightningElement {
   }
 
   addTooltips() {
+    const isMac =
+      typeof navigator !== "undefined" &&
+      navigator.platform.indexOf("Mac") !== -1;
+    const cmdCtrl = isMac ? "⌘" : "Ctrl+";
+    const altOption = isMac ? "⌥" : "Alt+";
+    const shift = isMac ? "⇧" : "Shift+";
+
     const tooltips = {
-      "ql-bold": "Bold",
-      "ql-italic": "Italic",
-      "ql-underline": "Underline",
+      "ql-bold": `Bold (${cmdCtrl}B)`,
+      "ql-italic": `Italic (${cmdCtrl}I)`,
+      "ql-underline": `Underline (${cmdCtrl}U)`,
       "ql-strike": "Strikethrough",
-      "ql-blockquote": "Blockquote",
-      "ql-code-block": "Code Block",
+      "ql-blockquote": `Blockquote (${cmdCtrl}${shift}B)`,
+      "ql-code-block": `Code Block (${cmdCtrl}${shift}C)`,
       "ql-link": "Insert Link",
       "ql-image": "Insert Image",
-      "ql-clean": "Clear Formatting"
+      "ql-clean": `Clear Formatting (${cmdCtrl}\\)`
     };
 
     for (const selector in tooltips) {
       if (Object.prototype.hasOwnProperty.call(tooltips, selector)) {
         const elements = this.template.querySelectorAll("." + selector);
         elements.forEach((el) => {
-          el.setAttribute("title", tooltips[selector]);
+          el.setAttribute("data-tooltip", tooltips[selector]);
         });
       }
     }
@@ -226,15 +338,28 @@ export default class CustomRichTextEditor extends LightningElement {
     const orderedList = this.template.querySelector(
       '.ql-list[value="ordered"]'
     );
-    if (orderedList) orderedList.setAttribute("title", "Numbered List");
+    if (orderedList) {
+      orderedList.setAttribute(
+        "data-tooltip",
+        `Numbered List (${cmdCtrl}${shift}7)`
+      );
+    }
 
     const bulletList = this.template.querySelector('.ql-list[value="bullet"]');
-    if (bulletList) bulletList.setAttribute("title", "Bulleted List");
+    if (bulletList) {
+      bulletList.setAttribute(
+        "data-tooltip",
+        `Bulleted List (${cmdCtrl}${shift}8)`
+      );
+    }
 
     // Specially handle headers picker
     const picker = this.template.querySelector(".ql-header.ql-picker");
     if (picker) {
-      picker.setAttribute("title", "Heading Format");
+      picker.setAttribute(
+        "data-tooltip",
+        `Heading Format (${cmdCtrl}${altOption}[1-3])`
+      );
     }
   }
 
