@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NavigationMenu xmlns="http://soap.sforce.com/2006/04/metadata">
+    <container>Spokane Mountaineers</container>
+    <containerType>Network</containerType>
+    <label>Default Navigation</label>
+    <navigationMenuItem>
+        <label>My Mountaineers</label>
+        <position>1</position>
+        <publiclyAvailable>false</publiclyAvailable>
+        <target>/my-mountaineers</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <defaultListViewId>All_ChatterGroups</defaultListViewId>
+        <label>Activity Groups</label>
+        <position>2</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>/activities</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Calendar of Events</label>
+        <position>3</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <target>/events</target>
+        <type>InternalLink</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <defaultListViewId>My_ChatterGroups</defaultListViewId>
+        <label>Schools &amp; Clinics</label>
+        <position>4</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <subMenu>
+            <navigationMenuItem>
+                <label>About Schools, Seminars &amp; Clinics</label>
+                <position>0</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/schools-and-clinics</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Backpack School</label>
+                <position>1</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/backpack-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Mountain School</label>
+                <position>2</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/mountain-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Rock School</label>
+                <position>3</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/rock-climbing-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Sport Lead School</label>
+                <position>4</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/sport-lead-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Multipitch Sport School</label>
+                <position>5</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/multipitch-sport-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Trad Lead School</label>
+                <position>6</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/trad-lead-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Alpine Climbing School</label>
+                <position>7</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/alpine-climbing-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Ice Climbing Seminar</label>
+                <position>8</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/ice-climbing-seminar</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Aid Climbing Seminar</label>
+                <position>9</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/aid-climbing-seminar</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>High Angle Rescue Seminar</label>
+                <position>10</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/high-angle-rescue</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Scrambling School</label>
+                <position>11</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/scrambling</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Wilderness First Aid</label>
+                <position>12</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/wilderness-first-aid-course</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Leadership Development</label>
+                <position>13</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/leadership-development-seminar</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Backcountry Skiing 101</label>
+                <position>14</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/backcountry-skiing-101</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Backcountry Ski &quot;School&quot;</label>
+                <position>15</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/backcountry-ski-school</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Mountain Bike Fundamentals</label>
+                <position>16</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/mountain-bike-fundamentals</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+        </subMenu>
+        <type>MenuLabel</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Resources</label>
+        <position>5</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <subMenu>
+            <navigationMenuItem>
+                <label>Club Leadership</label>
+                <position>0</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/club-leadership</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Our Mission</label>
+                <position>1</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/our-mission</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Member Benefits</label>
+                <position>2</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/member-benefits</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Kinni Online</label>
+                <position>3</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/kinni-online</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Our Chalet</label>
+                <position>4</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/our-chalet</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Member Resources</label>
+                <position>5</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/member-documents</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Member Discounts</label>
+                <position>6</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/member-discounts</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>History</label>
+                <position>7</position>
+                <publiclyAvailable>true</publiclyAvailable>
+                <target>/100-years</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Club Logo Gear</label>
+                <position>8</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/club-logo-gear</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+        </subMenu>
+        <type>MenuLabel</type>
+    </navigationMenuItem>
+    <navigationMenuItem>
+        <label>Support</label>
+        <position>6</position>
+        <publiclyAvailable>true</publiclyAvailable>
+        <subMenu>
+            <navigationMenuItem>
+                <label>FAQ</label>
+                <position>0</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/faq</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>My Tickets</label>
+                <position>1</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/my-tickets</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+            <navigationMenuItem>
+                <label>Submit Ticket</label>
+                <position>2</position>
+                <publiclyAvailable>false</publiclyAvailable>
+                <target>/submit-ticket</target>
+                <type>InternalLink</type>
+            </navigationMenuItem>
+        </subMenu>
+        <type>MenuLabel</type>
+    </navigationMenuItem>
+</NavigationMenu>

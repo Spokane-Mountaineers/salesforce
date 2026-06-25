@@ -107,7 +107,7 @@
   transition: color 0.2s;
 }
 .body a:hover {
-  color: var(--pine);
+  color: var(--pine) !important;
   border-bottom-style: solid;
 }
 .body ul,
@@ -154,7 +154,7 @@
   transition: color 0.15s;
 }
 .breadcrumb-link:hover {
-  color: var(--rust);
+  color: var(--rust) !important;
   text-decoration: underline;
 }
 
@@ -192,6 +192,27 @@
 .tag-link:hover {
   color: inherit;
   text-decoration: none;
+}
+
+/* ── Anchor color reassert (LWR shadow-DOM fix) ──
+   The site's branding LinkColor (#005fb2) leaks through synthetic shadow onto
+   real (href) links and overrides our colors; the platform rule wins even
+   against a higher-specificity class, so reassert with !important. */
+.breadcrumb-link:link,
+.breadcrumb-link:visited {
+  color: var(--pine) !important;
+}
+.smi-btn--secondary:link,
+.smi-btn--secondary:visited {
+  color: var(--pine) !important;
+}
+.tag-link:link,
+.tag-link:visited {
+  color: inherit !important;
+}
+.body a:link,
+.body a:visited {
+  color: var(--sky) !important;
 }
 .error {
   font-size: 16px;

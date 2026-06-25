@@ -567,7 +567,7 @@
 }
 .related__item a:hover,
 .related__item a:focus-visible {
-  color: var(--rust);
+  color: var(--rust) !important;
   padding-left: 6px;
   outline: none;
 }
@@ -577,22 +577,23 @@
 }
 
 /* ── Anchor color reassert (LWR shadow-DOM fix) ──
-   Under the site's synthetic shadow DOM the global theme's `a:link`/`a:visited`
-   color leaks in and outranks our colors on real (href) links, tinting them the
-   platform's default blue. Re-declare each intended color at :link/:visited:
-   the sky prose base, the dark course-card directory tiles (which would
-   otherwise inherit the sky base), and the muted related-rail links. */
+   The site's branding set ties LinkColor to the brand accent (#005fb2, a blue),
+   and that leaks through synthetic shadow onto real (href) links, overriding our
+   colors. The platform rule wins even against a higher-specificity class, so we
+   reassert with !important at :link/:visited: the sky prose base, the dark
+   course-card directory tiles (which would otherwise take the sky base), and the
+   muted related-rail links. */
 .body a:link,
 .body a:visited {
-  color: var(--sky);
+  color: var(--sky) !important;
 }
 .body .course-card:link,
 .body .course-card:visited {
-  color: var(--ink);
+  color: var(--ink) !important;
 }
 .related__item a:link,
 .related__item a:visited {
-  color: var(--ink-soft);
+  color: var(--ink-soft) !important;
 }
 
 /* ---------------------------------------------------------------------------

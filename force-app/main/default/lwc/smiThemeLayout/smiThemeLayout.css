@@ -136,7 +136,7 @@
 }
 .nav__link:hover,
 .nav__link:focus-visible {
-  color: #fff;
+  color: #fff !important;
   border-bottom-color: var(--rust);
   outline: none;
 }
@@ -146,45 +146,44 @@
 }
 
 /* ── Anchor color reassert (LWR shadow-DOM fix) ──
-   The Experience Cloud runtime injects an author-origin `a:link`/`a:visited`
-   color rule into every component shadow root (specificity 0,1,1). That
-   outranks our plain class colors on <a> elements (0,1,0), so styled links —
-   the brand name, the top-level nav links, the Log out button — render in the
-   platform's default blue instead of the field-guide palette. Buttons aren't
-   matched by `a:link`, which is why the dropdown triggers stayed correct and
-   the links didn't. Re-declaring each intended color at :link/:visited (0,2,0)
-   wins it back; hover/focus already sit at 0,2,0 and were never affected. */
+   The site's branding set ties LinkColor to the brand accent (#005fb2, a blue),
+   and the Experience Cloud runtime emits that as a link-color rule that leaks
+   through synthetic shadow into every component — overriding our own colors on
+   <a> elements (buttons aren't anchors, which is why the dropdown triggers
+   stayed correct and the links didn't). The platform rule wins even against a
+   higher-specificity class, so we reassert each intended color at :link/:visited
+   with !important. Hover colors below also need !important to beat this base. */
 .brand:link,
 .brand:visited {
-  color: var(--overlay-ink);
+  color: var(--overlay-ink) !important;
 }
 .nav__link:link,
 .nav__link:visited {
-  color: #d8e6dc;
+  color: #d8e6dc !important;
 }
 .nav__sublink:link,
 .nav__sublink:visited {
-  color: var(--ink-soft);
+  color: var(--ink-soft) !important;
 }
 .smi-btn--ghost:link,
 .smi-btn--ghost:visited {
-  color: var(--overlay-ink);
+  color: var(--overlay-ink) !important;
 }
 .smi-btn--primary:link,
 .smi-btn--primary:visited {
-  color: #fff;
+  color: #fff !important;
 }
 .skip-link:link,
 .skip-link:visited {
-  color: #fff;
+  color: #fff !important;
 }
 .footer-nav__link:link,
 .footer-nav__link:visited {
-  color: #cdddd2;
+  color: #cdddd2 !important;
 }
 .footer-nav__primary .footer-nav__link:link,
 .footer-nav__primary .footer-nav__link:visited {
-  color: #eaf2ec;
+  color: #eaf2ec !important;
 }
 
 /* ── Dropdown groups ── */
@@ -269,7 +268,7 @@
 .nav__sublink:hover,
 .nav__sublink:focus-visible {
   background: var(--paper-2);
-  color: var(--rust);
+  color: var(--rust) !important;
   outline: none;
 }
 
@@ -299,6 +298,7 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 1;
+  white-space: nowrap;
   padding: 10px 18px;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -402,7 +402,7 @@
   font-size: 14px;
 }
 .footer-nav__link:hover {
-  color: #fff;
+  color: #fff !important;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -540,12 +540,12 @@
   }
   .nav__sublink:link,
   .nav__sublink:visited {
-    color: #cdddd2;
+    color: #cdddd2 !important;
   }
   .nav__sublink:hover,
   .nav__sublink:focus-visible {
     background: transparent;
-    color: #fff;
+    color: #fff !important;
   }
   .nav__auth {
     margin-top: 16px;

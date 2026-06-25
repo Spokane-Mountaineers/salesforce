@@ -47,7 +47,31 @@
   white-space: nowrap;
 }
 .status-strip__card:hover {
-  color: #fff;
+  color: #fff !important;
+}
+
+/* ── Anchor color reassert (LWR shadow-DOM fix) ──
+   The site's branding LinkColor (#005fb2) leaks through synthetic shadow onto
+   real (href) links and overrides our colors; the platform rule wins even
+   against a higher-specificity class, so reassert with !important. The cards
+   that inherit their text color get `inherit` so the leaked blue can't tint it. */
+.status-strip__card:link,
+.status-strip__card:visited {
+  color: #cfe3d6 !important;
+}
+.action:link,
+.action:visited {
+  color: var(--pine) !important;
+}
+.empty a:link,
+.empty a:visited {
+  color: var(--pine) !important;
+}
+.evcard__link:link,
+.evcard__link:visited,
+.postrow__link:link,
+.postrow__link:visited {
+  color: inherit !important;
 }
 
 .cols {

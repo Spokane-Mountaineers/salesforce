@@ -161,7 +161,7 @@
       "HeadingSmallTextTransform": "none",
       "HorizontalRowPaddingDesktop": "1rem",
       "HorizontalRowPaddingMobile": "0.75rem",
-      "LinkColor": "var(--dxp-g-brand)",
+      "LinkColor": "#2c6a8c",
       "LinkHoverColor": "var(--dxp-s-link-text-color-1)",
       "LinkTextDecoration": "none",
       "LinkTextDecorationFocus": "underline",

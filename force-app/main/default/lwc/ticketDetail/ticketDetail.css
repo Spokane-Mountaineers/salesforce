@@ -172,6 +172,13 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+/* Anchor color reassert: the site's branding LinkColor (#005fb2) leaks through
+   synthetic shadow onto real (href) links and overrides our color, so reassert
+   with !important. */
+.frow a:link,
+.frow a:visited {
+  color: var(--pine) !important;
+}
 .frow__date {
   font-size: 12px;
   color: var(--ink-faint);
