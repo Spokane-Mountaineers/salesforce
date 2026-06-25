@@ -265,4 +265,145 @@ public with sharing class ContentPostService {
       }
     }
   }
+
+  /**
+   * Links document link records using ServiceDb without sharing.
+   */
+  public static void insertLinks(List<ContentDocumentLink> cdls) {
+    ServiceDb db = new ServiceDb();
+    db.insertLinks(cdls);
+  }
+
+  /**
+   * Scans and parses inline base64 images in HTML, uploads them to ContentVersion,
+   * generates ContentDistribution, and replaces image src attributes with the public CDN URL.
+   * Collects created ContentDocumentIds to link them to the post.
+   *
+   * @param html The HTML string containing raw base64 data.
+   * @param outDocIds Output list to collect the created ContentDocumentIds.
+   * @return The rewritten HTML string.
+   */
+  public static String processInlineImagesInHtml(
+    String html,
+    List<Id> outDocIds
+  ) {
+    if (String.isBlank(html)) {
+      return html;
+    }
+
+    List<ContentVersion> cvsToInsert = new List<ContentVersion>();
+    List<InlineImageInfo> imageInfos = new List<InlineImageInfo>();
+
+    Pattern imgPattern = Pattern.compile(
+      'src=(["\'])data:image/([a-zA-Z]+);base64,([^"\']+)\\1'
+    );
+    Matcher imgMatcher = imgPattern.matcher(html);
+
+    while (imgMatcher.find()) {
+      String quoteChar = imgMatcher.group(1);
+      String ext = imgMatcher.group(2);
+      String base64Data = imgMatcher.group(3);
+
+      ContentVersion cv = new ContentVersion(
+        Title = 'Inline Image ' + DateTime.now().getTime(),
+        PathOnClient = 'inline_' + DateTime.now().getTime() + '.' + ext,
+        VersionData = EncodingUtil.base64Decode(base64Data),
+        IsMajorVersion = true
+      );
+      cvsToInsert.add(cv);
+
+      InlineImageInfo info = new InlineImageInfo();
+      info.cv = cv;
+      info.originalMatch = imgMatcher.group(0);
+      info.quoteChar = quoteChar;
+      imageInfos.add(info);
+    }
+
+    if (cvsToInsert.isEmpty()) {
+      return html;
+    }
+
+    ServiceDb db = new ServiceDb();
+    db.insertContentVersions(cvsToInsert);
+
+    List<ContentDistribution> distsToInsert = new List<ContentDistribution>();
+    for (InlineImageInfo info : imageInfos) {
+      distsToInsert.add(
+        new ContentDistribution(
+          Name = info.cv.Title,
+          ContentVersionId = info.cv.Id,
+          PreferencesAllowViewInBrowser = true,
+          PreferencesLinkLatestVersion = true,
+          PreferencesNotifyOnVisit = false,
+          PreferencesPasswordRequired = false
+        )
+      );
+    }
+    db.insertDistributions(distsToInsert);
+
+    Set<Id> cvIds = new Set<Id>();
+    for (ContentVersion cv : cvsToInsert) {
+      cvIds.add(cv.Id);
+    }
+
+    Map<Id, ContentVersion> cvMap = db.queryVersions(cvIds);
+
+    Map<Id, ContentDistribution> distMap = new Map<Id, ContentDistribution>();
+    for (ContentDistribution cd : db.queryDistributions(distsToInsert)) {
+      distMap.put(cd.ContentVersionId, cd);
+    }
+
+    String rewrittenHtml = html;
+    for (InlineImageInfo info : imageInfos) {
+      ContentVersion cv = cvMap.get(info.cv.Id);
+      ContentDistribution cd = distMap.get(info.cv.Id);
+
+      if (cv != null && cd != null) {
+        String replacement =
+          'src=' +
+          info.quoteChar +
+          cd.ContentDownloadUrl +
+          info.quoteChar;
+        rewrittenHtml = rewrittenHtml.replace(info.originalMatch, replacement);
+
+        if (cv.ContentDocumentId != null && outDocIds != null) {
+          outDocIds.add(cv.ContentDocumentId);
+        }
+      }
+    }
+
+    return rewrittenHtml;
+  }
+
+  public class InlineImageInfo {
+    public ContentVersion cv;
+    public String originalMatch;
+    public String quoteChar;
+  }
+
+  private without sharing class ServiceDb {
+    public void insertContentVersions(List<ContentVersion> cvs) {
+      insert cvs;
+    }
+    public void insertDistributions(List<ContentDistribution> cds) {
+      insert cds;
+    }
+    public void insertLinks(List<ContentDocumentLink> cdls) {
+      Database.insert(cdls, false);
+    }
+    public Map<Id, ContentVersion> queryVersions(Set<Id> cvIds) {
+      return new Map<Id, ContentVersion>(
+        [SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id IN :cvIds]
+      );
+    }
+    public List<ContentDistribution> queryDistributions(
+      List<ContentDistribution> dists
+    ) {
+      return [
+        SELECT ContentVersionId, ContentDownloadUrl
+        FROM ContentDistribution
+        WHERE Id IN :dists
+      ];
+    }
+  }
 }

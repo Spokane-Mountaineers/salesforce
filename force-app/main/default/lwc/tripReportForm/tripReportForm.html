@@ -94,13 +94,12 @@
 
     <label class="field">
       <span class="label">Trip report</span>
-      <lightning-input-rich-text
+      <c-custom-rich-text-editor
         data-field="body"
         value={form.body}
         onchange={handleChange}
-        formats={allowedFormats}
         placeholder="How was the route? Conditions, beta, the good and the type-2 fun…"
-      ></lightning-input-rich-text>
+      ></c-custom-rich-text-editor>
     </label>
 
     <label class="field">

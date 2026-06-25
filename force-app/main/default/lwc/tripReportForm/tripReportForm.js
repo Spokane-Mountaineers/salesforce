@@ -203,7 +203,9 @@ export default class TripReportForm extends NavigationMixin(LightningElement) {
     const val =
       event.target.type === "checkbox"
         ? event.target.checked
-        : event.target.value;
+        : event.detail && event.detail.value !== undefined
+          ? event.detail.value
+          : event.target.value;
     this.form = { ...this.form, [field]: val };
   }
 

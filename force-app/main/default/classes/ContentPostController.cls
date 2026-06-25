@@ -251,10 +251,17 @@ public with sharing class ContentPostController {
       throw new AuraHandledException('A title is required');
     }
     Id tripRtId = recordTypeId('Trip_Report');
+
+    List<Id> inlineDocIds = new List<Id>();
+    String processedBody = ContentPostService.processInlineImagesInHtml(
+      body,
+      inlineDocIds
+    );
+
     Content_Post__c post = new Content_Post__c(
       RecordTypeId = tripRtId,
       Title__c = title.trim(),
-      Body__c = sanitizeHtml(body),
+      Body__c = sanitizeHtml(processedBody),
       Activity__c = activity,
       Trip_Date__c = tripDate,
       Location__c = location,
@@ -274,6 +281,21 @@ public with sharing class ContentPostController {
     }
     try {
       insert post;
+
+      if (!inlineDocIds.isEmpty()) {
+        List<ContentDocumentLink> cdls = new List<ContentDocumentLink>();
+        for (Id docId : inlineDocIds) {
+          cdls.add(
+            new ContentDocumentLink(
+              ContentDocumentId = docId,
+              LinkedEntityId = post.Id,
+              ShareType = 'V',
+              Visibility = 'AllUsers'
+            )
+          );
+        }
+        ContentPostService.insertLinks(cdls);
+      }
 
       if (tagIds != null && !tagIds.isEmpty()) {
         List<Content_Post_Tag__c> postTags = new List<Content_Post_Tag__c>();
@@ -345,8 +367,14 @@ public with sharing class ContentPostController {
       );
     }
 
+    List<Id> inlineDocIds = new List<Id>();
+    String processedBody = ContentPostService.processInlineImagesInHtml(
+      body,
+      inlineDocIds
+    );
+
     post.Title__c = title == null ? null : title.trim();
-    post.Body__c = sanitizeHtml(body);
+    post.Body__c = sanitizeHtml(processedBody);
     post.Activity__c = activity;
     post.Trip_Date__c = tripDate;
     post.Location__c = location;
@@ -378,6 +406,21 @@ public with sharing class ContentPostController {
 
     try {
       update post;
+
+      if (!inlineDocIds.isEmpty()) {
+        List<ContentDocumentLink> cdls = new List<ContentDocumentLink>();
+        for (Id docId : inlineDocIds) {
+          cdls.add(
+            new ContentDocumentLink(
+              ContentDocumentId = docId,
+              LinkedEntityId = post.Id,
+              ShareType = 'V',
+              Visibility = 'AllUsers'
+            )
+          );
+        }
+        ContentPostService.insertLinks(cdls);
+      }
 
       if (tagIds != null) {
         delete [

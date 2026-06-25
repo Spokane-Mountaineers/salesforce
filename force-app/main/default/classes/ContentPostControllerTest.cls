@@ -800,6 +800,55 @@ private class ContentPostControllerTest {
   }
 
   @isTest
+  static void processInlineImages_createsContentDistributionsAndRewritesBody() {
+    User author = authorUser();
+    Id postId;
+    System.runAs(author) {
+      String inlineImageBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==';
+      String bodyWithImage =
+        '<p>Check out this photo: <img src="data:image/png;base64,' +
+        inlineImageBase64 +
+        '" /> and have a good day!</p>';
+
+      Test.startTest();
+      postId = ContentPostController.createTripReport(
+        'Post with Inline Image',
+        bodyWithImage,
+        'Hiking',
+        Date.today(),
+        'Mt. Spokane',
+        'Easy',
+        'sunset',
+        new List<Id>(),
+        false
+      );
+      Test.stopTest();
+
+      Content_Post__c post = [
+        SELECT Id, Body__c
+        FROM Content_Post__c
+        WHERE Id = :postId
+      ];
+
+      System.assert(
+        !post.Body__c.contains('data:image/png;base64'),
+        'Base64 image should be rewritten'
+      );
+      System.assert(
+        post.Body__c.contains('https://'),
+        'Should contain public CDN link: ' + post.Body__c
+      );
+
+      List<ContentDocumentLink> links = [
+        SELECT Id, ContentDocumentId
+        FROM ContentDocumentLink
+        WHERE LinkedEntityId = :postId
+      ];
+      System.assert(links.size() > 0, 'ContentDocumentLink should be created');
+    }
+  }
+
+  @isTest
   static void getPublishedPosts_filtersByMultipleTagsAdditive() {
     Content_Post__c hiking = [
       SELECT Id

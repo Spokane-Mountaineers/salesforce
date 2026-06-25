@@ -1,0 +1,52 @@
+/* Style wrapper container to host Quill */
+.editor-container {
+  display: block;
+}
+
+/* Inherit styling from parent theme/variables */
+:host .ql-container {
+  font-family:
+    var(--font-body),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size: 16px;
+  color: var(--ink);
+  background-color: var(--card);
+}
+
+:host .ql-container.ql-snow {
+  border: 1px solid var(--line-strong, #ccc);
+  border-top: none;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+:host .ql-toolbar.ql-snow {
+  border: 1px solid var(--line-strong, #ccc);
+  background-color: var(--paper-2);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+/* Custom editor height - auto expands to content with a minimum height */
+:host .ql-editor {
+  min-height: 400px;
+  height: auto;
+  max-height: none;
+  overflow-y: visible;
+  line-height: 1.6;
+}
+
+/* Ensure inline images look premium and scale nicely */
+:host .ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 12px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
