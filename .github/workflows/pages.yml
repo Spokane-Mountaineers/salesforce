@@ -26,10 +26,16 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Install MkDocs and Material theme
+      - name: Install Zensical
         run: |
           pip install --upgrade pip
           pip install -r requirements-docs.txt
 
+      - name: Build documentation
+        run: zensical build --strict
+
       - name: Deploy to GitHub Pages
-        run: mkdocs gh-deploy --strict --force
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
