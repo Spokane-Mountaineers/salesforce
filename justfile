@@ -5,7 +5,7 @@ default:
 # Run Docs Server
 serve:
     @echo ➤ starting dev server
-    @docker run --rm -it -p 8000:8000 -v "$(pwd -P)":/docs squidfunk/mkdocs-material:9.7.6
+    @docker run --rm -it -p 8000:8000 -v "$(pwd -P)":/docs zensical/zensical:0.0.45 serve --dev-addr 0.0.0.0:8000
 
 # Build the docs and fail on broken links or nav (parity with CI --strict)
 # Uses pwd -P so the macOS /tmp -> /private/tmp symlink is resolved before
@@ -18,7 +18,7 @@ build-docs:
         -v "$(pwd -P)":/docs \
         -v "$(git rev-parse --path-format=absolute --git-common-dir)":"$(git rev-parse --path-format=absolute --git-common-dir)" \
         -e GIT_CONFIG_COUNT=1 -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0='*' \
-        squidfunk/mkdocs-material:9.7.6 build --strict
+        zensical/zensical:0.0.45 build --strict
 
 # Mirror the canonical SMI theme into the Salesforce static resource
 sync-theme:

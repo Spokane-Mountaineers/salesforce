@@ -1,6 +1,2 @@
-# Pinned MkDocs toolchain for the documentation site (docs/ + mkdocs.yml).
-# Keep the mkdocs-material version in sync with the squidfunk/mkdocs-material
-# image tag used by `just serve` and `just build-docs`.
-mkdocs==1.6.1
-mkdocs-material==9.7.6
-mkdocs-git-revision-date-localized-plugin==1.5.3
+# Pinned Zensical toolchain for the documentation site (docs/ + mkdocs.yml).
+zensical==0.0.45

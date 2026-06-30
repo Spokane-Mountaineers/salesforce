@@ -1,12 +1,12 @@
 ---
-description: MkDocs documentation maintenance standards
+description: Zensical documentation maintenance standards
 globs: docs/**/*.md
 alwaysApply: false
 ---
 
-# MkDocs Documentation Maintenance
+# Zensical Documentation Maintenance
 
-When adding, moving, or removing documentation files, always maintain the MkDocs configuration and verify the build.
+When adding, moving, or removing documentation files, always maintain the Zensical/MkDocs configuration and verify the build.
 
 ## Required Steps
 
@@ -21,17 +21,17 @@ nav:
     - New Article: section/new-article.md
 ```
 
-### 2. Run mkdocs build
+### 2. Run zensical build
 
-Always run `mkdocs build` after documentation changes:
+Always run `zensical build` (or via `just build-docs`) after documentation changes:
 
 ```bash
-mkdocs build
+just build-docs
 ```
 
 ### 3. Resolve All Issues
 
-Fix **all** issues reported by mkdocs build, including:
+Fix **all** issues reported by zensical build, including:
 
 - **ERROR**: Must be fixed (broken links, missing files)
 - **WARNING**: Must be fixed (invalid config, deprecated syntax)
@@ -69,6 +69,7 @@ When adding documentation:
 
 - [ ] New .md file created in appropriate docs/ subdirectory
 - [ ] mkdocs.yml updated with nav entry
-- [ ] `mkdocs build` executed successfully
+- [ ] `just build-docs` executed successfully
 - [ ] All ERROR, WARNING, and INFO messages resolved
 - [ ] Build output shows "Documentation built successfully"
+

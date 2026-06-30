@@ -375,7 +375,7 @@ The guest user profile must have access to both Visualforce pages for unauthenti
 
 **Verifying Profile Access**:
 
-1. Setup → Profiles → [Guest User Profile]
+1. Setup → Profiles → \[Guest User Profile\]
 2. Scroll to "Enabled Apex Page Access"
 3. Verify both pages are listed:
     - `CommunitiesLogin`
