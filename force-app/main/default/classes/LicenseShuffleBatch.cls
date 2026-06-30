@@ -13,7 +13,7 @@
  * Runs daily via LoginHistorySyncBatch.finish() → Database.executeBatch().
  * Uses Fiscal_Year_Login_History__c for full fiscal year (Feb 1 – Jan 31) counts.
  */
-public class LicenseShuffleBatch implements Database.Batchable<sObject>, Database.Stateful {
+public without sharing class LicenseShuffleBatch implements Database.Batchable<sObject>, Database.Stateful {
   private static final Integer MAX_PREMIUM_LICENSES = 475;
   private static final Integer LOGIN_THRESHOLD = 5;
   private static final Integer NEW_USER_DAYS = 90;

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Create_Log</name>
@@ -8,38 +8,44 @@
         <locationX>264</locationX>
         <locationY>458</locationY>
         <assignmentItems>
-            <assignToReference>variable_conservation_group_membership_log.Username__c</assignToReference>
+            <assignToReference
+      >variable_conservation_group_membership_log.Username__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Loop.Username</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_group_membership_log.User_ID__c</assignToReference>
+            <assignToReference
+      >variable_conservation_group_membership_log.User_ID__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Loop.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_group_membership_log.Role__c</assignToReference>
+            <assignToReference
+      >variable_conservation_group_membership_log.Role__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Loop.UserRoleId</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_group_membership_log.Message__c</assignToReference>
+            <assignToReference
+      >variable_conservation_group_membership_log.Message__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <stringValue>Removing From Conservation Group</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_group_membership_logs</assignToReference>
+            <assignToReference
+      >variable_conservation_group_membership_logs</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>variable_conservation_group_membership_log</elementReference>
+                <elementReference
+        >variable_conservation_group_membership_log</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -52,7 +58,8 @@
         <locationX>264</locationX>
         <locationY>350</locationY>
         <assignmentItems>
-            <assignToReference>variable_collaboration_group_members</assignToReference>
+            <assignToReference
+      >variable_collaboration_group_members</assignToReference>
             <operator>Add</operator>
             <value>
                 <elementReference>Get_Group_Record</elementReference>
@@ -64,7 +71,8 @@
     </assignments>
     <description>Removing four members from conservation group.</description>
     <environments>Default</environments>
-    <interviewLabel>Remove Members From Conservation Group {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Remove Members From Conservation Group {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Remove Members From Conservation Group</label>
     <loops>
         <name>Loop</name>
@@ -77,7 +85,8 @@
             <targetReference>Queue_Record_For_Delete</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Remove_Members_From_Conservation_Group</targetReference>
+            <targetReference
+      >Remove_Members_From_Conservation_Group</targetReference>
         </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
@@ -104,7 +113,8 @@
         <label>Create Logs</label>
         <locationX>176</locationX>
         <locationY>866</locationY>
-        <inputReference>variable_conservation_group_membership_logs</inputReference>
+        <inputReference
+    >variable_conservation_group_membership_logs</inputReference>
     </recordCreates>
     <recordDeletes>
         <name>Remove_Members_From_Conservation_Group</name>
@@ -121,7 +131,8 @@
         <label>Get Group Record</label>
         <locationX>264</locationX>
         <locationY>566</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop</targetReference>
         </connector>
@@ -142,7 +153,8 @@
         <label>Get Members</label>
         <locationX>176</locationX>
         <locationY>134</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop</targetReference>
         </connector>

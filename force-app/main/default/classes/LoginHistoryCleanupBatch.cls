@@ -4,7 +4,7 @@
  * Runs on May 1st to delete records before February 1st of the previous fiscal year.
  * This keeps exactly one full fiscal year of data (Feb 1 - Jan 31).
  */
-public class LoginHistoryCleanupBatch implements Database.Batchable<sObject>, Database.Stateful {
+public without sharing class LoginHistoryCleanupBatch implements Database.Batchable<sObject>, Database.Stateful {
   private Integer totalRecordsDeleted = 0;
   private Integer totalErrors = 0;
 

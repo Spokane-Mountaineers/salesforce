@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" ?>
+<Flow
+  xmlns="http://soap.sforce.com/2006/04/metadata"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
     <actionCalls>
         <name>Send_Confirmation</name>
         <label>Send Confirmation</label>
         <locationX>1779</locationX>
         <locationY>251</locationY>
-        <actionName>Event_Participant__c.Event_Registration_Confirmed</actionName>
+        <actionName
+    >Event_Participant__c.Event_Registration_Confirmed</actionName>
         <actionType>emailAlert</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -14,7 +18,8 @@
                 <elementReference>Create_Event_Participant</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>Event_Participant__c.Event_Registration_Confirmed</nameSegment>
+        <nameSegment
+    >Event_Participant__c.Event_Registration_Confirmed</nameSegment>
     </actionCalls>
     <actionCalls>
         <description>Sends confirmation email</description>
@@ -22,7 +27,8 @@
         <label>Send Email confirmation</label>
         <locationX>1550</locationX>
         <locationY>1112</locationY>
-        <actionName>Event_Participant__c.Event_Registration_Confirmed</actionName>
+        <actionName
+    >Event_Participant__c.Event_Registration_Confirmed</actionName>
         <actionType>emailAlert</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
@@ -31,9 +37,10 @@
                 <elementReference>Send_Confirmation</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>Event_Participant__c.Event_Registration_Confirmed</nameSegment>
+        <nameSegment
+    >Event_Participant__c.Event_Registration_Confirmed</nameSegment>
     </actionCalls>
-    <apiVersion>52.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
         <name>Did_they_select_attending</name>
@@ -48,7 +55,8 @@
             <name>Attending</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>pcs_EventRegistrationResponse</leftValueReference>
+                <leftValueReference
+        >pcs_EventRegistrationResponse</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>Attending</elementReference>
@@ -73,7 +81,8 @@
             <name>Approved</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Event_Registration.Status__c</leftValueReference>
+                <leftValueReference
+        >Get_Event_Registration.Status__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Approved</stringValue>
@@ -98,10 +107,12 @@
             <name>Limit_already_hit</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Event_Registration.Number_Attending__c</leftValueReference>
+                <leftValueReference
+        >Get_Event_Registration.Number_Attending__c</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
-                    <elementReference>Get_Event_Registration.Limit_of_Attendees__c</elementReference>
+                    <elementReference
+          >Get_Event_Registration.Limit_of_Attendees__c</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -123,14 +134,17 @@
             <name>Limit_already_hit_0</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Event_Registration.Number_Attending__c</leftValueReference>
+                <leftValueReference
+        >Get_Event_Registration.Number_Attending__c</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
-                    <elementReference>Get_Event_Registration.Limit_of_Attendees__c</elementReference>
+                    <elementReference
+          >Get_Event_Registration.Limit_of_Attendees__c</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Get_Event_Registration.Limit_of_Attendees__c</leftValueReference>
+                <leftValueReference
+        >Get_Event_Registration.Limit_of_Attendees__c</leftValueReference>
                 <operator>GreaterThan</operator>
                 <rightValue>
                     <numberValue>0.0</numberValue>
@@ -155,14 +169,16 @@
             <name>Limit_is_0</name>
             <conditionLogic>or</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Event_Registration.Limit_of_Attendees__c</leftValueReference>
+                <leftValueReference
+        >Get_Event_Registration.Limit_of_Attendees__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <numberValue>0.0</numberValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>Get_Event_Registration.Limit_of_Attendees__c</leftValueReference>
+                <leftValueReference
+        >Get_Event_Registration.Limit_of_Attendees__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -215,12 +231,13 @@
     <dynamicChoiceSets>
         <name>pcs_EventRegistrationResponse</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true"/>
-        <object xsi:nil="true"/>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
         <picklistField>Response__c</picklistField>
         <picklistObject>Event_Participant__c</picklistObject>
     </dynamicChoiceSets>
-    <interviewLabel>Community: Event Registration Screen Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Community: Event Registration Screen Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Update your registration:</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -264,7 +281,8 @@
         <inputAssignments>
             <field>Response__c</field>
             <value>
-                <elementReference>pcs_EventRegistrationResponse</elementReference>
+                <elementReference
+        >pcs_EventRegistrationResponse</elementReference>
             </value>
         </inputAssignments>
         <object>Event_Participant__c</object>
@@ -275,7 +293,8 @@
         <label>Get Contact</label>
         <locationX>375</locationX>
         <locationY>486</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Event_Registration</targetReference>
         </connector>
@@ -296,7 +315,8 @@
         <label>Get Event Participant</label>
         <locationX>728</locationX>
         <locationY>499</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Was_Event_Participant_Found</targetReference>
         </connector>
@@ -324,7 +344,8 @@
         <label>Get Event Registration</label>
         <locationX>551</locationX>
         <locationY>497</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Has_Event_Been_Approved</targetReference>
         </connector>
@@ -345,7 +366,8 @@
         <label>Get User</label>
         <locationX>226</locationX>
         <locationY>497</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Contact</targetReference>
         </connector>
@@ -383,7 +405,8 @@
         <inputAssignments>
             <field>Response__c</field>
             <value>
-                <elementReference>pcs_EventRegistrationResponse</elementReference>
+                <elementReference
+        >pcs_EventRegistrationResponse</elementReference>
             </value>
         </inputAssignments>
         <object>Event_Participant__c</object>
@@ -413,7 +436,8 @@
         <inputAssignments>
             <field>Response__c</field>
             <value>
-                <elementReference>pcs_EventRegistrationResponse</elementReference>
+                <elementReference
+        >pcs_EventRegistrationResponse</elementReference>
             </value>
         </inputAssignments>
         <object>Event_Participant__c</object>
@@ -489,7 +513,8 @@
         <allowPause>true</allowPause>
         <fields>
             <name>check_Back_Displaytext</name>
-            <fieldText>&lt;p&gt;This event has not been approved for registration. Check back later to register.&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;This event has not been approved for registration. Check back later to register.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -513,7 +538,8 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Event_full</name>
-            <fieldText>&lt;p&gt;This event has reached capacity. Please check in with the event leader with any questions or wait for a spot to open up.&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;This event has reached capacity. Please check in with the event leader with any questions or wait for a spot to open up.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

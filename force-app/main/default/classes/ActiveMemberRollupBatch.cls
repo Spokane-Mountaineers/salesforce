@@ -17,7 +17,7 @@
  * from 2021; the scheduler passes the trailing two months, so closed months are
  * written once and the current month stays live.
  */
-public class ActiveMemberRollupBatch implements Database.Batchable<Date>, Database.Stateful {
+public without sharing class ActiveMemberRollupBatch implements Database.Batchable<Date>, Database.Stateful {
   // Continuous membership tracking in this org begins in 2021; earlier records
   // are a handful of lifetime members, not a meaningful monthly trend.
   public static final Date BACKFILL_START = Date.newInstance(2021, 1, 1);

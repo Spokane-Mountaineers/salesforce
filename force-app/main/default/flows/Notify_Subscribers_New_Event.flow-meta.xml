@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <description>Posts an event to the related chatter group</description>
@@ -24,11 +24,13 @@
         <nameSegment>EventChatterPostHelper</nameSegment>
         <offset>0</offset>
     </actionCalls>
-    <apiVersion>65.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <description>Posts a notification to the corresponding activity group Chatter group when a new event is created. This leverages the existing Chatter subscription system for notifications.</description>
+    <description
+  >Posts a notification to the corresponding activity group Chatter group when a new event is created. This leverages the existing Chatter subscription system for notifications.</description>
     <environments>Default</environments>
-    <interviewLabel>Notify Subscribers New Event {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Notify Subscribers New Event {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Notify Subscribers New Event</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -55,7 +57,8 @@
         <connector>
             <targetReference>Post_Event_to_Chatter_Group</targetReference>
         </connector>
-        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <doesRequireRecordChangedToMeetCriteria
+    >true</doesRequireRecordChangedToMeetCriteria>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Status__c</field>

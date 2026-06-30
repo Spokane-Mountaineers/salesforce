@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Create_Group_Record</name>
@@ -8,31 +8,36 @@
         <locationX>264</locationX>
         <locationY>900</locationY>
         <assignmentItems>
-            <assignToReference>variable_collaboration_group_member.CollaborationGroupId</assignToReference>
+            <assignToReference
+      >variable_collaboration_group_member.CollaborationGroupId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <stringValue>0F91N000000m2jESAQ</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_collaboration_group_member.CollaborationRole</assignToReference>
+            <assignToReference
+      >variable_collaboration_group_member.CollaborationRole</assignToReference>
             <operator>Assign</operator>
             <value>
                 <stringValue>Standard</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_collaboration_group_member.MemberId</assignToReference>
+            <assignToReference
+      >variable_collaboration_group_member.MemberId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Loop_Through_Members.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_collaboration_group_members</assignToReference>
+            <assignToReference
+      >variable_collaboration_group_members</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>variable_collaboration_group_member</elementReference>
+                <elementReference
+        >variable_collaboration_group_member</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -45,56 +50,66 @@
         <locationX>264</locationX>
         <locationY>792</locationY>
         <assignmentItems>
-            <assignToReference>variable_conservation_log.User_ID__c</assignToReference>
+            <assignToReference
+      >variable_conservation_log.User_ID__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Loop_Through_Members.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_log.Username__c</assignToReference>
+            <assignToReference
+      >variable_conservation_log.Username__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Loop_Through_Members.Username</elementReference>
+                <elementReference
+        >Loop_Through_Members.Username</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_log.Updated_At__c</assignToReference>
+            <assignToReference
+      >variable_conservation_log.Updated_At__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>$System.OriginDateTime</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_log.Email__c</assignToReference>
+            <assignToReference
+      >variable_conservation_log.Email__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Loop_Through_Members.Email</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_log.Message__c</assignToReference>
+            <assignToReference
+      >variable_conservation_log.Message__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <stringValue>Added To Conservation Group</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_log.Role__c</assignToReference>
+            <assignToReference
+      >variable_conservation_log.Role__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <stringValue>Standard</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_log.Group_Member_Id__c</assignToReference>
+            <assignToReference
+      >variable_conservation_log.Group_Member_Id__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>variable_collaboration_group_member.Id</elementReference>
+                <elementReference
+        >variable_collaboration_group_member.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_conservation_group_logs</assignToReference>
+            <assignToReference
+      >variable_conservation_group_logs</assignToReference>
             <operator>Add</operator>
             <value>
                 <elementReference>variable_conservation_log</elementReference>
@@ -110,12 +125,16 @@
         <label>Member Group Record</label>
         <locationX>396</locationX>
         <locationY>576</locationY>
-        <assignNextValueToReference>currentItem_Member_Group_Record</assignNextValueToReference>
-        <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
-        <collectionReference>Get_Conservation_Group_Member_Records</collectionReference>
+        <assignNextValueToReference
+    >currentItem_Member_Group_Record</assignNextValueToReference>
+        <collectionProcessorType
+    >FilterCollectionProcessor</collectionProcessorType>
+        <collectionReference
+    >Get_Conservation_Group_Member_Records</collectionReference>
         <conditionLogic>and</conditionLogic>
         <conditions>
-            <leftValueReference>currentItem_Member_Group_Record.MemberId</leftValueReference>
+            <leftValueReference
+      >currentItem_Member_Group_Record.MemberId</leftValueReference>
             <operator>EqualTo</operator>
             <rightValue>
                 <elementReference>Loop_Through_Members.Id</elementReference>
@@ -151,7 +170,8 @@
         </rules>
     </decisions>
     <environments>Default</environments>
-    <interviewLabel>Add All Members To Conservation Group {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Add All Members To Conservation Group {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Scheduled: Add Members To Conservation Group</label>
     <loops>
         <name>Loop_Through_Members</name>
@@ -208,7 +228,8 @@
         <label>Get Conservation Group Member Records</label>
         <locationX>176</locationX>
         <locationY>252</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_User_Records</targetReference>
         </connector>
@@ -230,7 +251,8 @@
         <label>Get User Records</label>
         <locationX>176</locationX>
         <locationY>360</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Through_Members</targetReference>
         </connector>
@@ -271,7 +293,8 @@
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Get_Conservation_Group_Member_Records</targetReference>
+            <targetReference
+      >Get_Conservation_Group_Member_Records</targetReference>
         </connector>
         <schedule>
             <frequency>Daily</frequency>

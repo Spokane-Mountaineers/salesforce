@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Set_Redirect_URL</name>
@@ -11,7 +11,8 @@
             <assignToReference>redirectUrl</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>/s/profile/{!Get_Event_Participant.null__NotFound.User_Lookup__c}</stringValue>
+                <stringValue
+        >/s/profile/{!Get_Event_Participant.null__NotFound.User_Lookup__c}</stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -31,7 +32,8 @@
             <name>User_Exists</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Event_Participant.null__NotFound.User_Lookup__c</leftValueReference>
+                <leftValueReference
+        >Get_Event_Participant.null__NotFound.User_Lookup__c</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -44,7 +46,8 @@
         </rules>
     </decisions>
     <environments>Default</environments>
-    <interviewLabel>Redirect to User Profile {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Redirect to User Profile {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Redirect to User Profile</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -70,7 +73,8 @@
         <label>Get Event Participant</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Has_Related_User</targetReference>
         </connector>
@@ -96,7 +100,8 @@
         <allowPause>false</allowPause>
         <fields>
             <name>redirect_message</name>
-            <fieldText>&lt;p&gt;Redirecting to user profile...&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;Redirecting to user profile...&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -121,7 +126,8 @@
         <allowPause>false</allowPause>
         <fields>
             <name>no_profile_message</name>
-            <fieldText>&lt;p&gt;This participant has no public profile available.&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;This participant has no public profile available.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

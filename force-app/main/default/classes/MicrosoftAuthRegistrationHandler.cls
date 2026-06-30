@@ -22,7 +22,7 @@
  * NOTE: If the '.smi' suffix is removed in the future, update the username
  * pattern matching logic accordingly.
  */
-public class MicrosoftAuthRegistrationHandler implements Auth.RegistrationHandler {
+public without sharing class MicrosoftAuthRegistrationHandler implements Auth.RegistrationHandler {
   /**
    * Authenticates an existing user for Microsoft OAuth authentication
    *

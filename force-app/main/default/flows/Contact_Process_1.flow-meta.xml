@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Send_ping</name>
@@ -41,7 +41,7 @@
         <nameSegment>customNotificationAction</nameSegment>
         <offset>0</offset>
     </actionCalls>
-    <apiVersion>63.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Assign_Contact_Owner_to_RecipientID</name>
@@ -59,7 +59,8 @@
             <targetReference>Send_ping</targetReference>
         </connector>
     </assignments>
-    <description>Migrated from the Contact Process process using Active Member is Checked criteria. Sends notification to contact owner when Active member = true.</description>
+    <description
+  >Migrated from the Contact Process process using Active Member is Checked criteria. Sends notification to contact owner when Active member = true.</description>
     <environments>Default</environments>
     <interviewLabel>Contact Process {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Contact Process</label>
@@ -81,9 +82,11 @@
         <label>Get Notification Type</label>
         <locationX>176</locationX>
         <locationY>323</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Assign_Contact_Owner_to_RecipientID</targetReference>
+            <targetReference
+      >Assign_Contact_Owner_to_RecipientID</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -103,7 +106,8 @@
         <connector>
             <targetReference>Get_Notification_Type</targetReference>
         </connector>
-        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <doesRequireRecordChangedToMeetCriteria
+    >true</doesRequireRecordChangedToMeetCriteria>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Active_Member_formula__c</field>
