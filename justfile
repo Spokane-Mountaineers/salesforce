@@ -5,15 +5,17 @@ default:
 # Run Docs Server
 serve:
     @echo ➤ starting dev server
-    @docker run --rm -it -p 8000:8000 -v $PWD:/docs squidfunk/mkdocs-material:9.7.6
+    @docker run --rm -it -p 8000:8000 -v "$(pwd -P)":/docs squidfunk/mkdocs-material:9.7.6
 
 # Build the docs and fail on broken links or nav (parity with CI --strict)
+# Uses pwd -P so the macOS /tmp -> /private/tmp symlink is resolved before
+# Docker sees the mount source (otherwise the container gets an empty /docs).
 # Also mounts the git common dir so git-revision-date works inside worktrees,
 # where .git is a file pointing at a gitdir outside the mounted tree.
 build-docs:
     @echo "➤ building docs (strict)"
     @docker run --rm \
-        -v $PWD:/docs \
+        -v "$(pwd -P)":/docs \
         -v "$(git rev-parse --path-format=absolute --git-common-dir)":"$(git rev-parse --path-format=absolute --git-common-dir)" \
         -e GIT_CONFIG_COUNT=1 -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0='*' \
         squidfunk/mkdocs-material:9.7.6 build --strict
@@ -40,7 +42,7 @@ lint-aura:
 # Lint the documentation for issues
 lint-docs:
     @echo ➤ linting docs
-    @docker run --platform=linux/amd64 --rm -v $PWD:/code -w /code markdownlint/markdownlint **/*.md
+    @docker run --platform=linux/amd64 --rm -v "$(pwd -P)":/code -w /code markdownlint/markdownlint **/*.md
 
 # Show the currently loaded Salesforce env
 env:
