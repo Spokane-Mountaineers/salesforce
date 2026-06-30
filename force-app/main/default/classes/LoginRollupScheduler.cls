@@ -8,7 +8,7 @@
  * `Database.executeBatch(new LoginRollupBatch(), 6)` run by an admin (small scope
  * because each month is delete+inserted, doubling DML rows).
  */
-public class LoginRollupScheduler implements Schedulable {
+public without sharing class LoginRollupScheduler implements Schedulable {
   public void execute(SchedulableContext ctx) {
     Date currentMonth = Date.today().toStartOfMonth();
     Date previousMonth = currentMonth.addMonths(-1);

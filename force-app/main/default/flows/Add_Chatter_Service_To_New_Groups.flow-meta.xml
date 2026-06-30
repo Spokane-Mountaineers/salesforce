@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>64.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Set_Group_Member_Fields</name>
@@ -8,21 +8,24 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>variable_group_member.CollaborationGroupId</assignToReference>
+            <assignToReference
+      >variable_group_member.CollaborationGroupId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>$Record.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_group_member.MemberId</assignToReference>
+            <assignToReference
+      >variable_group_member.MemberId</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Service_Account.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>variable_group_member.CollaborationRole</assignToReference>
+            <assignToReference
+      >variable_group_member.CollaborationRole</assignToReference>
             <operator>Assign</operator>
             <value>
                 <stringValue>Standard</stringValue>
@@ -54,7 +57,8 @@
             <label>Yes</label>
         </rules>
     </decisions>
-    <description>Automatically adds the sm-client@prolocity.com service account to all newly created Chatter groups</description>
+    <description
+  >Automatically adds the sm-client@prolocity.com service account to all newly created Chatter groups</description>
     <formulas>
         <name>ServiceAccountUsername</name>
         <dataType>String</dataType>
@@ -92,7 +96,8 @@
         <label>Get Service Account</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Service_Account_Found</targetReference>
         </connector>

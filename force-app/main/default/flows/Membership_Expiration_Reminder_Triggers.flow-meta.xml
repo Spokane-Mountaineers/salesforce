@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Send_0_Day_Reminder</name>
@@ -36,7 +36,8 @@
                 <elementReference>$Record.Id</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>Contact.X15_Day_Membership_Expiration_Reminder</nameSegment>
+        <nameSegment
+    >Contact.X15_Day_Membership_Expiration_Reminder</nameSegment>
     </actionCalls>
     <actionCalls>
         <name>Send_30_Day_Reminder</name>
@@ -55,9 +56,10 @@
                 <elementReference>$Record.Id</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>Contact.X30_Day_Membership_Expiration_Reminder</nameSegment>
+        <nameSegment
+    >Contact.X30_Day_Membership_Expiration_Reminder</nameSegment>
     </actionCalls>
-    <apiVersion>53.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
         <name>Membership_Ending</name>
@@ -69,7 +71,8 @@
             <name>Today</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.npo02__MembershipEndDate__c</leftValueReference>
+                <leftValueReference
+        >$Record.npo02__MembershipEndDate__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>f_Today</elementReference>
@@ -84,7 +87,8 @@
             <name>In_15_Days</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.npo02__MembershipEndDate__c</leftValueReference>
+                <leftValueReference
+        >$Record.npo02__MembershipEndDate__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>f_15Days</elementReference>
@@ -99,7 +103,8 @@
             <name>In_30_Days</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.npo02__MembershipEndDate__c</leftValueReference>
+                <leftValueReference
+        >$Record.npo02__MembershipEndDate__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>f_30days</elementReference>
@@ -126,7 +131,8 @@
         <dataType>Date</dataType>
         <expression>TODAY()</expression>
     </formulas>
-    <interviewLabel>Membership Expiration Reminder Triggers {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Membership Expiration Reminder Triggers {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Membership Expiration Reminder Triggers</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -179,7 +185,8 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>0-day Membership Expiration Reminder Sent</stringValue>
+                <stringValue
+        >0-day Membership Expiration Reminder Sent</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -223,7 +230,8 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>15-day Membership Expiration Reminder Sent</stringValue>
+                <stringValue
+        >15-day Membership Expiration Reminder Sent</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -267,7 +275,8 @@
         <inputAssignments>
             <field>Subject</field>
             <value>
-                <stringValue>30-day Membership Expiration Reminder Sent</stringValue>
+                <stringValue
+        >30-day Membership Expiration Reminder Sent</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>

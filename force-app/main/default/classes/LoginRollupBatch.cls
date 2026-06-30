@@ -19,7 +19,7 @@
  * out; a plain upsert can't remove a row. Runs after the active-member rollup so
  * the current month's gate uses fresh data.
  */
-public class LoginRollupBatch implements Database.Batchable<Date>, Database.Stateful {
+public without sharing class LoginRollupBatch implements Database.Batchable<Date>, Database.Stateful {
   private final Date startMonth;
   private final Date endMonth;
   private Integer rowsUpserted = 0;

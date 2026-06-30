@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>53.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <decisions>
         <name>Is_the_Opp_a_Membership</name>
@@ -19,7 +19,8 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Is_today_between_membership_dates</targetReference>
+                <targetReference
+        >Is_today_between_membership_dates</targetReference>
             </connector>
             <label>Is Membership</label>
         </rules>
@@ -34,7 +35,8 @@
             <name>Another_Active_Membership_Found</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Other_Active_Opportunities</leftValueReference>
+                <leftValueReference
+        >Get_Other_Active_Opportunities</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
@@ -46,7 +48,8 @@
             <name>No_Other_Active_Membership</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Get_Other_Active_Opportunities</leftValueReference>
+                <leftValueReference
+        >Get_Other_Active_Opportunities</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -68,14 +71,16 @@
             <name>Active_Membership</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.npe01__Membership_Start_Date__c</leftValueReference>
+                <leftValueReference
+        >$Record.npe01__Membership_Start_Date__c</leftValueReference>
                 <operator>LessThanOrEqualTo</operator>
                 <rightValue>
                     <elementReference>f_Today</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record.npe01__Membership_End_Date__c</leftValueReference>
+                <leftValueReference
+        >$Record.npe01__Membership_End_Date__c</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
                     <elementReference>f_Today</elementReference>
@@ -87,21 +92,24 @@
             <name>Inactive_Membership</name>
             <conditionLogic>or</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.npe01__Membership_Start_Date__c</leftValueReference>
+                <leftValueReference
+        >$Record.npe01__Membership_Start_Date__c</leftValueReference>
                 <operator>GreaterThanOrEqualTo</operator>
                 <rightValue>
                     <elementReference>f_Today</elementReference>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record.npe01__Membership_End_Date__c</leftValueReference>
+                <leftValueReference
+        >$Record.npe01__Membership_End_Date__c</leftValueReference>
                 <operator>LessThanOrEqualTo</operator>
                 <rightValue>
                     <elementReference>f_Today</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Get_Other_Active_Opportunities</targetReference>
+                <targetReference
+        >Get_Other_Active_Opportunities</targetReference>
             </connector>
             <label>Inactive Membership</label>
         </rules>
@@ -111,7 +119,8 @@
         <dataType>Date</dataType>
         <expression>TODAY()</expression>
     </formulas>
-    <interviewLabel>Membership: Daily Check for Deactivation {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Membership: Daily Check for Deactivation {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Membership: Daily Check for Deactivation</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -137,9 +146,11 @@
         <label>Get Other Active Membership</label>
         <locationX>708</locationX>
         <locationY>374</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Is_there_another_active_membership</targetReference>
+            <targetReference
+      >Is_there_another_active_membership</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -160,7 +171,8 @@
             <field>npsp__Primary_Contact__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.npsp__Primary_Contact__c</elementReference>
+                <elementReference
+        >$Record.npsp__Primary_Contact__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -177,7 +189,8 @@
             <field>ContactId</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>$Record.npsp__Primary_Contact__c</elementReference>
+                <elementReference
+        >$Record.npsp__Primary_Contact__c</elementReference>
             </value>
         </filters>
         <inputAssignments>

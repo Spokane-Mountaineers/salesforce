@@ -7,7 +7,7 @@
  * `Database.executeBatch(new ActiveMemberRollupBatch(), 4)` run by an admin (small
  * scope because each month is delete+inserted, doubling DML rows).
  */
-public class ActiveMemberRollupScheduler implements Schedulable {
+public without sharing class ActiveMemberRollupScheduler implements Schedulable {
   public void execute(SchedulableContext ctx) {
     Date currentMonth = Date.today().toStartOfMonth();
     Date previousMonth = currentMonth.addMonths(-1);

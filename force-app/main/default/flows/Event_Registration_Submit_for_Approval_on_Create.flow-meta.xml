@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Submit_for_Approval</name>
@@ -17,9 +17,10 @@
         <nameSegment>submit</nameSegment>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
-    <apiVersion>53.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <interviewLabel>Event Registration: Submit for Approval on Create {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Event Registration: Submit for Approval on Create {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Event Registration: Submit for Approval on Create</label>
     <processMetadataValues>
         <name>BuilderType</name>

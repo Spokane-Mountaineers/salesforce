@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>53.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
-    <interviewLabel>Event Registration: Update Parent Event when Changed {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel
+  >Event Registration: Update Parent Event when Changed {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Event Registration: Update Parent Event when Changed</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -63,7 +64,8 @@
         <inputAssignments>
             <field>Event_Pre_Requisites__c</field>
             <value>
-                <elementReference>$Record.Event_Pre_Requisites__c</elementReference>
+                <elementReference
+        >$Record.Event_Pre_Requisites__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -81,7 +83,8 @@
         <inputAssignments>
             <field>Limit_of_Attendees__c</field>
             <value>
-                <elementReference>$Record.Limit_of_Attendees__c</elementReference>
+                <elementReference
+        >$Record.Limit_of_Attendees__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -93,7 +96,8 @@
         <inputAssignments>
             <field>Registration_Type__c</field>
             <value>
-                <elementReference>$Record.Registration_Type__c</elementReference>
+                <elementReference
+        >$Record.Registration_Type__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>

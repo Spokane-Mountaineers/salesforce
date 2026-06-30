@@ -26,7 +26,7 @@
  * Run once to backfill:
  *   Database.executeBatch(new FederationIdBackfillBatch(), 200);
  */
-public class FederationIdBackfillBatch implements Database.Batchable<sObject>, Database.Stateful {
+public without sharing class FederationIdBackfillBatch implements Database.Batchable<sObject>, Database.Stateful {
   // Domains that are never a member's real login email.
   private static final List<String> INTERNAL_HINTS = new List<String>{
     '@spokanemountaineers.org',

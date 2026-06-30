@@ -1,4 +1,4 @@
-global class UpdateCalendarViewFiltersBatch implements Database.Batchable<sObject>, Database.Stateful {
+global without sharing class UpdateCalendarViewFiltersBatch implements Database.Batchable<sObject>, Database.Stateful {
   private Map<String, Id> newListViewIds = new Map<String, Id>();
   private Integer recordsUpdated = 0;
   private Integer recordsProcessed = 0;
