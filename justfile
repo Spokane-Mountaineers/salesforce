@@ -8,9 +8,15 @@ serve:
     @docker run --rm -it -p 8000:8000 -v $PWD:/docs squidfunk/mkdocs-material:9.7.6
 
 # Build the docs and fail on broken links or nav (parity with CI --strict)
+# Also mounts the git common dir so git-revision-date works inside worktrees,
+# where .git is a file pointing at a gitdir outside the mounted tree.
 build-docs:
     @echo "➤ building docs (strict)"
-    @docker run --rm -v $PWD:/docs squidfunk/mkdocs-material:9.7.6 build --strict
+    @docker run --rm \
+        -v $PWD:/docs \
+        -v "$(git rev-parse --path-format=absolute --git-common-dir)":"$(git rev-parse --path-format=absolute --git-common-dir)" \
+        -e GIT_CONFIG_COUNT=1 -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0='*' \
+        squidfunk/mkdocs-material:9.7.6 build --strict
 
 # Mirror the canonical SMI theme into the Salesforce static resource
 sync-theme:
